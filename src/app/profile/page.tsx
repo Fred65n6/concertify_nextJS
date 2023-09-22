@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {toast} from "react-hot-toast";
 import {useRouter} from "next/navigation";
 
@@ -27,8 +27,13 @@ export default function ProfilePage() {
     const getUserDetails = async () => {
         const res = await axios.get("api/users/cookie_user");
         console.log(res.data);
-        setData(res.data.data._id);
+        setData(res.data.data.username);
     };
+
+    useEffect(() => {
+        // Fetch user details when the component mounts
+        getUserDetails();
+    }, []);
 
     return (
         <div className="flex flex-col items-center height-screen">
@@ -54,6 +59,7 @@ export default function ProfilePage() {
                 onClick={getUserDetails}
                 className="bg-purple-500 mt-4 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
             >
+                {data}
                 Get user details
             </button>
         </div>
