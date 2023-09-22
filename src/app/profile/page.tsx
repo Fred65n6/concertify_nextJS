@@ -8,14 +8,30 @@ import {useRouter} from "next/navigation";
 export default function ProfilePage() {
     const [loading, setLoading] = React.useState(false);
     const router = useRouter();
-    const [data, setData] = useState("nothing");
+    const [data, setData] = useState("Loading");
+
+    useEffect(() => {
+        // Check if the 'successfulLogin' flag is present in localStorage
+        const successfulLogin = localStorage.getItem("successfulLogin");
+
+        if (successfulLogin === "true") {
+            // Remove the flag to prevent future reloads
+            localStorage.removeItem("successfulLogin");
+
+            // Push the user to the "/profile" route
+            router.push("/");
+        }
+    }, []);
+
     const logout = async () => {
         try {
             setLoading(true);
             await axios.get("/api/users/logout");
             console.log("log out successfull");
             toast.success("Logout successful");
-            router.push("/login");
+            // Set a flag in localStorage to indicate a successful login
+            localStorage.setItem("successfulLogin", "true");
+            window.location.reload();
         } catch (error: any) {
             console.log(error.message);
             toast.error(error.message);
@@ -37,15 +53,12 @@ export default function ProfilePage() {
 
     return (
         <div className="flex flex-col items-center height-screen">
-            <h1>{loading ? "Logging out" : "Profile"}</h1>
-            <hr />
-            <p>Profile Page</p>
-            <h2 className="p-3 bg-green-500 rounded-md">
-                {data === "nothing" ? (
-                    "Nothing"
-                ) : (
-                    <Link href={"/profile/${data}"}>{data}</Link>
-                )}
+            <h1 className="text-4xl py-8 flex gap-2">
+                {loading ? "Logging out" : "User"}:
+                <div className="">{data}</div>
+            </h1>
+            <h2 className="bg-green-500 mt-4 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                <Link href={"/profile/${data}"}>{data}</Link>
             </h2>
             <hr />
             <button
@@ -59,7 +72,6 @@ export default function ProfilePage() {
                 onClick={getUserDetails}
                 className="bg-purple-500 mt-4 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
             >
-                {data}
                 Get user details
             </button>
         </div>

@@ -1,5 +1,4 @@
 // cookieUtils.ts
-
 import {cookies} from "next/headers";
 
 // Function to check if a specific cookie exists

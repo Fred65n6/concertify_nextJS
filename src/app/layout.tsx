@@ -1,7 +1,8 @@
 import "./globals.css";
 import type {Metadata} from "next";
 import {Inter} from "next/font/google";
-import Nav from "@/app/components/nav/page";
+import Nav_logged from "@/app/components/nav_logged_in/page";
+import Nav_not_logged from "@/app/components/nav_not_logged/page";
 import {hasCookie} from "@/helpers/cookieHelper";
 
 const inter = Inter({subsets: ["latin"]});
@@ -17,12 +18,10 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     return (
         <html lang="en">
             <body className={inter.className}>
-                {showComponent ? (
-                    // Render your component here
-                    <Nav />
+                {showComponent ? ( // Render your component here
+                    <Nav_logged />
                 ) : (
-                    // Render something else or nothing
-                    "you're not logged in"
+                    <Nav_not_logged />
                 )}
                 <main>{children}</main>
             </body>
