@@ -1,35 +1,120 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import axios from "axios";
+import Image from "next/image";
 
 const nav_logged = () => {
-    // const handleSignInClick = () => {
-    //     console.log("This works");
-    // };
-
-    async function getUserDetails() {
-        const res = await axios.get("/api/users/cookie_user");
-        console.log(res);
-    }
-
     return (
-        <nav className="flex justify-between p-4">
-            <div className="">
-                <p>You're logged in</p>
-            </div>
-            <div className="">
-                <ul className="flex gap-4">
-                    <li>
-                        <Link href="/">Home</Link>
-                    </li>
-                    <li>
+        <nav className=" p-4">
+            {/* Desktop Nav - Logged in */}
+            <div className="hidden md:flex justify-between gap-4 py-4 max-w-[1300px] m-auto">
+                <div className="flex gap-12 items-center w-full">
+                    <Link href="/">
+                        <Image
+                            src="../concertify_logo.svg"
+                            width={150}
+                            height={30}
+                            alt="concertify_logo"
+                        />
+                    </Link>
+
+                    <ul className="flex gap-10 brand-purple">
+                        <li>
+                            <Link className="flex gap-2 items-center" href="/">
+                                <Image
+                                    src="../home_btn.svg"
+                                    width="20"
+                                    height="20"
+                                    alt="button"
+                                />
+                                Home
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="flex gap-2 items-center" href="/">
+                                <Image
+                                    src="../favourites_btn.svg"
+                                    width="25"
+                                    height="25"
+                                    alt="button"
+                                />
+                                Favourites
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="flex gap-2 items-center" href="/">
+                                <Image
+                                    src="../explore_btn.svg"
+                                    width="25"
+                                    height="25"
+                                    alt="button"
+                                />
+                                Explore
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+                <div className="">
+                    <button className="rounded-full px-8 py-2 bg-purple-100 brand-purple flex items-center gap-2 m-auto hover:bg-purple-200">
                         <Link href="/profile/${data}">Profile</Link>
+                        <Image
+                            src="../profile_btn.svg"
+                            width="20"
+                            height="20"
+                            alt="button"
+                        />
+                    </button>
+                </div>
+            </div>
+            {/* Mobile Nav Logged in */}
+            <div className="flex md:hidden p-4 fixed bottom-0 w-full">
+                <ul className="flex gap-10 brand-purple justify-evenly w-full">
+                    <li>
+                        <Link className="flex flex-col items-center" href="/">
+                            <Image
+                                src="../home_btn.svg"
+                                width="20"
+                                height="20"
+                                alt="button"
+                            />
+                            Home
+                        </Link>
                     </li>
                     <li>
-                        <a className="cursor-pointer" onClick={getUserDetails}>
-                            Test button
-                        </a>
+                        <Link className="flex flex-col items-center" href="/">
+                            <Image
+                                src="../favourites_btn.svg"
+                                width="25"
+                                height="25"
+                                alt="button"
+                            />
+                            Favourites
+                        </Link>
+                    </li>
+                    <li>
+                        <Link className="flex flex-col items-center" href="/">
+                            <Image
+                                src="../explore_btn.svg"
+                                width="25"
+                                height="25"
+                                alt="button"
+                            />
+                            Explore
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            className="flex flex-col items-center"
+                            href="/profile/${data}"
+                        >
+                            <Image
+                                src="../profile_btn.svg"
+                                width="25"
+                                height="25"
+                                alt="button"
+                            />
+                            Profile
+                        </Link>
                     </li>
                 </ul>
             </div>
