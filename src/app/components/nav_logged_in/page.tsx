@@ -67,7 +67,7 @@ const nav_logged = () => {
                 </div>
             </div>
             {/* Mobile Nav Logged in */}
-            <div className="flex md:hidden p-4 fixed bottom-0 w-full">
+            <div className="flex md:hidden p-4 fixed bottom-0 w-full bg-white">
                 <ul className="flex gap-10 brand-purple justify-evenly w-full">
                     <li>
                         <Link className="flex flex-col items-center" href="/">

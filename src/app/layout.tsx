@@ -4,6 +4,7 @@ import {Plus_Jakarta_Sans} from "next/font/google";
 import Nav_logged from "@/app/components/nav_logged_in/page";
 import Nav_not_logged from "@/app/components/nav_not_logged/page";
 import {hasCookie} from "@/helpers/cookieHelper";
+import Footer from "./components/footer/page";
 
 const plusJakartaSans = Plus_Jakarta_Sans({subsets: ["latin"]});
 
@@ -26,6 +27,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
                 <main className="max-w-[1300px] pt-8 m-auto px-4 ">
                     {children}
                 </main>
+                <Footer />
             </body>
         </html>
     );
