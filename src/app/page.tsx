@@ -2,6 +2,7 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
+import LoginPage from "@/app/login/page";
 
 export default function Home() {
     const router = useRouter();
@@ -44,6 +45,9 @@ export default function Home() {
                     Experience Copenhagen through live music
                 </h1>
             )}
+            <div className="">
+                <LoginPage />
+            </div>
         </div>
     );
 }

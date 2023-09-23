@@ -1,10 +1,17 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const nav_logged = () => {
+const NavLogged = () => {
+    const openLoginModule = () => {
+        const loginModule = document.getElementById("login_module");
+        loginModule?.classList.remove("hidden");
+        loginModule?.classList.add("grid");
+    };
+
     return (
-        <nav className=" p-4">
+        <nav className="p-4">
             {/* Desktop Nav - Logged in */}
             <div className="hidden md:flex justify-between gap-4 py-4 max-w-[1300px] m-auto">
                 <div className="flex gap-12 items-center w-full">
@@ -16,7 +23,6 @@ const nav_logged = () => {
                             alt="concertify_logo"
                         />
                     </Link>
-
                     <ul className="flex gap-10 brand-purple">
                         <li>
                             <Link className="flex gap-2 items-center" href="/">
@@ -29,17 +35,6 @@ const nav_logged = () => {
                                 Home
                             </Link>
                         </li>
-                        {/* <li>
-                            <Link className="flex gap-2 items-center" href="/">
-                                <Image
-                                    src="../favourites_btn.svg"
-                                    width="25"
-                                    height="25"
-                                    alt="button"
-                                />
-                                Favourites
-                            </Link>
-                        </li> */}
                         <li>
                             <Link className="flex gap-2 items-center" href="/">
                                 <Image
@@ -55,10 +50,14 @@ const nav_logged = () => {
                 </div>
                 <div className="flex gap-4">
                     <button className="rounded-full bg-purple-100 brand-purple w-32 py-3 hover:bg-purple-200">
-                        <Link href="/singup">Sign up</Link>
+                        <Link href="/signup">Sign up</Link>
                     </button>
-                    <button className="rounded-full w-32 brand_gradient text-white hover:bg-purple-200">
-                        <Link href="/login">Log in</Link>
+                    <button
+                        type="button"
+                        onClick={openLoginModule}
+                        className="rounded-full w-32 brand_gradient text-white hover:bg-purple-200"
+                    >
+                        Log in
                     </button>
                 </div>
             </div>
@@ -76,17 +75,6 @@ const nav_logged = () => {
                             Home
                         </Link>
                     </li>
-                    {/* <li>
-                        <Link className="flex flex-col items-center" href="/">
-                            <Image
-                                src="../favourites_btn.svg"
-                                width="25"
-                                height="25"
-                                alt="button"
-                            />
-                            Favourites
-                        </Link>
-                    </li> */}
                     <li>
                         <Link className="flex flex-col items-center" href="/">
                             <Image
@@ -118,4 +106,4 @@ const nav_logged = () => {
     );
 };
 
-export default nav_logged;
+export default NavLogged;
