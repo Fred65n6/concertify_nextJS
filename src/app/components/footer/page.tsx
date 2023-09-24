@@ -13,7 +13,7 @@ const Footer = () => {
                         className="py-5"
                         alt="logo"
                     />
-                    <p className="col-start-1 col-span-2 md:col-span-1 text-left pb-10">
+                    <p className="col-start-1 col-span-2 md:col-span-1 text-left pb-10 pt-4">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Sapiente eos soluta exercitationem accusantium nostrum
                         cum voluptates, harum fugiat sed commodi ducimus
