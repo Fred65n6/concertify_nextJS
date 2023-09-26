@@ -38,7 +38,7 @@ export default function Home() {
             ) : data.username ? (
                 <h1 className="text-4xl font-bold">
                     Welcome back{" "}
-                    <span className="brand-purple">{data.username}</span>
+                    <span className="brand_purple">{data.userId}</span>
                 </h1>
             ) : (
                 <h1 className="text-4xl font-bold">
