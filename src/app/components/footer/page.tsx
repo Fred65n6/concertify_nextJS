@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <>
             <footer className=" pb-24 md:pb-12 border-t-2 border-purple-800 font-light w-full px-4 xl:px-28">
-                <div className="grid grid-cols-2 ">
+                <div className="grid grid-cols-2 pt-4">
                     <Image
                         src="../logo.svg"
                         width={150}
@@ -21,7 +21,7 @@ const Footer = () => {
                         excepturi?
                     </p>
                 </div>
-                <div className="grid justify-center items-center md:flex gap-8  md:justify-between pb-12">
+                <div className="grid justify-center items-center md:flex gap-8  md:justify-between pb-8">
                     <div className="text-purple-800 flex ">
                         <img
                             src="../phone.svg"
@@ -49,7 +49,7 @@ const Footer = () => {
                         </a>
                     </div>
                 </div>
-                <section className="flex border-t-2 border-gray-300 justify-between pt-4">
+                <section className="flex border-t-2 border-gray-300 justify-between pt-8">
                     <div className="grid md:flex gap-4">
                         <a href="#">About us</a>
                         <a href="#">Contact</a>
