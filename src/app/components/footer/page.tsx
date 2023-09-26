@@ -4,7 +4,7 @@ import Image from "next/image";
 const Footer = () => {
     return (
         <>
-            <footer className=" pb-24 md:pb-0 border-t-2 border-purple-800 font-light w-full mt-40 px-4 xl:px-28">
+            <footer className=" pb-24 md:pb-12 border-t-2 border-purple-800 font-light w-full px-4 xl:px-28">
                 <div className="grid grid-cols-2 ">
                     <Image
                         src="../logo.svg"
@@ -21,7 +21,7 @@ const Footer = () => {
                         excepturi?
                     </p>
                 </div>
-                <div className="grid justify-center items-center md:flex gap-8  md:justify-between pb-6 ">
+                <div className="grid justify-center items-center md:flex gap-8  md:justify-between pb-12">
                     <div className="text-purple-800 flex ">
                         <img
                             src="../phone.svg"

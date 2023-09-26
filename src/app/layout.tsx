@@ -24,7 +24,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
                 ) : (
                     <Nav_not_logged />
                 )}
-                <main className="max-w-[1300px] pt-8 m-auto px-4 ">
+                <main className="max-w-[1300px] pt-8 m-auto px-4 min-h-screen">
                     {children}
                 </main>
                 <Footer />
