@@ -8,9 +8,19 @@ connect();
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const {newpassword, email} = reqBody;
+        const {newpassword, email, password} = reqBody;
+        console.log(reqBody);
 
         const user = await User.findOne({email});
+
+        const validPassword = await bcryptjs.compare(password, user.password);
+        if (!validPassword) {
+            return NextResponse.json(
+                {error: "Invalid password"},
+                {status: 400}
+            );
+        }
+        console.log(user);
 
         if (!user) {
             return NextResponse.json({error: "Invalid token"}, {status: 400});

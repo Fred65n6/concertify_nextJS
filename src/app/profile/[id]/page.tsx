@@ -15,7 +15,18 @@ export default function UserProfile({params}: any) {
     const [user, setUser] = React.useState({
         newpassword: "",
         email: "",
+        password: "",
     });
+
+    const showPasswordChangeMessage = () => {
+        const changePasswordMessage = document.getElementById(
+            "changePasswordMessage"
+        );
+        const changePasswordForm =
+            document.getElementById("changePasswordForm");
+        changePasswordMessage?.classList.remove("hidden");
+        changePasswordForm?.classList.add("hidden");
+    };
 
     useEffect(() => {
         // Check if the 'successfulLogin' flag is present in localStorage
@@ -66,6 +77,10 @@ export default function UserProfile({params}: any) {
         getUserDetails();
     }, []);
 
+    useEffect(() => {
+        setUser({...user, email: data.userEmail});
+    }, [data.userEmail]);
+
     const changePassword = async () => {
         try {
             setLoading(true);
@@ -74,6 +89,7 @@ export default function UserProfile({params}: any) {
                 user
             );
             console.log("password changed", response.data);
+            showPasswordChangeMessage();
         } catch (error: any) {
             console.log("password change FAILED", error);
         } finally {
@@ -95,15 +111,26 @@ export default function UserProfile({params}: any) {
             >
                 Logout
             </button>
-            <div className="grid my-12">
+            <div id="changePasswordForm" className="grid my-12">
                 <h2 className="text-2xl pb-8">Change password</h2>
-                <label htmlFor="email">Type your email</label>
                 <input
-                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+                    readOnly={true}
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200 hidden"
                     type="text"
                     id="email"
                     value={user.email}
                     onChange={(e) => setUser({...user, email: e.target.value})}
+                    placeholder=""
+                />
+                <label htmlFor="password">Type your old password</label>
+                <input
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+                    type="password"
+                    id="password"
+                    value={user.password}
+                    onChange={(e) =>
+                        setUser({...user, password: e.target.value})
+                    }
                     placeholder=""
                 />
                 <label htmlFor="password">Type your new password</label>
@@ -123,6 +150,9 @@ export default function UserProfile({params}: any) {
                 >
                     Change password
                 </button>
+            </div>
+            <div id="changePasswordMessage" className="text-2xl hidden mt-12">
+                Your password has been changed
             </div>
         </div>
     );
