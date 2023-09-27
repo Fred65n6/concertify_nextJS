@@ -1,8 +1,8 @@
 import "./globals.css";
 import type {Metadata} from "next";
 import {Plus_Jakarta_Sans} from "next/font/google";
-import Nav_logged from "@/app/components/nav_logged_in/page";
-import Nav_not_logged from "@/app/components/nav_not_logged/page";
+import Nav_logged from "@/app/components/navLoggedIn/page";
+import Nav_not_logged from "@/app/components/navNotLogged/page";
 import {hasCookie} from "@/helpers/cookieHelper";
 import Footer from "./components/footer/page";
 
