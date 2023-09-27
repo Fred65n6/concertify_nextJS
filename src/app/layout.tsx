@@ -1,8 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import Nav_logged from "@/app/components/nav_logged_in/page";
-import Nav_not_logged from "@/app/components/nav_not_logged/page";
+import Nav_logged from "@/app/components/navLoggedIn/page";
+import Nav_not_logged from "@/app/components/navNotLogged/page";
 import { hasCookie } from "@/helpers/cookieHelper";
 import Footer from "./components/footer/page";
 import { ThemeProvider } from "./themeProvider";
@@ -24,20 +24,15 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body
-        className={`${plusJakartaSans.className} bg-slate-50 dark:bg-[#0d1117]`}
-      >
+      <body className={plusJakartaSans.className}>
         {showComponent ? ( // Render your component here
           <Nav_logged />
         ) : (
           <Nav_not_logged />
         )}
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <ThemeSwitcher />
-          <main className="max-w-[1300px] pt-8 m-auto px-4 min-h-screen">
-            {children}
-          </main>
-        </ThemeProvider>
+        <main className="max-w-[1300px] pt-8 m-auto px-4 min-h-screen">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
