@@ -14,6 +14,7 @@ export async function POST(request: NextRequest) {
         const user = await User.findOne({email});
 
         const validPassword = await bcryptjs.compare(password, user.password);
+
         if (!validPassword) {
             return NextResponse.json(
                 {error: "Invalid password"},
@@ -30,16 +31,15 @@ export async function POST(request: NextRequest) {
         const salt = await bcryptjs.genSalt(10);
         const hashedPassword = await bcryptjs.hash(newpassword, salt);
 
-        const newPassword = new User({
-            password: hashedPassword,
-        });
+        user.password = hashedPassword;
+        await user.save();
+
         await user.save();
 
         return NextResponse.json({
             message: "new password set",
             success: true,
         });
-        console.log("password updated");
     } catch (error: any) {
         return NextResponse.json({error: error.message}, {status: 500});
     }

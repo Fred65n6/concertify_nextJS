@@ -11,14 +11,15 @@ export default function Home() {
         username: "",
         userId: null,
         userEmail: "",
-    });const [user, setUser] = React.useState({
+    });
+    const [user, setUser] = React.useState({
         email: "",
         newpassword: "",
     });
 
     const getUserDetails = async () => {
         try {
-            const res = await axios.get("/api/users/cookie_user");
+            const res = await axios.get("/api/users/cookieUser");
             const userData = res.data.data;
             setData({
                 username: userData.username,

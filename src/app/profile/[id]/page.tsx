@@ -58,7 +58,7 @@ export default function UserProfile({params}: any) {
 
     const getUserDetails = async () => {
         try {
-            const res = await axios.get("/api/users/cookie_user");
+            const res = await axios.get("/api/users/cookieUser");
             console.log(res.data);
             const userData = res.data.data;
             setData({
@@ -85,7 +85,7 @@ export default function UserProfile({params}: any) {
         try {
             setLoading(true);
             const response = await axios.post(
-                "/api/users/reset_password",
+                "/api/users/changePassword",
                 user
             );
             console.log("password changed", response.data);
