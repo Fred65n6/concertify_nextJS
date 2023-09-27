@@ -20,6 +20,18 @@
     color: #5311bf;
 }
 
+.brand-gray {
+    color: #979C9E;
+}
+
+.brand-light-gray {
+    color: #E7E7E7;
+}
+
+.brand-lightest-gray {
+    color: #F0F0F0;
+}
+
 .brand_gradient {
     background: linear-gradient(
         90deg,

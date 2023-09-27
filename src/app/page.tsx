@@ -3,6 +3,8 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import LoginPage from "@/app/login/page";
+import ConcertCard from "./components/concertCard/page";
+
 
 export default function Home() {
     const router = useRouter();
@@ -48,6 +50,18 @@ export default function Home() {
             <div className="">
                 <LoginPage />
             </div>
+
+            {/* Popular */}
+            <section className="mt-8">
+                <h2 className="font-bold text-xl mb-4">Popular concerts</h2>
+                <div className="flex flex-col lg:flex-row gap-8">
+                    <ConcertCard />
+                    <ConcertCard />
+                    <ConcertCard />
+                    <ConcertCard />
+                </div>
+            </section>
+
         </div>
     );
 }
