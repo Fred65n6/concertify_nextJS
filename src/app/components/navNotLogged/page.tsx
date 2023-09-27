@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import themeToggle from "../switchTheme/page";
 
 const NavLogged = () => {
   const openLoginModule = () => {
@@ -15,7 +14,6 @@ const NavLogged = () => {
     <nav className="p-4">
       {/* Desktop Nav - Logged in */}
       <div className="hidden md:flex justify-between gap-4 py-4 max-w-[1300px] m-auto">
-        <themeToggle />
         <div className="flex gap-12 items-center w-full">
           <Link href="/">
             <Image
