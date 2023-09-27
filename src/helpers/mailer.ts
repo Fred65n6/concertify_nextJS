@@ -21,12 +21,14 @@ export const sendEmail = async ({email, emailType, userId}: any) => {
         }
 
         const transport = nodemailer.createTransport({
-            host: "sandbox.smtp.mailtrap.io",
-            port: 2525,
+            service: "Gmail", // Use Gmail service
             auth: {
-                user: "978714c8f931e2",
-                pass: "df69988197cd64",
-                // TODO add these credentials to .env file
+                user: "frederikmilland95@gmail.com", // Your Gmail email address
+                pass: "mwvynzigocxzoehf", // Your Gmail password or app-specific password
+            },
+            secure: true, // Use secure connection
+            tls: {
+                rejectUnauthorized: false, // Disable unauthorized SSL certificate rejection (not recommended for production)
             },
         });
 

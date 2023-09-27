@@ -32,6 +32,15 @@ export async function POST(request: NextRequest) {
         }
         console.log(user);
 
+        // Check if the user is verified
+        if (!user.isVerified) {
+            console.log("user not verified");
+            return NextResponse.json(
+                {error: "User is not verified"},
+                {status: 400}
+            );
+        }
+
         //create token data
         const tokenData = {
             id: user._id,

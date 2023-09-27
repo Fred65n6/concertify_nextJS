@@ -62,8 +62,8 @@ export default function LoginPage() {
                         <path
                             fill="none"
                             stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             d="m7 7l10 10M7 17L17 7"
                         />
                     </svg>

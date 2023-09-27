@@ -1,5 +1,5 @@
 "use client";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import LoginPage from "@/app/login/page";
@@ -12,6 +12,10 @@ export default function Home() {
     const [data, setData] = useState({
         username: "",
         userId: null,
+        userEmail: "",
+    });const [user, setUser] = React.useState({
+        email: "",
+        newpassword: "",
     });
 
     const getUserDetails = async () => {
@@ -21,6 +25,7 @@ export default function Home() {
             setData({
                 username: userData.username,
                 userId: userData._id,
+                userEmail: userData.email,
             });
             setLoading(false); // Set loading to false after successful data retrieval
         } catch (error: any) {
@@ -33,6 +38,21 @@ export default function Home() {
         getUserDetails();
     }, []);
 
+    const changePassword = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.post(
+                "/api/users/reset_password",
+                user
+            );
+            console.log("password changed", response.data);
+        } catch (error: any) {
+            console.log("password change FAILED", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="grid ">
             {loading ? (
@@ -40,7 +60,7 @@ export default function Home() {
             ) : data.username ? (
                 <h1 className="text-4xl font-bold">
                     Welcome back{" "}
-                    <span className="brand-purple">{data.username}</span>
+                    <span className="brand_purple">{data.userEmail}</span>
                 </h1>
             ) : (
                 <h1 className="text-4xl font-bold">

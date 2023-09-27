@@ -10,7 +10,23 @@ export default function UserProfile({params}: any) {
     const [data, setData] = useState({
         username: "nothing",
         userId: null, // Initialize with null or a suitable default value
+        userEmail: "",
     });
+    const [user, setUser] = React.useState({
+        newpassword: "",
+        email: "",
+        password: "",
+    });
+
+    const showPasswordChangeMessage = () => {
+        const changePasswordMessage = document.getElementById(
+            "changePasswordMessage"
+        );
+        const changePasswordForm =
+            document.getElementById("changePasswordForm");
+        changePasswordMessage?.classList.remove("hidden");
+        changePasswordForm?.classList.add("hidden");
+    };
 
     useEffect(() => {
         // Check if the 'successfulLogin' flag is present in localStorage
@@ -48,6 +64,7 @@ export default function UserProfile({params}: any) {
             setData({
                 username: userData.username,
                 userId: userData._id,
+                userEmail: userData.email,
                 // Add more properties as needed
             });
         } catch (error: any) {
@@ -60,8 +77,28 @@ export default function UserProfile({params}: any) {
         getUserDetails();
     }, []);
 
+    useEffect(() => {
+        setUser({...user, email: data.userEmail});
+    }, [data.userEmail]);
+
+    const changePassword = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.post(
+                "/api/users/reset_password",
+                user
+            );
+            console.log("password changed", response.data);
+            showPasswordChangeMessage();
+        } catch (error: any) {
+            console.log("password change FAILED", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center pt-8">
             <h1>Profile</h1>
             <hr />
             <p className="text-4xl">Profile Page {data.username}</p>
@@ -74,6 +111,49 @@ export default function UserProfile({params}: any) {
             >
                 Logout
             </button>
+            <div id="changePasswordForm" className="grid my-12">
+                <h2 className="text-2xl pb-8">Change password</h2>
+                <input
+                    readOnly={true}
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200 hidden"
+                    type="text"
+                    id="email"
+                    value={user.email}
+                    onChange={(e) => setUser({...user, email: e.target.value})}
+                    placeholder=""
+                />
+                <label htmlFor="password">Type your old password</label>
+                <input
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+                    type="password"
+                    id="password"
+                    value={user.password}
+                    onChange={(e) =>
+                        setUser({...user, password: e.target.value})
+                    }
+                    placeholder=""
+                />
+                <label htmlFor="password">Type your new password</label>
+                <input
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+                    type="password"
+                    id="password"
+                    value={user.newpassword}
+                    onChange={(e) =>
+                        setUser({...user, newpassword: e.target.value})
+                    }
+                    placeholder=""
+                />
+                <button
+                    onClick={changePassword}
+                    className="m-4 bg-blue-500 px-12 py-4 rounded-full text-white mt-8"
+                >
+                    Change password
+                </button>
+            </div>
+            <div id="changePasswordMessage" className="text-2xl hidden mt-12">
+                Your password has been changed
+            </div>
         </div>
     );
 }

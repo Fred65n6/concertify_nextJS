@@ -23,13 +23,24 @@ export default function SingupPage() {
             setLoading(true);
             const response = await axios.post("/api/users/signup", user);
             console.log("Signup success", response.data);
-            router.push("/login?reload=true");
+            showMessage();
         } catch (error: any) {
             toast.error(error.message);
             console.log("API signup failed", error);
         } finally {
             setLoading(false);
         }
+    };
+
+    const showMessage = () => {
+        const verifiedMessage = document.getElementById("verified_message");
+        const signUpForm = document.getElementById("signup_form");
+        if (verifiedMessage) {
+            verifiedMessage.classList.remove("hidden");
+            verifiedMessage.classList.add("block"); // Add the "grid" class to make it visible
+            signUpForm?.classList.add("hidden");
+        }
+        console.log("showMessage");
     };
 
     //DISABLE SIGNUP KNAP, HVIS FELTER IKKE ER UDFYLDT
@@ -49,45 +60,61 @@ export default function SingupPage() {
     //TEMPLATE FOR SIGNUP
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <h1 className="mb-4 text-4xl">
-                {loading ? "Processing" : "Sign Up"}
-            </h1>
-            <hr />
-            <label htmlFor="username">username</label>
-            <input
-                className="m-2 p-2 rounded-md text-left text-black"
-                type="text"
-                id="username"
-                value={user.username}
-                onChange={(e) => setUser({...user, username: e.target.value})}
-                placeholder="Username"
-            />
-            <label htmlFor="email">email</label>
-            <input
-                className="m-2 p-2 rounded-md text-left text-black"
-                type="text"
-                id="email"
-                value={user.email}
-                onChange={(e) => setUser({...user, email: e.target.value})}
-                placeholder="email"
-            />
-            <label htmlFor="password">password</label>
-            <input
-                className="m-2 p-2 rounded-md text-left text-black"
-                type="password"
-                id="password"
-                value={user.password}
-                onChange={(e) => setUser({...user, password: e.target.value})}
-                placeholder="password"
-            />
-            <button
-                onClick={onSignup}
-                className="m-4 bg-blue-500 px-12 py-4 rounded-full text-white"
+        <div className="">
+            <div id="verified_message" className="hidden">
+                <h1 className="text-2xl text-center mt-24">
+                    We've send a link to your email, to verify your account.{" "}
+                    <br />
+                    Please click that link and login to your account
+                </h1>
+            </div>
+            <div
+                id="signup_form"
+                className="flex flex-col items-center justify-center py-2"
             >
-                {buttonDisabled ? "Missing fields" : "Sign up"}
-            </button>
-            <Link href="/login">Visit login</Link>
+                <h1 className="mb-4 text-4xl pb-4">
+                    {loading ? "Processing" : "Sign Up"}
+                </h1>
+                <hr />
+                <label htmlFor="username">username</label>
+                <input
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+                    type="text"
+                    id="username"
+                    value={user.username}
+                    onChange={(e) =>
+                        setUser({...user, username: e.target.value})
+                    }
+                    placeholder="Username"
+                />
+                <label htmlFor="email">email</label>
+                <input
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+                    type="text"
+                    id="email"
+                    value={user.email}
+                    onChange={(e) => setUser({...user, email: e.target.value})}
+                    placeholder="email"
+                />
+                <label htmlFor="password">password</label>
+                <input
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+                    type="password"
+                    id="password"
+                    value={user.password}
+                    onChange={(e) =>
+                        setUser({...user, password: e.target.value})
+                    }
+                    placeholder="password"
+                />
+                <button
+                    onClick={onSignup}
+                    className="m-4 bg-blue-500 px-12 py-4 rounded-full text-white mt-8"
+                >
+                    {buttonDisabled ? "Missing fields" : "Sign up"}
+                </button>
+                <Link href="/login">Visit login</Link>
+            </div>
         </div>
     );
 }
