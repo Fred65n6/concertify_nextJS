@@ -68,12 +68,12 @@ export default function LoginPage() {
                         />
                     </svg>
                 </button>
-                <h1 className="mb-4 text-4xl">
+                <h1 className="mb-6 text-4xl">
                     {loading ? "Processing" : "Login"}
                 </h1>
                 <label htmlFor="email">email</label>
                 <input
-                    className="m-2 p-2 rounded-md text-left text-black"
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-100"
                     type="text"
                     id="email"
                     value={user.email}
@@ -82,7 +82,7 @@ export default function LoginPage() {
                 />
                 <label htmlFor="password">password</label>
                 <input
-                    className="m-2 p-2 rounded-md text-left text-black"
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-100"
                     type="password"
                     id="password"
                     value={user.password}
@@ -93,12 +93,25 @@ export default function LoginPage() {
                 />
                 <button
                     onClick={onLogin}
-                    className="m-4 bg-blue-500 px-12 py-4 rounded-full text-white"
+                    className="m-4 brand_gradient px-12 py-4 rounded-full text-white"
                     disabled={buttonDisabled}
                 >
                     login
                 </button>
-                <Link href="/signup">Visit sign up page</Link>
+                <div className="grid gap-4 text-center mt-4">
+                    <Link
+                        className="text-purple-700 hover:underline"
+                        href="/signup"
+                    >
+                        Visit sign up page
+                    </Link>
+                    <Link
+                        className="text-purple-700 hover:underline"
+                        href="/forgotPassword"
+                    >
+                        Forgot your password?
+                    </Link>
+                </div>
             </div>
         </div>
     );

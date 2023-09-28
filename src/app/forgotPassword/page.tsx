@@ -53,7 +53,9 @@ export default function SingupPage() {
                     {loading ? "Processing" : "Send password reset link"}
                 </h1>
                 <hr />
-                <label htmlFor="email">email</label>
+                <label className="text-left" htmlFor="email">
+                    Type your email
+                </label>
                 <input
                     className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
                     type="text"
@@ -62,10 +64,9 @@ export default function SingupPage() {
                     onChange={(e) => setUser({...user, email: e.target.value})}
                     placeholder="email"
                 />
-                <label htmlFor="password">password</label>
                 <button
                     onClick={sendLink}
-                    className="m-4 bg-blue-500 px-12 py-4 rounded-full text-white mt-8"
+                    className="mb-6 brand_gradient px-12 py-4 rounded-full text-white mt-8"
                 >
                     {buttonDisabled ? "Missing fields" : "Send reset link"}
                 </button>
