@@ -12,7 +12,7 @@ export default function Home() {
     username: "",
     userId: null,
     userEmail: "",
-  });
+});
   const [user, setUser] = React.useState({
     email: "",
     newpassword: "",
