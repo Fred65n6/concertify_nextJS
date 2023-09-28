@@ -22,7 +22,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={plusJakartaSans.className}>
+      <body className={`${plusJakartaSans.className}`}>
         {showComponent ? ( // Render your component here
           <Nav_logged />
         ) : (
