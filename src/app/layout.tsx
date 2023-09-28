@@ -5,6 +5,7 @@ import Nav_logged from "@/app/components/navLoggedIn/page";
 import Nav_not_logged from "@/app/components/navNotLogged/page";
 import { hasCookie } from "@/helpers/cookieHelper";
 import Footer from "./components/footer/page";
+import TopNav from "./components/topNav/page";
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${plusJakartaSans.className}`}>
+        <TopNav />
         {showComponent ? ( // Render your component here
           <Nav_logged />
         ) : (

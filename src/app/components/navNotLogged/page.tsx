@@ -11,7 +11,7 @@ const NavLogged = () => {
   };
 
   return (
-    <nav className="p-4">
+    <nav className="px-4">
       {/* Desktop Nav - Logged in */}
       <div className="hidden md:flex justify-between gap-4 py-4 max-w-[1300px] m-auto">
         <div className="flex gap-12 items-center w-full">
