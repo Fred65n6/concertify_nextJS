@@ -3,40 +3,40 @@
 @tailwind utilities;
 
 :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
-    }
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
 }
 
 .brand_purple {
-    color: #5311bf;
+  color: #5311bf;
 }
 
 .brand-gray {
-    color: #979C9E;
+  color: #979c9e;
 }
 
 .brand-light-gray {
-    color: #E7E7E7;
+  color: #e7e7e7;
 }
 
 .brand-lightest-gray {
-    color: #F0F0F0;
+  color: #f0f0f0;
 }
 
 .brand_gradient {
-    background: linear-gradient(
-        90deg,
-        rgba(142, 11, 245, 1) 0%,
-        rgba(83, 17, 191, 1) 81%,
-        rgba(65, 32, 136, 1) 100%
-    );
+  background: linear-gradient(
+    90deg,
+    rgb(142, 11, 245) 0%,
+    rgba(83, 17, 191, 1) 81%,
+    rgba(65, 32, 136, 1) 100%
+  );
 }
