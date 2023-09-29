@@ -23,17 +23,21 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${plusJakartaSans.className}`}>
-        <TopNav />
-        {showComponent ? ( // Render your component here
-          <Nav_logged />
-        ) : (
-          <Nav_not_logged />
-        )}
-        <main className="max-w-[1300px] pt-8 m-auto px-4 min-h-screen">
-          {children}
-        </main>
-        <Footer />
+      <body>
+        <div
+          className={`${plusJakartaSans.className} dark:bg-gray-800 dark:text-white`}
+        >
+          <TopNav />
+          {showComponent ? ( // Render your component here
+            <Nav_logged />
+          ) : (
+            <Nav_not_logged />
+          )}
+          <main className="max-w-[1300px] pt-8 m-auto px-4 min-h-screen ">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
