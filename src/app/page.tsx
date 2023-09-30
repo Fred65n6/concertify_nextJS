@@ -5,6 +5,7 @@ import axios from "axios";
 import LoginPage from "@/app/login/page";
 import ConcertCard from "./components/concertCard/page";
 import ArtistCard from "./components/artistCard/page";
+import VenueCard from "./components/venueCard/page";
 
 export default function Home() {
     const router = useRouter();
@@ -73,9 +74,9 @@ export default function Home() {
             </div>
 
             {/* Popular */}
-            <section className="mt-8">
+            <section className="py-10 border-b-[1px] border-gray-200 dark:border-stone-800">
                 <h2 className="font-bold text-xl mb-4">Popular concerts</h2>
-                <div className="flex flex-col lg:flex-row gap-8">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                     <ConcertCard />
                     <ConcertCard />
                     <ConcertCard />
@@ -84,16 +85,27 @@ export default function Home() {
             </section>
 
       
-      {/* Artists */}
-      <section className="mt-8">
-        <h2 className="font-bold text-xl mb-4">Artists you might like</h2>
-        <div className="flex flex-col lg:flex-row gap-8">
-          < ArtistCard />
-          < ArtistCard />
-          < ArtistCard />
-          < ArtistCard />
-        </div>
-      </section>
+            {/* Artists */}
+            <section className="py-10 border-b-[1px] border-gray-200 dark:border-stone-800">
+                <h2 className="font-bold text-xl mb-4">Artists you might like</h2>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+                < ArtistCard />
+                < ArtistCard />
+                < ArtistCard />
+                < ArtistCard />
+                </div>
+            </section>
+
+            {/* Venues */}
+            <section className="py-10">
+                <h2 className="font-bold text-xl mb-4">Venues you need to experiece</h2>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+                < VenueCard />
+                < VenueCard />
+                < VenueCard />
+                < VenueCard />
+                </div>
+            </section>
 
     </div>
   );

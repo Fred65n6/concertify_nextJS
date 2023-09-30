@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const nav_logged = () => {
   return (
-    <nav className=" p-4">
+    <nav className=" px-8">
       {/* Desktop Nav - Logged in */}
       <div className="hidden md:flex justify-between gap-4 py-4 max-w-[1300px] m-auto">
         <div className="flex gap-12 items-center w-full">
@@ -67,7 +67,7 @@ const nav_logged = () => {
         </div>
       </div>
       {/* Mobile Nav Logged in */}
-      <div className="flex md:hidden p-4 fixed bottom-0 w-full bg-white">
+      <div className="flex md:hidden p-4 fixed bottom-0 w-full bg-white dark:bg-[#121212]">
         <ul className="flex gap-10 brand_purple justify-evenly w-full">
           <li>
             <Link className="flex flex-col items-center" href="/">

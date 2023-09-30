@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div
-          className={`${plusJakartaSans.className} dark:bg-gray-800 dark:text-white`}
+          className={`${plusJakartaSans.className} dark:bg-[#121212] dark:text-white`}
         >
           <TopNav />
           {showComponent ? ( // Render your component here
@@ -33,7 +33,7 @@ export default function RootLayout({
           ) : (
             <Nav_not_logged />
           )}
-          <main className="max-w-[1300px] pt-8 m-auto px-4 min-h-screen ">
+          <main className="max-w-[1300px] pt-8 m-auto px-8 lg:px-14 min-h-screen ">
             {children}
           </main>
           <Footer />
