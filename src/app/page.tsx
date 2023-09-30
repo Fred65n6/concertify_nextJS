@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import LoginPage from "@/app/login/page";
 import ConcertCard from "./components/concertCard/page";
+import ArtistCard from "./components/artistCard/page";
 
 export default function Home() {
   const router = useRouter();
@@ -77,6 +78,18 @@ export default function Home() {
           <ConcertCard />
         </div>
       </section>
+      
+      {/* Artists */}
+      <section className="mt-8">
+        <h2 className="font-bold text-xl mb-4">Artists you might like</h2>
+        <div className="flex flex-col lg:flex-row gap-8">
+          < ArtistCard />
+          < ArtistCard />
+          < ArtistCard />
+          < ArtistCard />
+        </div>
+      </section>
+
     </div>
   );
 }
