@@ -6,7 +6,7 @@ interface SearchResultsProps {
 
 const SearchResults: React.FC<SearchResultsProps> = ({result}) => {
     return (
-        <div className="bg-slate-100 hover:bg-slate-200 p-4 rounded-full text-red-500">
+        <div className="bg-slate-100 pr-32 hover:bg-slate-200 p-4">
             {result.username}
         </div>
     );
