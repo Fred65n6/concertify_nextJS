@@ -8,8 +8,8 @@ interface SearchResultsProps {
 const SearchResultsList: React.FC<SearchResultsProps> = ({results}) => {
     // Your component logic here
     return (
-        <div className="absolute top-[10%]">
-            <div className=" p-4 rounded-md max-h-48 overflow-y-scroll">
+        <div className="absolute top-[45px]">
+            <div className=" p-4  max-h-48 overflow-y-scroll">
                 {results.map((result, id) => {
                     return <SearchResults result={result} key={id} />;
                 })}

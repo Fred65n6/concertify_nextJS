@@ -35,7 +35,7 @@ const SearchInput = ({setResults}) => {
                 <FaSearch className="fill-slate-400" id="search-icon" />
                 <input
                     type="text"
-                    className="bg-slate-100 outline-none"
+                    className="bg-slate-100 outline-none dark:text-black"
                     placeholder="Type to search..."
                     value={input}
                     onChange={(e) => handleChange(e.target.value)}
