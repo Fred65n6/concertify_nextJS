@@ -6,6 +6,7 @@ import LoginPage from "@/app/login/page";
 import ConcertCard from "./components/concertCard/page";
 import ArtistCard from "./components/artistCard/page";
 import VenueCard from "./components/venueCard/page";
+import SearchInput from "@/app/components/searchBar/page";
 
 export default function Home() {
     const router = useRouter();
@@ -84,29 +85,31 @@ export default function Home() {
                 </div>
             </section>
 
-      
             {/* Artists */}
             <section className="py-10 border-b-[1px] border-gray-200 dark:border-stone-800">
-                <h2 className="font-bold text-xl mb-4">Artists you might like</h2>
+                <h2 className="font-bold text-xl mb-4">
+                    Artists you might like
+                </h2>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-                < ArtistCard />
-                < ArtistCard />
-                < ArtistCard />
-                < ArtistCard />
+                    <ArtistCard />
+                    <ArtistCard />
+                    <ArtistCard />
+                    <ArtistCard />
                 </div>
             </section>
 
             {/* Venues */}
             <section className="py-10">
-                <h2 className="font-bold text-xl mb-4">Venues you need to experiece</h2>
+                <h2 className="font-bold text-xl mb-4">
+                    Venues you need to experiece
+                </h2>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-                < VenueCard />
-                < VenueCard />
-                < VenueCard />
-                < VenueCard />
+                    <VenueCard />
+                    <VenueCard />
+                    <VenueCard />
+                    <VenueCard />
                 </div>
             </section>
-
-    </div>
-  );
+        </div>
+    );
 }
