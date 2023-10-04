@@ -35,24 +35,25 @@ const VenueSchedule = () => {
               <Td>September 4th 2023</Td>
               <Td>Sunday 19.30</Td>
               <Td>Drake</Td>
-              <Td>
-                <Link className="flex">
-                  <span>Learn More</span>
-                  <Img src="../arrow-right.svg" width="5" height="5" />
-                </Link>
+              <Td isNumeric>
+                <Link>Learn More</Link>
               </Td>
             </Tr>
             <Tr>
               <Td>September 4th 2023</Td>
               <Td>Sunday 19.30</Td>
               <Td>Drake</Td>
-              <Td isNumeric>30.48</Td>
+              <Td isNumeric>
+                <Link>Learn More</Link>
+              </Td>
             </Tr>
             <Tr>
               <Td>September 4th 2023</Td>
               <Td>Sunday 19.30</Td>
               <Td>Drake</Td>
-              <Td isNumeric>0.91444</Td>
+              <Td isNumeric>
+                <Link>Learn More</Link>
+              </Td>
             </Tr>
           </Tbody>
         </Table>
