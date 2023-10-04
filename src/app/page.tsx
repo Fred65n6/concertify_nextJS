@@ -104,14 +104,7 @@ export default function Home() {
                     Venues you need to experiece
                 </h2>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-<<<<<<< HEAD
-                < VenueCard />
-=======
                     <VenueCard />
-                    <VenueCard />
-                    <VenueCard />
-                    <VenueCard />
->>>>>>> full_text_search
                 </div>
             </section>
         </div>
