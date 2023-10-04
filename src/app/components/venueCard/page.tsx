@@ -61,7 +61,7 @@ const VenueCard: React.FC = () => {
                         <li className="grid gap-2 w-[500px]"> */}
                     <Link href="/">
                         <Image
-                            src={beyonce}
+                            src={venueImage}
                             width={200}
                             height={200}
                             alt="concert"
