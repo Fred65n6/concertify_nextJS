@@ -108,7 +108,7 @@ export default function Home() {
                 </div>
                 <Link
                     className="place-self-end flex items-center md:hidden"
-                    href=""
+                    href="/showVenues"
                 >
                     View all venues
                     <svg
