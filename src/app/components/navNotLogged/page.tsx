@@ -23,7 +23,7 @@ const NavLogged = () => {
               alt="concertify_logo"
             />
           </Link>
-          <ul className="flex gap-10 brand_purple">
+          <ul className="flex gap-10 brand_purple dark:text-[#8e0bf5]">
             <li>
               <Link className="flex gap-2 items-center" href="/">
                 <Image
