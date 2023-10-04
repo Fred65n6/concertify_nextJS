@@ -37,8 +37,8 @@ const VenueCard: React.FC = () => {
                                 <Link className="" href="/">
                                     <Image
                                         src={venueImage}
-                                        width="full"
-                                        height="full"
+                                        width={200}
+                                        height={200}
                                         alt="concert"
                                         className="rounded-lg w-fit"
                                     />
