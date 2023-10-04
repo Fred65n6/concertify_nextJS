@@ -9,7 +9,6 @@ import venueVega from 'public/images/venue-vega.jpeg'
 const VenueCard = () => {
     return (
         <>
-        {/* VenueCard component - start */}
         <article className="rounded-lg max-h-fit flex flex-col justify-between gap-2 mb-6 lg:mb-0">
             <Link className="" href="/">
                 <Image
@@ -26,8 +25,6 @@ const VenueCard = () => {
             </div>
             
         </article>
-         {/* VenueCard component - end */}
-
         </>
     );
 };
