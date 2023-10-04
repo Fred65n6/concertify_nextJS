@@ -9,7 +9,7 @@ const TopNav = () => {
 
     return (
         <>
-            <div className="w-full m-0 px-8 flex justify-end items-center">
+            <div className="hidden  w-full m-0 px-8 md:flex justify-end items-center   ">
                 <div className="grid">
                     <SearchInput setResults={setResults} />
                     <SearchResultsList results={results} />

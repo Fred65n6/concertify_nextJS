@@ -6,7 +6,7 @@ import LoginPage from "@/app/login/page";
 import ConcertCard from "./components/concertCard/page";
 import ArtistCard from "./components/artistCard/page";
 import VenueCard from "./components/venueCard/page";
-import SearchInput from "@/app/components/searchBar/page";
+import Link from "next/link";
 
 export default function Home() {
     const router = useRouter();
@@ -66,7 +66,7 @@ export default function Home() {
                     <span className="brand_purple">{data.userEmail}</span>
                 </h1>
             ) : (
-                <h1 className="text-4xl font-bold">
+                <h1 className="text-2xl md:text-4xl font-bold">
                     Experience Copenhagen through live music
                 </h1>
             )}
@@ -75,37 +75,54 @@ export default function Home() {
             </div>
 
             {/* Popular */}
-            <section className="py-20 border-b-[1px] border-gray-200 dark:border-stone-800">
+            {/* <section className="py-20 border-b-[1px] border-gray-200 dark:border-stone-800">
                 <h2 className="font-bold text-xl mb-4">Popular concerts</h2>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <div className=" grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                     <ConcertCard />
                     <ConcertCard />
                     <ConcertCard />
                     <ConcertCard />
                 </div>
-            </section>
+            </section> */}
 
             {/* Artists */}
-            <section className="py-20 border-b-[1px] border-gray-200 dark:border-stone-800">
+            {/* <section className="py-20 border-b-[1px] border-gray-200 dark:border-stone-800">
                 <h2 className="font-bold text-xl mb-4">
                     Artists you might like
                 </h2>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <div className="flex overflow-y-scroll md:grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                     <ArtistCard />
                     <ArtistCard />
                     <ArtistCard />
                     <ArtistCard />
                 </div>
-            </section>
+            </section> */}
 
             {/* Venues */}
-            <section className="py-20">
-                <h2 className="font-bold text-xl mb-4">
+            <section className="py-20 grid gap-8">
+                <h2 className="font-bold text-xl">
                     Venues you need to experiece
                 </h2>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
                     <VenueCard />
                 </div>
+                <Link
+                    className="place-self-end flex items-center md:hidden"
+                    href=""
+                >
+                    View all venues
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="25"
+                        height="25"
+                        viewBox="0 0 22 22"
+                    >
+                        <path
+                            fill="#5311bf"
+                            d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375q0 .2-.063.375t-.212.325l-4.6 4.6q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l3.9-3.9Z"
+                        />
+                    </svg>
+                </Link>
             </section>
         </div>
     );
