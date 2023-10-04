@@ -14,6 +14,8 @@ import {
   Img,
 } from "@chakra-ui/react";
 import { ChakraProvider } from "@chakra-ui/react";
+import { userAgent } from "next/server";
+import Venue from "@/models/venueModel";
 
 const VenueSchedule = () => {
   return (
