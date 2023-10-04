@@ -11,6 +11,8 @@ interface Venue {
 
 const VenueList: React.FC = () => {
     const [venues, setVenues] = useState<Venue[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const venuesPerPage = 4; // Number of venues to show per page
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,19 +27,44 @@ const VenueList: React.FC = () => {
         fetchData();
     }, []);
 
+    // Calculate the start and end indexes of venues to display on the current page
+    const startIndex = (currentPage - 1) * venuesPerPage;
+    const endIndex = startIndex + venuesPerPage;
+
+    // Slice the venues array to display only the venues for the current page
+    const venuesToDisplay = venues.slice(startIndex, endIndex);
+
+    // Function to handle page change
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
     return (
         <div>
-            <h1>Venues</h1>
             <ul className="flex gap-8">
-                {venues.map((venue) => (
+                {venuesToDisplay.map((venue) => (
                     <li className="grid gap-2" key={venue._id}>
                         <div className="">{venue.venue_name}</div>
                         <div className="">{venue.venue_address}</div>
                     </li>
-
-                    // Add other properties from your Venue model as needed
                 ))}
             </ul>
+            <div className="pagination">
+                {/* Generate pagination links based on the number of venues */}
+                {Array.from({
+                    length: Math.ceil(venues.length / venuesPerPage),
+                }).map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => handlePageChange(index + 1)}
+                        className={`bg-black text-white pagination-button ${
+                            currentPage === index + 1 ? "active" : ""
+                        }`}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+            </div>
         </div>
     );
 };
