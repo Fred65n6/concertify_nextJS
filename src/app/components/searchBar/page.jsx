@@ -6,17 +6,18 @@ const SearchInput = ({setResults}) => {
     const [input, setInput] = useState("");
 
     const fetchData = (value) => {
-        const apiUrl = "https://jsonplaceholder.typicode.com/users"; // Access the environment variable
+        // const apiUrl = `/api/your-artist-api-endpoint`; // Replace with your actual artist API endpoint
+        const apiUrl = "/api/data/artistData";
 
         fetch(apiUrl)
             .then((response) => response.json())
             .then((json) => {
-                const results = json.filter((user) => {
+                const results = json.data.filter((artist) => {
                     return (
                         value &&
-                        user &&
-                        user.username &&
-                        user.username.toLowerCase().includes(value)
+                        artist &&
+                        artist.artist_name &&
+                        artist.artist_name.toLowerCase().includes(value)
                     );
                 });
                 setResults(results);

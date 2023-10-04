@@ -2,7 +2,7 @@ import React from "react";
 import SearchResults from "../searchResults/page";
 
 interface SearchResultsProps {
-    results: {username: string}[]; // An array of objects with a 'name' property
+    results: {artist_name: string}[]; // An array of objects with a 'name' property
 }
 
 const SearchResultsList: React.FC<SearchResultsProps> = ({results}) => {
