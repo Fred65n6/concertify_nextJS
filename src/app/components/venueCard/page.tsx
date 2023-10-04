@@ -56,7 +56,7 @@ const VenueCard: React.FC = () => {
     return (
         <>
             {venuesToDisplay.map((venue) => (
-                <article className="w-auto flex-shrink-0" key={venue._id}>
+                <article className="flex-shrink-0" key={venue._id}>
                     {/* <ul className="md:flex gap-8">
                         <li className="grid gap-2 w-[500px]"> */}
                     <Link href="/">
@@ -65,7 +65,7 @@ const VenueCard: React.FC = () => {
                             width={200}
                             height={200}
                             alt="concert"
-                            className="rounded-lg md:w-fit"
+                            className="rounded-lg w-fit"
                         />
                     </Link>
 

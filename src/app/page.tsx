@@ -99,11 +99,11 @@ export default function Home() {
             </section> */}
 
             {/* Venues */}
-            <section className="py-20 grid gap-8">
+            <section className="py-20 grid gap-8 md:h-[500px]">
                 <h2 className="font-bold text-xl">
                     Venues you need to experiece
                 </h2>
-                <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
+                <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
                     <VenueCard />
                 </div>
                 <Link
