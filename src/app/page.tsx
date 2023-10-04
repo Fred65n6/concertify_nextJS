@@ -101,9 +101,6 @@ export default function Home() {
                 <h2 className="font-bold text-xl mb-4">Venues you need to experiece</h2>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                 < VenueCard />
-                < VenueCard />
-                < VenueCard />
-                < VenueCard />
                 </div>
             </section>
 
