@@ -36,7 +36,7 @@ const VenueList: React.FC = () => {
                     <article className="w-auto" key={venue._id}>
                         {/* <ul className="md:flex gap-8">
                         <li className="grid gap-2 w-[500px]"> */}
-                        <Link href={"/showVenues/" + venue._id} key={venue._id}>
+                        <Link href={"/venues/" + venue._id} key={venue._id}>
                             <Image
                                 src={venueImage}
                                 width={200}
