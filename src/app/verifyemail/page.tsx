@@ -25,6 +25,16 @@ export default function VerifyEmailPage() {
     }, []);
 
     useEffect(() => {
+        const verifyUserEmail = async () => {
+            try {
+                await axios.post("/api/users/verifyemail", {token});
+                setVerified(true);
+            } catch (error:any) {
+                setError(true);
+                console.log(error.response.data);
+            }
+        };
+
         if (token.length > 0) {
             verifyUserEmail();
         }
