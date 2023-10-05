@@ -1,18 +1,21 @@
 "use client";
-import React, {useState} from "react";
+import React, {useState, ChangeEvent} from "react";
 import {FaSearch} from "react-icons/fa";
 
-const SearchInput = ({setResults}) => {
-    const [input, setInput] = useState("");
+interface SearchInputProps {
+    setResults: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
-    const fetchData = (value) => {
-        // const apiUrl = `/api/your-artist-api-endpoint`; // Replace with your actual artist API endpoint
+const SearchInput: React.FC<SearchInputProps> = ({setResults}) => {
+    const [input, setInput] = useState<string>("");
+
+    const fetchData = (value: string) => {
         const apiUrl = "/api/data/artistData";
 
         fetch(apiUrl)
             .then((response) => response.json())
             .then((json) => {
-                const results = json.data.filter((artist) => {
+                const results = json.data.filter((artist: any) => {
                     return (
                         value &&
                         artist &&
@@ -25,7 +28,7 @@ const SearchInput = ({setResults}) => {
             });
     };
 
-    const handleChange = (value) => {
+    const handleChange = (value: string) => {
         setInput(value);
         fetchData(value);
     };
@@ -39,7 +42,9 @@ const SearchInput = ({setResults}) => {
                     className="bg-slate-100 outline-none dark:text-black"
                     placeholder="Type to search..."
                     value={input}
-                    onChange={(e) => handleChange(e.target.value)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        handleChange(e.target.value)
+                    }
                 />
             </div>
         </div>
