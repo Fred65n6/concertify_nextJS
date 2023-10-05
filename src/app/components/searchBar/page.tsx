@@ -3,7 +3,7 @@ import React, {useState, ChangeEvent} from "react";
 import {FaSearch} from "react-icons/fa";
 
 interface SearchInputProps {
-    setResults: React.Dispatch<React.SetStateAction<string[]>>;
+    setResults: any;
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({setResults}) => {
