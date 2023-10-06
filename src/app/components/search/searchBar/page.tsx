@@ -1,15 +1,19 @@
 "use client";
-import {useState} from "react";
+import React, {useState, ChangeEvent} from "react";
 import {FaSearch} from "react-icons/fa";
 
-export const SearchBar = ({setResults}) => {
-    const [input, setInput] = useState("");
+interface SearchBarProps {
+    setResults: React.Dispatch<React.SetStateAction<any[]>>;
+}
 
-    const fetchData = (value) => {
+const SearchBar: React.FC<SearchBarProps> = ({setResults}) => {
+    const [input, setInput] = useState<string>("");
+
+    const fetchData = (value: string) => {
         fetch("/api/data/artistData")
             .then((response) => response.json())
             .then((json) => {
-                const results = json.data.filter((artist) =>
+                const results = json.data.filter((artist: any) =>
                     artist?.artist_name?.toLowerCase().includes(value)
                 );
                 setResults(results);
@@ -20,7 +24,7 @@ export const SearchBar = ({setResults}) => {
             });
     };
 
-    const handleChange = (value) => {
+    const handleChange = (value: string) => {
         setInput(value);
         fetchData(value);
     };
@@ -34,9 +38,13 @@ export const SearchBar = ({setResults}) => {
                     className="bg-slate-100 outline-none dark:text-black"
                     placeholder="Type to search..."
                     value={input}
-                    onChange={(e) => handleChange(e.target.value)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        handleChange(e.target.value)
+                    }
                 />
             </div>
         </div>
     );
 };
+
+export default SearchBar; // Provide a default export here

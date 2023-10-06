@@ -31,8 +31,8 @@
         "src/app/components/topNav/page.tsx",
         "src/app/component/page.tsx",
         "src/app/showVenues/[id]/page.tsx",
-        "src/app/components/search/searchBar/page.jsx",
+        "src/app/components/search/searchBar/page.tsx",
         "src/app/components/switchTheme/page.tsx"
-    ],
+, "src/app/components/search/page.jsx"    ],
     "exclude": ["node_modules"]
 }
