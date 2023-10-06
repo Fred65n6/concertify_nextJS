@@ -2,11 +2,11 @@
 import React, {useState, ChangeEvent} from "react";
 import {FaSearch} from "react-icons/fa";
 
-interface SearchInputProps {
+interface Props {
     setResults: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
-const SearchBar: React.FC<SearchInputProps> = ({setResults}) => {
+const SearchBar: React.FC<Props> = ({setResults}) => {
     const [input, setInput] = useState<string>("");
 
     const fetchData = (value: string) => {
