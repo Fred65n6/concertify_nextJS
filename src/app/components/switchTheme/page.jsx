@@ -10,21 +10,14 @@ const ThemeSwitcher = () => {
     return (
         <>
             <div className="py-2 hidden md:flex">
-                {/* <Switch
-          onClick={() => setColorMode(colorMode === "light" ? "dark" : "light")}
-          checked={enabled}
-          onChange={setEnabled}
-          className={`${enabled ? "bg-[#8e0bf5]" : "bg-[#5311bf]"} */}
                 <Switch
                     onClick={() =>
-                        setColorMode((prevColorMode) =>
-                            prevColorMode === "light" ? "dark" : "light"
-                        )
+                        setColorMode(colorMode === "light" ? "dark" : "light")
                     }
                     checked={enabled}
-                    onChange={() => setEnabled((prevEnabled) => !prevEnabled)}
-                    className={`${enabled ? "bg-[#8e0bf5]" : "bg-[#5311bf]"}}
-          relative inline-flex h-[24px] w-[48px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+                    onChange={setEnabled}
+                    className={`${enabled ? "bg-[#8e0bf5]" : "bg-[#5311bf]"}
+        relative inline-flex h-[24px] w-[48px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
                 >
                     <span className="sr-only">Use setting</span>
                     <span
