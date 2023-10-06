@@ -1,8 +1,8 @@
 "use client";
 import {useState} from "react";
 
-import {SearchBar} from "./searchBar/page";
-import {SearchResultsList} from "./searchResultsList/page";
+import {SearchBar} from "../searchBar/page";
+import {SearchResultsList} from "../searchResultsList/page";
 
 function Search() {
     const [results, setResults] = useState([]);

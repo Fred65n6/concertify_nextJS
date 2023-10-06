@@ -31,8 +31,11 @@
         "src/app/components/topNav/page.tsx",
         "src/app/component/page.tsx",
         "src/app/showVenues/[id]/page.tsx",
-        "src/app/components/search/searchBar/page.jsx",
-        "src/app/components/switchTheme/page.tsx"
-, "src/app/components/search/page.jsx", "src/app/components/search/searchResults/page.jsx", "src/app/components/search/searchResultsList/page.jsx"    ],
+        "src/app/components/searchBar/page.jsx",
+        "src/app/components/switchTheme/page.tsx",
+        "src/app/components/search/page.jsrc/app/components/searchResults/page.jsx
+        "src/app/components/search/searchResults/page.jsx",
+        "src/app/components/searchResultsList/page.jsx"
+    ],
     "exclude": ["node_modules"]
 }
