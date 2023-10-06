@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Search from "../search/page";
 
 const nav_logged = () => {
     return (
@@ -54,6 +55,7 @@ const nav_logged = () => {
                         </li>
                     </ul>
                 </div>
+                <Search />
                 <div className="">
                     <button className="rounded-full px-8 py-2 bg-purple-100 brand_purple flex items-center gap-2 m-auto hover:bg-purple-200">
                         <Link href="/profile/${data}">Profile</Link>
