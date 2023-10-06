@@ -6,6 +6,7 @@ import Nav_not_logged from "@/app/components/navNotLogged/page";
 import {hasCookie} from "@/helpers/cookieHelper";
 import Footer from "./components/footer/page";
 import TopNav from "./components/topNav/page";
+import Search from "./components/search/page";
 
 const plusJakartaSans = Plus_Jakarta_Sans({subsets: ["latin"]});
 
@@ -24,6 +25,8 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
                     className={`${plusJakartaSans.className} dark:bg-[#121212] dark:text-white`}
                 >
                     <TopNav />
+                    <Search />
+
                     {showComponent ? ( // Render your component here
                         <Nav_logged />
                     ) : (
