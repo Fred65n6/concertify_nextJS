@@ -2,7 +2,7 @@
 import {useState} from "react";
 import {FaSearch} from "react-icons/fa";
 
-export const SearchBar = ({setResults}) => {
+export default function SearchBar({setResults}) {
     const [input, setInput] = useState("");
 
     const fetchData = (value) => {
@@ -35,4 +35,4 @@ export const SearchBar = ({setResults}) => {
             />
         </div>
     );
-};
+}

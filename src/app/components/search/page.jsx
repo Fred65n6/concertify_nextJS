@@ -1,7 +1,7 @@
 "use client";
 import {useState} from "react";
 
-import {SearchBar} from "../searchBar/page";
+import SearchBar from "../searchBar/page";
 import {SearchResultsList} from "../searchResultsList/page";
 
 function Search() {
