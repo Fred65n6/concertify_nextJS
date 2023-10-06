@@ -1,23 +1,28 @@
 "use client";
 import React from "react";
-import useColorMode from "@/app/hooks/useColorMode";
+import useColorMode from "@/app/hooks/useColorMode"; // Import your custom hook
 import {useState} from "react";
 import {Switch} from "@headlessui/react";
 
 const ThemeSwitcher = () => {
-    const [colorMode, setColorMode] = useColorMode();
+    const [colorMode, setColorMode] = useColorMode(); // Destructure the state and setter function
     const [enabled, setEnabled] = useState(false);
+
     return (
         <>
             <div className="py-2 hidden md:flex">
                 <Switch
-                    onClick={() =>
-                        setColorMode(colorMode === "light" ? "dark" : "light")
-                    }
+                    onClick={() => {
+                        if (typeof setColorMode === "function") {
+                            setColorMode((prevColorMode) =>
+                                prevColorMode === "light" ? "dark" : "light"
+                            );
+                        }
+                    }}
                     checked={enabled}
-                    onChange={setEnabled}
+                    onChange={() => setEnabled(!enabled)}
                     className={`${enabled ? "bg-[#8e0bf5]" : "bg-[#5311bf]"}
-        relative inline-flex h-[24px] w-[48px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+          relative inline-flex h-[24px] w-[48px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
                 >
                     <span className="sr-only">Use setting</span>
                     <span

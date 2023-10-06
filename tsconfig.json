@@ -29,10 +29,10 @@
         ".next/types/**/*.ts",
         "src/app/verifyemail",
         "src/app/components/topNav/page.tsx",
-        "src/app/component/page.jsx",
+        "src/app/component/page.tsx",
         "src/app/showVenues/[id]/page.tsx",
         "src/app/components/search/searchBar/page.jsx",
-        "src/app/components/switchTheme/page.jsx"
+        "src/app/components/switchTheme/page.tsx"
     ],
     "exclude": ["node_modules"]
 }
