@@ -1,8 +1,6 @@
 "use client";
 import React, {useState} from "react";
 import ThemeSwitcher from "../switchTheme/page";
-import SearchBar from "../search/searchBar/page";
-import SearchResultsList from "../search/searchResultsList/page";
 
 const TopNav = () => {
     return (
