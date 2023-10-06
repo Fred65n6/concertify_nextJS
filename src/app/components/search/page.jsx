@@ -1,18 +1,22 @@
 "use client";
-import React, {useState} from "react";
-import SearchResults from "./searchResults/page";
-import SearchResultsList from "./searchResultsList/page";
-import SearchBar from "./searchBar/page";
+import {useState} from "react";
 
-const Search = () => {
-    const [results, setResults] = useState([]); // Provide an initial empty array of type 'any[]'
+import {SearchBar} from "./searchBar/page";
+import {SearchResultsList} from "./searchResultsList/page";
+
+function Search() {
+    const [results, setResults] = useState([]);
 
     return (
-        <div className="grid">
-            <SearchBar setResults={setResults} />
-            <SearchResultsList results={results} />
+        <div className="App">
+            <div className="search-bar-container">
+                <SearchBar setResults={setResults} />
+                {results && results.length > 0 && (
+                    <SearchResultsList results={results} />
+                )}
+            </div>
         </div>
     );
-};
+}
 
 export default Search;
