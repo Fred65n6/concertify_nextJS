@@ -1,3 +1,4 @@
+"use client";
 import React, {useState} from "react";
 import SearchResults from "./searchResults/page";
 import SearchResultsList from "./searchResultsList/page";
