@@ -1,11 +1,11 @@
 "use client";
 import React, {useState} from "react";
 import ThemeSwitcher from "../switchTheme/page";
-import SearchInput from "../searchBar/page";
+import {SearchInput} from "../searchBar/page";
 import SearchResultsList from "../searchResultsList/page";
 
 const TopNav = () => {
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState<any[]>([]); // Provide an initial empty array of type 'any[]'
 
     return (
         <>

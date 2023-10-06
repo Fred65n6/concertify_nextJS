@@ -6,7 +6,7 @@ interface SearchInputProps {
     setResults: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({setResults}) => {
+export const SearchInput: React.FC<SearchInputProps> = ({setResults}) => {
     const [input, setInput] = useState<string>("");
 
     const fetchData = (value: string) => {
@@ -50,5 +50,3 @@ const SearchInput: React.FC<SearchInputProps> = ({setResults}) => {
         </div>
     );
 };
-
-export default SearchInput;
