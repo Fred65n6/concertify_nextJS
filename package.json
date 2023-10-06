@@ -46,6 +46,7 @@
     "@types/js-cookie": "^3.0.4",
     "@types/jsonwebtoken": "^9.0.3",
     "@types/nodemailer": "^6.4.10",
-    "daisyui": "^3.8.0"
+    "daisyui": "^3.8.0",
+    "eslint-config-prettier": "^9.0.0"
   }
 }
