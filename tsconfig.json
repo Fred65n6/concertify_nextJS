@@ -33,7 +33,8 @@
         "src/app/showVenues/[id]/page.tsx",
         "src/app/components/searchBar/page.jsx",
         "src/app/components/switchTheme/page.tsx",
-        "src/app/components/search/page.jsrc/app/components/searchResults/page.jsx",
+        "src/app/components/search/page.jsx",
+        "src/app/components/searchBar/page.jsx",
         "src/app/components/searchResults/page.jsx",
         "src/app/components/searchResultsList/page.jsx"
     ],
