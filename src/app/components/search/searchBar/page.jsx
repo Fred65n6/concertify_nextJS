@@ -1,34 +1,28 @@
 "use client";
-import React, {useState, ChangeEvent} from "react";
+import {useState} from "react";
 import {FaSearch} from "react-icons/fa";
 
-interface Props {
-    setResults: React.Dispatch<React.SetStateAction<any[]>>;
-}
+const SearchBar = ({setResults}) => {
+    const [input, setInput] = useState("");
 
-const SearchBar: React.FC<Props> = ({setResults}) => {
-    const [input, setInput] = useState<string>("");
-
-    const fetchData = (value: string) => {
+    const fetchData = (value) => {
         const apiUrl = "/api/data/artistData";
 
         fetch(apiUrl)
             .then((response) => response.json())
             .then((json) => {
-                const results = json.data.filter((artist: any) => {
-                    return (
-                        value &&
-                        artist &&
-                        artist.artist_name &&
-                        artist.artist_name.toLowerCase().includes(value)
-                    );
-                });
+                const results = json.data.filter((artist) =>
+                    artist?.artist_name?.toLowerCase().includes(value)
+                );
                 setResults(results);
                 console.log(results);
+            })
+            .catch((error) => {
+                console.error("Error fetching data:", error);
             });
     };
 
-    const handleChange = (value: string) => {
+    const handleChange = (value) => {
         setInput(value);
         fetchData(value);
     };
@@ -42,9 +36,7 @@ const SearchBar: React.FC<Props> = ({setResults}) => {
                     className="bg-slate-100 outline-none dark:text-black"
                     placeholder="Type to search..."
                     value={input}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                        handleChange(e.target.value)
-                    }
+                    onChange={(e) => handleChange(e.target.value)}
                 />
             </div>
         </div>
