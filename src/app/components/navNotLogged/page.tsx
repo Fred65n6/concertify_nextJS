@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Search from "../search/page";
+// import Search from "../search/page";
 
 const NavLogged = () => {
     const openLoginModule = () => {
@@ -49,7 +49,7 @@ const NavLogged = () => {
                         </li>
                     </ul>
                 </div>
-                <Search />
+                {/* <Search /> */}
                 <div className="flex gap-4">
                     <button className="rounded-full bg-purple-100 brand_purple w-32 py-3 hover:bg-purple-200">
                         <Link href="/signup">Sign up</Link>
