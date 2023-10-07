@@ -85,18 +85,32 @@ export default function Home() {
                 </div>
             </section> */}
 
-            {/* Artists */}
-            {/* <section className="py-20 border-b-[1px] border-gray-200 dark:border-stone-800">
-                <h2 className="font-bold text-xl mb-4">
-                    Artists you might like
+            {/* Concerts */}
+            <section className="py-20 grid gap-8 md:h-[500px]">
+                <h2 className="font-bold text-xl">
+                    Concerts you need to experiece
                 </h2>
-                <div className="flex overflow-y-scroll md:grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                    <ArtistCard />
-                    <ArtistCard />
-                    <ArtistCard />
-                    <ArtistCard />
+                <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
+                    <ConcertCard />
                 </div>
-            </section> */}
+                <Link
+                    className="place-self-end flex items-center md:hidden"
+                    href="/showVenues"
+                >
+                    View all venues
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="25"
+                        height="25"
+                        viewBox="0 0 22 22"
+                    >
+                        <path
+                            fill="#5311bf"
+                            d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375q0 .2-.063.375t-.212.325l-4.6 4.6q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l3.9-3.9Z"
+                        />
+                    </svg>
+                </Link>
+            </section>
 
             {/* Venues */}
             <section className="py-20 grid gap-8 md:h-[500px]">
