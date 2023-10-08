@@ -9,12 +9,14 @@ export async function GET(request: NextRequest, response: NextResponse) {
     try {
         const concertId = await getConcertData(request);
         const concert = await Concert.find();
-
+        
         return NextResponse.json({
             message: "Concert Found:",
             data: concert,
+            
         });
     } catch (error: any) {
         return NextResponse.json({error: error.message}, {status: 400});
     }
 }
+
