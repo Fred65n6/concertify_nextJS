@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import minds_of_99 from "public/images/artist-the-minds-of-99.jpeg";
+import minds_of_99 from "public/concert_images/minds_tour.jpeg";
 
 const ArtistCard = () => {
     return (
