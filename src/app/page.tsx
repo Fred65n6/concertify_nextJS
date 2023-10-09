@@ -86,7 +86,7 @@ export default function Home() {
             </section> */}
 
             {/* Concerts */}
-            <section className="pt-24 pb-40 grid gap-8 md:h-[700px]">
+            <section className="pt-24 pb-10 grid gap-8 md:h-[600px]">
                 <h2 className="font-bold text-xl">
                     Concerts you need to experience
                 </h2>
@@ -95,7 +95,7 @@ export default function Home() {
                 </div>
                 <Link
                     className="place-self-end flex items-center md:hidden"
-                    href="/showVenues"
+                    href="/concerts"
                 >
                     View all venues
                     <svg
