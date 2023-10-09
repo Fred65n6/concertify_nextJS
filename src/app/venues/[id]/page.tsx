@@ -3,11 +3,13 @@
 import {useParams} from "next/navigation";
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import Image from "next/image";
 
 interface Venue {
     _id: string;
     venue_name: string;
     venue_address: string;
+    venue_image: string;
     // Add other properties from your Venue model
 }
 
@@ -44,12 +46,19 @@ export default function SingleVenue() {
         <div style={{padding: 40}}>
             {selectedVenue ? (
                 <div>
+                    <Image
+                        src={"/venue_images/" + selectedVenue.venue_image}
+                        width={200}
+                        height={200}
+                        alt="concert"
+                        className=" pb-8 object-cover w-full h-[300px] rounded-lg"
+                    />
                     <h2 className="text-4xl font-bold my-2">
-                        Venue name: {selectedVenue.venue_name}
+                        {selectedVenue.venue_name}
                     </h2>
                     <hr />
                     <p className="text-xl my-2">
-                        Venue address: {selectedVenue.venue_address}
+                        address: {selectedVenue.venue_address}
                     </p>
                     {/* Add more venue details as needed */}
                 </div>

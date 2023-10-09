@@ -3,13 +3,13 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import venueImage from "public/images/venue-vega.jpeg";
-import beyonce from "public/images/beyonce_2023_tour.webp";
 
 interface Venue {
     _id: string;
     venue_name: string;
     venue_address: string;
+    venue_image: string;
+    venue_location: string;
 }
 
 const VenueCard: React.FC = () => {
@@ -56,24 +56,27 @@ const VenueCard: React.FC = () => {
     return (
         <>
             {venuesToDisplay.map((venue) => (
-                <article className="flex-shrink-0" key={venue._id}>
+                <article className="flex-shrink-0 h-[300px]" key={venue._id}>
                     {/* <ul className="md:flex gap-8">
                         <li className="grid gap-2 w-[500px]"> */}
                     <Link href={"/venues/" + venue._id} key={venue._id}>
                         <Image
-                            src={venueImage}
+                            src={"/venue_images/" + venue.venue_image}
                             width={200}
                             height={200}
                             alt="concert"
-                            className="rounded-lg w-fit"
+                            className="rounded-lg  object-cover w-[300px] h-[200px]"
                         />
                     </Link>
 
-                    <div className="text-black text-xl font-bold dark:text-white">
+                    <div className="text-black text-xl font-bold dark:text-white pt-2">
                         {venue.venue_name}
                     </div>
-                    <div className="text-gray-600 text-sm dark:text-gray-400">
+                    <div className="text-gray-600 text-sm dark:text-gray-400 pt-2">
                         {venue.venue_address}
+                    </div>
+                    <div className="text-gray-400 text-sm dark:text-gray-400">
+                        {venue.venue_location}
                     </div>
                     {/* </li>
                     </ul> */}

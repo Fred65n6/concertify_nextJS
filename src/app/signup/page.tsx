@@ -12,6 +12,7 @@ export default function SingupPage() {
         email: "",
         password: "",
         username: "",
+        confirmpassword: "",
     });
 
     const [buttonDisabled, setButtonDisabled] = React.useState(false);
@@ -49,7 +50,8 @@ export default function SingupPage() {
         if (
             user.email.length > 0 &&
             user.password.length > 0 &&
-            user.username.length > 0
+            user.username.length > 0 &&
+            user.confirmpassword.length > 0
         ) {
             setButtonDisabled(false);
         } else {
@@ -87,7 +89,7 @@ export default function SingupPage() {
                     }
                     placeholder="Username"
                 />
-                <label htmlFor="email">email</label>
+                <label htmlFor="email">Email</label>
                 <input
                     className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
                     type="text"
@@ -96,7 +98,7 @@ export default function SingupPage() {
                     onChange={(e) => setUser({...user, email: e.target.value})}
                     placeholder="email"
                 />
-                <label htmlFor="password">password</label>
+                <label htmlFor="password">Password</label>
                 <input
                     className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
                     type="password"
@@ -106,6 +108,17 @@ export default function SingupPage() {
                         setUser({...user, password: e.target.value})
                     }
                     placeholder="password"
+                />
+                <label htmlFor="confirmpassword">Confirm password</label>
+                <input
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+                    type="password"
+                    id="confirmpassword"
+                    value={user.confirmpassword}
+                    onChange={(e) =>
+                        setUser({...user, confirmpassword: e.target.value})
+                    }
+                    placeholder="Confirm your password"
                 />
                 <button
                     onClick={onSignup}

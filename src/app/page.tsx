@@ -86,9 +86,9 @@ export default function Home() {
             </section> */}
 
             {/* Concerts */}
-            <section className="py-20 grid gap-8 md:h-[500px]">
+            <section className="pt-24 pb-40 grid gap-8 md:h-[700px]">
                 <h2 className="font-bold text-xl">
-                    Concerts you need to experiece
+                    Concerts you need to experience
                 </h2>
                 <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
                     <ConcertCard />
@@ -113,16 +113,16 @@ export default function Home() {
             </section>
 
             {/* Venues */}
-            <section className="py-20 grid gap-8 md:h-[500px]">
+            <section className="pt-10 pb-40 grid gap-8 md:h-[600px]">
                 <h2 className="font-bold text-xl">
-                    Venues you need to experiece
+                    Venues you need to experience
                 </h2>
                 <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
                     <VenueCard />
                 </div>
                 <Link
                     className="place-self-end flex items-center md:hidden"
-                    href="/showVenues"
+                    href="/venues"
                 >
                     View all venues
                     <svg

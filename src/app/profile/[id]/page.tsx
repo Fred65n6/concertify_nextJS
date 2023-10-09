@@ -16,6 +16,7 @@ export default function UserProfile({params}: any) {
         newpassword: "",
         email: "",
         password: "",
+        confirmpassword: "",
     });
 
     const showPasswordChangeMessage = () => {
@@ -131,7 +132,7 @@ export default function UserProfile({params}: any) {
                     onChange={(e) =>
                         setUser({...user, password: e.target.value})
                     }
-                    placeholder=""
+                    placeholder="Type your old password"
                 />
                 <label htmlFor="password">Type your new password</label>
                 <input
@@ -142,7 +143,20 @@ export default function UserProfile({params}: any) {
                     onChange={(e) =>
                         setUser({...user, newpassword: e.target.value})
                     }
-                    placeholder=""
+                    placeholder="Type new password"
+                />
+                <label htmlFor="confirm_password">
+                    Confirm your new password
+                </label>
+                <input
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+                    type="password"
+                    id="confirm_password"
+                    value={user.confirmpassword}
+                    onChange={(e) =>
+                        setUser({...user, confirmpassword: e.target.value})
+                    }
+                    placeholder="Confirm new password"
                 />
                 <button
                     onClick={changePassword}

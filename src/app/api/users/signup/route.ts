@@ -9,21 +9,26 @@ connect();
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const {username, email, password} = reqBody;
+        const {username, email, password, confirmpassword} = reqBody;
 
         console.log(reqBody);
 
-        //check if user already exists
+        // Check if user already exists
         const user = await User.findOne({email});
 
         if (user) {
             return NextResponse.json(
-                {error: "user already exists"},
+                {error: "User already exists"},
                 {status: 400}
             );
         }
 
-        //hash password
+        // Check if password and confirm password match
+        if (password !== confirmpassword) {
+            throw new Error("Password and confirm password do not match");
+        }
+
+        // Hash password
         const salt = await bcryptjs.genSalt(10);
         const hashedPassword = await bcryptjs.hash(password, salt);
 
@@ -36,16 +41,16 @@ export async function POST(request: NextRequest) {
         const savedUser = await newUser.save();
         console.log(savedUser);
 
-        //Send verifiaton email
+        // Send verification email
         await sendEmail({email, emailType: "VERIFY", userId: savedUser._id});
 
-        //Sign up success
+        // Sign up success
         return NextResponse.json({
             message: "User created successfully",
             success: true,
             savedUser,
         });
     } catch (error: any) {
-        return NextResponse.json({error: error.message}), {status: 500};
+        return NextResponse.json({error: error.message}, {status: 500});
     }
 }

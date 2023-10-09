@@ -1,14 +1,13 @@
 "use client";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import ConcertCard from "../components/concertCard/page";
-import concertImageBeyonce from "public/images/beyonce_2023_tour.webp";
 import Link from "next/link";
 import Image from "next/image";
 interface Concert {
     _id: string;
     concert_name: string;
     concert_venue_fk: string;
+    concert_image: string;
 }
 
 const ConcertList: React.FC = () => {
@@ -30,17 +29,21 @@ const ConcertList: React.FC = () => {
 
     return (
         <>
+            <h1 className="font-bold text-4xl pb-4">All concerts</h1>
             <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8">
-            {/* <ConcertCard/> */}
+                {/* <ConcertCard/> */}
                 {concerts.map((concert) => (
                     <article className="w-auto" key={concert._id}>
-                        <Link href={"/concerts/" + concert._id} key={concert._id}>
+                        <Link
+                            href={"/concerts/" + concert._id}
+                            key={concert._id}
+                        >
                             <Image
-                                src={concertImageBeyonce}
+                                src={"/concert_images/" + concert.concert_image}
                                 width={200}
                                 height={200}
                                 alt="concert"
-                                className="rounded-lg md:w-fit"
+                                className="rounded-lg w-[300px] h-[200px] object-cover"
                             />
                         </Link>
 

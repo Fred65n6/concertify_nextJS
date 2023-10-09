@@ -3,16 +3,14 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import concertImageBeyonce from "public/images/beyonce_2023_tour.webp";
-
+import concertImageBeyonce from "public/artist_images/beyonce_2023_tour.webp";
 
 interface Concert {
     _id: string;
     concert_name: string;
     concert_date: number;
-
+    concert_image: string;
 }
-
 
 const ConcertCard: React.FC = () => {
     const [concerts, setConcerts] = useState<Concert[]>([]);
@@ -56,24 +54,23 @@ const ConcertCard: React.FC = () => {
     return (
         <>
             {concertsToDisplay.map((concert) => (
-                <article className="flex-shrink-0" key={concert._id}>
+                <article className="flex-shrink-0 h-[300px]" key={concert._id}>
                     <Link href={"/concerts/" + concert._id} key={concert._id}>
                         <Image
-                            src={concertImageBeyonce}
+                            src={"/concert_images/" + concert.concert_image}
                             width={200}
                             height={200}
                             alt="concert"
-                            className="rounded-lg w-fit"
+                            className="rounded-lg  object-cover w-[300px] h-[200px]"
                         />
                     </Link>
 
-                    <p className="text-black text-xl font-bold dark:text-white">
+                    <div className="text-black text-xl font-bold dark:text-white pt-2">
                         {concert.concert_name}
-                    </p>
-
-                    <p className="text-gray-600 text-sm dark:text-gray-400">
+                    </div>
+                    <div className="text-gray-600 text-sm dark:text-gray-400 pt-2">
                         {concert.concert_date}
-                    </p>
+                    </div>
                 </article>
             ))}
 
@@ -100,7 +97,8 @@ const ConcertCard: React.FC = () => {
                 <button
                     onClick={nextPage}
                     className={`flex items-center pagination-button ${
-                        currentPage === Math.ceil(concerts.length / concertsPerPage)
+                        currentPage ===
+                        Math.ceil(concerts.length / concertsPerPage)
                             ? "disabled"
                             : ""
                     }`}
