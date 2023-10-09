@@ -1,4 +1,4 @@
-import {SearchResult} from "../searchResults/page";
+import {SearchResult} from "@/app/components/search/searchResults";
 
 export const SearchResultsList = ({results}) => {
     return (
