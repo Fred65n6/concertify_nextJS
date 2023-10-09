@@ -1,35 +1,124 @@
 "use client";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import beyonce_tour from "public/images/beyonce_2023_tour.webp";
+import concertImageBeyonce from "public/images/beyonce_2023_tour.webp";
 
-const ConcertCard = () => {
+
+interface Concert {
+    _id: string;
+    concert_name: string;
+    concert_date: number;
+
+}
+
+
+const ConcertCard: React.FC = () => {
+    const [concerts, setConcerts] = useState<Concert[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const concertsPerPage = 4;
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/data/concertData");
+                setConcerts(response.data.data);
+            } catch (error) {
+                console.error("Error fetching concerts:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    // Calculate the start and end indexes of venues to display on the current page
+    const startIndex = (currentPage - 1) * concertsPerPage;
+    const endIndex = startIndex + concertsPerPage;
+
+    // Slice the venues array to display only the venues for the current page
+    const concertsToDisplay = concerts.slice(startIndex, endIndex);
+
+    // Function to handle next page
+    const nextPage = () => {
+        if (currentPage < Math.ceil(concerts.length / concertsPerPage)) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    // Function to handle previous page
+    const previousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
     return (
         <>
-            <article className="rounded-lg max-h-fit flex flex-col justify-between gap-2 mb-6 lg:mb-0">
-                <Link className="" href="/">
-                    <Image
-                        src={beyonce_tour}
-                        width={200}
-                        height={200}
-                        alt="concert"
-                        className="rounded-lg w-fit"
-                    />
-                </Link>
-                <div className="flex flex-col">
-                    <h3 className="text-black text-xl font-bold dark:text-white">
-                        Beyonce - RENAISSANCE WORLD TOUR
-                    </h3>
-                    <p className="text-gray-600 text-sm dark:text-gray-400">
-                        6. September 2023
+            {concertsToDisplay.map((concert) => (
+                <article className="flex-shrink-0" key={concert._id}>
+                    <Link href={"/concerts/" + concert._id} key={concert._id}>
+                        <Image
+                            src={concertImageBeyonce}
+                            width={200}
+                            height={200}
+                            alt="concert"
+                            className="rounded-lg w-fit"
+                        />
+                    </Link>
+
+                    <p className="text-black text-xl font-bold dark:text-white">
+                        {concert.concert_name}
                     </p>
+
                     <p className="text-gray-600 text-sm dark:text-gray-400">
-                        <span className="font-bold text-sm">Royal Arena</span>,
-                        Copenhagen S
+                        {concert.concert_date}
                     </p>
-                </div>
-            </article>
+                </article>
+            ))}
+
+            <div className="hidden pagination md:flex gap-8 md:place-self-end md:col-end-5">
+                {currentPage > 1 && (
+                    <button
+                        onClick={previousPage}
+                        className="pagination-button flex items-center"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="25"
+                            height="25"
+                            viewBox="0 0 22 22"
+                        >
+                            <path
+                                fill="#5311bf"
+                                d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7q-.275.275-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12q0-.2.063-.375T8.7 11.3l4.6-4.6q.275-.275.7-.275t.7.275q.275.275.275.7t-.275.7L10.8 12Z"
+                            />
+                        </svg>
+                        Previous
+                    </button>
+                )}
+                <button
+                    onClick={nextPage}
+                    className={`flex items-center pagination-button ${
+                        currentPage === Math.ceil(concerts.length / concertsPerPage)
+                            ? "disabled"
+                            : ""
+                    }`}
+                >
+                    Next
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="25"
+                        height="25"
+                        viewBox="0 0 22 22"
+                    >
+                        <path
+                            fill="#5311bf"
+                            d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375q0 .2-.063.375t-.212.325l-4.6 4.6q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l3.9-3.9Z"
+                        />
+                    </svg>
+                </button>
+            </div>
         </>
     );
 };
