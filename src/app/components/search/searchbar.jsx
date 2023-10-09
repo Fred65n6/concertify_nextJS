@@ -26,13 +26,17 @@ export const SearchBar = ({setResults}) => {
     };
 
     return (
-        <div className="input-wrapper">
-            <FaSearch id="search-icon" />
-            <input
-                placeholder="Type to search..."
-                value={input}
-                onChange={(e) => handleChange(e.target.value)}
-            />
+        <div className="bg-slate-100 p-2 rounded-full m-4">
+            <div className="flex gap-2 items-center mx-2">
+                <FaSearch className="fill-slate-400" id="search-icon" />
+                <input
+                    type="text"
+                    className="bg-slate-100 outline-none dark:text-black"
+                    placeholder="Type to search..."
+                    value={input}
+                    onChange={(e) => handleChange(e.target.value)}
+                />
+            </div>
         </div>
     );
 };
