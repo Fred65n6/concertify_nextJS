@@ -8,6 +8,7 @@ import Link from "next/link";
 export default function LoginPage() {
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = React.useState<string>("");
     const router = useRouter();
     const [user, setUser] = useState({
         email: "",
@@ -27,8 +28,16 @@ export default function LoginPage() {
             console.log("Login success", response.data);
             window.location.reload();
         } catch (error: any) {
-            console.log("Login failed", error.message);
-            toast.error(error.message);
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.error
+            ) {
+                setError(error.response.data.error);
+            } else {
+                setError("An error occurred during signup.");
+            }
+            console.log("API signup failed", error);
         } finally {
             setLoading(false);
         }
@@ -71,6 +80,8 @@ export default function LoginPage() {
                 <h1 className="mb-6 text-4xl">
                     {loading ? "Processing" : "Login"}
                 </h1>
+                <hr />
+                {error && <div className="text-red-500">{error}</div>}
                 <label htmlFor="email">email</label>
                 <input
                     className="m-2 p-2 rounded-md text-left text-black bg-slate-100"

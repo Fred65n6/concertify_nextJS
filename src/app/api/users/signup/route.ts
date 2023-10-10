@@ -18,14 +18,25 @@ export async function POST(request: NextRequest) {
 
         if (user) {
             return NextResponse.json(
-                {error: "User already exists"},
+                {error: "Email already in use"},
+                {status: 400}
+            );
+        }
+
+        const usernameExists = await User.findOne({username});
+        if (usernameExists) {
+            return NextResponse.json(
+                {error: "Username is already taken"},
                 {status: 400}
             );
         }
 
         // Check if password and confirm password match
         if (password !== confirmpassword) {
-            throw new Error("Password and confirm password do not match");
+            return NextResponse.json(
+                {error: "Password and confirm password doesn't match"},
+                {status: 400}
+            );
         }
 
         // Hash password

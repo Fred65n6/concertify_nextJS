@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
         if (!user.isVerified) {
             console.log("user not verified");
             return NextResponse.json(
-                {error: "User is not verified"},
+                {error: "Email is not verified"},
                 {status: 400}
             );
         }

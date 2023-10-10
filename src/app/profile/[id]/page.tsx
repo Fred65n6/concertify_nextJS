@@ -7,6 +7,7 @@ import {useRouter} from "next/navigation";
 export default function UserProfile({params}: any) {
     const router = useRouter();
     const [loading, setLoading] = React.useState(false);
+    const [error, setError] = React.useState<string>("");
     const [data, setData] = useState({
         username: "nothing",
         userId: null, // Initialize with null or a suitable default value
@@ -17,30 +18,21 @@ export default function UserProfile({params}: any) {
         email: "",
         password: "",
         confirmpassword: "",
+        newUsername: "",
     });
 
-    const showPasswordChangeMessage = () => {
-        const changePasswordMessage = document.getElementById(
-            "changePasswordMessage"
-        );
-        const changePasswordForm =
-            document.getElementById("changePasswordForm");
-        changePasswordMessage?.classList.remove("hidden");
-        changePasswordForm?.classList.add("hidden");
-    };
+    // useEffect(() => {
+    //     // Check if the 'successfulLogin' flag is present in localStorage
+    //     const successfulLogin = localStorage.getItem("successfulLogin");
 
-    useEffect(() => {
-        // Check if the 'successfulLogin' flag is present in localStorage
-        const successfulLogin = localStorage.getItem("successfulLogin");
+    //     if (successfulLogin === "true") {
+    //         // Remove the flag to prevent future reloads
+    //         localStorage.removeItem("successfulLogin");
 
-        if (successfulLogin === "true") {
-            // Remove the flag to prevent future reloads
-            localStorage.removeItem("successfulLogin");
-
-            // Push the user to the "/profile" route
-            router.push("/");
-        }
-    }, []);
+    //         // Push the user to the "/profile" route
+    //         router.push("/");
+    //     }
+    // }, []);
 
     const logout = async () => {
         try {
@@ -72,15 +64,50 @@ export default function UserProfile({params}: any) {
             console.error(error.message);
         }
     };
-
     useEffect(() => {
-        // Fetch user details when the component mounts
         getUserDetails();
     }, []);
 
     useEffect(() => {
         setUser({...user, email: data.userEmail});
     }, [data.userEmail]);
+
+    const showChangePasswordForm = () => {
+        const PasswordForm = document.getElementById("changePasswordForm");
+        PasswordForm?.classList.remove("hidden");
+        PasswordForm?.classList.add("grid");
+    };
+
+    const showChangeUsernamedForm = () => {
+        const UsernameForm = document.getElementById("changeUsernameForm");
+        UsernameForm?.classList.remove("hidden");
+        UsernameForm?.classList.add("grid");
+    };
+
+    const changeUsername = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.post(
+                "/api/users/changeUsername",
+                user
+            );
+            console.log("username changed", response.data);
+            showUsernameChangeMessage();
+        } catch (error: any) {
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.error
+            ) {
+                setError(error.response.data.error);
+            } else {
+                setError("An error occurred during signup.");
+            }
+            console.log("API signup failed", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const changePassword = async () => {
         try {
@@ -92,28 +119,124 @@ export default function UserProfile({params}: any) {
             console.log("password changed", response.data);
             showPasswordChangeMessage();
         } catch (error: any) {
-            console.log("password change FAILED", error);
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.error
+            ) {
+                setError(error.response.data.error);
+            } else {
+                setError("An error occurred during signup.");
+            }
+            console.log("API signup failed", error);
         } finally {
             setLoading(false);
         }
     };
 
+    const showUsernameChangeMessage = () => {
+        const changeUsernameMessage = document.getElementById(
+            "changeUsernameMessage"
+        );
+        const changeUsernameForm =
+            document.getElementById("changeUsernameForm");
+        changeUsernameMessage?.classList.remove("hidden");
+        changeUsernameForm?.classList.add("hidden");
+    };
+
+    const showPasswordChangeMessage = () => {
+        const changePasswordMessage = document.getElementById(
+            "changePasswordMessage"
+        );
+        const changePasswordForm =
+            document.getElementById("changePasswordForm");
+        changePasswordMessage?.classList.remove("hidden");
+        changePasswordForm?.classList.add("hidden");
+    };
+
     return (
-        <div className="flex flex-col items-center pt-8">
-            <h1>Profile</h1>
+        <div className="grid pt-8">
+            <h1 className="text-4xl my-8">Profile</h1>
             <hr />
-            <p className="text-4xl">Profile Page {data.username}</p>
-            {/* Render other properties if needed */}
-            <p>User ID: {data.userId}</p>
-            <hr />
-            <button
-                onClick={logout}
-                className="bg-blue-500 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            <div className="flex item-center justify-between pb-4 mt-8">
+                <p className="text-xl pb-4">
+                    Username:{" "}
+                    <span className="brand_purple">{data.username}</span>
+                </p>
+                <button onClick={showChangeUsernamedForm}>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        className="opacity-50"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M5 23.7q-.825 0-1.413-.587T3 21.7v-14q0-.825.588-1.413T5 5.7h8.925l-2 2H5v14h14v-6.95l2-2v8.95q0 .825-.588 1.413T19 23.7H5Zm7-9Zm4.175-8.425l1.425 1.4l-6.6 6.6V15.7h1.4l6.625-6.625l1.425 1.4l-7.2 7.225H9v-4.25l7.175-7.175Zm4.275 4.2l-4.275-4.2l2.5-2.5q.6-.6 1.438-.6t1.412.6l1.4 1.425q.575.575.575 1.4T22.925 8l-2.475 2.475Z"
+                        />
+                    </svg>
+                </button>
+            </div>
+            <div id="changeUsernameForm" className="w-72 hidden mb-12">
+                {error && <div className="text-red-500">{error}</div>}
+                <input
+                    readOnly={true}
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200 hidden"
+                    type="text"
+                    id="email"
+                    value={user.email}
+                    onChange={(e) => setUser({...user, email: e.target.value})}
+                    placeholder=""
+                />
+                <label htmlFor="newUsername">Type your new username</label>
+                <input
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+                    type="text"
+                    id="newUsername"
+                    value={user.newUsername}
+                    onChange={(e) =>
+                        setUser({...user, newUsername: e.target.value})
+                    }
+                    placeholder="Type new username"
+                />
+                <button
+                    onClick={changeUsername}
+                    className="m-4 brand_gradient px-12 py-4 rounded-full text-white mt-8"
+                >
+                    Change username
+                </button>
+            </div>
+
+            <div
+                id="changeUsernameMessage"
+                className="text-2xl hidden mt-4 mb-12 brand_purple"
             >
-                Logout
-            </button>
-            <div id="changePasswordForm" className="grid my-12">
-                <h2 className="text-2xl pb-8">Change password</h2>
+                Your username has been changed
+            </div>
+
+            <div className="flex items-center justify-between mb-8">
+                <p className="text-xl">
+                    Password: <span className="brand_purple">********</span>
+                </p>
+
+                <button onClick={showChangePasswordForm}>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        className="opacity-50"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M5 23.7q-.825 0-1.413-.587T3 21.7v-14q0-.825.588-1.413T5 5.7h8.925l-2 2H5v14h14v-6.95l2-2v8.95q0 .825-.588 1.413T19 23.7H5Zm7-9Zm4.175-8.425l1.425 1.4l-6.6 6.6V15.7h1.4l6.625-6.625l1.425 1.4l-7.2 7.225H9v-4.25l7.175-7.175Zm4.275 4.2l-4.275-4.2l2.5-2.5q.6-.6 1.438-.6t1.412.6l1.4 1.425q.575.575.575 1.4T22.925 8l-2.475 2.475Z"
+                        />
+                    </svg>
+                </button>
+            </div>
+            <div id="changePasswordForm" className="w-72 hidden">
+                {error && <div className="text-red-500">{error}</div>}
                 <input
                     readOnly={true}
                     className="m-2 p-2 rounded-md text-left text-black bg-slate-200 hidden"
@@ -160,14 +283,26 @@ export default function UserProfile({params}: any) {
                 />
                 <button
                     onClick={changePassword}
-                    className="m-4 bg-blue-500 px-12 py-4 rounded-full text-white mt-8"
+                    className="m-4 brand_gradient px-12 py-4 rounded-full text-white mt-8"
                 >
                     Change password
                 </button>
             </div>
-            <div id="changePasswordMessage" className="text-2xl hidden mt-12">
+            <div
+                id="changePasswordMessage"
+                className="text-2xl hidden mt-4 mb-12 brand_purple"
+            >
                 Your password has been changed
             </div>
+
+            <hr />
+
+            <button
+                onClick={logout}
+                className="brand_gradient px-12 py-4 rounded-full text-white mt-8 mb-12 hover:brightness-75 w-72 m-auto"
+            >
+                Logout
+            </button>
         </div>
     );
 }
