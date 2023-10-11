@@ -10,6 +10,7 @@ interface Concert {
     concert_name: string;
     concert_date: number;
     concert_image: string;
+    concert_artist: string;
 }
 
 const ConcertCard: React.FC = () => {
@@ -57,17 +58,23 @@ const ConcertCard: React.FC = () => {
                 <article className="flex-shrink-0 h-[300px]" key={concert._id}>
                     <Link href={"/concerts/" + concert._id} key={concert._id}>
                         <Image
-                            src={"/concert_images/" + concert.concert_image}
+                            src={"/" + concert.concert_image}
                             width={200}
                             height={200}
                             alt="concert"
                             className="rounded-lg  object-cover w-[300px] h-[200px]"
                         />
                     </Link>
+                    <div className="flex gap-2">
+                        <div className="text-black text-xl font-bold dark:text-white pt-2">
+                            {concert.concert_artist}
+                        </div>
 
-                    <div className="text-black text-xl font-bold dark:text-white pt-2">
-                        {concert.concert_name}
+                        <div className="text-black text-xl  dark:text-white pt-2">
+                            {concert.concert_name}
+                        </div>
                     </div>
+
                     <div className="text-gray-600 text-sm dark:text-gray-400 pt-2">
                         {concert.concert_date}
                     </div>
