@@ -86,11 +86,11 @@ export default function Home() {
             </section> */}
 
             {/* Concerts */}
-            <section className="pt-24 pb-10 grid gap-8 md:h-[600px]">
-                <h2 className="font-bold text-xl">
+            <section className="pt-24 pb-4  md:h-[600px]">
+                <h2 className="font-bold text-xl pb-8">
                     Concerts you need to experience
                 </h2>
-                <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
+                <div className="flex md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
                     <ConcertCard />
                 </div>
                 <Link
@@ -113,7 +113,7 @@ export default function Home() {
             </section>
 
             {/* Venues */}
-            <section className="pt-10 pb-40 grid gap-8 md:h-[600px]">
+            <section className="pb-40">
                 <h2 className="font-bold text-xl">
                     Venues you need to experience
                 </h2>

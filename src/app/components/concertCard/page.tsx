@@ -55,7 +55,7 @@ const ConcertCard: React.FC = () => {
     return (
         <>
             {concertsToDisplay.map((concert) => (
-                <article className="flex-shrink-0 h-[300px]" key={concert._id}>
+                <article className="flex-shrink-0 grid pb-8" key={concert._id}>
                     <Link href={"/concerts/" + concert._id} key={concert._id}>
                         <Image
                             src={"/" + concert.concert_image}
