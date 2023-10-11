@@ -2,8 +2,8 @@
 import React from "react";
 import { Fragment, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+// import Calendar from "react-calendar";
+// import "react-calendar/dist/Calendar.css";
 import { Menu } from "@headlessui/react";
 
 function FilteringNavDesktop() {
@@ -217,7 +217,7 @@ function FilteringNavDesktop() {
                 <p className="font-medium">Date</p>
               </div>
 
-              <Menu>
+              {/* <Menu>
                 <Menu.Button className="relative mt-1 text-gray-400 py-2 pl-3 pr-10 font-light cursor-pointer focus:bg-purple-50 hover:bg-purple-50 rounded-full">
                   Search by date
                 </Menu.Button>
@@ -234,7 +234,7 @@ function FilteringNavDesktop() {
                     )}
                   </Menu.Item>
                 </Menu.Items>
-              </Menu>
+              </Menu> */}
             </div>
           </div>
           <div className="border-l-2 border-gray-300">
