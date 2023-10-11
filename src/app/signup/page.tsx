@@ -12,10 +12,12 @@ export default function SingupPage() {
         email: "",
         password: "",
         username: "",
+        confirmpassword: "",
     });
 
     const [buttonDisabled, setButtonDisabled] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
+    const [error, setError] = React.useState<string>("");
 
     // Send information til API'en signup
     const onSignup = async () => {
@@ -25,7 +27,15 @@ export default function SingupPage() {
             console.log("Signup success", response.data);
             showMessage();
         } catch (error: any) {
-            toast.error(error.message);
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.error
+            ) {
+                setError(error.response.data.error);
+            } else {
+                setError("An error occurred during signup.");
+            }
             console.log("API signup failed", error);
         } finally {
             setLoading(false);
@@ -49,7 +59,8 @@ export default function SingupPage() {
         if (
             user.email.length > 0 &&
             user.password.length > 0 &&
-            user.username.length > 0
+            user.username.length > 0 &&
+            user.confirmpassword.length > 0
         ) {
             setButtonDisabled(false);
         } else {
@@ -76,6 +87,8 @@ export default function SingupPage() {
                     {loading ? "Processing" : "Sign Up"}
                 </h1>
                 <hr />
+                {error && <div className="text-red-500">{error}</div>}
+                <hr />
                 <label htmlFor="username">username</label>
                 <input
                     className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
@@ -87,7 +100,7 @@ export default function SingupPage() {
                     }
                     placeholder="Username"
                 />
-                <label htmlFor="email">email</label>
+                <label htmlFor="email">Email</label>
                 <input
                     className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
                     type="text"
@@ -96,7 +109,7 @@ export default function SingupPage() {
                     onChange={(e) => setUser({...user, email: e.target.value})}
                     placeholder="email"
                 />
-                <label htmlFor="password">password</label>
+                <label htmlFor="password">Password</label>
                 <input
                     className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
                     type="password"
@@ -107,9 +120,20 @@ export default function SingupPage() {
                     }
                     placeholder="password"
                 />
+                <label htmlFor="confirmpassword">Confirm password</label>
+                <input
+                    className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+                    type="password"
+                    id="confirmpassword"
+                    value={user.confirmpassword}
+                    onChange={(e) =>
+                        setUser({...user, confirmpassword: e.target.value})
+                    }
+                    placeholder="Confirm your password"
+                />
                 <button
                     onClick={onSignup}
-                    className="m-4 bg-blue-500 px-12 py-4 rounded-full text-white mt-8"
+                    className="m-4 brand_gradient px-12 py-4 rounded-full text-white mt-8"
                 >
                     {buttonDisabled ? "Missing fields" : "Sign up"}
                 </button>

@@ -41,7 +41,7 @@ export default function ProfilePage() {
     };
 
     const getUserDetails = async () => {
-        const res = await axios.get("api/users/cookie_user");
+        const res = await axios.get("api/users/cookieUser");
         console.log(res.data);
         setData(res.data.data.username);
     };

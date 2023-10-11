@@ -4,7 +4,7 @@ import Image from "next/image";
 const Footer = () => {
     return (
         <>
-            <footer className=" pb-24 md:pb-12 border-t-2 border-purple-800 font-light w-full px-4 xl:px-28">
+            <footer className=" hidden md:block pb-24 md:pb-12 border-t-2 border-purple-800 font-light w-full px-4 xl:px-28">
                 <div className="grid grid-cols-2 pt-4">
                     <Image
                         src="../logo.svg"

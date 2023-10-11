@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+// import Search from "../search/page";
 
 const NavLogged = () => {
     const openLoginModule = () => {
@@ -11,7 +12,7 @@ const NavLogged = () => {
     };
 
     return (
-        <nav className="p-4">
+        <nav className="">
             {/* Desktop Nav - Logged in */}
             <div className="hidden md:flex justify-between gap-4 py-4 max-w-[1300px] m-auto">
                 <div className="flex gap-12 items-center w-full">
@@ -23,7 +24,7 @@ const NavLogged = () => {
                             alt="concertify_logo"
                         />
                     </Link>
-                    <ul className="flex gap-10 brand_purple">
+                    <ul className="flex gap-10 brand_purple dark:text-[#8e0bf5]">
                         <li>
                             <Link className="flex gap-2 items-center" href="/">
                                 <Image
@@ -48,6 +49,7 @@ const NavLogged = () => {
                         </li>
                     </ul>
                 </div>
+                {/* <Search /> */}
                 <div className="flex gap-4">
                     <button className="rounded-full bg-purple-100 brand_purple w-32 py-3 hover:bg-purple-200">
                         <Link href="/signup">Sign up</Link>
