@@ -71,12 +71,16 @@ const ConcertCard: React.FC = () => {
                         </div>
 
                         <div className="text-black text-xl  dark:text-white pt-2">
+                            <span className="mr-2">-</span>
                             {concert.concert_name}
                         </div>
                     </div>
 
                     <div className="text-gray-600 text-sm dark:text-gray-400 pt-2">
-                        {concert.concert_date}
+                        Pop, Rock
+                    </div>
+                    <div className="text-gray-700 text-sm dark:text-gray-400 pt-2">
+                        10/10/2023
                     </div>
                 </article>
             ))}
