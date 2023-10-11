@@ -46,7 +46,7 @@ export default function UploadForm() {
                 name="Concert_name"
                 value={concertName}
                 onChange={(e) => setConcertName(e.target.value)}
-                placeholder="name"
+                placeholder="Venue"
             />
             <input
                 type="file"
