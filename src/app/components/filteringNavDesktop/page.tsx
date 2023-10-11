@@ -85,7 +85,7 @@ function FilteringNavDesktop() {
                     <Combobox.Input
                       className=" py-2 pl-3 pr-10 font-light cursor-pointer focus:bg-purple-50 hover:bg-purple-50 rounded-full focus:outline-none"
                       placeholder="Search by venue"
-                      displayValue={(locations:any) => locations.name}
+                      displayValue={(locations: any) => locations.name}
                       onChange={(event) => setQuery(event.target.value)}
                     />
                   </Combobox.Button>
@@ -154,7 +154,7 @@ function FilteringNavDesktop() {
                     <Combobox.Input
                       className=" py-2 pl-3 pr-10 font-light cursor-pointer focus:bg-purple-50 hover:bg-purple-50 rounded-full focus:outline-none"
                       placeholder="$ - $$$$"
-                      displayValue={(prices:any) => prices.price}
+                      displayValue={(prices: any) => prices.price}
                       onChange={(event) => setQuery(event.target.value)}
                     />
                   </Combobox.Button>
@@ -250,7 +250,7 @@ function FilteringNavDesktop() {
                     <Combobox.Input
                       className=" py-2 pl-3 pr-10 font-light cursor-pointer focus:bg-purple-50 hover:bg-purple-50 rounded-full focus:outline-none"
                       placeholder="Search by artist"
-                      displayValue={(artists:any) => artists.name}
+                      displayValue={(artists: any) => artists.name}
                       onChange={(event) => setQuery(event.target.value)}
                     />
                   </Combobox.Button>
