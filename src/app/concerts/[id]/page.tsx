@@ -54,10 +54,7 @@ export default function SingleConcert() {
                 <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
                     <figure>
                         <Image
-                            src={
-                                "/concert_images/" +
-                                selectedConcert.concert_image
-                            }
+                            src={"/" + selectedConcert.concert_image}
                             width={200}
                             height={200}
                             alt="concert"

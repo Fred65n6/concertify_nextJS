@@ -2,15 +2,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import minds_of_99 from "public/concert_images/minds_tour.jpeg";
-
 const ArtistCard = () => {
     return (
         <>
             <article className="rounded-lg max-h-fit w-full flex flex-col justify-between gap-2 mb-6 lg:mb-0">
                 <Link className="" href="/">
                     <Image
-                        src={minds_of_99}
+                        src={""}
                         width={200}
                         height={200}
                         alt="artist"
