@@ -151,7 +151,9 @@ export default function SignupPage() {
               {buttonDisabled ? "Missing fields" : "Sign up"}
             </button>
             <div className="flex">
-              <img src="" alt="../arrow-right.svg" />
+              <img src="../phone.svg" alt="telefon" />
+              <img src="../phone.svg" alt="telefon" />
+              <img src="../phone.svg" alt="telefon" />
             </div>
             <div className="grid gap-4 text-center mt-4">
               <p>
