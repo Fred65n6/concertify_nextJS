@@ -17,6 +17,8 @@ export default function SignupPage() {
 
   const openLoginModule = () => {
     const loginModule = document.getElementById("login_module");
+    const signupModule = document.getElementById("signup_module");
+    signupModule?.classList.add("hidden");
     loginModule?.classList.remove("hidden");
     loginModule?.classList.add("grid");
   };
