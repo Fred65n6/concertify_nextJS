@@ -19,7 +19,6 @@ export default function SignupPage() {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string>("");
 
-  //   ændringer her
   const closeSignupModule = () => {
     const signupModule = document.getElementById("signup_module");
     signupModule?.classList.add("hidden");
@@ -80,7 +79,7 @@ export default function SignupPage() {
         className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen  items-center justify-center hidden backdrop-blur-sm"
       >
         <div id="signup_form">
-          <div className="flex flex-col items-center justify-center pt-4 py-8 bg-white w-[400px] rounded-lg">
+          <div className="flex flex-col items-center justify-center pt-4 py-8 bg-white w-[800px] rounded-lg">
             <button
               type="button"
               onClick={closeSignupModule}
@@ -101,14 +100,15 @@ export default function SignupPage() {
                 />
               </svg>
             </button>
-            <h1 className="mb-6 text-4xl">
-              {loading ? "Processing" : "Signup"}
+            <h1 className="mb-4 text-4xl font-bold">
+              {loading ? "Processing" : "Signup..."}
             </h1>
+            <p className="mb-6">To get personalized recommendations</p>
             <hr />
             {error && <div className="text-red-500">{error}</div>}
-            <label htmlFor="username">username</label>
+            <label htmlFor="username">Username</label>
             <input
-              className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+              className="m-2 p-2 pl-4 rounded-full text-left text-black bg-slate-200 w-[400px]"
               type="text"
               id="username"
               value={user.username}
@@ -117,25 +117,25 @@ export default function SignupPage() {
             />
             <label htmlFor="email">Email</label>
             <input
-              className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+              className="m-2 p-2 pl-4 rounded-full text-left text-black bg-slate-200 w-[400px]"
               type="text"
               id="email"
               value={user.email}
               onChange={(e) => setUser({ ...user, email: e.target.value })}
-              placeholder="email"
+              placeholder="Email"
             />
             <label htmlFor="password">Password</label>
             <input
-              className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+              className="m-2 p-2 pl-4 rounded-full text-left text-black bg-slate-200 w-[400px]"
               type="password"
               id="password"
               value={user.password}
               onChange={(e) => setUser({ ...user, password: e.target.value })}
-              placeholder="password"
+              placeholder="Password"
             />
             <label htmlFor="confirmpassword">Confirm password</label>
             <input
-              className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+              className="m-2 p-2 pl-4 rounded-full text-left text-black bg-slate-200 w-[400px]"
               type="password"
               id="confirmpassword"
               value={user.confirmpassword}
@@ -150,10 +150,19 @@ export default function SignupPage() {
             >
               {buttonDisabled ? "Missing fields" : "Sign up"}
             </button>
+            <div className="flex">
+              <img src="" alt="../arrow-right.svg" />
+            </div>
             <div className="grid gap-4 text-center mt-4">
-              <Link className="text-purple-700 hover:underline" href="/login">
-                Visit login page
-              </Link>
+              <p>
+                Already have an account?
+                <Link
+                  className="text-purple-700 hover:underline pl-1"
+                  href="/login"
+                >
+                  Go to login
+                </Link>
+              </p>
             </div>
           </div>
         </div>
