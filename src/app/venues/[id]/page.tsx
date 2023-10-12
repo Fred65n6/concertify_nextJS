@@ -4,11 +4,14 @@ import { useParams } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { StringSchemaDefinition } from "mongoose";
+import VenueCard from "@/app/components/venueCard/page";
 
 interface Venue {
   _id: string;
   venue_name: string;
   venue_address: string;
+  venue_size: string;
   venue_location: string;
   venue_description: string;
   venue_image: string;
@@ -73,7 +76,7 @@ export default function SingleVenue() {
             </div>
 
             <ul className="flex flex-col gap-4 pt-4">
-              {/* Location*/}
+              {/* Location */}
               <li className="flex gap-2">
                 <Image
                   src="../location.svg"
@@ -85,7 +88,19 @@ export default function SingleVenue() {
                   {selectedVenue.venue_address}, {selectedVenue.venue_location}
                 </p>
               </li>
-              {/* Concert date*/}
+              {/* Venue Size */}
+              <li className="flex gap-2">
+                <Image
+                  src="../audience.svg"
+                  width={24}
+                  height={24}
+                  alt="location icon"
+                />
+                <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                  {selectedVenue.venue_size}
+                </p>
+              </li>
+              {/* Todays program */}
               <li className="flex gap-2">
                 <Image
                   src="../calendar.svg"
@@ -97,7 +112,7 @@ export default function SingleVenue() {
                   What is on today?
                 </p>
                 <hr />
-                {/* her skal der fetches data om hvilke koncerter, der spiller i Lille Vega */}
+                {/* her skal der fetches data om hvilke koncerter, der spiller */}
               </li>
             </ul>
             <div className="border-t-[1px] border-[#979C9E] pt-4 mt-4">
@@ -112,6 +127,30 @@ export default function SingleVenue() {
             </div>
           </section>
         </div>
+      ) : (
+        <p>Loading...</p>
+      )}
+      {/* Event schedule section */}
+      {selectedVenue ? (
+        <section className="">
+          <h2 className="text-2xl font-bold">
+            Event Schedule at {selectedVenue.venue_name}
+          </h2>
+          <div></div>
+        </section>
+      ) : (
+        <p>Loading...</p>
+      )}
+      {/* Other venues section */}
+      {selectedVenue ? (
+        <section className="">
+          <h2 className="text-2xl font-bold">
+            Other venues you need to experience
+          </h2>
+          <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
+            <VenueCard />
+          </div>
+        </section>
       ) : (
         <p>Loading...</p>
       )}
