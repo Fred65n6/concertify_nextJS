@@ -102,7 +102,10 @@ const NavLogged = () => {
             </Link>
           </li>
           <li>
-            <Link className="flex flex-col items-center" href="/login">
+            <button
+              className="flex flex-col items-center"
+              onClick={openLoginModule}
+            >
               <Image
                 src="../profile_btn.svg"
                 width="25"
@@ -110,7 +113,7 @@ const NavLogged = () => {
                 alt="button"
               />
               Log in
-            </Link>
+            </button>
           </li>
         </ul>
       </div>

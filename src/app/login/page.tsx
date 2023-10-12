@@ -64,7 +64,7 @@ export default function LoginPage() {
         <button
           type="button"
           onClick={closeLoginModule}
-          className="cursor-pointer ml-[75%]"
+          className="cursor-pointer ml-[75%] "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -74,17 +74,17 @@ export default function LoginPage() {
           >
             <path
               fill="none"
-              stroke="currentColor"
+              stroke="black"
               strokeLinecap="round"
               strokeLinejoin="round"
               d="m7 7l10 10M7 17L17 7"
             />
           </svg>
         </button>
-        <h1 className="mb-4 text-3xl font-bold">
+        <h1 className="mb-4 text-3xl font-bold dark:text-black">
           {loading ? "Processing" : "Login"}
         </h1>
-        <p className="mb-6">Login to continue exploring</p>
+        <p className="mb-6 dark:text-black">Login to continue exploring</p>
 
         <hr />
         {error && <div className="text-red-500">{error}</div>}
@@ -108,7 +108,7 @@ export default function LoginPage() {
         />
         <button
           onClick={onLogin}
-          className="m-4 brand_gradient px-12 py-4 rounded-full text-white"
+          className="m-4 brand_gradient px-12 py-4 rounded-full text-white "
           disabled={buttonDisabled}
         >
           Login
