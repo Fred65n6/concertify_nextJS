@@ -50,16 +50,16 @@ export default function SignupPage() {
     }
   };
 
-  const showMessage = () => {
-    const verifiedMessage = document.getElementById("verified_message");
-    const signUpForm = document.getElementById("signup_form");
-    if (verifiedMessage) {
-      verifiedMessage.classList.remove("hidden");
-      verifiedMessage.classList.add("block"); // Add the "grid" class to make it visible
-      signUpForm?.classList.add("hidden");
-    }
-    console.log("showMessage");
-  };
+  // const showMessage = () => {
+  //   const verifiedMessage = document.getElementById("verified_message");
+  //   const signUpForm = document.getElementById("signup_form");
+  //   if (verifiedMessage) {
+  //     verifiedMessage.classList.remove("hidden");
+  //     verifiedMessage.classList.add("block"); // Add the "grid" class to make it visible
+  //     signUpForm?.classList.add("hidden");
+  //   }
+  //   console.log("showMessage");
+  // };
 
   //DISABLE SIGNUP KNAP, HVIS FELTER IKKE ER UDFYLDT
 
