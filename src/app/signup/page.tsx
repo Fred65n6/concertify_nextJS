@@ -39,7 +39,8 @@ export default function SignupPage() {
       setLoading(true);
       const response = await axios.post("/api/users/signup", user);
       console.log("Signup success", response.data);
-      showMessage();
+      showProfileGenres();
+      // showMessage();
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.error) {
         setError(error.response.data.error);
@@ -52,13 +53,36 @@ export default function SignupPage() {
     }
   };
 
+  const showProfileGenres = () => {
+    const profileGenres = document.getElementById("profile_genres");
+    const signUpForm = document.getElementById("signup_form");
+    if (profileGenres) {
+      profileGenres.classList.remove("hidden");
+      profileGenres.classList.add("block");
+      signUpForm?.classList.add("hidden");
+    }
+  };
+
+  const showProfileVenues = () => {
+    const profileVenues = document.getElementById("profile_venues");
+    const profileGenres = document.getElementById("profile_genres");
+    if (profileVenues) {
+      profileVenues.classList.remove("hidden");
+      profileVenues.classList.add("block");
+      profileGenres?.classList.add("hidden");
+    }
+  };
   const showMessage = () => {
     const verifiedMessage = document.getElementById("verified_message");
     const signUpForm = document.getElementById("signup_form");
+    const profileGenres = document.getElementById("profile_genres");
+    const profileVenues = document.getElementById("profile_venues");
     if (verifiedMessage) {
       verifiedMessage.classList.remove("hidden");
       verifiedMessage.classList.add("block"); // Add the "grid" class to make it visible
       signUpForm?.classList.add("hidden");
+      profileGenres?.classList.add("hidden");
+      profileVenues?.classList.add("hidden");
     }
     console.log("showMessage");
   };
@@ -185,6 +209,48 @@ export default function SignupPage() {
                 </button>
               </p>
             </div>
+          </div>
+        </div>
+        {/* PROFILE GENRES MODUL */}
+        <div id="profile_genres" className="hidden">
+          <div className="flex flex-col items-center justify-center py-8 bg-white w-[800px] rounded-lg">
+            <h1 className="mb-4 text-3xl font-bold">
+              What music genres do you like?
+            </h1>
+            <p className="mb-6">Get your own personalized recommendations</p>
+            <button
+              onClick={showProfileVenues}
+              className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white"
+            >
+              Submit
+            </button>
+            <button
+              onClick={showMessage}
+              className="mb-4 mt-2 px-12 py-4 rounded-full text-purple-700"
+            >
+              Skip
+            </button>
+          </div>
+        </div>
+        {/* PROFILE VENUES MODUL */}
+        <div id="profile_venues" className="hidden">
+          <div className="flex flex-col items-center justify-center py-8 bg-white w-[800px] rounded-lg">
+            <h1 className="mb-4 text-3xl font-bold">
+              What music venues do you like?
+            </h1>
+            <p className="mb-6">Get your own personalized recommendations</p>
+            <button
+              onClick={showMessage}
+              className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white"
+            >
+              Submit
+            </button>
+            <button
+              onClick={showMessage}
+              className="mb-4 mt-2 px-12 py-4 rounded-full text-purple-700"
+            >
+              Skip
+            </button>
           </div>
         </div>
         <div id="verified_message" className="hidden">
