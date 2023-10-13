@@ -5,9 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 // Can we create the interface global?
-interface Concert {
+interface ConcertLoop {
   _id: string;
-  artist: {
+  concert_artist: {
     artist_id: string;
     artist_name: string;
     artist_instagram: string;
@@ -21,11 +21,11 @@ interface Concert {
   concert_image: string;
   concert_name: string;
   concert_start: string;
-  genre: {
+  concert_genre: {
     genre_id: string;
     genre_name: string;
   };
-  venue: {
+  concert_venue: {
     venue_id: string;
     venue_name: string;
     venue_address: string;
@@ -37,7 +37,7 @@ interface Concert {
 
 
 const ConcertLoopview: React.FC = () => {
-  const [concerts, setConcerts] = useState<Concert[]>([]);
+  const [concerts, setConcerts] = useState<ConcertLoop[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
@@ -71,12 +71,12 @@ const ConcertLoopview: React.FC = () => {
 
             <h4 className="text-black text-xl font-bold dark:text-white">
 
-                {concert.artist ? concert.artist.artist_name : "Unknown Artist"} - {concert.concert_name ? concert.concert_name : "Unknown concert_name"}
+                {concert.concert_artist ? concert.concert_artist.artist_name : "Unknown Artist"} - {concert.concert_name ? concert.concert_name : "Unknown concert_name"}
             </h4>
             <div className="flex flex-col gap-2">
 
                 <p className="text-gray-600 text-sm dark:text-gray-400">
-                    <span className="font-bold">{concert.venue?.venue_name}, </span>{concert.venue?.venue_location}
+                    <span className="font-bold">{concert.concert_venue?.venue_name}, </span>{concert.concert_venue?.venue_location}
                 </p>
             </div>
 
