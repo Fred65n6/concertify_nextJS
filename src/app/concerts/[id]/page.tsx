@@ -8,12 +8,32 @@ import Link from "next/link";
 
 interface Concert {
     _id: string;
-    concert_name: string;
+    artist: {
+      artist_id: string;
+      artist_name: string;
+      artist_instagram: string;
+      artist_youtube: string;
+      artist_facebook: string;
+      artist_twitter: string;
+      artist_spotify: string;
+    },
     concert_date: string;
+    concert_description: string;
     concert_image: string;
-    concert_artist: string; // TO DO: replace with nested data
-    concert_artist_description: string; // TO DO: replace with nested data
-}
+    concert_name: string;
+    concert_start: string;
+    genre: {
+      genre_id: string;
+      genre_name: string;
+    };
+    venue: {
+      venue_id: string;
+      venue_name: string;
+      venue_address: string;
+      venue_location: string;
+    };
+    concert_doors: string;
+  }
 
 export default function SingleConcert() {
     const params = useParams();
@@ -54,7 +74,7 @@ export default function SingleConcert() {
                 <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
                     <figure>
                         <Image
-                            src={"/" + selectedConcert.concert_image}
+                            src={"/concert_images/" + selectedConcert.concert_image}
                             width={200}
                             height={200}
                             alt="concert"
@@ -63,22 +83,25 @@ export default function SingleConcert() {
                     </figure>
                     <section>
                         <h1 className="text-3xl font-bold my-2">
-                            {selectedConcert.concert_name}
+                            {selectedConcert.concert_name }
                         </h1>
 
                         <ul className="flex flex-col gap-4">
                             {/* More about the artist*/}
-                            <li className="flex gap-2">
-                                <Image
-                                    src="../star-stroke.svg"
-                                    width={24}
-                                    height={24}
-                                    alt="calendar icon"
-                                />
-                                <p className="text-[#5311BF] text-sm dark:text-gray-400 align-middle">
-                                    Read more about xxx
-                                </p>
-                            </li>
+                            <Link href={"/artists/" + selectedConcert.artist.artist_id} key={selectedConcert.artist.artist_id}>
+                                <li className="flex gap-2">
+                                    <Image
+                                        src="../star-stroke.svg"
+                                        width={24}
+                                        height={24}
+                                        alt="star icon"
+                                    />
+                                    <p className="text-[#5311BF] text-sm align-middle">
+                                    Read more about {selectedConcert.artist.artist_name}
+                                    </p>
+                                </li>
+                            </Link>
+
 
                             {/* Concert date*/}
                             <li className="flex gap-2">
@@ -103,9 +126,9 @@ export default function SingleConcert() {
                                 />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                                     <span className="font-bold">
-                                        Doors open:{" "}
+                                        Doors open: 
                                     </span>
-                                    19:00
+                                    {selectedConcert.concert_doors}
                                 </p>
                             </li>
 
@@ -119,9 +142,9 @@ export default function SingleConcert() {
                                 />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                                     <span className="font-bold">
-                                        Concert starts:{" "}
+                                        Concert start: 
                                     </span>
-                                    20:00
+                                    {selectedConcert.concert_start}
                                 </p>
                             </li>
 
@@ -134,7 +157,7 @@ export default function SingleConcert() {
                                     alt="location icon"
                                 />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
-                                    Royal Arena, Copenhagen S
+                                    {selectedConcert.venue.venue_name}, {selectedConcert.venue.venue_location}
                                 </p>
                             </li>
 
