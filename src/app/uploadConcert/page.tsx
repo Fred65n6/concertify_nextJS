@@ -114,168 +114,213 @@ const UploadForm: React.FC = () => {
             const errorText = await res.text();
             console.error(errorText);
         }
+
+        if (res.ok) {
+            showUploadMessage();
+        }
+    };
+
+    const showUploadMessage = () => {
+        const concertUploadedMessage = document.getElementById(
+            "concertUploadedMessage"
+        );
+        const uploadConcertForm = document.getElementById("uploadConcertForm");
+        concertUploadedMessage?.classList.remove("hidden");
+        concertUploadedMessage?.classList.add("grid"); // Add the "grid" class to make it visible
+        uploadConcertForm?.classList.add("hidden");
+        window.scrollTo(0, 0);
     };
 
     return (
-        <form className="grid gap-6 items-center pb-12" onSubmit={onSubmit}>
-            <input
-                className="bg-slate-100 p-4 w-72"
-                type="text"
-                name="Concert_name"
-                value={concertName}
-                onChange={(e) => setConcertName(e.target.value)}
-                placeholder="Concert Name"
-            />
-            <input
-                className="bg-slate-100 p-4 w-72"
-                type="date"
-                name="Concert_date"
-                value={concertDate}
-                onChange={(e) => setConcertDate(e.target.value)}
-                placeholder="Concert Date"
-            />
-            <input
-                className="bg-slate-100 p-4 w-72"
-                type="time"
-                name="Concert_start"
-                value={concertStart}
-                onChange={(e) => setConcertStart(e.target.value)}
-                placeholder="Concert start time"
-            />
-            <input
-                className="bg-slate-100 p-4 w-72"
-                type="time"
-                name="Concert_doors"
-                value={concertDoors}
-                onChange={(e) => setConcertDoors(e.target.value)}
-                placeholder="Concert Doors"
-            />
-            <input
-                className="bg-slate-100 p-4 w-72"
-                type="text"
-                name="Concert_description"
-                value={concertDescription}
-                onChange={(e) => setConcertDescription(e.target.value)}
-                placeholder="Concert Description"
-            />
-            <select
-                className="p-4 w-72"
-                value={selectedArtist ? selectedArtist._id : ""}
-                onChange={(e) =>
-                    setSelectedArtist(
-                        artists.find(
-                            (artist) => artist._id === e.target.value
-                        ) || null
-                    )
-                }
+        <div className="flex-col items-center flex">
+            <form
+                id="uploadConcertForm"
+                className="flex flex-col items-center gap-8 pb-12"
+                onSubmit={onSubmit}
             >
-                <option value="">Select an artist</option>
-                {artists.map((artist) => (
-                    <option key={artist._id} value={artist._id}>
-                        {artist.artist_name}
-                    </option>
-                ))}
-            </select>
-            <input
-                readOnly={true}
-                className="bg-slate-300 p-4 w-72 text-slate-500"
-                type="text"
-                name="Concert_artist_name"
-                value={selectedArtist ? selectedArtist.artist_name : ""}
-                onChange={(e) => setConcertArtistName(e.target.value)}
-                placeholder="Artist Name"
-            />
+                <input
+                    className="bg-slate-100 p-4 w-72"
+                    type="text"
+                    name="Concert_name"
+                    value={concertName}
+                    onChange={(e) => setConcertName(e.target.value)}
+                    placeholder="Concert Name"
+                />
+                <div className="grid">
+                    <label htmlFor="Concert_date">Concert date:</label>
+                    <input
+                        className="bg-slate-100 p-4 w-72"
+                        type="date"
+                        name="Concert_date"
+                        value={concertDate}
+                        onChange={(e) => setConcertDate(e.target.value)}
+                        placeholder="Concert Date"
+                    />
+                </div>
+                <div className="grid">
+                    <label htmlFor="Concert_start">Concert start time:</label>
+                    <input
+                        className="bg-slate-100 p-4 w-72"
+                        type="time"
+                        name="Concert_start"
+                        value={concertStart}
+                        onChange={(e) => setConcertStart(e.target.value)}
+                        placeholder="Concert start time"
+                    />
+                </div>
+                <div className="grid">
+                    <label htmlFor="Concert_doors">Doors open at:</label>
+                    <input
+                        className="bg-slate-100 p-4 w-72"
+                        type="time"
+                        name="Concert_doors"
+                        value={concertDoors}
+                        onChange={(e) => setConcertDoors(e.target.value)}
+                        placeholder="Concert Doors"
+                    />
+                </div>
+                <input
+                    className="bg-slate-100 p-4 w-72"
+                    type="text"
+                    name="Concert_description"
+                    value={concertDescription}
+                    onChange={(e) => setConcertDescription(e.target.value)}
+                    placeholder="Concert Description"
+                />
+                <select
+                    className="p-4 w-72"
+                    value={selectedArtist ? selectedArtist._id : ""}
+                    onChange={(e) =>
+                        setSelectedArtist(
+                            artists.find(
+                                (artist) => artist._id === e.target.value
+                            ) || null
+                        )
+                    }
+                >
+                    <option value="">Select an artist</option>
+                    {artists.map((artist) => (
+                        <option key={artist._id} value={artist._id}>
+                            {artist.artist_name}
+                        </option>
+                    ))}
+                </select>
+                <input
+                    readOnly={true}
+                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                    type="text"
+                    name="Concert_artist_name"
+                    value={selectedArtist ? selectedArtist.artist_name : ""}
+                    onChange={(e) => setConcertArtistName(e.target.value)}
+                    placeholder="Artist Name"
+                />
 
-            <input
-                readOnly={true}
-                className="bg-slate-300 p-4 w-72 text-slate-500"
-                type="text"
-                name="Concert_artist_id"
-                value={selectedArtist ? selectedArtist._id : ""}
-                onChange={(e) => setConcertArtistId(e.target.value)}
-                placeholder="Artist ID"
-            />
-            <select
-                className="p-4 w-72"
-                value={selectedVenue ? selectedVenue._id : ""}
-                onChange={(e) =>
-                    setSelectedVenue(
-                        venues.find((venue) => venue._id === e.target.value) ||
-                            null
-                    )
-                }
+                <input
+                    readOnly={true}
+                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                    type="text"
+                    name="Concert_artist_id"
+                    value={selectedArtist ? selectedArtist._id : ""}
+                    onChange={(e) => setConcertArtistId(e.target.value)}
+                    placeholder="Artist ID"
+                />
+                <select
+                    className="p-4 w-72"
+                    value={selectedVenue ? selectedVenue._id : ""}
+                    onChange={(e) =>
+                        setSelectedVenue(
+                            venues.find(
+                                (venue) => venue._id === e.target.value
+                            ) || null
+                        )
+                    }
+                >
+                    <option value="">Select a venue</option>
+                    {venues.map((venue) => (
+                        <option key={venue._id} value={venue._id}>
+                            {venue.venue_name}
+                        </option>
+                    ))}
+                </select>
+                <input
+                    readOnly={true}
+                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                    type="text"
+                    name="Concert_venue_name"
+                    value={selectedVenue ? selectedVenue.venue_name : ""}
+                    onChange={(e) => setConcertVenueName(e.target.value)}
+                    placeholder="venue Name"
+                />
+                <input
+                    readOnly={true}
+                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                    type="text"
+                    name="Concert_venue_id"
+                    value={selectedVenue ? selectedVenue._id : ""}
+                    onChange={(e) => setConcertVenueId(e.target.value)}
+                    placeholder="Venue ID"
+                />
+                <select
+                    className="p-4 w-72"
+                    value={selectedGenre ? selectedGenre._id : ""}
+                    onChange={(e) =>
+                        setSelectedGenre(
+                            genres.find(
+                                (genre) => genre._id === e.target.value
+                            ) || null
+                        )
+                    }
+                >
+                    <option value="">Select a genre</option>
+                    {genres.map((genre) => (
+                        <option key={genre._id} value={genre._id}>
+                            {genre.genre_name}
+                        </option>
+                    ))}
+                </select>
+                <input
+                    readOnly={true}
+                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                    type="text"
+                    name="Concert_genre_name"
+                    value={selectedGenre ? selectedGenre.genre_name : ""}
+                    onChange={(e) => setConcertGenreName(e.target.value)}
+                    placeholder="venue Name"
+                />
+                <input
+                    readOnly={true}
+                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                    type="text"
+                    name="Concert_genre_id"
+                    value={selectedGenre ? selectedGenre._id : ""}
+                    onChange={(e) => setConcertGenreId(e.target.value)}
+                    placeholder="Venue ID"
+                />
+
+                <input
+                    type="file"
+                    name="file"
+                    onChange={(e) => setFile(e.target.files?.[0] || null)}
+                />
+                <input
+                    className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
+                    type="submit"
+                    value="upload"
+                />
+            </form>
+            <div
+                id="concertUploadedMessage"
+                className="gap-8 text-center hidden"
             >
-                <option value="">Select a venue</option>
-                {venues.map((venue) => (
-                    <option key={venue._id} value={venue._id}>
-                        {venue.venue_name}
-                    </option>
-                ))}
-            </select>
-            <input
-                readOnly={true}
-                className="bg-slate-300 p-4 w-72 text-slate-500"
-                type="text"
-                name="Concert_venue_name"
-                value={selectedVenue ? selectedVenue.venue_name : ""}
-                onChange={(e) => setConcertVenueName(e.target.value)}
-                placeholder="venue Name"
-            />
-            <input
-                readOnly={true}
-                className="bg-slate-300 p-4 w-72 text-slate-500"
-                type="text"
-                name="Concert_venue_id"
-                value={selectedVenue ? selectedVenue._id : ""}
-                onChange={(e) => setConcertVenueId(e.target.value)}
-                placeholder="Venue ID"
-            />
-            <select
-                className="p-4 w-72"
-                value={selectedGenre ? selectedGenre._id : ""}
-                onChange={(e) =>
-                    setSelectedGenre(
-                        genres.find((genre) => genre._id === e.target.value) ||
-                            null
-                    )
-                }
-            >
-                <option value="">Select a genre</option>
-                {genres.map((genre) => (
-                    <option key={genre._id} value={genre._id}>
-                        {genre.genre_name}
-                    </option>
-                ))}
-            </select>
-            <input
-                readOnly={true}
-                className="bg-slate-300 p-4 w-72 text-slate-500"
-                type="text"
-                name="Concert_genre_name"
-                value={selectedGenre ? selectedGenre.genre_name : ""}
-                onChange={(e) => setConcertGenreName(e.target.value)}
-                placeholder="venue Name"
-            />
-            <input
-                readOnly={true}
-                className="bg-slate-300 p-4 w-72 text-slate-500"
-                type="text"
-                name="Concert_genre_id"
-                value={selectedGenre ? selectedGenre._id : ""}
-                onChange={(e) => setConcertGenreId(e.target.value)}
-                placeholder="Venue ID"
-            />
-            <input
-                type="file"
-                name="file"
-                onChange={(e) => setFile(e.target.files?.[0] || null)}
-            />
-            <input
-                className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
-                type="submit"
-                value="upload"
-            />
-        </form>
+                <h2 className="text-2xl">Concert Uploaded!</h2>
+                <a
+                    className="brand_gradient py-2 px-4 text-white rounded-full"
+                    href="/uploadConcert"
+                >
+                    Upload another
+                </a>
+            </div>
+        </div>
     );
 };
 
