@@ -88,19 +88,20 @@ export default function SingleConcert() {
 
                         <ul className="flex flex-col gap-4">
                             {/* More about the artist*/}
-                            <li className="flex gap-2">
                             <Link href={"/artists/" + selectedConcert.artist.artist_id} key={selectedConcert.artist.artist_id}>
-                                <Image
-                                    src="../star-stroke.svg"
-                                    width={24}
-                                    height={24}
-                                    alt="star icon"
-                                />
-                                <p className="text-[#5311BF] text-sm dark:text-gray-400 align-middle">
+                                <li className="flex gap-2">
+                                    <Image
+                                        src="../star-stroke.svg"
+                                        width={24}
+                                        height={24}
+                                        alt="star icon"
+                                    />
+                                    <p className="text-[#5311BF] text-sm align-middle">
                                     Read more about {selectedConcert.artist.artist_name}
-                                </p>
-                                </Link>
-                            </li>
+                                    </p>
+                                </li>
+                            </Link>
+
 
                             {/* Concert date*/}
                             <li className="flex gap-2">
@@ -125,9 +126,9 @@ export default function SingleConcert() {
                                 />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                                     <span className="font-bold">
-                                        Doors open:{" "}
+                                        Doors open: 
                                     </span>
-                                    19:00
+                                    {selectedConcert.concert_doors}
                                 </p>
                             </li>
 
@@ -141,9 +142,9 @@ export default function SingleConcert() {
                                 />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                                     <span className="font-bold">
-                                        Concert starts:{" "}
+                                        Concert start: 
                                     </span>
-                                    20:00
+                                    {selectedConcert.concert_start}
                                 </p>
                             </li>
 
@@ -156,7 +157,7 @@ export default function SingleConcert() {
                                     alt="location icon"
                                 />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
-                                    Royal Arena, Copenhagen S
+                                    {selectedConcert.venue.venue_name}, {selectedConcert.venue.venue_location}
                                 </p>
                             </li>
 

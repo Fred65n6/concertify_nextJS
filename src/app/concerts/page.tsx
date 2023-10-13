@@ -69,7 +69,7 @@ const ConcertList: React.FC = () => {
             </Link>
 
             <h4 className="text-black text-xl font-bold dark:text-white">
-                {/* ------- WHY does this NOT work???? */}
+                {/* ------- Why does this NOT work???? */}
                 {/* {concert.concert_name} */}
                 {/* But this does? Why? */}
                 {/* {concert?.concert_name} */}
@@ -77,10 +77,10 @@ const ConcertList: React.FC = () => {
             </h4>
             <div className="flex flex-col gap-2">
                 <p className="text-gray-600 text-sm dark:text-gray-400">
-                    {/* ------- WHY does this NOT work???? */}
+                    {/* ------- Whu does this NOT work???? */}
                     {/* {concert.artist.artist_name} */}
 
-                    {/* ------- WHY does this work???? */}
+                    {/* ------- Why does this work???? */}
                     {/* {concert.artist?.artist_name} */}
                     {/* {concert.artist ? concert.artist.artist_name : "Unknown Artist"} */}
                 </p>
