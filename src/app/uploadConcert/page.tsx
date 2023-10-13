@@ -1,9 +1,23 @@
 "use client";
-
-import {useState} from "react";
+import React, {useState, useEffect} from "react";
+interface Artist {
+    _id: string;
+    artist_name: string;
+    // Add more artist properties as needed
+}
+interface Venue {
+    _id: string;
+    venue_name: string;
+    // Add more artist properties as needed
+}
+interface Genre {
+    _id: string;
+    genre_name: string;
+    // Add more artist properties as needed
+}
 
 const UploadForm: React.FC = () => {
-    const [file, setFile] = useState<File>();
+    const [file, setFile] = useState<File | null>(null);
     const [concertName, setConcertName] = useState("");
     const [concertDescription, setConcertDescription] = useState("");
     const [concertGenreId, setConcertGenreId] = useState("");
@@ -13,37 +27,91 @@ const UploadForm: React.FC = () => {
     const [concertVenueId, setConcertVenueId] = useState("");
     const [concertVenueName, setConcertVenueName] = useState("");
 
+    const [artists, setArtists] = useState<Artist[]>([]);
+    const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
+
+    const [venues, setVenues] = useState<Venue[]>([]);
+    const [selectedVenue, setSelectedVenue] = useState<Venue | null>(null);
+
+    const [genres, setGenres] = useState<Genre[]>([]);
+    const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+
+    useEffect(() => {
+        const fetchArtists = async () => {
+            try {
+                const response = await fetch("/api/data/artistData");
+                if (response.ok) {
+                    const data = await response.json();
+                    setArtists(data.data as Artist[]);
+                }
+            } catch (error) {
+                console.error("Error fetching artists: ", error);
+            }
+        };
+
+        fetchArtists();
+    }, []);
+
+    useEffect(() => {
+        const fetchVenues = async () => {
+            try {
+                const response = await fetch("/api/data/venueData");
+                if (response.ok) {
+                    const data = await response.json();
+                    setVenues(data.data as Venue[]);
+                }
+            } catch (error) {
+                console.error("Error fetching artists: ", error);
+            }
+        };
+
+        fetchVenues();
+    }, []);
+
+    useEffect(() => {
+        const fetchGenres = async () => {
+            try {
+                const response = await fetch("/api/data/genreData");
+                if (response.ok) {
+                    const data = await response.json();
+                    setGenres(data.data as Genre[]);
+                }
+            } catch (error) {
+                console.error("Error fetching artists: ", error);
+            }
+        };
+
+        fetchGenres();
+    }, []);
+
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!file) return;
 
-        try {
-            const data = new FormData();
-            data.set("file", file);
-            data.set("Concert_name", concertName);
-            data.set("Concert_description", concertDescription);
-            data.set("Concert_genre_id", concertGenreId);
-            data.set("Concert_genre_name", concertGenreName);
-            data.set("Concert_artist_id", concertArtistId);
-            data.set("Concert_artist_name", concertArtistName);
-            data.set("Concert_venue_id", concertVenueId);
-            data.set("Concert_venue_name", concertVenueName);
+        const data = new FormData();
+        data.set("file", file);
+        data.set("Concert_name", concertName);
+        data.set("Concert_description", concertDescription);
+        data.set("Concert_genre_id", concertGenreId);
+        data.set("Concert_genre_name", concertGenreName);
+        data.set("Concert_artist_id", concertArtistId);
+        data.set("Concert_artist_name", concertArtistName);
+        data.set("Concert_venue_id", concertVenueId);
+        data.set("Concert_venue_name", concertVenueName);
 
-            const res = await fetch("/api/data/uploadConcert/", {
-                method: "POST",
-                body: data,
-            });
-            console.log("concert uploaded");
-            // handle the error
-            if (!res.ok) throw new Error(await res.text());
-        } catch (e: any) {
-            // Handle errors here
-            console.error(e);
+        const res = await fetch("/api/data/uploadConcert/", {
+            method: "POST",
+            body: data,
+        });
+
+        if (!res.ok) {
+            const errorText = await res.text();
+            console.error(errorText);
         }
     };
 
     return (
-        <form className="grid gap-4 items-center pb-12" onSubmit={onSubmit}>
+        <form className="grid gap-6 items-center pb-12" onSubmit={onSubmit}>
             <input
                 className="bg-slate-100 p-4 w-72"
                 type="text"
@@ -60,66 +128,119 @@ const UploadForm: React.FC = () => {
                 onChange={(e) => setConcertDescription(e.target.value)}
                 placeholder="Concert Description"
             />
+            <select
+                className="p-4 w-72"
+                value={selectedArtist ? selectedArtist._id : ""}
+                onChange={(e) =>
+                    setSelectedArtist(
+                        artists.find(
+                            (artist) => artist._id === e.target.value
+                        ) || null
+                    )
+                }
+            >
+                <option value="">Select an artist</option>
+                {artists.map((artist) => (
+                    <option key={artist._id} value={artist._id}>
+                        {artist.artist_name}
+                    </option>
+                ))}
+            </select>
             <input
-                className="bg-slate-100 p-4 w-72"
+                readOnly={true}
+                className="bg-slate-300 p-4 w-72 text-slate-500"
                 type="text"
                 name="Concert_artist_name"
-                value={concertArtistName}
+                value={selectedArtist ? selectedArtist.artist_name : ""}
                 onChange={(e) => setConcertArtistName(e.target.value)}
                 placeholder="Artist Name"
             />
+
             <input
-                className="bg-slate-100 p-4 w-72"
+                readOnly={true}
+                className="bg-slate-300 p-4 w-72 text-slate-500"
                 type="text"
                 name="Concert_artist_id"
-                value={concertArtistId}
+                value={selectedArtist ? selectedArtist._id : ""}
                 onChange={(e) => setConcertArtistId(e.target.value)}
                 placeholder="Artist ID"
             />
+            <select
+                className="p-4 w-72"
+                value={selectedVenue ? selectedVenue._id : ""}
+                onChange={(e) =>
+                    setSelectedVenue(
+                        venues.find((venue) => venue._id === e.target.value) ||
+                            null
+                    )
+                }
+            >
+                <option value="">Select a venue</option>
+                {venues.map((venue) => (
+                    <option key={venue._id} value={venue._id}>
+                        {venue.venue_name}
+                    </option>
+                ))}
+            </select>
             <input
-                className="bg-slate-100 p-4 w-72"
-                type="text"
-                name="Concert_genre_name"
-                value={concertGenreName}
-                onChange={(e) => setConcertGenreName(e.target.value)}
-                placeholder="Genre Name"
-            />
-            <input
-                className="bg-slate-100 p-4 w-72"
-                type="text"
-                name="Concert_genre_id"
-                value={concertGenreId}
-                onChange={(e) => setConcertGenreId(e.target.value)}
-                placeholder="Genre ID"
-            />
-            <input
-                className="bg-slate-100 p-4 w-72"
+                readOnly={true}
+                className="bg-slate-300 p-4 w-72 text-slate-500"
                 type="text"
                 name="Concert_venue_name"
-                value={concertVenueName}
+                value={selectedVenue ? selectedVenue.venue_name : ""}
                 onChange={(e) => setConcertVenueName(e.target.value)}
-                placeholder="Artist Name"
+                placeholder="venue Name"
             />
             <input
-                className="bg-slate-100 p-4 w-72"
+                readOnly={true}
+                className="bg-slate-300 p-4 w-72 text-slate-500"
                 type="text"
                 name="Concert_venue_id"
-                value={concertVenueId}
+                value={selectedVenue ? selectedVenue._id : ""}
                 onChange={(e) => setConcertVenueId(e.target.value)}
-                placeholder="Artist ID"
+                placeholder="Venue ID"
             />
-
+            <select
+                className="p-4 w-72"
+                value={selectedGenre ? selectedGenre._id : ""}
+                onChange={(e) =>
+                    setSelectedGenre(
+                        genres.find((genre) => genre._id === e.target.value) ||
+                            null
+                    )
+                }
+            >
+                <option value="">Select a genre</option>
+                {venues.map((genre) => (
+                    <option key={genre._id} value={genre._id}>
+                        {genre.venue_name}
+                    </option>
+                ))}
+            </select>
+            <input
+                readOnly={true}
+                className="bg-slate-300 p-4 w-72 text-slate-500"
+                type="text"
+                name="Concert_genre_name"
+                value={selectedGenre ? selectedGenre.genre_name : ""}
+                onChange={(e) => setConcertGenreName(e.target.value)}
+                placeholder="venue Name"
+            />
+            <input
+                readOnly={true}
+                className="bg-slate-300 p-4 w-72 text-slate-500"
+                type="text"
+                name="Concert_genre_id"
+                value={selectedGenre ? selectedGenre._id : ""}
+                onChange={(e) => setConcertGenreId(e.target.value)}
+                placeholder="Venue ID"
+            />
             <input
                 type="file"
                 name="file"
                 onChange={(e) => setFile(e.target.files?.[0])}
             />
-
-            <input
-                className="brand_gradient text-white rounded-full py-2 px-4 mt-8"
-                type="submit"
-                value="Upload"
-            />
+            <input type="submit" value="upload" />
         </form>
     );
 };

@@ -9,39 +9,38 @@ import Link from "next/link";
 interface ConcertSingle {
     _id: string;
     concert_artist: {
-      artist_id: string;
-      artist_name: string;
-      artist_instagram: string;
-      artist_youtube: string;
-      artist_facebook: string;
-      artist_twitter: string;
-      artist_spotify: string;
-    },
+        artist_id: string;
+        artist_name: string;
+        artist_instagram: string;
+        artist_youtube: string;
+        artist_facebook: string;
+        artist_twitter: string;
+        artist_spotify: string;
+    };
     concert_date: string;
     concert_description: string;
     concert_image: string;
     concert_name: string;
     concert_start: string;
     concert_genre: {
-      genre_id: string;
-      genre_name: string;
+        genre_id: string;
+        genre_name: string;
     };
     concert_venue: {
-      venue_id: string;
-      venue_name: string;
-      venue_address: string;
-      venue_location: string;
+        venue_id: string;
+        venue_name: string;
+        venue_address: string;
+        venue_location: string;
     };
     concert_doors: string;
-  }
+}
 
 export default function SingleConcert() {
     const params = useParams();
     const id = params.id;
     const [concerts, setConcerts] = useState<ConcertSingle[]>([]);
-    const [selectedConcert, setSelectedConcert] = useState<ConcertSingle | null>(
-        null
-    );
+    const [selectedConcert, setSelectedConcert] =
+        useState<ConcertSingle | null>(null);
 
     // Fetch data with useEffect because it is a client site
     useEffect(() => {
@@ -75,7 +74,7 @@ export default function SingleConcert() {
                 <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
                     <figure>
                         <Image
-                            src={"/concert_images/" + selectedConcert.concert_image}
+                            src={"/" + selectedConcert.concert_image}
                             width={200}
                             height={200}
                             alt="concert"
@@ -84,12 +83,18 @@ export default function SingleConcert() {
                     </figure>
                     <section>
                         <h1 className="text-3xl font-bold my-2">
-                            {selectedConcert.concert_name }
+                            {selectedConcert.concert_name}
                         </h1>
 
                         <ul className="flex flex-col gap-4">
                             {/* More about the artist*/}
-                            <Link href={"/artists/" + selectedConcert.concert_artist.artist_id} key={selectedConcert.concert_artist.artist_id}>
+                            <Link
+                                href={
+                                    "/artists/" +
+                                    selectedConcert.concert_artist.artist_id
+                                }
+                                key={selectedConcert.concert_artist.artist_id}
+                            >
                                 <li className="flex gap-2">
                                     <Image
                                         src="../star-stroke.svg"
@@ -98,11 +103,14 @@ export default function SingleConcert() {
                                         alt="star icon"
                                     />
                                     <p className="text-[#5311BF] text-sm align-middle">
-                                    Read more about {selectedConcert.concert_artist.artist_name}
+                                        Read more about{" "}
+                                        {
+                                            selectedConcert.concert_artist
+                                                .artist_name
+                                        }
                                     </p>
                                 </li>
                             </Link>
-
 
                             {/* Concert date*/}
                             <li className="flex gap-2">
@@ -127,7 +135,7 @@ export default function SingleConcert() {
                                 />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                                     <span className="font-bold">
-                                        Doors open: 
+                                        Doors open:
                                     </span>
                                     {selectedConcert.concert_doors}
                                 </p>
@@ -143,7 +151,7 @@ export default function SingleConcert() {
                                 />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                                     <span className="font-bold">
-                                        Concert start: 
+                                        Concert start:
                                     </span>
                                     {selectedConcert.concert_start}
                                 </p>
