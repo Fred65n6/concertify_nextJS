@@ -73,7 +73,6 @@ export default function Home() {
         <SignupPage />
       </div>
 
-
       {/* Concerts */}
       <section className="pt-24 pb-4  md:h-[600px]">
         <h2 className="font-bold text-xl pb-8">
