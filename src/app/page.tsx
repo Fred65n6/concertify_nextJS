@@ -5,7 +5,6 @@ import axios from "axios";
 import LoginPage from "@/app/login/page";
 import SignupPage from "./signup/page";
 import ConcertCard from "./components/concertCard/page";
-import ArtistCard from "./components/artistCard/page";
 import VenueCard from "./components/venueCard/page";
 import Link from "next/link";
 
@@ -74,16 +73,6 @@ export default function Home() {
         <SignupPage />
       </div>
 
-      {/* Popular */}
-      {/* <section className="py-20 border-b-[1px] border-gray-200 dark:border-stone-800">
-                <h2 className="font-bold text-xl mb-4">Popular concerts</h2>
-                <div className=" grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                    <ConcertCard />
-                    <ConcertCard />
-                    <ConcertCard />
-                    <ConcertCard />
-                </div>
-            </section> */}
 
       {/* Concerts */}
       <section className="pt-24 pb-4  md:h-[600px]">
@@ -97,7 +86,7 @@ export default function Home() {
           className="place-self-end flex items-center md:hidden"
           href="/concerts"
         >
-          View all venues
+          View all concerts
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"

@@ -43,6 +43,7 @@ export default function SingleConcert() {
         null
     );
 
+    // Fetch data with useEffect because it is a client site
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -179,20 +180,7 @@ export default function SingleConcert() {
 
                         <div className="border-t-[1px] border-[#979C9E] pt-4 mt-4">
                             <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
-                                Beyoncé has spent over two decades dominating
-                                the music industry. She is the most-awarded
-                                artist in Grammy history with 32 wins, and has
-                                sold 200 million albums worldwide, earning eight
-                                Billboard No. 1 hits. As a live performer,
-                                Beyoncé’s dynamic stage presence and
-                                choreography are unparalleled. Her iconic world
-                                tours, including two co-headlining tours with
-                                Jay-Z (On the Run Tour I and II), have grossed
-                                $767.3 million and sold 8.9 million tickets. In
-                                2018, she became the first Black woman to
-                                headline Coachella, and her performance (dubbed
-                                “Beychella”) is considered one of the festival’s
-                                most memorable and record-breaking moments.
+                                {selectedConcert.concert_description}
                             </p>
                         </div>
                     </section>
