@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
+import ProgressBar from "../components/progressBar/page";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -216,6 +217,7 @@ export default function SignupPage() {
               What music genres do you like?
             </h1>
             <p className="mb-6">Get your own personalized recommendations</p>
+            <ProgressBar />
             <button
               onClick={showProfileVenues}
               className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white"
