@@ -8,32 +8,31 @@ import concertImageBeyonce from "public/artist_images/beyonce_2023_tour.webp";
 interface Concert {
     _id: string;
     artist: {
-      artist_id: string;
-      artist_name: string;
-      artist_instagram: string;
-      artist_youtube: string;
-      artist_facebook: string;
-      artist_twitter: string;
-      artist_spotify: string;
-    },
+        artist_id: string;
+        artist_name: string;
+        artist_instagram: string;
+        artist_youtube: string;
+        artist_facebook: string;
+        artist_twitter: string;
+        artist_spotify: string;
+    };
     concert_date: string;
     concert_description: string;
     concert_image: string;
     concert_name: string;
     concert_start: string;
     genre: {
-      genre_id: string;
-      genre_name: string;
+        genre_id: string;
+        genre_name: string;
     };
     venue: {
-      venue_id: string;
-      venue_name: string;
-      venue_address: string;
-      venue_location: string;
+        venue_id: string;
+        venue_name: string;
+        venue_address: string;
+        venue_location: string;
     };
     concert_doors: string;
-  }
-
+}
 
 const ConcertCard: React.FC = () => {
     const [concerts, setConcerts] = useState<Concert[]>([]);
@@ -78,28 +77,35 @@ const ConcertCard: React.FC = () => {
     return (
         <>
             {concertsToDisplay?.map((concert) => (
-            <article className="flex-shrink-0 grid pb-8" key={concert._id}>
-                <Link href={"/concerts/" + concert._id} key={concert._id}>
-                <Image
-                    src={"/concert_images/" + concert.concert_image}
-                    width={200}
-                    height={200}
-                    alt="concert"
-                    className="rounded-lg  object-cover w-fit h-[200px]"
-                />
-                </Link>
+                <article className="flex-shrink-0 grid pb-8" key={concert._id}>
+                    <Link href={"/concerts/" + concert._id} key={concert._id}>
+                        <Image
+                            src={"/" + concert.concert_image}
+                            width={200}
+                            height={200}
+                            alt="concert"
+                            className="rounded-lg  object-cover w-fit h-[200px]"
+                        />
+                    </Link>
 
-                <h4 className="text-black text-xl font-bold dark:text-white">
-                    {concert.artist ? concert.artist.artist_name : "Unknown Artist"} - {concert.concert_name ? concert.concert_name : "Unknown concert_name"}
-                </h4>
+                    <h4 className="text-black text-xl font-bold dark:text-white">
+                        {concert.artist
+                            ? concert.artist.artist_name
+                            : "Unknown Artist"}{" "}
+                        -{" "}
+                        {concert.concert_name
+                            ? concert.concert_name
+                            : "Unknown concert_name"}
+                    </h4>
 
-                <p className="text-gray-600 text-sm dark:text-gray-400">
-                    <span className="font-bold">{concert.venue?.venue_name}, </span>{concert.venue?.venue_location}
-                </p>
-
-            </article>
+                    <p className="text-gray-600 text-sm dark:text-gray-400">
+                        <span className="font-bold">
+                            {concert.venue?.venue_name},{" "}
+                        </span>
+                        {concert.venue?.venue_location}
+                    </p>
+                </article>
             ))}
-
 
             <div className="pagination hidden md:flex gap-8 md:place-self-end md:col-end-5">
                 {currentPage > 1 && (
