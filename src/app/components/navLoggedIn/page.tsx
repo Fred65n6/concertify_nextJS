@@ -2,6 +2,8 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import {SlMagnifier, SlHeart, SlHome} from "react-icons/sl";
+
 // import Search from "../search/page";
 
 const nav_logged = () => {
@@ -22,35 +24,21 @@ const nav_logged = () => {
                     <ul className="flex gap-10 brand_purple">
                         <li>
                             <Link className="flex gap-2 items-center" href="/">
-                                <Image
-                                    src="../home_btn.svg"
-                                    width="20"
-                                    height="20"
-                                    alt="button"
-                                />
-                                Home
+                                <SlHome className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="home" />
+                                <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">Home</span>
                             </Link>
                         </li>
                         <li>
                             <Link className="flex gap-2 items-center" href="/">
-                                <Image
-                                    src="../favourites_btn.svg"
-                                    width="25"
-                                    height="25"
-                                    alt="button"
-                                />
-                                Favourites
+                                <SlHeart className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5" id="favourites" />
+                                <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">Favourites</span>
+
                             </Link>
                         </li>
                         <li>
                             <Link className="flex gap-2 items-center" href="/">
-                                <Image
-                                    src="../explore_btn.svg"
-                                    width="25"
-                                    height="25"
-                                    alt="button"
-                                />
-                                Explore
+                                <SlMagnifier className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5" id="explore" />
+                                <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">Explore</span>
                             </Link>
                         </li>
                     </ul>

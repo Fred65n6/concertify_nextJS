@@ -10,17 +10,10 @@ interface ConcertLoop {
   concert_artist: {
     artist_id: string;
     artist_name: string;
-    artist_instagram: string;
-    artist_youtube: string;
-    artist_facebook: string;
-    artist_twitter: string;
-    artist_spotify: string;
   },
-  concert_date: string;
-  concert_description: string;
-  concert_image: string;
   concert_name: string;
-  concert_start: string;
+  concert_image: string;
+  concert_date: string;
   concert_genre: {
     genre_id: string;
     genre_name: string;
@@ -28,10 +21,8 @@ interface ConcertLoop {
   concert_venue: {
     venue_id: string;
     venue_name: string;
-    venue_address: string;
     venue_location: string;
   };
-  concert_doors: string;
 }
 
 
