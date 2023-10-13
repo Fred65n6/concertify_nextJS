@@ -7,17 +7,40 @@ import concertImageBeyonce from "public/artist_images/beyonce_2023_tour.webp";
 
 interface Concert {
     _id: string;
-    concert_name: string;
-    concert_date: number;
+    artist: {
+      artist_id: string;
+      artist_name: string;
+      artist_instagram: string;
+      artist_youtube: string;
+      artist_facebook: string;
+      artist_twitter: string;
+      artist_spotify: string;
+    },
+    concert_date: string;
+    concert_description: string;
     concert_image: string;
-    concert_artist: string;
-}
+    concert_name: string;
+    concert_start: string;
+    genre: {
+      genre_id: string;
+      genre_name: string;
+    };
+    venue: {
+      venue_id: string;
+      venue_name: string;
+      venue_address: string;
+      venue_location: string;
+    };
+    concert_doors: string;
+  }
+
 
 const ConcertCard: React.FC = () => {
     const [concerts, setConcerts] = useState<Concert[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const concertsPerPage = 4;
 
+    // ----- Fetch data with useEffect since it is a client site
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -31,21 +54,21 @@ const ConcertCard: React.FC = () => {
         fetchData();
     }, []);
 
-    // Calculate the start and end indexes of venues to display on the current page
+    // ----- Calculate the start and end indexes of venues to display on the current page
     const startIndex = (currentPage - 1) * concertsPerPage;
     const endIndex = startIndex + concertsPerPage;
 
-    // Slice the venues array to display only the venues for the current page
+    // ----- Slice the venues array to display only the venues for the current page
     const concertsToDisplay = concerts.slice(startIndex, endIndex);
 
-    // Function to handle next page
+    // ----- Function to handle next page
     const nextPage = () => {
         if (currentPage < Math.ceil(concerts.length / concertsPerPage)) {
             setCurrentPage(currentPage + 1);
         }
     };
 
-    // Function to handle previous page
+    // ----- Function to handle previous page
     const previousPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
@@ -54,38 +77,31 @@ const ConcertCard: React.FC = () => {
 
     return (
         <>
-            {concertsToDisplay.map((concert) => (
-                <article className="flex-shrink-0 grid pb-8" key={concert._id}>
-                    <Link href={"/concerts/" + concert._id} key={concert._id}>
-                        <Image
-                            src={"/" + concert.concert_image}
-                            width={200}
-                            height={200}
-                            alt="concert"
-                            className="rounded-lg  object-cover w-[300px] h-[200px]"
-                        />
-                    </Link>
-                    <div className="flex gap-2">
-                        <div className="text-black text-xl font-bold dark:text-white pt-2">
-                            {concert.concert_artist}
-                        </div>
+            {concertsToDisplay?.map((concert) => (
+            <article className="flex-shrink-0 grid pb-8" key={concert._id}>
+                <Link href={"/concerts/" + concert._id} key={concert._id}>
+                <Image
+                    src={"/concert_images/" + concert.concert_image}
+                    width={200}
+                    height={200}
+                    alt="concert"
+                    className="rounded-lg  object-cover w-fit h-[200px]"
+                />
+                </Link>
 
-                        <div className="text-black text-xl  dark:text-white pt-2">
-                            <span className="mr-2">-</span>
-                            {concert.concert_name}
-                        </div>
-                    </div>
+                <h4 className="text-black text-xl font-bold dark:text-white">
+                    {concert.artist ? concert.artist.artist_name : "Unknown Artist"} - {concert.concert_name ? concert.concert_name : "Unknown concert_name"}
+                </h4>
 
-                    <div className="text-gray-600 text-sm dark:text-gray-400 pt-2">
-                        Pop, Rock
-                    </div>
-                    <div className="text-gray-700 text-sm dark:text-gray-400 pt-2">
-                        10/10/2023
-                    </div>
-                </article>
+                <p className="text-gray-600 text-sm dark:text-gray-400">
+                    <span className="font-bold">{concert.venue?.venue_name}, </span>{concert.venue?.venue_location}
+                </p>
+
+            </article>
             ))}
 
-            <div className="hidden pagination md:flex gap-8 md:place-self-end md:col-end-5">
+
+            <div className="pagination hidden md:flex gap-8 md:place-self-end md:col-end-5">
                 {currentPage > 1 && (
                     <button
                         onClick={previousPage}
