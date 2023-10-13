@@ -109,7 +109,7 @@ export default function SignupPage() {
         className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen  items-center justify-center hidden backdrop-blur-sm"
       >
         <div id="signup_form">
-          <div className="flex flex-col items-center justify-center pt-4 py-8 bg-white w-[800px] rounded-lg">
+          <div className="flex flex-col items-center justify-center pt-4 py-8 bg-white w-[800px] dark:bg-slate-900 dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <button
               type="button"
               onClick={closeSignupModule}
@@ -211,7 +211,7 @@ export default function SignupPage() {
         </div>
         {/* PROFILE GENRES MODUL */}
         <div id="profile_genres" className="hidden">
-          <div className="flex flex-col items-center justify-center py-8 bg-white w-[800px] rounded-lg">
+          <div className="flex flex-col items-center justify-center py-8 bg-white w-[800px] dark:bg-slate-900 dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <h1 className="mb-4 text-3xl font-bold">
               What music genres do you like?
             </h1>
@@ -232,7 +232,7 @@ export default function SignupPage() {
         </div>
         {/* PROFILE VENUES MODUL */}
         <div id="profile_venues" className="hidden">
-          <div className="flex flex-col items-center justify-center py-8 bg-white w-[800px] rounded-lg">
+          <div className="flex flex-col items-center justify-center py-8 bg-white w-[800px] dark:bg-slate-900 dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <h1 className="mb-4 text-3xl font-bold">
               What music venues do you like?
             </h1>
@@ -252,7 +252,7 @@ export default function SignupPage() {
           </div>
         </div>
         <div id="verified_message" className="hidden">
-          <div className="flex flex-col items-center justify-center pt-4 py-8 bg-white w-[800px] rounded-lg">
+          <div className="flex flex-col items-center justify-center pt-4 py-8 bg-white w-[800px] dark:bg-slate-900 dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <h1 className="text-2xl text-center my-10">
               We've send a link to your email, to verify your account. <br />
               Please click that link and login to your account🎉🎉
