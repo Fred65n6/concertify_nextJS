@@ -19,6 +19,9 @@ interface Genre {
 const UploadForm: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);
     const [concertName, setConcertName] = useState("");
+    const [concertDate, setConcertDate] = useState("");
+    const [concertStart, setConcertStart] = useState("");
+    const [concertDoors, setConcertDoors] = useState("");
     const [concertDescription, setConcertDescription] = useState("");
     const [concertGenreId, setConcertGenreId] = useState("");
     const [concertGenreName, setConcertGenreName] = useState("");
@@ -91,13 +94,16 @@ const UploadForm: React.FC = () => {
         const data = new FormData();
         data.set("file", file);
         data.set("Concert_name", concertName);
+        data.set("Concert_date", concertDate);
+        data.set("Concert_start", concertStart);
+        data.set("Concert_doors", concertDoors);
         data.set("Concert_description", concertDescription);
-        data.set("Concert_genre_id", concertGenreId);
-        data.set("Concert_genre_name", concertGenreName);
-        data.set("Concert_artist_id", concertArtistId);
-        data.set("Concert_artist_name", concertArtistName);
-        data.set("Concert_venue_id", concertVenueId);
-        data.set("Concert_venue_name", concertVenueName);
+        data.set("Concert_genre_id", selectedGenre!._id);
+        data.set("Concert_genre_name", selectedGenre!.genre_name);
+        data.set("Concert_artist_id", selectedArtist!._id);
+        data.set("Concert_artist_name", selectedArtist!.artist_name);
+        data.set("Concert_venue_id", selectedVenue!._id);
+        data.set("Concert_venue_name", selectedVenue!.venue_name);
 
         const res = await fetch("/api/data/uploadConcert/", {
             method: "POST",
@@ -119,6 +125,30 @@ const UploadForm: React.FC = () => {
                 value={concertName}
                 onChange={(e) => setConcertName(e.target.value)}
                 placeholder="Concert Name"
+            />
+            <input
+                className="bg-slate-100 p-4 w-72"
+                type="date"
+                name="Concert_date"
+                value={concertDate}
+                onChange={(e) => setConcertDate(e.target.value)}
+                placeholder="Concert Date"
+            />
+            <input
+                className="bg-slate-100 p-4 w-72"
+                type="time"
+                name="Concert_start"
+                value={concertStart}
+                onChange={(e) => setConcertStart(e.target.value)}
+                placeholder="Concert start time"
+            />
+            <input
+                className="bg-slate-100 p-4 w-72"
+                type="time"
+                name="Concert_doors"
+                value={concertDoors}
+                onChange={(e) => setConcertDoors(e.target.value)}
+                placeholder="Concert Doors"
             />
             <input
                 className="bg-slate-100 p-4 w-72"
@@ -211,9 +241,9 @@ const UploadForm: React.FC = () => {
                 }
             >
                 <option value="">Select a genre</option>
-                {venues.map((genre) => (
+                {genres.map((genre) => (
                     <option key={genre._id} value={genre._id}>
-                        {genre.venue_name}
+                        {genre.genre_name}
                     </option>
                 ))}
             </select>
@@ -238,9 +268,13 @@ const UploadForm: React.FC = () => {
             <input
                 type="file"
                 name="file"
-                onChange={(e) => setFile(e.target.files?.[0])}
+                onChange={(e) => setFile(e.target.files?.[0] || null)}
             />
-            <input type="submit" value="upload" />
+            <input
+                className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
+                type="submit"
+                value="upload"
+            />
         </form>
     );
 };

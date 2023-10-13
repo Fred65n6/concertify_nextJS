@@ -8,6 +8,8 @@ export async function POST(request: NextRequest) {
     const file = data.get("file") as File;
     const concertName = data.get("Concert_name");
     const concertDate = data.get("Concert_date");
+    const concertStart = data.get("Concert_start");
+    const concertDoors = data.get("Concert_doors");
     const concertDescription = data.get("Concert_description");
 
     const concertGenre = {
@@ -45,6 +47,9 @@ export async function POST(request: NextRequest) {
 
     const newConcert = new Concert({
         concert_name: concertName,
+        concer_date: concertDate,
+        concert_start: concertStart,
+        concert_doors: concertDoors,
         concert_image: image,
         concert_date: concertDate,
         concert_description: concertDescription,
