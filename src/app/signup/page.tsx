@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Progress } from "flowbite-react";
+import {SiFacebook, SiGoogle, SiApple} from "react-icons/si";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -195,17 +196,13 @@ export default function SignupPage() {
             </button>
             <div className="flex">
               <Link href="/">
-                <img src="../google_login.svg" alt="telefon" />
+                <SiGoogle className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="google" />
               </Link>
               <Link href="/">
-                <img
-                  className="px-14"
-                  src="../facebook_login.svg"
-                  alt="telefon"
-                />
+                <SiFacebook className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="facebook" />
               </Link>
               <Link href="/">
-                <img src="../apple_login.svg" alt="telefon" />
+                <SiApple className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="apple" />
               </Link>
             </div>
             <div className="grid gap-4 text-center mt-4">

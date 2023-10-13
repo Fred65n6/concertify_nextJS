@@ -3,6 +3,9 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 // import Search from "../search/page";
+import {GrHomeRounded} from "react-icons/gr";
+import {SlMagnifier, SlHome, SlUser} from "react-icons/sl";
+
 
 const NavLogged = () => {
     const openLoginModule = () => {
@@ -33,24 +36,15 @@ const NavLogged = () => {
                     <ul className="flex gap-10 brand_purple dark:text-[#8e0bf5]">
                         <li>
                             <Link className="flex gap-2 items-center" href="/">
-                                <Image
-                                    src="../home_btn.svg"
-                                    width="20"
-                                    height="20"
-                                    alt="button"
-                                />
-                                Home
+                                <SlHome className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="home" />
+                                <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">Home</span>
+
                             </Link>
                         </li>
                         <li>
                             <Link className="flex gap-2 items-center" href="/">
-                                <Image
-                                    src="../explore_btn.svg"
-                                    width="25"
-                                    height="25"
-                                    alt="button"
-                                />
-                                Explore
+                                <SlMagnifier className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="explore" />
+                                <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">Explore</span>
                             </Link>
                         </li>
                     </ul>
@@ -81,23 +75,15 @@ const NavLogged = () => {
                 <ul className="flex gap-10 brand_purple justify-evenly w-full">
                     <li>
                         <Link className="flex flex-col items-center" href="/">
-                            <Image
-                                src="../home_btn.svg"
-                                width="20"
-                                height="20"
-                                alt="button"
-                            />
+                            <SlHome className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="home" />
+
                             Home
                         </Link>
                     </li>
                     <li>
                         <Link className="flex flex-col items-center" href="/">
-                            <Image
-                                src="../explore_btn.svg"
-                                width="25"
-                                height="25"
-                                alt="button"
-                            />
+                            <SlMagnifier className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="explore" />
+
                             Explore
                         </Link>
                     </li>
@@ -106,12 +92,8 @@ const NavLogged = () => {
                             className="flex flex-col items-center"
                             onClick={openLoginModule}
                         >
-                            <Image
-                                src="../profile_btn.svg"
-                                width="25"
-                                height="25"
-                                alt="button"
-                            />
+                            <SlUser className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5" id="user" />
+
                             Log in
                         </button>
                     </li>

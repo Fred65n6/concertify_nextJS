@@ -3,6 +3,9 @@ import React from "react";
 import { useState } from "react";
 import { NavSearchBar } from "./navSearch";
 import { NavSearchResultsList } from "./navResultsList";
+import {LiaDollarSignSolid} from from "react-icons/lia";
+import {SlLocationPin, SlCalender, SlStar} from from "react-icons/sl";
+
 
 function FilteringNavDesktop() {
   const [results, setResults] = useState([]);
@@ -14,7 +17,7 @@ function FilteringNavDesktop() {
           <div>
             <div>
               <div className="flex pb-1">
-                <img src="../Location.svg" className="pr-2" />
+                  <SlLocationPin className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="location" />
                 <p className="font-medium">Location</p>
               </div>
             </div>
@@ -22,7 +25,7 @@ function FilteringNavDesktop() {
           <div className="border-l-2 border-gray-300">
             <div className="pl-6">
               <div className="flex pb-1">
-                <img src="../pricetag.svg" className="pr-2" />
+               <LiaDollarSignSolid className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="date" />
                 <p className="font-medium">Price</p>
               </div>
             </div>
@@ -30,7 +33,7 @@ function FilteringNavDesktop() {
           <div className="border-l-2 border-gray-300">
             <div className="pl-6">
               <div className="flex pb-1">
-                <img src="../calendar.svg" className="pr-2" />
+                <SlCalender className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="date" />
                 <p className="font-medium">Date</p>
               </div>
             </div>
@@ -38,7 +41,7 @@ function FilteringNavDesktop() {
           <div className="border-l-2 border-gray-300">
             <div className="pl-6">
               <div className="flex pb-1">
-                <img src="../artist.svg" className="pr-2" />
+              <SlStar className="fill-[#5311BF] dark:fill-[#8e0bf5] w-5 h-5" id="artist" />
                 <p className="font-medium">Artist</p>
               </div>
               <div className="App">

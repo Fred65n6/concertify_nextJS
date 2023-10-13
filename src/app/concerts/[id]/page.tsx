@@ -5,6 +5,8 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import {SlLocationPin, SlStar, SlMusicToneAlt, SlClock, SlControlPlay, SlCalender} from "react-icons/sl";
+import {HiOutlineArrowRight} from "react-icons/hi";
 
 interface ConcertSingle {
     _id: string;
@@ -87,6 +89,15 @@ export default function SingleConcert() {
                         </h1>
 
                         <ul className="flex flex-col gap-4">
+
+                            {/* Concert genre tag*/}
+                            <li className="flex gap-2">
+                                <SlMusicToneAlt className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="genre" />
+                                <p className="text-gray-600 dark:text-slate-400 text-sm align-middle">
+                                    {selectedConcert.concert_genre.genre_name}
+                                </p>
+                            </li>
+
                             {/* More about the artist*/}
                             <Link
                                 href={
@@ -96,43 +107,24 @@ export default function SingleConcert() {
                                 key={selectedConcert.concert_artist.artist_id}
                             >
                                 <li className="flex gap-2">
-                                    <Image
-                                        src="../star-stroke.svg"
-                                        width={24}
-                                        height={24}
-                                        alt="star icon"
-                                    />
-                                    <p className="text-[#5311BF] text-sm align-middle">
-                                        Read more about{" "}
-                                        {
-                                            selectedConcert.concert_artist
-                                                .artist_name
-                                        }
+                                    <SlStar className="fill-[#5311BF] dark:fill-[#8e0bf5] w-5 h-5" id="artist" />
+                                    <p className="text-[#5311BF] dark:text-[#8e0bf5] text-sm align-middle">
+                                    Read more about {selectedConcert.concert_artist.artist_name}
                                     </p>
                                 </li>
                             </Link>
 
                             {/* Concert date*/}
                             <li className="flex gap-2">
-                                <Image
-                                    src="../calendar.svg"
-                                    width={24}
-                                    height={24}
-                                    alt="calendar icon"
-                                />
-                                <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                                <SlCalender className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="date" />
+                                <p className="text-gray-600 dark:text-slate-400 align-middle">
                                     {selectedConcert.concert_date}
                                 </p>
                             </li>
 
                             {/* Doors open*/}
                             <li className="flex gap-2">
-                                <Image
-                                    src="../clock.svg"
-                                    width={24}
-                                    height={24}
-                                    alt="clock icon"
-                                />
+                                <SlClock className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="doors" />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                                     <span className="font-bold">
                                         Doors open:
@@ -143,12 +135,7 @@ export default function SingleConcert() {
 
                             {/* Concert start*/}
                             <li className="flex gap-2">
-                                <Image
-                                    src="../play.svg"
-                                    width={24}
-                                    height={24}
-                                    alt="play icon"
-                                />
+                                <SlControlPlay className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="concert_start" />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                                     <span className="font-bold">
                                         Concert start:
@@ -159,12 +146,7 @@ export default function SingleConcert() {
 
                             {/* Location*/}
                             <li className="flex gap-2">
-                                <Image
-                                    src="../location.svg"
-                                    width={24}
-                                    height={24}
-                                    alt="location icon"
-                                />
+                                <SlLocationPin className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="location" />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                                     {selectedConcert.concert_venue.venue_name}
                                 </p>
@@ -173,13 +155,8 @@ export default function SingleConcert() {
                             {/* See all concerts*/}
                             <li className="flex gap-2">
                                 <Link className="flex gap-2" href="/concerts/">
-                                    <Image
-                                        src="../arrow-right.svg"
-                                        width={24}
-                                        height={24}
-                                        alt="arrow icon"
-                                    />
-                                    <p className="text-[#5311BF] text-sm dark:text-gray-400 align-middle">
+                                    <HiOutlineArrowRight className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="se_all" />
+                                    <p className="text-[#5311BF] dark:text-[#8e0bf5] text-sm align-middle">
                                         See all concerts
                                     </p>
                                 </Link>

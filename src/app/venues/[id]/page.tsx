@@ -6,8 +6,10 @@ import axios from "axios";
 import Image from "next/image";
 import { StringSchemaDefinition } from "mongoose";
 import VenueCard from "@/app/components/venueCard/page";
+import {SlLocationPin, SlHeart, SlCalender, SlSocialInstagram, SlSocialFacebook, SlSocialTwitter, SlSocialYoutube, SlUserFollowing} from "react-icons/sl";
 
-interface Venue {
+
+interface VenueSingle {
   _id: string;
   venue_name: string;
   venue_address: string;
@@ -15,14 +17,13 @@ interface Venue {
   venue_location: string;
   venue_description: string;
   venue_image: string;
-  // Add other properties from your Venue model
 }
 
 export default function SingleVenue() {
   const params = useParams();
   const id = params.id;
-  const [venues, setVenues] = useState<Venue[]>([]);
-  const [selectedVenue, setSelectedVenue] = useState<Venue | null>(null);
+  const [venues, setVenues] = useState<VenueSingle[]>([]);
+  const [selectedVenue, setSelectedVenue] = useState<VenueSingle | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +54,7 @@ export default function SingleVenue() {
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
           <figure>
             <Image
-              src={"/venue_images/" + selectedVenue.venue_image}
+              src={"/venue_images/" + selectedVenue.venue_image} 
               width={200}
               height={200}
               alt="concert"
@@ -69,7 +70,7 @@ export default function SingleVenue() {
               </div>
               <div>
                 <button className="flex items-center place-content-center rounded-full bg-purple-100 brand_purple w-32 py-3 hover:bg-purple-200">
-                  <img className="pr-2" src="../heart.svg" />
+                  <SlHeart className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="favourites" />
                   <span>Add</span>
                 </button>
               </div>
@@ -78,36 +79,21 @@ export default function SingleVenue() {
             <ul className="flex flex-col gap-4 pt-4">
               {/* Location */}
               <li className="flex gap-2">
-                <Image
-                  src="../location.svg"
-                  width={24}
-                  height={24}
-                  alt="location icon"
-                />
+                <SlLocationPin className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="favourites" />
                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                   {selectedVenue.venue_address}, {selectedVenue.venue_location}
                 </p>
               </li>
               {/* Venue Size */}
               <li className="flex gap-2">
-                <Image
-                  src="../audience.svg"
-                  width={24}
-                  height={24}
-                  alt="location icon"
-                />
+                <SlUserFollowing className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="venue_size" />
                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                   {selectedVenue.venue_size}
                 </p>
               </li>
               {/* Todays program */}
               <li className="flex gap-2">
-                <Image
-                  src="../calendar.svg"
-                  width={24}
-                  height={24}
-                  alt="calendar icon"
-                />
+                <SlCalender className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="date" />
                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                   What is on today?
                 </p>
@@ -120,9 +106,10 @@ export default function SingleVenue() {
                 {selectedVenue.venue_description}
               </p>
               <div className="flex pt-5">
-                <img src="../instagram.svg" />
-                <img src="../twitter.svg" />
-                <img src="../facebook.svg" />
+               <SlSocialInstagram className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="instagram" />
+               <SlSocialTwitter className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="twitter" />
+               <SlSocialFacebook className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="facebook" />
+               <SlSocialYoutube className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="youtube" />
               </div>
             </div>
           </section>
