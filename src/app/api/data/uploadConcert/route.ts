@@ -20,15 +20,10 @@ export async function POST(request: NextRequest) {
         artist_id: data.get("Concert_artist_id"),
     };
 
-    // const concertArtist = {
-    //     artist_name: data.get("Concert_artist_name"),
-    //     artist_id: data.get("Concert_artist_id"),
-    // };
-
-    // const concertVenue = {
-    //     venue_name: data.get("Concert_venue_name"),
-    //     venue_id: data.get("Concert_venue_id"),
-    // };
+    const concertVenue = {
+        venue_name: data.get("Concert_venue_name"),
+        venue_id: data.get("Concert_venue_id"),
+    };
 
     if (!file) {
         return NextResponse.json({success: false});
@@ -55,8 +50,7 @@ export async function POST(request: NextRequest) {
         concert_description: concertDescription,
         concert_genre: concertGenre,
         concert_artist: concertArtist,
-        // concert_artist: concertArtist,
-        // concert_venue: concertVenue,
+        concert_venue: concertVenue,
     });
 
     const savedConcert = await newConcert.save();

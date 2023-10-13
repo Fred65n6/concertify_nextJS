@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 const concertSchema = new mongoose.Schema({
     concert_name: {
         type: String,
+        unique: false,
     },
     concert_artist: {
         artist_id: String,

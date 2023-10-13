@@ -10,10 +10,8 @@ const UploadForm: React.FC = () => {
     const [concertGenreName, setConcertGenreName] = useState("");
     const [concertArtistId, setConcertArtistId] = useState("");
     const [concertArtistName, setConcertArtistName] = useState("");
-    // const [concertVenueName, setConcertVenueName] = useState("");
-    // const [concertVenueID, setConcertVenueID] = useState("");
-    // const [concertArtistName, setConcertArtistName] = useState("");
-    // const [concertArtistID, setConcertArtistID] = useState("");
+    const [concertVenueId, setConcertVenueId] = useState("");
+    const [concertVenueName, setConcertVenueName] = useState("");
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -28,10 +26,8 @@ const UploadForm: React.FC = () => {
             data.set("Concert_genre_name", concertGenreName);
             data.set("Concert_artist_id", concertArtistId);
             data.set("Concert_artist_name", concertArtistName);
-            // data.set("Concert_artist_name", concertArtistName);
-            // data.set("Concert_artist_id", concertArtistID);
-            // data.set("Concert_venue_name", concertVenueName);
-            // data.set("Concert_venue_id", concertVenueID);
+            data.set("Concert_venue_id", concertVenueId);
+            data.set("Concert_venue_name", concertVenueName);
 
             const res = await fetch("/api/data/uploadConcert/", {
                 method: "POST",
@@ -64,23 +60,6 @@ const UploadForm: React.FC = () => {
                 onChange={(e) => setConcertDescription(e.target.value)}
                 placeholder="Concert Description"
             />
-
-            {/* <input
-                className="bg-slate-100 p-4 w-72"
-                type="text"
-                name="Concert_artist_name"
-                value={concertArtistName}
-                onChange={(e) => setConcertArtistName(e.target.value)}
-                placeholder="Artist Name"
-            />
-            <input
-                className="bg-slate-100 p-4 w-72"
-                type="text"
-                name="Concert_artist_id"
-                value={concertArtistID}
-                onChange={(e) => setConcertArtistID(e.target.value)}
-                placeholder="Artist ID"
-            /> */}
             <input
                 className="bg-slate-100 p-4 w-72"
                 type="text"
@@ -113,22 +92,23 @@ const UploadForm: React.FC = () => {
                 onChange={(e) => setConcertGenreId(e.target.value)}
                 placeholder="Genre ID"
             />
-            {/* <input
+            <input
                 className="bg-slate-100 p-4 w-72"
                 type="text"
                 name="Concert_venue_name"
                 value={concertVenueName}
                 onChange={(e) => setConcertVenueName(e.target.value)}
-                placeholder="Venue Name"
+                placeholder="Artist Name"
             />
             <input
                 className="bg-slate-100 p-4 w-72"
                 type="text"
                 name="Concert_venue_id"
-                value={concertVenueID}
-                onChange={(e) => setConcertVenueID(e.target.value)}
-                placeholder="Venue ID"
-            /> */}
+                value={concertVenueId}
+                onChange={(e) => setConcertVenueId(e.target.value)}
+                placeholder="Artist ID"
+            />
+
             <input
                 type="file"
                 name="file"
