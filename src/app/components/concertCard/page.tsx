@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import concertImageBeyonce from "public/artist_images/beyonce_2023_tour.webp";
 
-interface Concert {
+interface ConcertCard {
     _id: string;
-    artist: {
+    concert_artist: {
         artist_id: string;
         artist_name: string;
         artist_instagram: string;
@@ -21,11 +21,11 @@ interface Concert {
     concert_image: string;
     concert_name: string;
     concert_start: string;
-    genre: {
+    concert_genre: {
         genre_id: string;
         genre_name: string;
     };
-    venue: {
+    concert_venue: {
         venue_id: string;
         venue_name: string;
         venue_address: string;
@@ -35,7 +35,7 @@ interface Concert {
 }
 
 const ConcertCard: React.FC = () => {
-    const [concerts, setConcerts] = useState<Concert[]>([]);
+    const [concerts, setConcerts] = useState<ConcertCard[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const concertsPerPage = 4;
 
@@ -89,8 +89,8 @@ const ConcertCard: React.FC = () => {
                     </Link>
 
                     <h4 className="text-black text-xl font-bold dark:text-white">
-                        {concert.artist
-                            ? concert.artist.artist_name
+                        {concert.concert_artist
+                            ? concert.concert_artist.artist_name
                             : "Unknown Artist"}{" "}
                         -{" "}
                         {concert.concert_name
@@ -100,9 +100,9 @@ const ConcertCard: React.FC = () => {
 
                     <p className="text-gray-600 text-sm dark:text-gray-400">
                         <span className="font-bold">
-                            {concert.venue?.venue_name},{" "}
+                            {concert.concert_venue?.venue_name},{" "}
                         </span>
-                        {concert.venue?.venue_location}
+                        {concert.concert_venue?.venue_location}
                     </p>
                 </article>
             ))}

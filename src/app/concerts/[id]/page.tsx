@@ -6,9 +6,9 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 
-interface Concert {
+interface ConcertSingle {
     _id: string;
-    artist: {
+    concert_artist: {
       artist_id: string;
       artist_name: string;
       artist_instagram: string;
@@ -22,11 +22,11 @@ interface Concert {
     concert_image: string;
     concert_name: string;
     concert_start: string;
-    genre: {
+    concert_genre: {
       genre_id: string;
       genre_name: string;
     };
-    venue: {
+    concert_venue: {
       venue_id: string;
       venue_name: string;
       venue_address: string;
@@ -38,8 +38,8 @@ interface Concert {
 export default function SingleConcert() {
     const params = useParams();
     const id = params.id;
-    const [concerts, setConcerts] = useState<Concert[]>([]);
-    const [selectedConcert, setSelectedConcert] = useState<Concert | null>(
+    const [concerts, setConcerts] = useState<ConcertSingle[]>([]);
+    const [selectedConcert, setSelectedConcert] = useState<ConcertSingle | null>(
         null
     );
 
@@ -89,7 +89,7 @@ export default function SingleConcert() {
 
                         <ul className="flex flex-col gap-4">
                             {/* More about the artist*/}
-                            <Link href={"/artists/" + selectedConcert.artist.artist_id} key={selectedConcert.artist.artist_id}>
+                            <Link href={"/artists/" + selectedConcert.concert_artist.artist_id} key={selectedConcert.concert_artist.artist_id}>
                                 <li className="flex gap-2">
                                     <Image
                                         src="../star-stroke.svg"
@@ -98,7 +98,7 @@ export default function SingleConcert() {
                                         alt="star icon"
                                     />
                                     <p className="text-[#5311BF] text-sm align-middle">
-                                    Read more about {selectedConcert.artist.artist_name}
+                                    Read more about {selectedConcert.concert_artist.artist_name}
                                     </p>
                                 </li>
                             </Link>
@@ -158,7 +158,7 @@ export default function SingleConcert() {
                                     alt="location icon"
                                 />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
-                                    {selectedConcert.venue.venue_name}, {selectedConcert.venue.venue_location}
+                                    {selectedConcert.concert_venue.venue_name}
                                 </p>
                             </li>
 
