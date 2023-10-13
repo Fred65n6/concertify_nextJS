@@ -224,7 +224,7 @@ export default function SignupPage() {
             </button>
             <button
               onClick={showMessage}
-              className="mb-4 mt-2 px-12 py-4 rounded-full text-purple-700"
+              className="mb-4 mt-2 px-12 py-4 rounded-full text-purple-700 dark:text-purple-200"
             >
               Skip
             </button>
@@ -245,7 +245,7 @@ export default function SignupPage() {
             </button>
             <button
               onClick={showMessage}
-              className="mb-4 mt-2 px-12 py-4 rounded-full text-purple-700"
+              className="mb-4 mt-2 px-12 py-4 rounded-full text-purple-700 dark:text-purple-200"
             >
               Skip
             </button>
