@@ -17,6 +17,7 @@ const ShowGenres: React.FC = () => {
             try {
                 const response = await axios.get("/api/data/genreData");
                 setGenres(response.data.data);
+                console.log(response);
             } catch (error) {
                 console.error("Error fetching genres:", error);
             }
