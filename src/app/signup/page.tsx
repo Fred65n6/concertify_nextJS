@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Progress } from "flowbite-react";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -39,7 +40,7 @@ export default function SignupPage() {
       setLoading(true);
       const response = await axios.post("/api/users/signup", user);
       console.log("Signup success", response.data);
-      showProfileGenres();
+      showWelcomePopup();
       // showMessage();
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.error) {
@@ -53,13 +54,23 @@ export default function SignupPage() {
     }
   };
 
+  const showWelcomePopup = () => {
+    const welcomePopup = document.getElementById("welcome_popup");
+    const signUpForm = document.getElementById("signup_form");
+    if (welcomePopup) {
+      welcomePopup.classList.remove("hidden");
+      welcomePopup.classList.add("block");
+      signUpForm?.classList.add("hidden");
+    }
+  };
+
   const showProfileGenres = () => {
     const profileGenres = document.getElementById("profile_genres");
-    const signUpForm = document.getElementById("signup_form");
+    const welcomePopup = document.getElementById("welcome_popup");
     if (profileGenres) {
       profileGenres.classList.remove("hidden");
       profileGenres.classList.add("block");
-      signUpForm?.classList.add("hidden");
+      welcomePopup?.classList.add("hidden");
     }
   };
 
@@ -111,7 +122,7 @@ export default function SignupPage() {
         className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen  items-center justify-center hidden backdrop-blur-sm"
       >
         <div id="signup_form">
-          <div className="flex flex-col items-center justify-center pt-4 py-8 bg-white w-[800px] dark:bg-slate-900 dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+          <div className="flex flex-col items-center justify-center pt-4 py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <button
               type="button"
               onClick={closeSignupModule}
@@ -140,7 +151,7 @@ export default function SignupPage() {
             {error && <div className="text-red-500">{error}</div>}
             <label htmlFor="username">Username</label>
             <input
-              className="m-2 mt-1 p-2 pl-4 rounded-full text-left text-black bg-slate-200 w-[400px]"
+              className="m-2 mt-1 p-2 pl-4 rounded-full text-left text-black bg-slate-200 w-[350px] lg:w-[400px]"
               type="text"
               id="username"
               value={user.username}
@@ -149,7 +160,7 @@ export default function SignupPage() {
             />
             <label htmlFor="email">Email</label>
             <input
-              className="m-2 mt-1 p-2 pl-4 rounded-full text-left text-black bg-slate-200 w-[400px]"
+              className="m-2 mt-1 p-2 pl-4 rounded-full text-left text-black bg-slate-200 w-[350px] lg:w-[400px]"
               type="text"
               id="email"
               value={user.email}
@@ -158,7 +169,7 @@ export default function SignupPage() {
             />
             <label htmlFor="password">Password</label>
             <input
-              className="m-2 mt-1 p-2 pl-4 rounded-full text-left text-black bg-slate-200 w-[400px]"
+              className="m-2 mt-1 p-2 pl-4 rounded-full text-left text-black bg-slate-200 w-[350px] lg:w-[400px]"
               type="password"
               id="password"
               value={user.password}
@@ -167,7 +178,7 @@ export default function SignupPage() {
             />
             <label htmlFor="confirmpassword">Confirm password</label>
             <input
-              className="m-2 mt-1 p-2 pl-4 rounded-full text-left text-black bg-slate-200 w-[400px]"
+              className="m-2 mt-1 p-2 pl-4 rounded-full text-left text-black bg-slate-200 w-[350px] lg:w-[400px]"
               type="password"
               id="confirmpassword"
               value={user.confirmpassword}
@@ -211,13 +222,41 @@ export default function SignupPage() {
             </div>
           </div>
         </div>
+        {/* WELCOME POPUP */}
+        <div id="welcome_popup" className="hidden">
+          <div className="flex flex-col items-center justify-center py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+            <img className="my-10" src="../concertify_logo.svg" alt="" />
+            <h1 className="my-4 text-3xl font-bold">Welcome Human!</h1>
+            <p className="mb-6 text-center mx-2">
+              Great to have you on board! Lets personalize your experience in 2
+              simple steps.
+            </p>
+            <button
+              onClick={showProfileGenres}
+              className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white"
+            >
+              Get Started
+            </button>
+            <button
+              onClick={showMessage}
+              className="mb-4 mt-2 px-12 py-4 rounded-full text-purple-700 dark:text-[#8e0bf5]"
+            >
+              Skip to verification
+            </button>
+          </div>
+        </div>
         {/* PROFILE GENRES MODUL */}
         <div id="profile_genres" className="hidden">
-          <div className="flex flex-col items-center justify-center py-8 bg-white w-[800px] dark:bg-slate-900 dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
-            <h1 className="mb-4 text-3xl font-bold">
+          <div className="flex flex-col items-center justify-center py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+            <div className="w-[300px] lg:w-[500px] mb-10">
+              <Progress color="purple" progress={33} />
+            </div>
+            <h1 className="mb-4 text-3xl font-bold text-center mx-6">
               What music genres do you like?
             </h1>
-            <p className="mb-6">Get your own personalized recommendations</p>
+            <p className="mb-6 text-center mx-6">
+              Get your own personalized recommendations
+            </p>
             <button
               onClick={showProfileVenues}
               className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white"
@@ -234,11 +273,16 @@ export default function SignupPage() {
         </div>
         {/* PROFILE VENUES MODUL */}
         <div id="profile_venues" className="hidden">
-          <div className="flex flex-col items-center justify-center py-8 bg-white w-[800px] dark:bg-slate-900 dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
-            <h1 className="mb-4 text-3xl font-bold">
+          <div className="flex flex-col items-center justify-center py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+            <div className="w-[300px] lg:w-[500px] mb-10">
+              <Progress color="purple" progress={66} />
+            </div>
+            <h1 className="mb-4 text-3xl font-bold text-center mx-6">
               What music venues do you like?
             </h1>
-            <p className="mb-6">Get your own personalized recommendations</p>
+            <p className="mb-6 text-center mx-6">
+              Get your own personalized recommendations
+            </p>
             <button
               onClick={showMessage}
               className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white"
@@ -254,11 +298,16 @@ export default function SignupPage() {
           </div>
         </div>
         <div id="verified_message" className="hidden">
-          <div className="flex flex-col items-center justify-center pt-4 py-8 bg-white w-[800px] dark:bg-slate-900 dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
-            <h1 className="text-2xl text-center my-10">
-              We've send a link to your email, to verify your account. <br />
-              Please click that link and login to your account🎉🎉
+          <div className="flex flex-col items-center justify-center pt-4 py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+            <div className="w-[300px] lg:w-[500px] mt-10">
+              <Progress color="purple" progress={100} />
+            </div>
+            <h1 className="text-2xl text-center mx-6 mt-10">
+              We've send a link to your email, to verify your account.
             </h1>
+            <p className="mt-5 mb-10 text-center">
+              Please click that link and login to your account to complete🎉🎉
+            </p>
           </div>
         </div>
       </div>
