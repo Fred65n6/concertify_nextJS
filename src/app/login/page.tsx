@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast/headless";
 import Link from "next/link";
+import {IoCloseOutline} from "react-icons/io5";
 
 export default function LoginPage() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -66,20 +67,8 @@ export default function LoginPage() {
           onClick={closeLoginModule}
           className="cursor-pointer ml-[75%] "
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="none"
-              stroke="black"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m7 7l10 10M7 17L17 7"
-            />
-          </svg>
+        <IoCloseOutline className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="arrow_left" />
+
         </button>
         <h1 className="mb-4 text-3xl font-bold dark:text-black">
           {loading ? "Processing" : "Login"}

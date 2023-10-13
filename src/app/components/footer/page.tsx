@@ -9,7 +9,7 @@ const Footer = () => {
             <footer className=" hidden md:block pb-24 md:pb-12 border-t-2 border-purple-800 font-light w-full px-4 xl:px-28">
                 <div className="grid grid-cols-2 pt-4">
                     <Image
-                        src="../logo.svg"
+                        src="../concertify_logo.svg"
                         width={150}
                         height={30}
                         className="py-5"

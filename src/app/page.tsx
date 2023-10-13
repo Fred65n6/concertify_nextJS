@@ -7,6 +7,7 @@ import SignupPage from "./signup/page";
 import ConcertCard from "./components/concertCard/page";
 import VenueCard from "./components/venueCard/page";
 import Link from "next/link";
+import {SlArrowRight, SlArrowLeft} from "react-icons/sl";
 
 export default function Home() {
   const router = useRouter();
@@ -87,17 +88,8 @@ export default function Home() {
           href="/concerts"
         >
           View all concerts
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="25"
-            height="25"
-            viewBox="0 0 22 22"
-          >
-            <path
-              fill="#5311bf"
-              d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375q0 .2-.063.375t-.212.325l-4.6 4.6q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l3.9-3.9Z"
-            />
-          </svg>
+          <SlArrowRight className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="arrow_right" />
+
         </Link>
       </section>
 
@@ -112,17 +104,8 @@ export default function Home() {
           href="/venues"
         >
           View all venues
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="25"
-            height="25"
-            viewBox="0 0 22 22"
-          >
-            <path
-              fill="#5311bf"
-              d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375q0 .2-.063.375t-.212.325l-4.6 4.6q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l3.9-3.9Z"
-            />
-          </svg>
+          <SlArrowRight className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="arrow_right" />
+
         </Link>
       </section>
     </div>

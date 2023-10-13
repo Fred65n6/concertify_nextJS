@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {SlMagnifier, SlHeart, SlHome} from "react-icons/sl";
+import {SlMagnifier, SlHeart, SlHome, SlUser} from "react-icons/sl";
 
 // import Search from "../search/page";
 
@@ -47,12 +47,7 @@ const nav_logged = () => {
                 <div className="">
                     <button className="rounded-full px-8 py-2 bg-purple-100 brand_purple flex items-center gap-2 m-auto hover:bg-purple-200">
                         <Link href="/profile/${data}">Profile</Link>
-                        <Image
-                            src="../profile_btn.svg"
-                            width="20"
-                            height="20"
-                            alt="button"
-                        />
+                        <SlUser className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5" id="user" />
                     </button>
                 </div>
             </div>
@@ -61,34 +56,19 @@ const nav_logged = () => {
                 <ul className="flex gap-10 brand_purple justify-evenly w-full">
                     <li>
                         <Link className="flex flex-col items-center" href="/">
-                            <Image
-                                src="../home_btn.svg"
-                                width="20"
-                                height="20"
-                                alt="button"
-                            />
+                            <SlHome className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="home" />
                             Home
                         </Link>
                     </li>
                     <li>
                         <Link className="flex flex-col items-center" href="/">
-                            <Image
-                                src="../favourites_btn.svg"
-                                width="25"
-                                height="25"
-                                alt="button"
-                            />
+                            <SlHeart className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="favourites" />
                             Favourites
                         </Link>
                     </li>
                     <li>
                         <Link className="flex flex-col items-center" href="/">
-                            <Image
-                                src="../explore_btn.svg"
-                                width="25"
-                                height="25"
-                                alt="button"
-                            />
+                            <SlMagnifier className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5" id="explore" />
                             Explore
                         </Link>
                     </li>
@@ -97,12 +77,7 @@ const nav_logged = () => {
                             className="flex flex-col items-center"
                             href="/profile/${data}"
                         >
-                            <Image
-                                src="../profile_btn.svg"
-                                width="25"
-                                height="25"
-                                alt="button"
-                            />
+                        <SlUser className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5" id="user" />
                             Profile
                         </Link>
                     </li>

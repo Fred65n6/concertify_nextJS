@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import {SlArrowLeft, SlArrowRight} from "react-icons/sl";
 
 interface Venue {
     _id: string;
@@ -89,17 +90,8 @@ const VenueCard: React.FC = () => {
                         onClick={previousPage}
                         className="pagination-button flex items-center"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="25"
-                            height="25"
-                            viewBox="0 0 22 22"
-                        >
-                            <path
-                                fill="#5311bf"
-                                d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7q-.275.275-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12q0-.2.063-.375T8.7 11.3l4.6-4.6q.275-.275.7-.275t.7.275q.275.275.275.7t-.275.7L10.8 12Z"
-                            />
-                        </svg>
+                    <SlArrowLeft className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="arrow_left" />
+
                         Previous
                     </button>
                 )}
@@ -112,17 +104,8 @@ const VenueCard: React.FC = () => {
                     }`}
                 >
                     Next
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="25"
-                        height="25"
-                        viewBox="0 0 22 22"
-                    >
-                        <path
-                            fill="#5311bf"
-                            d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375q0 .2-.063.375t-.212.325l-4.6 4.6q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l3.9-3.9Z"
-                        />
-                    </svg>
+                    <SlArrowRight className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="arrow_right" />
+
                 </button>
             </div>
         </>
