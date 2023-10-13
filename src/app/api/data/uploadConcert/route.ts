@@ -6,8 +6,29 @@ import Concert from "@/models/concertModel";
 export async function POST(request: NextRequest) {
     const data = await request.formData();
     const file = data.get("file") as File;
-    const concertArtist = data.get("Concert_artist");
     const concertName = data.get("Concert_name");
+    const concertDate = data.get("Concert_date");
+    const concertDescription = data.get("Concert_description");
+
+    const concertGenre = {
+        genre_name: data.get("Concert_genre_name"),
+        genre_id: data.get("Concert_genre_id"),
+    };
+
+    const concertArtist = {
+        artist_name: data.get("Concert_artist_name"),
+        artist_id: data.get("Concert_artist_id"),
+    };
+
+    // const concertArtist = {
+    //     artist_name: data.get("Concert_artist_name"),
+    //     artist_id: data.get("Concert_artist_id"),
+    // };
+
+    // const concertVenue = {
+    //     venue_name: data.get("Concert_venue_name"),
+    //     venue_id: data.get("Concert_venue_id"),
+    // };
 
     if (!file) {
         return NextResponse.json({success: false});
@@ -29,8 +50,13 @@ export async function POST(request: NextRequest) {
 
     const newConcert = new Concert({
         concert_name: concertName,
-        concert_artist: concertArtist,
         concert_image: image,
+        concert_date: concertDate,
+        concert_description: concertDescription,
+        concert_genre: concertGenre,
+        concert_artist: concertArtist,
+        // concert_artist: concertArtist,
+        // concert_venue: concertVenue,
     });
 
     const savedConcert = await newConcert.save();
