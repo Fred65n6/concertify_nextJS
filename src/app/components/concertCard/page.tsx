@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {SlArrowRight, SlArrowLeft} from "react-icons/sl";
 
-
 interface ConcertCard {
     _id: string;
     concert_artist: {
@@ -114,7 +113,10 @@ const ConcertCard: React.FC = () => {
                         onClick={previousPage}
                         className="pagination-button flex items-center"
                     >
-                    <SlArrowLeft className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="explore" />
+                        <SlArrowLeft
+                            className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
+                            id="explore"
+                        />
                         Previous
                     </button>
                 )}
@@ -128,7 +130,10 @@ const ConcertCard: React.FC = () => {
                     }`}
                 >
                     Next
-                    <SlArrowRight className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="explore" />
+                    <SlArrowRight
+                        className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
+                        id="explore"
+                    />
                 </button>
             </div>
         </>
