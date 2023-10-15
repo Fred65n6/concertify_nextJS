@@ -4,7 +4,8 @@ import React, {useState} from "react";
 
 const UploadForm: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);
-    const [artistName, setArtistName] = useState("");
+    const [venueName, setVenueName] = useState("");
+    const [venueAddress, setVenueAddress] = useState("");
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -12,9 +13,10 @@ const UploadForm: React.FC = () => {
 
         const data = new FormData();
         data.set("file", file);
-        data.set("Artist_name", artistName);
+        data.set("Venue_name", venueName);
+        data.set("Venue_address", venueAddress);
 
-        const res = await fetch("/api/data/uploadArtist/", {
+        const res = await fetch("/api/data/uploadVenue/", {
             method: "POST",
             body: data,
         });
@@ -30,30 +32,39 @@ const UploadForm: React.FC = () => {
     };
 
     const showUploadMessage = () => {
-        const concertUploadedMessage = document.getElementById(
-            "concertUploadedMessage"
+        const venueUploadedMessage = document.getElementById(
+            "venueUploadedMessage"
         );
-        const uploadArtistForm = document.getElementById("uploadArtistForm");
-        concertUploadedMessage?.classList.remove("hidden");
-        concertUploadedMessage?.classList.add("grid"); // Add the "grid" class to make it visible
-        uploadArtistForm?.classList.add("hidden");
+        const uploadVenueForm = document.getElementById("uploadVenueForm");
+        venueUploadedMessage?.classList.remove("hidden");
+        venueUploadedMessage?.classList.add("grid"); // Add the "grid" class to make it visible
+        uploadVenueForm?.classList.add("hidden");
         window.scrollTo(0, 0);
     };
 
     return (
         <div className="flex-col items-center flex">
             <form
-                id="uploadArtistForm"
+                id="uploadVenueForm"
                 className="flex flex-col items-center gap-8 pb-12"
                 onSubmit={onSubmit}
             >
                 <input
                     className="bg-slate-100 p-4 w-72"
                     type="text"
-                    name="Artist_name"
-                    value={artistName}
-                    onChange={(e) => setArtistName(e.target.value)}
-                    placeholder="Artist Name"
+                    name="Venue_name"
+                    value={venueName}
+                    onChange={(e) => setVenueName(e.target.value)}
+                    placeholder="Venue Name"
+                />
+
+                <input
+                    className="bg-slate-100 p-4 w-72"
+                    type="text"
+                    name="Venue_address"
+                    value={venueAddress}
+                    onChange={(e) => setVenueAddress(e.target.value)}
+                    placeholder="Venue address"
                 />
 
                 <input
@@ -67,14 +78,11 @@ const UploadForm: React.FC = () => {
                     value="upload"
                 />
             </form>
-            <div
-                id="artistUploadedMessage"
-                className="gap-8 text-center hidden"
-            >
-                <h2 className="text-2xl">Artist Uploaded!</h2>
+            <div id="venueUploadedMessage" className="gap-8 text-center hidden">
+                <h2 className="text-2xl">Venue Uploaded!</h2>
                 <a
                     className="brand_gradient py-2 px-4 text-white rounded-full"
-                    href="/uploadArtist"
+                    href="/uploadVenue"
                 >
                     Upload another
                 </a>
