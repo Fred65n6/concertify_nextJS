@@ -17,6 +17,8 @@ interface Genre {
 }
 
 const UploadForm: React.FC = () => {
+    const [loading, setLoading] = useState(false);
+
     const [file, setFile] = useState<File | null>(null);
     const [concertName, setConcertName] = useState("");
     const [concertDate, setConcertDate] = useState("");
@@ -90,6 +92,7 @@ const UploadForm: React.FC = () => {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!file) return;
+        setLoading(true);
 
         const data = new FormData();
         data.set("file", file);
@@ -116,6 +119,7 @@ const UploadForm: React.FC = () => {
         }
 
         if (res.ok) {
+            setLoading(false);
             showUploadMessage();
         }
     };
@@ -302,11 +306,13 @@ const UploadForm: React.FC = () => {
                     name="file"
                     onChange={(e) => setFile(e.target.files?.[0] || null)}
                 />
-                <input
+                <button
                     className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
                     type="submit"
                     value="upload"
-                />
+                >
+                    {loading ? "Processing" : "Upload"}
+                </button>
             </form>
             <div
                 id="concertUploadedMessage"
