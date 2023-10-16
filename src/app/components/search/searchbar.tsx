@@ -33,18 +33,12 @@ export const SearchBar: React.FC<SearchInputProps> = ({setResults}) => {
         fetchData(value);
     };
 
-    const Reset = () => {
-        setInput(""); // Clear the input
-        setResults([]); // Set the results state to an empty array
-    };
-
     return (
         <div className="bg-slate-100 p-2 rounded-full m-4 w-72">
             <div className="flex gap-2 items-center mx-2">
                 <FaSearch className="fill-slate-400" id="search-icon" />
                 <input
-                    onBlur={Reset}
-                    type="text"
+                    type="textarea"
                     className="bg-slate-100 outline-none dark:text-black"
                     placeholder="Type to search..."
                     value={input}
