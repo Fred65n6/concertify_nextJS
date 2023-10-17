@@ -7,7 +7,7 @@ interface FilterComponentProps {
     onDataFiltered: (filteredData: any[]) => void; // Callback function to pass filtered data
 }
 
-const FilterComponent: React.FC<FilterComponentProps> = ({
+export const FilterComponent: React.FC<FilterComponentProps> = ({
     data,
     onDataFiltered,
 }) => {
@@ -218,5 +218,3 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
         </div>
     );
 };
-
-export default FilterComponent;
