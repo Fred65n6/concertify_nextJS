@@ -6,7 +6,6 @@ import Image from "next/image";
 import {GrHomeRounded} from "react-icons/gr";
 import {SlMagnifier, SlHome, SlUser} from "react-icons/sl";
 
-
 const NavLogged = () => {
     const openLoginModule = () => {
         const loginModule = document.getElementById("login_module");
@@ -36,15 +35,27 @@ const NavLogged = () => {
                     <ul className="flex gap-10 brand_purple dark:text-[#8e0bf5]">
                         <li>
                             <Link className="flex gap-2 items-center" href="/">
-                                <SlHome className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="home" />
-                                <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">Home</span>
-
+                                <SlHome
+                                    className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
+                                    id="home"
+                                />
+                                <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">
+                                    Home
+                                </span>
                             </Link>
                         </li>
                         <li>
-                            <Link className="flex gap-2 items-center" href="/">
-                                <SlMagnifier className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="explore" />
-                                <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">Explore</span>
+                            <Link
+                                className="flex gap-2 items-center"
+                                href="/concerts"
+                            >
+                                <SlMagnifier
+                                    className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
+                                    id="explore"
+                                />
+                                <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">
+                                    Explore
+                                </span>
                             </Link>
                         </li>
                     </ul>
@@ -75,15 +86,22 @@ const NavLogged = () => {
                 <ul className="flex gap-10 brand_purple justify-evenly w-full">
                     <li>
                         <Link className="flex flex-col items-center" href="/">
-                            <SlHome className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="home" />
-
+                            <SlHome
+                                className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
+                                id="home"
+                            />
                             Home
                         </Link>
                     </li>
                     <li>
-                        <Link className="flex flex-col items-center" href="/">
-                            <SlMagnifier className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="explore" />
-
+                        <Link
+                            className="flex flex-col items-center"
+                            href="/concerts"
+                        >
+                            <SlMagnifier
+                                className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
+                                id="explore"
+                            />
                             Explore
                         </Link>
                     </li>
@@ -92,8 +110,10 @@ const NavLogged = () => {
                             className="flex flex-col items-center"
                             onClick={openLoginModule}
                         >
-                            <SlUser className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5" id="user" />
-
+                            <SlUser
+                                className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5"
+                                id="user"
+                            />
                             Log in
                         </button>
                     </li>
