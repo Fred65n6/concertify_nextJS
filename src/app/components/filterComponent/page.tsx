@@ -2,9 +2,26 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 
+interface ConcertData {
+    concert_artist: {
+        artist_name: string;
+        // Other artist properties
+    };
+    concert_venue: {
+        venue_name: string;
+        // Other venue properties
+    };
+    concert_genre: {
+        genre_name: string;
+        // Other genre properties
+    };
+    concert_date: string; // You might want to use a Date type here
+    // Other properties specific to each concert data
+}
+
 interface FilterComponentProps {
-    data: any[]; // Replace 'any' with your specific data type
-    onDataFiltered: (filteredData: any[]) => void; // Callback function to pass filtered data
+    data: ConcertData[];
+    onDataFiltered: (filteredData: any[]) => void;
 }
 
 const FilterComponent: React.FC<FilterComponentProps> = ({
