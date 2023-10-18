@@ -146,7 +146,7 @@ const Filter = ({data, onDataFiltered}) => {
                     >
                         {/* Genre SVG Path */}
                     </svg>
-                    Search by genre
+                    Search by Genre
                 </label>
                 <select
                     name="genre"
