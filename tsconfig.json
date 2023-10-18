@@ -37,6 +37,6 @@
         "src/app/components/searchBar/searchbar.jsx",
         "src/app/components/search/searchResults.jsx",
         "src/app/components/search/searchResultsList.jsx"
-, "src/app/components/search/searchbar.jsx", "src/app/components/filter/page.tsx"    ],
+, "src/app/components/search/searchbar.jsx", "src/app/components/filter/page.tsx", "src/app/components/filter/page.jsx"    ],
     "exclude": ["node_modules"]
 }
