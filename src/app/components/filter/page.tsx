@@ -19,15 +19,12 @@ interface ConcertData {
     // Other properties specific to each concert data
 }
 
-interface FilterComponentProps {
+interface FilterProps {
     data: ConcertData[];
     onDataFiltered: (filteredData: any[]) => void;
 }
 
-const FilterComponent: React.FC<FilterComponentProps> = ({
-    data,
-    onDataFiltered,
-}) => {
+const Filter: React.FC<FilterProps> = ({data, onDataFiltered}) => {
     const [dateFilter, setDateFilter] = useState<string>("");
     const [artistFilter, setArtistFilter] = useState<string>("");
     const [venueFilter, setVenueFilter] = useState<string>("");
@@ -109,7 +106,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
         <div className="border-[1px] rounded-full my-8 border-solid border-purple-800 flex py-6 px-12 justify-between">
             <div className="">
                 <label
-                    className="text-lg font-bold flex gap-2 mb-4"
+                    className="text-lg font-bold flex gap-2 mb-4 items-center"
                     htmlFor="venue"
                 >
                     <svg
@@ -147,7 +144,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
 
             <div className="">
                 <label
-                    className="text-lg font-bold flex gap-2 mb-4"
+                    className="text-lg font-bold flex gap-2 mb-4 items-center"
                     htmlFor="date"
                 >
                     <svg
@@ -174,7 +171,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
 
             <div className="">
                 <label
-                    className="text-lg font-bold flex gap-2 mb-4"
+                    className="text-lg font-bold flex gap-2 mb-4 items-center"
                     htmlFor="genre"
                 >
                     <svg
@@ -206,7 +203,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
 
             <div className="">
                 <label
-                    className="text-lg font-bold flex gap-2 mb-2 mt-2"
+                    className="text-lg font-bold flex gap-2 mb-2 mt-2 items-center"
                     htmlFor="artist"
                 >
                     <svg
@@ -236,4 +233,4 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
     );
 };
 
-export default FilterComponent;
+export default Filter;
