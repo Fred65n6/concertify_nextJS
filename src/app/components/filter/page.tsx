@@ -2,29 +2,29 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 
-interface ConcertData {
-    concert_artist: {
-        artist_name: string;
-        // Other artist properties
-    };
-    concert_venue: {
-        venue_name: string;
-        // Other venue properties
-    };
-    concert_genre: {
-        genre_name: string;
-        // Other genre properties
-    };
-    concert_date: string; // You might want to use a Date type here
-    // Other properties specific to each concert data
-}
+// interface ConcertData {
+//     concert_artist: {
+//         artist_name: string;
+//         // Other artist properties
+//     };
+//     concert_venue: {
+//         venue_name: string;
+//         // Other venue properties
+//     };
+//     concert_genre: {
+//         genre_name: string;
+//         // Other genre properties
+//     };
+//     concert_date: string; // You might want to use a Date type here
+//     // Other properties specific to each concert data
+// }
 
-interface FilterProps {
-    data: ConcertData[];
-    onDataFiltered: (filteredData: any[]) => void;
-}
+// interface FilterProps {
+//     data: ConcertData[];
+//     onDataFiltered: (filteredData: any[]) => void;
+// }
 
-const Filter: React.FC<FilterProps> = ({data, onDataFiltered}) => {
+const Filter: React.FC<any> = ({data, onDataFiltered}) => {
     const [dateFilter, setDateFilter] = useState<string>("");
     const [artistFilter, setArtistFilter] = useState<string>("");
     const [venueFilter, setVenueFilter] = useState<string>("");
@@ -71,7 +71,7 @@ const Filter: React.FC<FilterProps> = ({data, onDataFiltered}) => {
 
     useEffect(() => {
         // Filter data based on artist, venue, and date filters
-        const newFilteredData = data.filter((item) => {
+        const newFilteredData = data.filter((item: any) => {
             const artistName = item.concert_artist.artist_name.toLowerCase();
             const venueName = item.concert_venue.venue_name.toLowerCase();
             const genreName = item.concert_genre.genre_name.toLowerCase();
