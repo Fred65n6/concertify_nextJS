@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
-import Filter from "../components/filter/page";
+import Filter from "../filter/page";
 interface ConcertLoop {
     _id: string;
     concert_artist: {
