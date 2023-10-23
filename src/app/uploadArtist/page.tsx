@@ -10,11 +10,12 @@ const UploadForm: React.FC = () => {
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!file) return;
         setLoading(true);
 
         const data = new FormData();
-        data.set("file", file);
+        if (file) {
+            data.set("file", file);
+        }
         data.set("Artist_name", artistName);
 
         const res = await fetch("/api/data/uploadArtist/", {

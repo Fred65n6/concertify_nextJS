@@ -8,9 +8,9 @@ export async function POST(request: NextRequest) {
     const file = data.get("file") as File;
     const artistName = data.get("Artist_name");
 
-    if (!file) {
-        return NextResponse.json({success: false});
-    }
+    // if (!file) {
+    //     return NextResponse.json({success: false});
+    // }
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
