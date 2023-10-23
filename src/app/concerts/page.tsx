@@ -94,6 +94,9 @@ const ConcertLoopview: React.FC = () => {
                                 : "Unknown concert_name"}
                         </h4>
                         <div className="flex flex-col gap-2">
+                        <p className="text-gray-600 text-sm dark:text-gray-400">
+                                {concert.concert_date}
+                            </p>
                             <p className="text-gray-600 text-sm dark:text-gray-400">
                                 <span className="font-bold">
                                     {concert.concert_venue?.venue_name},{" "}

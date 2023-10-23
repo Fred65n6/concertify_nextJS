@@ -126,10 +126,7 @@ export default function SingleConcert() {
                             <li className="flex gap-2">
                                 <SlClock className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="doors" />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
-                                    <span className="font-bold">
-                                        Doors open:
-                                    </span>
-                                    {selectedConcert.concert_doors}
+                                    Doors open: {selectedConcert.concert_doors}
                                 </p>
                             </li>
 
@@ -137,10 +134,7 @@ export default function SingleConcert() {
                             <li className="flex gap-2">
                                 <SlControlPlay className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5" id="concert_start" />
                                 <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
-                                    <span className="font-bold">
-                                        Concert start:
-                                    </span>
-                                    {selectedConcert.concert_start}
+                                    Concert start: {selectedConcert.concert_start}
                                 </p>
                             </li>
 
