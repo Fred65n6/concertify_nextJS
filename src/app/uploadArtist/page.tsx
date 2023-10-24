@@ -53,13 +53,10 @@ const UploadForm: React.FC = () => {
         const data = new FormData();
         data.set("file", file);
         data.set("Artist_name", artistName);
-<<<<<<< HEAD
         data.set("Artist_genre_id", selectedGenre!._id);
         data.set("Artist_genre_name", selectedGenre!.genre_name);
 
-=======
         data.set("Artist_nation", artistNation);
->>>>>>> fa54e637b4dc088629b71bf969d400a18e39004e
 
         const res = await fetch("/api/data/uploadArtist/", {
             method: "POST",
