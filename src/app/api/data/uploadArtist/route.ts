@@ -7,6 +7,11 @@ export async function POST(request: NextRequest) {
     const data = await request.formData();
     // const file = data.get("file") as File;
     const artistName = data.get("Artist_name");
+    
+    const artistGenre = {
+        genre_name: data.get("Artist_genre_name"),
+        genre_id: data.get("Artist_genre_id"),
+    };
     const artistNation = data.get("Artis_nation");
 
     // if (!file) {
@@ -30,7 +35,6 @@ export async function POST(request: NextRequest) {
     const newArtist = new Artist({
         artist_name: artistName,
         artist_nation: artistNation,
-        // artist_image: artist_image,
     });
 
     const savedArtist = await newArtist.save();

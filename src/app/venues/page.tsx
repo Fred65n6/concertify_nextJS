@@ -42,7 +42,7 @@ const VenueList: React.FC = () => {
                             key={venue._id}
                         >
                             <Image
-                                src={"/images/" + venue.venue_image}
+                                src={"/venue_images/" + venue.venue_image}
                                 width={200}
                                 height={200}
                                 alt="concert"
