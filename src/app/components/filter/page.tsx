@@ -2,15 +2,29 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 
-interface FilterComponentProps {
-    data: any[]; // Replace 'any' with your specific data type
-    onDataFiltered: (filteredData: any[]) => void; // Callback function to pass filtered data
-}
+// interface ConcertData {
+//     concert_artist: {
+//         artist_name: string;
+//         // Other artist properties
+//     };
+//     concert_venue: {
+//         venue_name: string;
+//         // Other venue properties
+//     };
+//     concert_genre: {
+//         genre_name: string;
+//         // Other genre properties
+//     };
+//     concert_date: string; // You might want to use a Date type here
+//     // Other properties specific to each concert data
+// }
 
-export const FilterComponent: React.FC<FilterComponentProps> = ({
-    data,
-    onDataFiltered,
-}) => {
+// interface FilterProps {
+//     data: ConcertData[];
+//     onDataFiltered: (filteredData: any[]) => void;
+// }
+
+const Filter: React.FC<any> = ({data, onDataFiltered}) => {
     const [dateFilter, setDateFilter] = useState<string>("");
     const [artistFilter, setArtistFilter] = useState<string>("");
     const [venueFilter, setVenueFilter] = useState<string>("");
@@ -57,7 +71,7 @@ export const FilterComponent: React.FC<FilterComponentProps> = ({
 
     useEffect(() => {
         // Filter data based on artist, venue, and date filters
-        const newFilteredData = data.filter((item) => {
+        const newFilteredData = data.filter((item: any) => {
             const artistName = item.concert_artist.artist_name.toLowerCase();
             const venueName = item.concert_venue.venue_name.toLowerCase();
             const genreName = item.concert_genre.genre_name.toLowerCase();
@@ -92,7 +106,7 @@ export const FilterComponent: React.FC<FilterComponentProps> = ({
         <div className="border-[1px] rounded-full my-8 border-solid border-purple-800 flex py-6 px-12 justify-between">
             <div className="">
                 <label
-                    className="text-lg font-bold flex gap-2 mb-4"
+                    className="text-lg font-bold flex gap-2 mb-4 items-center"
                     htmlFor="venue"
                 >
                     <svg
@@ -130,7 +144,7 @@ export const FilterComponent: React.FC<FilterComponentProps> = ({
 
             <div className="">
                 <label
-                    className="text-lg font-bold flex gap-2 mb-4"
+                    className="text-lg font-bold flex gap-2 mb-4 items-center"
                     htmlFor="date"
                 >
                     <svg
@@ -157,7 +171,7 @@ export const FilterComponent: React.FC<FilterComponentProps> = ({
 
             <div className="">
                 <label
-                    className="text-lg font-bold flex gap-2 mb-4"
+                    className="text-lg font-bold flex gap-2 mb-4 items-center"
                     htmlFor="genre"
                 >
                     <svg
@@ -189,7 +203,7 @@ export const FilterComponent: React.FC<FilterComponentProps> = ({
 
             <div className="">
                 <label
-                    className="text-lg font-bold flex gap-2 mb-2 mt-2"
+                    className="text-lg font-bold flex gap-2 mb-2 mt-2 items-center"
                     htmlFor="artist"
                 >
                     <svg
@@ -218,3 +232,5 @@ export const FilterComponent: React.FC<FilterComponentProps> = ({
         </div>
     );
 };
+
+export default Filter;

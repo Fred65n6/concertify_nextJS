@@ -3,9 +3,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
-import {FilterComponent} from "../components/filterComponent/page";
-
-// Can we create the interface global?
+import Filter from "../components/filter/page";
 interface ConcertLoop {
     _id: string;
     concert_artist: {
@@ -47,26 +45,9 @@ const ConcertLoopview: React.FC = () => {
         setFilteredConcerts(filteredData);
     };
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await axios.get("/api/data/concertData");
-    //             setConcerts(response.data.data);
-    //         } catch (error) {
-    //             console.error("Error fetching concerts:", error);
-    //         }
-    //     };
-
-    //     fetchData();
-    // }, []);
-
-    // Render the FilterComponent and pass the data and callback function
     return (
         <>
-            <FilterComponent
-                data={concerts}
-                onDataFiltered={handleDataFiltered}
-            />
+            <Filter data={concerts} onDataFiltered={handleDataFiltered} />
             <h1 className="font-bold text-4xl pb-4">All concerts</h1>
             <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8">
                 {filteredConcerts.map((concert) => (

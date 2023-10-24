@@ -5,7 +5,8 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import {SlStar, SlCalender} from "react-icons/sl";
+import {SlStar, SlCalender, SlMusicToneAlt} from "react-icons/sl";
+
 import {HiOutlineArrowRight} from "react-icons/hi";
 import {PiBalloon} from "react-icons/pi";
 
@@ -16,6 +17,7 @@ interface ArtistSingle {
     artist_description: string;
     artist_image: string;
     artist_dob: string;
+    artist_genre: string;
 }
     
 
@@ -58,7 +60,7 @@ export default function SingleArtist() {
                 <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
                     <figure>
                         <Image
-                            src={"/" + selectedArtist.artist_image}
+                            src={"/./artist_images/" + selectedArtist.artist_image}
                             width={200}
                             height={200}
                             alt="artist image"
@@ -71,13 +73,19 @@ export default function SingleArtist() {
                         </h1>
 
                         <ul className="flex flex-col gap-4">
-
-
                             {/* Full name*/}
                                 <li className="flex gap-2">
                                     <SlStar className="fill-gray-600 text-sm dark:fill-gray-400 w-5 h-5" id="artist_fullname" />
                                     <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                                     Full name: {selectedArtist.artist_name}
+                                    </p>
+                                </li>
+
+                                {/* Genre*/}
+                                <li className="flex gap-2">
+                                    <SlMusicToneAlt className="fill-gray-600 text-sm dark:fill-gray-400 w-5 h-5" id="artist_fullname" />
+                                    <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                                    Genre: {selectedArtist.artist_genre}
                                     </p>
                                 </li>
 

@@ -1,12 +1,40 @@
 "use client";
-import React, {useState} from "react";
-("");
+import React, {useState, useEffect} from "react";
+
+interface Genre {
+    _id: string;
+    genre_name: string;
+}
 
 const UploadForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
 
     const [file, setFile] = useState<File | null>(null);
     const [artistName, setArtistName] = useState("");
+
+    const [genres, setGenres] = useState<Genre[]>([]);
+    const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+    const [artistGenreId, setArtistGenreId] = useState("");
+    const [artistGenreName, setArtistGenreName] = useState("");
+
+
+    useEffect(() => {
+        const fetchGenres = async () => {
+            try {
+                const response = await fetch("/api/data/genreData");
+                if (response.ok) {
+                    const data = await response.json();
+                    setGenres(data.data as Genre[]);
+                }
+            } catch (error) {
+                console.error("Error fetching genres: ", error);
+            }
+        };
+
+        fetchGenres();
+    }, []);
+
+
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -16,6 +44,9 @@ const UploadForm: React.FC = () => {
         const data = new FormData();
         data.set("file", file);
         data.set("Artist_name", artistName);
+        data.set("Artist_genre_id", selectedGenre!._id);
+        data.set("Artist_genre_name", selectedGenre!.genre_name);
+
 
         const res = await fetch("/api/data/uploadArtist/", {
             method: "POST",
@@ -39,7 +70,7 @@ const UploadForm: React.FC = () => {
         );
         const uploadArtistForm = document.getElementById("uploadArtistForm");
         artistUploadedMessage?.classList.remove("hidden");
-        artistUploadedMessage?.classList.add("grid"); // Add the "grid" class to make it visible
+        artistUploadedMessage?.classList.add("grid");
         uploadArtistForm?.classList.add("hidden");
         window.scrollTo(0, 0);
     };
@@ -58,6 +89,43 @@ const UploadForm: React.FC = () => {
                     value={artistName}
                     onChange={(e) => setArtistName(e.target.value)}
                     placeholder="Artist Name"
+                />
+
+                <select
+                    className="p-4 w-72"
+                    value={selectedGenre ? selectedGenre._id : ""}
+                    onChange={(e) =>
+                    setSelectedGenre(
+                    genres.find(
+                    (genre) => genre._id === e.target.value
+                        ) || null
+                    )
+                    }
+                >
+                    <option value="">Select a genre</option>
+                    {genres.map((genre) => (
+                        <option key={genre._id} value={genre._id}>
+                            {genre.genre_name}
+                        </option>
+                    ))}
+                </select>
+                <input
+                    readOnly={true}
+                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                    type="text"
+                    name="Artist_genre_name"
+                    value={selectedGenre ? selectedGenre.genre_name : ""}
+                    onChange={(e) => setArtistGenreName(e.target.value)}
+                    placeholder="artist genre name"
+                />
+                <input
+                    readOnly={true}
+                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                    type="text"
+                    name="Concert_genre_id"
+                    value={selectedGenre ? selectedGenre._id : ""}
+                    onChange={(e) => setArtistGenreId(e.target.value)}
+                    placeholder="artist genre name"
                 />
 
                 <input
