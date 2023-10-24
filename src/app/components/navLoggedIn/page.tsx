@@ -3,7 +3,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {SlMagnifier, SlHeart, SlHome, SlUser} from "react-icons/sl";
-import TopNav from "../topNav/page";
 import Search from "../search/page";
 import ThemeSwitcher from "../switchTheme/page";
 

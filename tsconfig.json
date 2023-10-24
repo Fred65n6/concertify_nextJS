@@ -28,7 +28,6 @@
         "**/*.tsx",
         ".next/types/**/*.ts",
         "src/app/verifyemail",
-        "src/app/components/topNav/page.tsx",
         "src/app/component/page.tsx",
         "src/app/showVenues/[id]/page.tsx",
         "src/app/components/searchBar/searchbar.jsx",

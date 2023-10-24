@@ -5,7 +5,6 @@ import Nav_logged from "@/app/components/navLoggedIn/page";
 import Nav_not_logged from "@/app/components/navNotLogged/page";
 import {hasCookie} from "@/helpers/cookieHelper";
 import Footer from "./components/footer/page";
-import TopNav from "./components/topNav/page";
 import BreadcrumbComp from "./components/breadCrumbs/page";
 
 const plusJakartaSans = Plus_Jakarta_Sans({subsets: ["latin"]});
