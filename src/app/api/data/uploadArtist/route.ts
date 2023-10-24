@@ -7,14 +7,18 @@ export async function POST(request: NextRequest) {
     const data = await request.formData();
     const file = data.get("file") as File;
     const artistName = data.get("Artist_name");
+<<<<<<< HEAD
     const artistGenre = {
         genre_name: data.get("Artist_genre_name"),
         genre_id: data.get("Artist_genre_id"),
     };
+=======
+    const artistNation = data.get("Artis_nation");
+>>>>>>> fa54e637b4dc088629b71bf969d400a18e39004e
 
-    // if (!file) {
-    //     return NextResponse.json({success: false});
-    // }
+    if (!file) {
+        return NextResponse.json({success: false});
+    }
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
@@ -32,6 +36,7 @@ export async function POST(request: NextRequest) {
 
     const newArtist = new Artist({
         artist_name: artistName,
+        artist_nation: artistNation,
         artist_image: image,
         artist_genre: artistGenre,
     });

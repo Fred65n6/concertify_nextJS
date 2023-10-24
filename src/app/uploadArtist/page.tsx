@@ -1,16 +1,23 @@
 "use client";
+<<<<<<< HEAD
 import React, {useState, useEffect} from "react";
 
 interface Genre {
     _id: string;
     genre_name: string;
 }
+=======
+import {request} from "http";
+import React, {useState} from "react";
+("");
+>>>>>>> fa54e637b4dc088629b71bf969d400a18e39004e
 
 const UploadForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
 
     const [file, setFile] = useState<File | null>(null);
     const [artistName, setArtistName] = useState("");
+    const [artistNation, setArtistNation] = useState("");
 
     const [genres, setGenres] = useState<Genre[]>([]);
     const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
@@ -41,12 +48,18 @@ const UploadForm: React.FC = () => {
         if (!file) return;
         setLoading(true);
 
+        if (!file) return request;
+
         const data = new FormData();
         data.set("file", file);
         data.set("Artist_name", artistName);
+<<<<<<< HEAD
         data.set("Artist_genre_id", selectedGenre!._id);
         data.set("Artist_genre_name", selectedGenre!.genre_name);
 
+=======
+        data.set("Artist_nation", artistNation);
+>>>>>>> fa54e637b4dc088629b71bf969d400a18e39004e
 
         const res = await fetch("/api/data/uploadArtist/", {
             method: "POST",
@@ -126,6 +139,15 @@ const UploadForm: React.FC = () => {
                     value={selectedGenre ? selectedGenre._id : ""}
                     onChange={(e) => setArtistGenreId(e.target.value)}
                     placeholder="artist genre name"
+                />
+
+                <input
+                    className="bg-slate-100 p-4 w-72"
+                    type="text"
+                    name="Artist_nation"
+                    value={artistNation}
+                    onChange={(e) => setArtistNation(e.target.value)}
+                    placeholder="Artist Nation"
                 />
 
                 <input

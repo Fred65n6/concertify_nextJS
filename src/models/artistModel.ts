@@ -19,6 +19,13 @@ const artistSchema = new mongoose.Schema({
     artist_image: {
         type: String,
     },
+    artist_image: {
+        type: String,
+        required: [true],
+    },
+    artist_nation: {
+        type: String,
+    },
 });
 
 const Artist =
