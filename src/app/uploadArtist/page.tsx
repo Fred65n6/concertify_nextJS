@@ -1,16 +1,11 @@
 "use client";
-<<<<<<< HEAD
 import React, {useState, useEffect} from "react";
+import {request} from "http";
 
 interface Genre {
     _id: string;
     genre_name: string;
 }
-=======
-import {request} from "http";
-import React, {useState} from "react";
-("");
->>>>>>> fa54e637b4dc088629b71bf969d400a18e39004e
 
 const UploadForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
