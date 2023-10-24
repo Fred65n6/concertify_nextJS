@@ -6,6 +6,13 @@ const artistSchema = new mongoose.Schema({
         required: [true, "please provide the artist_name"],
         unique: true,
     },
+    artist_image: {
+        type: String,
+        required: [true],
+    },
+    artist_nation: {
+        type: String,
+    },
 });
 
 const Artist =

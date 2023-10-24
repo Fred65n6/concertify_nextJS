@@ -1,4 +1,5 @@
 "use client";
+import {request} from "http";
 import React, {useState} from "react";
 ("");
 
@@ -7,16 +8,18 @@ const UploadForm: React.FC = () => {
 
     const [file, setFile] = useState<File | null>(null);
     const [artistName, setArtistName] = useState("");
+    const [artistNation, setArtistNation] = useState("");
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
 
+        if (!file) return request;
+
         const data = new FormData();
-        if (file) {
-            data.set("file", file);
-        }
+        data.set("file", file);
         data.set("Artist_name", artistName);
+        data.set("Artist_nation", artistNation);
 
         const res = await fetch("/api/data/uploadArtist/", {
             method: "POST",
@@ -59,6 +62,15 @@ const UploadForm: React.FC = () => {
                     value={artistName}
                     onChange={(e) => setArtistName(e.target.value)}
                     placeholder="Artist Name"
+                />
+
+                <input
+                    className="bg-slate-100 p-4 w-72"
+                    type="text"
+                    name="Artist_nation"
+                    value={artistNation}
+                    onChange={(e) => setArtistNation(e.target.value)}
+                    placeholder="Artist Nation"
                 />
 
                 <input
