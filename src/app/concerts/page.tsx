@@ -48,8 +48,8 @@ const ConcertLoopview: React.FC = () => {
     return (
         <>
             <Filter data={concerts} onDataFiltered={handleDataFiltered} />
-            <h1 className="font-bold text-4xl pb-4">All concerts</h1>
-            <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8">
+            <h1 className="font-bold text-4xl pb-4 pt-8">All concerts</h1>
+            <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8 pb-20">
                 {filteredConcerts.map((concert) => (
                     <article className="w-auto" key={concert._id}>
                         <Link
@@ -75,7 +75,7 @@ const ConcertLoopview: React.FC = () => {
                                 : "Unknown concert_name"}
                         </h4>
                         <div className="flex flex-col gap-2">
-                        <p className="text-gray-600 text-sm dark:text-gray-400">
+                            <p className="text-gray-600 text-sm dark:text-gray-400">
                                 {concert.concert_date}
                             </p>
                             <p className="text-gray-600 text-sm dark:text-gray-400">
