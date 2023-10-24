@@ -59,3 +59,15 @@
         rgba(65, 32, 136, 1) 100%
     );
 }
+
+.custom-file-button {
+    background-color: #EFEFEF;
+    color: #121212;
+    width: fit-content;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 100px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
