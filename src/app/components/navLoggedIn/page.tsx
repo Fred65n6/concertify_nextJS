@@ -30,9 +30,9 @@ const nav_logged = () => {
                                     className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
                                     id="home"
                                 />
-                                <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">
+                                {/* <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">
                                     Home
-                                </span>
+                                </span> */}
                             </Link>
                         </li>
                         <li>
@@ -41,9 +41,9 @@ const nav_logged = () => {
                                     className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5"
                                     id="favourites"
                                 />
-                                <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">
+                                {/* <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">
                                     Favourites
-                                </span>
+                                </span> */}
                             </Link>
                         </li>
                         <li>
@@ -55,9 +55,9 @@ const nav_logged = () => {
                                     className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5"
                                     id="explore"
                                 />
-                                <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">
+                                {/* <span className="text-md text-[#5311BF] dark:text-[#8e0bf5]">
                                     Explore
-                                </span>
+                                </span> */}
                             </Link>
                         </li>
                     </ul>
