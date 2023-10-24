@@ -55,6 +55,7 @@ export default function SingleArtist() {
       <BreadcrumbComp
         homeElement={"Home"}
         separator={<span> | </span>}
+        activeClasses="brand_purple_breadcrumb"
         containerClasses="flex py-5 brand_purple opacity-70"
         listClasses="hover:underline mx-2 font-bold brand_purple opacity-70"
         capitalizeLinks
