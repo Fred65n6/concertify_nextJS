@@ -7,7 +7,6 @@ import Image from "next/image";
 // import {StringSchemaDefinition} from "mongoose";
 import VenueCard from "@/app/components/venueCard/page";
 import {
-<<<<<<< HEAD
     SlLocationPin,
     SlHeart,
     SlCalender,
@@ -17,18 +16,6 @@ import {
     SlSocialYoutube,
     SlUserFollowing,
 } from "react-icons/sl";
-=======
-  SlLocationPin,
-  SlHeart,
-  SlCalender,
-  SlSocialInstagram,
-  SlSocialFacebook,
-  SlSocialTwitter,
-  SlSocialYoutube,
-  SlUserFollowing,
-} from "react-icons/sl";
-import BreadcrumbComp from "@/app/components/breadCrumbs/page";
->>>>>>> 71e000a338bebc67f896ff10d9c969f77b321896
 
 interface VenueSingle {
     _id: string;
