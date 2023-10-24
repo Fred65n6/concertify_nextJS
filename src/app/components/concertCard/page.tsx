@@ -61,18 +61,18 @@ const ConcertCard: React.FC = () => {
     const concertsToDisplay = concerts.slice(startIndex, endIndex);
 
     // ----- Function to handle next page
-    const nextPage = () => {
-        if (currentPage < Math.ceil(concerts.length / concertsPerPage)) {
-            setCurrentPage(currentPage + 1);
-        }
-    };
+    // const nextPage = () => {
+    //     if (currentPage < Math.ceil(concerts.length / concertsPerPage)) {
+    //         setCurrentPage(currentPage + 1);
+    //     }
+    // };
 
-    // ----- Function to handle previous page
-    const previousPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
+    // // ----- Function to handle previous page
+    // const previousPage = () => {
+    //     if (currentPage > 1) {
+    //         setCurrentPage(currentPage - 1);
+    //     }
+    // };
 
     return (
         <>
@@ -106,36 +106,6 @@ const ConcertCard: React.FC = () => {
                     </p>
                 </article>
             ))}
-
-            <div className="pagination hidden md:flex gap-8 md:place-self-end md:col-end-5">
-                {currentPage > 1 && (
-                    <button
-                        onClick={previousPage}
-                        className="pagination-button flex items-center"
-                    >
-                        <SlArrowLeft
-                            className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
-                            id="explore"
-                        />
-                        Previous
-                    </button>
-                )}
-                <button
-                    onClick={nextPage}
-                    className={`flex items-center pagination-button ${
-                        currentPage ===
-                        Math.ceil(concerts.length / concertsPerPage)
-                            ? "disabled"
-                            : ""
-                    }`}
-                >
-                    Next
-                    <SlArrowRight
-                        className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
-                        id="explore"
-                    />
-                </button>
-            </div>
         </>
     );
 };

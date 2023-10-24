@@ -88,7 +88,7 @@ export default function Home() {
                     <ConcertCard />
                 </div>
                 <Link
-                    className="place-self-end flex items-center md:hidden"
+                    className="place-self-end justify-end flex items-center"
                     href="/concerts"
                 >
                     View all concerts
