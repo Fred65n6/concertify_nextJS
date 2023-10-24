@@ -10,7 +10,7 @@ const ThemeSwitcher = () => {
 
     return (
         <>
-            <div className="py-2 hidden md:flex">
+            <div className="py-2 hidden md:flex pt-3">
                 <Switch
                     onClick={() => {
                         if (typeof setColorMode === "function") {
