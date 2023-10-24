@@ -108,18 +108,7 @@ export default function SingleArtist() {
                                     </p>
                                 </li>
 
-                                {/* Next concert near you*/}
-                                <li className="flex gap-2">
-                                    <SlCalender
-                                        className="fill-gray-600 text-sm dark:fill-gray-400 w-5 h-5"
-                                        id="see_all"
-                                    />
-                                    <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
-                                        Next concert near you: {selectedArtist.artist_next_concert
-                                    ? selectedArtist?.artist_next_concert
-                                    : "Unknown"}
-                                    </p>
-                                </li>
+                                
 
                                 {/* See all concerts*/}
                                 <li className="flex gap-2">
