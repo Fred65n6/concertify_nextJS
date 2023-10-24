@@ -14,7 +14,6 @@ interface ArtistLoop {
     };
 }
 
-
 const ArtistLoopview: React.FC = () => {
     const [artists, setArtists] = useState<ArtistLoop[]>([]);
     // const [filteredArtists, setFilteredArtists] = useState<ArtistLoop[]>([]);
@@ -38,12 +37,9 @@ const ArtistLoopview: React.FC = () => {
             <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8">
                 {artists?.map((artist) => (
                     <article className="w-auto" key={artist._id}>
-                        <Link
-                            href={"/artists/" + artist._id}
-                            key={artist._id}
-                        >
+                        <Link href={"/artists/" + artist._id} key={artist._id}>
                             <Image
-                                src={"/artist_images/" + artist.artist_image}
+                                src={"/" + artist.artist_image}
                                 width={200}
                                 height={200}
                                 alt="artist_image"
@@ -55,11 +51,11 @@ const ArtistLoopview: React.FC = () => {
                             {artist.artist_name}
                         </h4>
                         <div className="flex flex-col gap-2">
-                                <p className="text-gray-600 dark:text-slate-400 text-sm align-middle">
+                            <p className="text-gray-600 dark:text-slate-400 text-sm align-middle">
                                 {artist.artist_genre
-                                ? artist.artist_genre?.genre_name
-                                : "Unknown Genre"}
-                                </p>
+                                    ? artist.artist_genre?.genre_name
+                                    : "Unknown Genre"}
+                            </p>
                         </div>
                     </article>
                 ))}
