@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     await writeFile(path, buffer);
     console.log(`Open ${path} to see the uploaded file`);
 
-    const image = `artist_images/${newFileName}`;
+    const image = `venue_images/${newFileName}`;
 
     const newVenue = new Venue({
         venue_name: venueName,

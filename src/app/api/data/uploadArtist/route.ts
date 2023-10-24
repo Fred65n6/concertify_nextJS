@@ -5,32 +5,32 @@ import Artist from "@/models/artistModel";
 
 export async function POST(request: NextRequest) {
     const data = await request.formData();
-    const file = data.get("file") as File;
+    // const file = data.get("file") as File;
     const artistName = data.get("Artist_name");
     const artistNation = data.get("Artis_nation");
 
-    if (!file) {
-        return NextResponse.json({success: false});
-    }
+    // if (!file) {
+    //     return NextResponse.json({success: false});
+    // }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    // const bytes = await file.arrayBuffer();
+    // const buffer = Buffer.from(bytes);
 
-    const uuid = uuidv4();
-    const fileExtension = file.name.split(".").pop();
-    const newFileName = `${uuid}.${fileExtension}`;
-    const path = `public/artist_images/${newFileName}`;
+    // const uuid = uuidv4();
+    // const fileExtension = file.name.split(".").pop();
+    // const newFileName = `${uuid}.${fileExtension}`;
+    // const path = `public/artist_images/${newFileName}`;
 
-    // Writing the file to the filesystem
-    await writeFile(path, buffer);
-    console.log(`Open ${path} to see the uploaded file`);
+    // // Writing the file to the filesystem
+    // await writeFile(path, buffer);
+    // console.log(`Open ${path} to see the uploaded file`);
 
-    const image = `artist_images/${newFileName}`;
+    // const artist_image = `artist_images/${newFileName}`;
 
     const newArtist = new Artist({
         artist_name: artistName,
         artist_nation: artistNation,
-        artist_image: image,
+        // artist_image: artist_image,
     });
 
     const savedArtist = await newArtist.save();

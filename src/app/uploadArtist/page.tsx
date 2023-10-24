@@ -6,7 +6,7 @@ import React, {useState} from "react";
 const UploadForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
 
-    const [file, setFile] = useState<File | null>(null);
+    // const [file, setFile] = useState<File | null>(null);
     const [artistName, setArtistName] = useState("");
     const [artistNation, setArtistNation] = useState("");
 
@@ -14,10 +14,10 @@ const UploadForm: React.FC = () => {
         e.preventDefault();
         setLoading(true);
 
-        if (!file) return request;
+        // if (!file) return request;
 
         const data = new FormData();
-        data.set("file", file);
+        // data.set("file", file);
         data.set("Artist_name", artistName);
         data.set("Artist_nation", artistNation);
 
@@ -73,11 +73,11 @@ const UploadForm: React.FC = () => {
                     placeholder="Artist Nation"
                 />
 
-                <input
+                {/* <input
                     type="file"
                     name="file"
                     onChange={(e) => setFile(e.target.files?.[0] || null)}
-                />
+                /> */}
                 <button
                     className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
                     type="submit"
