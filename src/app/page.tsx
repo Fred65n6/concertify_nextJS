@@ -88,12 +88,12 @@ export default function Home() {
                     <ConcertCard />
                 </div>
                 <Link
-                    className="place-self-end justify-end flex items-center"
+                    className="justify-end flex items-center"
                     href="/concerts"
                 >
                     View all concerts
                     <SlArrowRight
-                        className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
+                        className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4 pt-1"
                         id="arrow_right"
                     />
                 </Link>
@@ -113,7 +113,7 @@ export default function Home() {
                 >
                     View all venues
                     <SlArrowRight
-                        className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
+                        className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4 pt-1"
                         id="arrow_right"
                     />
                 </Link>
