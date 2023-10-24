@@ -3,6 +3,9 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {SlMagnifier, SlHeart, SlHome, SlUser} from "react-icons/sl";
+import TopNav from "../topNav/page";
+import Search from "../search/page";
+import ThemeSwitcher from "../switchTheme/page";
 
 // import Search from "../search/page";
 
@@ -10,7 +13,7 @@ const nav_logged = () => {
     return (
         <nav className="">
             {/* Desktop Nav - Logged in */}
-            <div className="hidden md:flex justify-between gap-4 py-4 max-w-[1300px] m-auto">
+            <div className="hidden md:flex justify-between gap-4 py-4 max-w-[1300px] m-auto items-center">
                 <div className="flex gap-12 items-center w-full">
                     <Link href="/">
                         <Image
@@ -60,7 +63,7 @@ const nav_logged = () => {
                         </li>
                     </ul>
                 </div>
-                {/* <Search /> */}
+                <Search />
                 <div className="">
                     <button className="rounded-full px-8 py-2 bg-purple-100 brand_purple flex items-center gap-2 m-auto hover:bg-purple-200">
                         <Link href="/profile/${data}">Profile</Link>
@@ -70,7 +73,9 @@ const nav_logged = () => {
                         />
                     </button>
                 </div>
+                <ThemeSwitcher />
             </div>
+
             {/* Mobile Nav Logged in */}
             <div className="flex md:hidden p-4 fixed bottom-0 w-full bg-white dark:bg-[#121212]">
                 <ul className="flex gap-10 brand_purple justify-evenly w-full">

@@ -2,9 +2,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-// import Search from "../search/page";
+import Search from "../search/page";
 import {GrHomeRounded} from "react-icons/gr";
 import {SlMagnifier, SlHome, SlUser} from "react-icons/sl";
+import ThemeSwitcher from "../switchTheme/page";
 
 const NavLogged = () => {
     const openLoginModule = () => {
@@ -22,7 +23,7 @@ const NavLogged = () => {
     return (
         <nav className="">
             {/* Desktop Nav - Logged in */}
-            <div className="hidden md:flex justify-between gap-4 py-4 max-w-[1300px] m-auto">
+            <div className="hidden md:flex justify-between gap-4 py-4 max-w-[1300px] m-auto items-center">
                 <div className="flex gap-12 items-center w-full">
                     <Link href="/">
                         <Image
@@ -60,6 +61,7 @@ const NavLogged = () => {
                         </li>
                     </ul>
                 </div>
+                <Search />
                 {/* <Search /> */}
                 <div className="flex gap-4">
                     {/* <button className="rounded-full bg-purple-100 brand_purple w-32 py-3 hover:bg-purple-200">
@@ -68,17 +70,18 @@ const NavLogged = () => {
                     <button
                         type="button"
                         onClick={openSignupModule}
-                        className="rounded-full bg-purple-100 brand_purple w-32 py-3 hover:bg-purple-200"
+                        className="rounded-full bg-purple-100 brand_purple w-32 py-3 hover:bg-purple-200 h-12"
                     >
                         Signup
                     </button>
                     <button
                         type="button"
                         onClick={openLoginModule}
-                        className="rounded-full w-32 brand_gradient text-white hover:bg-purple-200"
+                        className="rounded-full w-32 brand_gradient text-white hover:bg-purple-200 h-12"
                     >
                         Log in
                     </button>
+                    <ThemeSwitcher />
                 </div>
             </div>
             {/* Mobile Nav Logged in */}
