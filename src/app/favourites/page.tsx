@@ -47,7 +47,7 @@ const FavouriteList: React.FC = () => {
         <ul className="flex gap-8">
           {favourites.map((favourite) => (
             <article className="w-auto" key={favourite._id}>
-              {/* <Link href={"/concerts/" + concert._id} key={concert._id}> */}
+              {/* <Link href={"/concerts/" + favourite._id} key={favourite._id}> */}
               <Image
                 src={"/" + favourite.favourite_concert_image}
                 width={200}
