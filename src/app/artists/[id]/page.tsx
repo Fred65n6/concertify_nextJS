@@ -10,6 +10,8 @@ import BreadcrumbComp from "@/app/components/breadCrumbs/page";
 
 import { HiOutlineArrowRight } from "react-icons/hi";
 import { PiBalloon } from "react-icons/pi";
+import LoginPage from "@/app/login/page";
+import SignupPage from "@/app/signup/page";
 
 interface ArtistSingle {
   _id: string;
@@ -52,6 +54,8 @@ export default function SingleArtist() {
 
   return (
     <div>
+      <LoginPage />
+      <SignupPage />
       <BreadcrumbComp
         homeElement={"Home"}
         separator={<span> | </span>}

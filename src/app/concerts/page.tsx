@@ -5,6 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import Filter from "../components/filter/page";
 import BreadcrumbComp from "../components/breadCrumbs/page";
+import LoginPage from "../login/page";
+import SignupPage from "../signup/page";
+
 interface ConcertLoop {
   _id: string;
   concert_artist: {
@@ -48,6 +51,8 @@ const ConcertLoopview: React.FC = () => {
 
   return (
     <>
+      <LoginPage />
+      <SignupPage />
       <BreadcrumbComp
         homeElement={"Home"}
         separator={<span> | </span>}

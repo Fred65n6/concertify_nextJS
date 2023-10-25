@@ -5,6 +5,8 @@ import VenueCard from "../components/venueCard/page";
 import Link from "next/link";
 import Image from "next/image";
 import BreadcrumbComp from "../components/breadCrumbs/page";
+import LoginPage from "../login/page";
+import SignupPage from "../signup/page";
 interface Venue {
   _id: string;
   venue_name: string;
@@ -33,6 +35,8 @@ const VenueList: React.FC = () => {
 
   return (
     <>
+      <LoginPage />
+      <SignupPage />
       <BreadcrumbComp
         homeElement={"Home"}
         separator={<span> | </span>}

@@ -5,6 +5,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import SignupPage from "@/app/signup/page";
+import LoginPage from "@/app/login/page";
+
 import {
   SlLocationPin,
   SlStar,
@@ -79,6 +82,8 @@ export default function SingleConcert() {
 
   return (
     <div>
+      <LoginPage />
+      <SignupPage />
       <BreadcrumbComp
         homeElement={"Home"}
         separator={<span> | </span>}

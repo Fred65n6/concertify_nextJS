@@ -6,6 +6,8 @@ import axios from "axios";
 import Image from "next/image";
 import { StringSchemaDefinition } from "mongoose";
 import VenueCard from "@/app/components/venueCard/page";
+import LoginPage from "@/app/login/page";
+import SignupPage from "@/app/signup/page";
 import {
   SlLocationPin,
   SlHeart,
@@ -59,6 +61,8 @@ export default function SingleVenue() {
 
   return (
     <div style={{ padding: 40 }}>
+      <LoginPage />
+      <SignupPage />
       <BreadcrumbComp
         homeElement={"Home"}
         separator={<span> | </span>}
