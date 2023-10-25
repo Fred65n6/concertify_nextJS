@@ -46,6 +46,40 @@ interface ConcertSingle {
 }
 
 export default function SingleConcert() {
+  const [favouriteConcertId, setFavouriteConcertId] = useState("");
+  const [favouriteConcertImage, setFavouriteConcertImage] = useState("");
+  const [favouriteConcertName, setFavouriteConcertName] = useState("");
+  const [favouriteConcertDate, setFavouriteConcertDate] = useState("");
+  const [favouriteConcertArtist, setFavouriteConcertArtist] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const data = new FormData();
+    data.set("Favourite_concert_id", favouriteConcertId);
+    data.set("Favourite_concert_image", favouriteConcertImage);
+    data.set("Favourite_concert_name", favouriteConcertName);
+    data.set("Favourite_concert_date", favouriteConcertDate);
+    data.set("Favourite_concert_artist", favouriteConcertArtist);
+
+    const res = await fetch("/api/data/uploadFavourite/", {
+      method: "POST",
+      body: data,
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error(errorText);
+    }
+
+    if (res.ok) {
+      setLoading(false);
+    }
+  };
+
   const params = useParams();
   const id = params.id;
   const [concerts, setConcerts] = useState<ConcertSingle[]>([]);
@@ -79,16 +113,52 @@ export default function SingleConcert() {
 
   return (
     <div>
-      <BreadcrumbComp
-        homeElement={"Home"}
-        separator={<span> | </span>}
-        activeClasses="brand_purple_breadcrumb"
-        containerClasses="flex py-5 brand_purple opacity-70"
-        listClasses="hover:underline mx-2 font-bold brand_purple opacity-70"
-        capitalizeLinks
-      />
       {selectedConcert ? (
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
+          <form
+            className="flex flex-col items-center gap-8 pb-12"
+            onSubmit={onSubmit}
+          >
+            <input
+              className="bg-slate-100 p-4 w-72"
+              type="text"
+              name="Favourite_concert_id"
+              value={selectedConcert._id}
+            />
+            <input
+              className="bg-slate-100 p-4 w-72"
+              type="text"
+              name="Favourite_concert_image"
+              value={selectedConcert.concert_image}
+            />
+            <input
+              className="bg-slate-100 p-4 w-72"
+              type="text"
+              name="Favourite_concert_name"
+              value={selectedConcert.concert_name}
+            />
+            <input
+              className="bg-slate-100 p-4 w-72"
+              type="text"
+              name="Favourite_concert_date"
+              value={selectedConcert.concert_date}
+            />
+            <input
+              className="bg-slate-100 p-4 w-72"
+              type="text"
+              name="Favourite_concert_artist"
+              value={selectedConcert.concert_artist.artist_name}
+            />
+
+            <button
+              className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
+              type="submit"
+              value="upload"
+            >
+              {loading ? "Processing" : "Upload"}
+            </button>
+          </form>
+
           <figure>
             <Image
               src={"/" + selectedConcert.concert_image}

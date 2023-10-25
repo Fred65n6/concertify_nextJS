@@ -6,7 +6,7 @@ import {SlPhone, SlEnvolope, SlLocationPin} from "react-icons/sl";
 const Footer = () => {
     return (
         <>
-            <footer className=" hidden md:block pb-24 md:pb-12 border-t-2 border-purple-800 font-light w-full px-4 xl:px-28">
+            <footer className=" hidden md:block pb-24 md:pb-12 font-light w-full px-4 xl:px-28">
                 <div className="grid grid-cols-2 pt-4">
                     <Image
                         src="../concertify_logo.svg"
@@ -19,9 +19,7 @@ const Footer = () => {
                         <p className="col-start-1 col-span-2 md:col-span-1 text-left pb-10 pt-4 text-gray-600 dark:text-slate-400">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit.
                             Sapiente eos soluta exercitationem accusantium nostrum
-                            cum voluptates, harum fugiat sed commodi ducimus
-                            deserunt aliquid iure sequi vel quos odio explicabo
-                            excepturi?
+                            cum voluptates.
                         </p>
                         <div className="flex flex-col md:flex gap-8 pb-8">
                             <div className="text-gray-600 dark:text-slate-400 flex gap-2 align-middle">
@@ -39,7 +37,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <section className="flex border-t-2 border-gray-300 justify-between pt-8">
+                <section className="flex border-t border-[#D0D5DD] justify-between pt-8">
                     <div className="grid md:flex gap-4 text-gray-600 dark:text-slate-400 ">
                         <a href="#">About us</a>
                         <a href="#">Contact</a>

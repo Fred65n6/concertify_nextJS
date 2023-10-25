@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
-import { StringSchemaDefinition } from "mongoose";
+// import {StringSchemaDefinition} from "mongoose";
 import VenueCard from "@/app/components/venueCard/page";
 import {
   SlLocationPin,
@@ -16,7 +16,6 @@ import {
   SlSocialYoutube,
   SlUserFollowing,
 } from "react-icons/sl";
-import BreadcrumbComp from "@/app/components/breadCrumbs/page";
 
 interface VenueSingle {
   _id: string;
@@ -58,24 +57,16 @@ export default function SingleVenue() {
   }, [id, venues]);
 
   return (
-    <div style={{ padding: 40 }}>
-      <BreadcrumbComp
-        homeElement={"Home"}
-        separator={<span> | </span>}
-        activeClasses="brand_purple_breadcrumb"
-        containerClasses="flex py-5 brand_purple opacity-70"
-        listClasses="hover:underline mx-2 font-bold brand_purple opacity-70"
-        capitalizeLinks
-      />
+    <div className="pt-8">
       {selectedVenue ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8 pb-12 w-full">
           <figure>
             <Image
               src={"/venue_images/" + selectedVenue.venue_image}
               width={200}
               height={200}
               alt="concert"
-              className="h-auto w-full rounded-lg"
+              className="h-full object-cover w-full rounded-lg"
             />
           </figure>
           <section>
@@ -134,7 +125,7 @@ export default function SingleVenue() {
               <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                 {selectedVenue.venue_description}
               </p>
-              <div className="flex pt-5">
+              <div className="flex pt-5 gap-4">
                 <SlSocialInstagram
                   className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5"
                   id="instagram"
@@ -160,7 +151,7 @@ export default function SingleVenue() {
       )}
       {/* Event schedule section */}
       {selectedVenue ? (
-        <section className="">
+        <section className="pb-12">
           <h2 className="text-2xl font-bold">
             Event Schedule at {selectedVenue.venue_name}
           </h2>
