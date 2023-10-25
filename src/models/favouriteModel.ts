@@ -17,10 +17,7 @@ const favouriteSchema = new mongoose.Schema({
   favourite_concert_date: {
     type: String,
   },
-  favourite_concert_venue: {
-    venue_id: String,
-    venue_name: String,
-  },
+
   favourite_concert_artist: {
     type: String,
   },

@@ -14,7 +14,6 @@ interface Favourite {
   favourite_concert_name: string;
   favourite_concert_date: string;
   favourite_concert_artist: string;
-  favourite_concert_venue: string;
   // Add other properties from your Venue model
 }
 const FavouriteList: React.FC = () => {
@@ -57,32 +56,33 @@ const FavouriteList: React.FC = () => {
                 className="rounded-lg object-cover w-full h-[200px]"
               />
               {/* </Link> */}
-
-              <h4 className="text-black text-xl font-bold dark:text-white">
-                {favourite.favourite_concert_artist
-                  ? favourite.favourite_concert_artist
-                  : "Unknown Artist"}{" "}
-                -{" "}
-                {favourite.favourite_concert_name
-                  ? favourite.favourite_concert_name
-                  : "Unknown concert_name"}
-              </h4>
-              <p className="text-gray-600 text-sm dark:text-gray-400">
+              <div className="flex justify-between items-center pt-2">
+                <h4 className="text-black text-xl font-bold dark:text-white">
+                  {favourite.favourite_concert_artist
+                    ? favourite.favourite_concert_artist
+                    : "Unknown Artist"}{" "}
+                  -{" "}
+                  {favourite.favourite_concert_name
+                    ? favourite.favourite_concert_name
+                    : "Unknown concert_name"}
+                </h4>
+                <button
+                  className="flex items-center place-content-center rounded-full bg-purple-100 brand_purple w-10 h-10  hover:bg-purple-200"
+                  type="submit"
+                  value="upload"
+                >
+                  <SlHeart
+                    className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
+                    id="favourites"
+                  />
+                </button>
+              </div>
+              {/* <p className="text-gray-600 text-sm dark:text-gray-400">
                 <span className="font-bold mr-1">
                   {favourite.favourite_concert_venue}
                 </span>
                 {favourite.favourite_concert_date}
-              </p>
-              <button
-                className="flex items-center place-content-center rounded-full bg-purple-100 brand_purple w-10 h-10  hover:bg-purple-200"
-                type="submit"
-                value="upload"
-              >
-                <SlHeart
-                  className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
-                  id="favourites"
-                />
-              </button>
+              </p> */}
             </article>
 
             // Add other properties from your Venue model as needed

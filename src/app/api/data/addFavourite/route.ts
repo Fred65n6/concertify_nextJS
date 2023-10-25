@@ -8,7 +8,6 @@ export async function POST(request: NextRequest) {
   const favouriteConcertName = data.get("Favourite_concert_name");
   const favouriteConcertDate = data.get("Favourite_concert_date");
   const favouriteConcertArtist = data.get("Favourite_concert_artist");
-  const favouriteConcertVenue = data.get("Favourite_concert_venue");
   const favouriteUserId = data.get("Favourite_user_id");
 
   console.log(favouriteUserId);
@@ -19,7 +18,6 @@ export async function POST(request: NextRequest) {
     favourite_concert_name: favouriteConcertName,
     favourite_concert_date: favouriteConcertDate,
     favourite_concert_artist: favouriteConcertArtist,
-    favourite_concert_venue: favouriteConcertVenue,
     favourite_user_id: favouriteUserId,
   });
 

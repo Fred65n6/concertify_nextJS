@@ -68,7 +68,6 @@ const SingleConcert: React.FC = () => {
     data.set("Favourite_concert_name", favouriteConcertName);
     data.set("Favourite_concert_date", favouriteConcertDate);
     data.set("Favourite_concert_artist", favouriteConcertArtist);
-    data.set("Favourite_concert_venue", favouriteConcertVenue);
     data.set("Favourite_user_id", favouriteUserId);
 
     const res = await fetch("/api/data/addFavourite/", {
@@ -186,13 +185,7 @@ const SingleConcert: React.FC = () => {
                   name="Favourite_concert_artist"
                   value={selectedConcert.concert_artist.artist_name}
                 />
-                <input
-                  readOnly={true}
-                  className="bg-slate-100 p-4 w-72 hidden"
-                  type="text"
-                  name="Favourite_concert_venue"
-                  value={selectedConcert.concert_venue.venue_name}
-                />
+
                 <input
                   readOnly={true}
                   className="bg-slate-100 p-4 w-72 hidden"
