@@ -15,14 +15,14 @@ import Link from "next/link";
 //   capitalizeLinks?: boolean;
 // };
 
-type BreadCrumbProps = {
-    homeElement: String;
-    separator: String;
-    containerClasses: any;
-    listClasses: any;
-    activeClasses: String;
-    capitalizeLinks: String;
-};
+// type BreadCrumbProps = {
+//     homeElement: String;
+//     separator: String;
+//     containerClasses: any;
+//     listClasses: any;
+//     activeClasses: String;
+//     capitalizeLinks: String;
+// };
 
 const BreadcrumbComp = ({
     homeElement,
@@ -31,7 +31,14 @@ const BreadcrumbComp = ({
     listClasses,
     activeClasses,
     capitalizeLinks,
-}: BreadCrumbProps) => {
+}: {
+    homeElement: ReactNode;
+    separator: ReactNode;
+    containerClasses?: string;
+    listClasses?: string;
+    activeClasses?: string;
+    capitalizeLinks?: boolean;
+}) => {
     const paths = usePathname();
     const pathNames = paths.split("/").filter((path) => path);
 
