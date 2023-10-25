@@ -48,12 +48,14 @@ interface ConcertSingle {
   concert_doors: string;
 }
 
-export default function SingleConcert() {
+const SingleConcert: React.FC = () => {
   const [favouriteConcertId, setFavouriteConcertId] = useState("");
   const [favouriteConcertImage, setFavouriteConcertImage] = useState("");
   const [favouriteConcertName, setFavouriteConcertName] = useState("");
   const [favouriteConcertDate, setFavouriteConcertDate] = useState("");
   const [favouriteConcertArtist, setFavouriteConcertArtist] = useState("");
+  const [favouriteUserId, setFavouriteUserId] = useState("");
+  const [data, setData] = useState("Loading");
 
   const [loading, setLoading] = useState(false);
 
@@ -67,8 +69,9 @@ export default function SingleConcert() {
     data.set("Favourite_concert_name", favouriteConcertName);
     data.set("Favourite_concert_date", favouriteConcertDate);
     data.set("Favourite_concert_artist", favouriteConcertArtist);
+    data.set("Favourite_user_id", favouriteUserId);
 
-    const res = await fetch("/api/data/uploadFavourite/", {
+    const res = await fetch("/api/data/addFavourite/", {
       method: "POST",
       body: data,
     });
@@ -104,6 +107,18 @@ export default function SingleConcert() {
     fetchData();
   }, []);
 
+  // Get User Cookie
+  const getUserDetails = async () => {
+    const res = await axios.get("/api/users/cookieUser");
+    console.log(res.data);
+    setData(res.data.data._id);
+  };
+
+  useEffect(() => {
+    // Fetch user details when the component mounts
+    getUserDetails();
+  }, []);
+
   // Use a useEffect to update the selectedConcert when the 'id' or 'concerts' array changes
   useEffect(() => {
     if (id && concerts.length > 0) {
@@ -137,30 +152,42 @@ export default function SingleConcert() {
               type="text"
               name="Favourite_concert_id"
               value={selectedConcert._id}
+              onChange={(e) => setFavouriteConcertId(e.target.value)}
             />
             <input
+              readOnly={true}
               className="bg-slate-100 p-4 w-72"
               type="text"
               name="Favourite_concert_image"
               value={selectedConcert.concert_image}
             />
             <input
+              readOnly={true}
               className="bg-slate-100 p-4 w-72"
               type="text"
               name="Favourite_concert_name"
               value={selectedConcert.concert_name}
             />
             <input
+              readOnly={true}
               className="bg-slate-100 p-4 w-72"
               type="text"
               name="Favourite_concert_date"
               value={selectedConcert.concert_date}
             />
             <input
+              readOnly={true}
               className="bg-slate-100 p-4 w-72"
               type="text"
               name="Favourite_concert_artist"
               value={selectedConcert.concert_artist.artist_name}
+            />
+            <input
+              readOnly={true}
+              className="bg-slate-100 p-4 w-72"
+              type="text"
+              name="Favourite_user_id"
+              value={data}
             />
 
             <button
@@ -168,7 +195,7 @@ export default function SingleConcert() {
               type="submit"
               value="upload"
             >
-              {loading ? "Processing" : "Upload"}
+              {loading ? "Processing" : "Favourite"}
             </button>
           </form>
 
@@ -284,4 +311,6 @@ export default function SingleConcert() {
       )}
     </div>
   );
-}
+};
+
+export default SingleConcert;
