@@ -220,14 +220,21 @@ const UploadForm: React.FC = () => {
                 id="artistUploadedMessage"
                 className="gap-8 text-center hidden"
             >
-                <h2 className="text-2xl">Artist Uploaded!</h2>
-                <a
-                    className="brand_gradient py-2 px-4 text-white rounded-full"
-                    href="/uploadArtist"
-                >
-                    Upload another
-                </a>
-            </div>
+                                <h2 className="text-2xl">Artist uploaded successfully 🎉</h2>
+                <div className="flex gap-4 mt-8">
+                    <a
+                        className="brand_gradient py-2 px-4 text-white rounded-full"
+                        href="/uploadArtist"
+                    >
+                        Upload another
+                    </a>
+                    <a
+                        className="rounded-full px-8 py-2 bg-purple-100 brand_purple flex items-center hover:bg-purple-200"
+                        href="/artists"
+                    >
+                        See all artists
+                    </a>
+                </div>
         </div>
     );
 };
