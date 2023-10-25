@@ -16,12 +16,12 @@ import Link from "next/link";
 // };
 
 type BreadCrumbProps = {
-    homeElement: any;
-    separator: any;
+    homeElement: String;
+    separator: String;
     containerClasses: any;
     listClasses: any;
-    activeClasses: any;
-    capitalizeLinks: any;
+    activeClasses: String;
+    capitalizeLinks: String;
 };
 
 const BreadcrumbComp = ({
