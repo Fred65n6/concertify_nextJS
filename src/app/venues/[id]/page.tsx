@@ -8,6 +8,7 @@ import Image from "next/image";
 import VenueCard from "@/app/components/venueCard/page";
 import LoginPage from "@/app/login/page";
 import SignupPage from "@/app/signup/page";
+import BreadcrumbComp from "@/app/components/breadCrumbs/page";
 import {
   SlLocationPin,
   SlHeart,
@@ -59,7 +60,7 @@ export default function SingleVenue() {
   }, [id, venues]);
 
   return (
-    <div style={{ padding: 40 }}>
+    <div className="pt-8">
       <LoginPage />
       <SignupPage />
       <BreadcrumbComp
@@ -70,7 +71,6 @@ export default function SingleVenue() {
         listClasses="hover:underline mx-2 font-bold brand_purple opacity-70"
         capitalizeLinks
       />
-    <div className="pt-8">
       {selectedVenue ? (
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8 pb-12 w-full">
           <figure>
