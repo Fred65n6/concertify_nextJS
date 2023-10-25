@@ -5,6 +5,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import SignupPage from "@/app/signup/page";
+import LoginPage from "@/app/login/page";
+
 import {
   SlLocationPin,
   SlStar,
@@ -47,12 +50,7 @@ interface ConcertSingle {
 }
 
 const SingleConcert: React.FC = () => {
-  const [favouriteConcertId, setFavouriteConcertId] = useState("");
-  const [favouriteConcertImage, setFavouriteConcertImage] = useState("");
-  const [favouriteConcertName, setFavouriteConcertName] = useState("");
-  const [favouriteConcertDate, setFavouriteConcertDate] = useState("");
-  const [favouriteConcertArtist, setFavouriteConcertArtist] = useState("");
-  const [favouriteConcertVenue, setfavouriteConcertVenue] = useState("");
+  const [userData, setUserData] = useState<string | null>(null);
   const [favouriteUserId, setFavouriteUserId] = useState("");
   const [data, setData] = useState("Loading");
 
@@ -62,13 +60,20 @@ const SingleConcert: React.FC = () => {
     e.preventDefault();
     setLoading(true);
 
+    if (!selectedConcert) {
+      return;
+    }
+
     const data = new FormData();
-    data.set("Favourite_concert_id", favouriteConcertId);
-    data.set("Favourite_concert_image", favouriteConcertImage);
-    data.set("Favourite_concert_name", favouriteConcertName);
-    data.set("Favourite_concert_date", favouriteConcertDate);
-    data.set("Favourite_concert_artist", favouriteConcertArtist);
-    data.set("Favourite_user_id", favouriteUserId);
+    data.set("Favourite_concert_id", selectedConcert._id);
+    data.set("Favourite_concert_image", selectedConcert.concert_image);
+    data.set("Favourite_concert_name", selectedConcert.concert_name);
+    data.set("Favourite_concert_date", selectedConcert.concert_date);
+    data.set(
+      "Favourite_concert_artist",
+      selectedConcert.concert_artist?.artist_name
+    );
+    data.set("Favourite_user_id", userData || "");
 
     const res = await fetch("/api/data/addFavourite/", {
       method: "POST",
@@ -110,7 +115,7 @@ const SingleConcert: React.FC = () => {
   const getUserDetails = async () => {
     const res = await axios.get("/api/users/cookieUser");
     console.log(res.data);
-    setData(res.data.data._id);
+    setUserData(res.data.data._id);
   };
 
   useEffect(() => {
@@ -130,6 +135,16 @@ const SingleConcert: React.FC = () => {
 
   return (
     <div>
+      <LoginPage />
+      <SignupPage />
+      <BreadcrumbComp
+        homeElement={"Home"}
+        separator={<span> | </span>}
+        activeClasses="brand_purple_breadcrumb"
+        containerClasses="flex py-5 brand_purple opacity-70"
+        listClasses="hover:underline mx-2 font-bold brand_purple opacity-70"
+        capitalizeLinks
+      />
       {selectedConcert ? (
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
           <figure>
@@ -155,7 +170,7 @@ const SingleConcert: React.FC = () => {
                   type="text"
                   name="Favourite_concert_id"
                   value={selectedConcert._id}
-                  onChange={(e) => setFavouriteConcertId(e.target.value)}
+                  // onChange={(e) => setFavouriteConcertId(e.target.value)}
                 />
                 <input
                   readOnly={true}

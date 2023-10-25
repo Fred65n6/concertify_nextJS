@@ -4,6 +4,8 @@ import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
 import BreadcrumbComp from "../components/breadCrumbs/page";
+import LoginPage from "../login/page";
+import SignupPage from "../signup/page";
 
 interface ArtistLoop {
   _id: string;
@@ -34,6 +36,8 @@ const ArtistLoopview: React.FC = () => {
 
   return (
     <>
+      <LoginPage />
+      <SignupPage />
       <BreadcrumbComp
         homeElement={"Home"}
         separator={<span> | </span>}

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Progress } from "flowbite-react";
-import {SiFacebook, SiGoogle, SiApple} from "react-icons/si";
+import { SiFacebook, SiGoogle, SiApple } from "react-icons/si";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -120,7 +120,7 @@ export default function SignupPage() {
     <div className="">
       <div
         id="signup_module"
-        className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen  items-center justify-center hidden backdrop-blur-sm"
+        className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen  items-center justify-center hidden backdrop-blur-sm z-50"
       >
         <div id="signup_form">
           <div className="flex flex-col items-center justify-center pt-4 py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
@@ -196,13 +196,22 @@ export default function SignupPage() {
             </button>
             <div className="flex">
               <Link href="/">
-                <SiGoogle className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="google" />
+                <SiGoogle
+                  className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
+                  id="google"
+                />
               </Link>
               <Link href="/">
-                <SiFacebook className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="facebook" />
+                <SiFacebook
+                  className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
+                  id="facebook"
+                />
               </Link>
               <Link href="/">
-                <SiApple className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="apple" />
+                <SiApple
+                  className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
+                  id="apple"
+                />
               </Link>
             </div>
             <div className="grid gap-4 text-center mt-4">
@@ -223,7 +232,9 @@ export default function SignupPage() {
         <div id="welcome_popup" className="hidden">
           <div className="flex flex-col items-center justify-center py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <img className="my-10" src="../concertify_logo.svg" alt="" />
-            <h1 className="my-4 text-3xl font-bold">Welcome Human!</h1>
+            <h1 className="my-4 text-3xl font-bold">
+              Welcome {user.username}!
+            </h1>
             <p className="mb-6 text-center mx-2">
               Great to have you on board! Lets personalize your experience in 2
               simple steps.

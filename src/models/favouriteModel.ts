@@ -23,7 +23,7 @@ const favouriteSchema = new mongoose.Schema({
   },
 });
 
-const Favourites =
+const Favourite =
   mongoose.models.favourites || mongoose.model("favourites", favouriteSchema);
 
-export default Favourites;
+export default Favourite;
