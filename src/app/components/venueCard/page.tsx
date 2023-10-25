@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Image from "next/image";
+import {useParams} from "next/navigation";
 import Link from "next/link";
 import {SlArrowLeft, SlArrowRight} from "react-icons/sl";
 
@@ -16,8 +17,8 @@ interface Venue {
 const VenueCard: React.FC = () => {
     const [venues, setVenues] = useState<Venue[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    // const venuesPerPage =
-    //     typeof window !== "undefined" && window.innerWidth <= 768 ? 1 : 4; // Change venuesPerPage based on screen
+    const params = useParams();
+    const id = params.id;
     const venuesPerPage = 4;
 
     useEffect(() => {
@@ -33,16 +34,19 @@ const VenueCard: React.FC = () => {
         fetchData();
     }, []);
 
+    // Filter venues to exclude the one with the matching ID
+    const filteredVenues = venues.filter((venue) => venue._id !== id);
+
     // Calculate the start and end indexes of venues to display on the current page
     const startIndex = (currentPage - 1) * venuesPerPage;
     const endIndex = startIndex + venuesPerPage;
 
-    // Slice the venues array to display only the venues for the current page
-    const venuesToDisplay = venues.slice(startIndex, endIndex);
+    // Slice the filtered venues array to display only the venues for the current page
+    const venuesToDisplay = filteredVenues.slice(startIndex, endIndex);
 
     // Function to handle next page
     const nextPage = () => {
-        if (currentPage < Math.ceil(venues.length / venuesPerPage)) {
+        if (currentPage < Math.ceil(filteredVenues.length / venuesPerPage)) {
             setCurrentPage(currentPage + 1);
         }
     };
@@ -58,8 +62,6 @@ const VenueCard: React.FC = () => {
         <>
             {venuesToDisplay.map((venue) => (
                 <article className="flex-shrink-0 md:pt-8 pb-8" key={venue._id}>
-                    {/* <ul className="md:flex gap-8">
-                        <li className="grid gap-2 w-[500px]"> */}
                     <Link href={"/venues/" + venue._id} key={venue._id}>
                         <Image
                             src={"/venue_images/" + venue.venue_image}
@@ -79,8 +81,6 @@ const VenueCard: React.FC = () => {
                     <div className="text-gray-400 text-sm dark:text-gray-400">
                         {venue.venue_location}
                     </div>
-                    {/* </li>
-                    </ul> */}
                 </article>
             ))}
 
@@ -90,22 +90,27 @@ const VenueCard: React.FC = () => {
                         onClick={previousPage}
                         className="pagination-button flex items-center"
                     >
-                    <SlArrowLeft className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="arrow_left" />
-
+                        <SlArrowLeft
+                            className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
+                            id="arrow_left"
+                        />
                         Previous
                     </button>
                 )}
                 <button
                     onClick={nextPage}
                     className={`flex items-center pagination-button ${
-                        currentPage === Math.ceil(venues.length / venuesPerPage)
+                        currentPage ===
+                        Math.ceil(filteredVenues.length / venuesPerPage)
                             ? "disabled"
                             : ""
                     }`}
                 >
                     Next
-                    <SlArrowRight className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4" id="arrow_right" />
-
+                    <SlArrowRight
+                        className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
+                        id="arrow_right"
+                    />
                 </button>
             </div>
         </>

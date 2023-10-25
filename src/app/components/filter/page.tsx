@@ -223,7 +223,7 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                 <input
                     name="artist"
                     type="text"
-                    className="border-none"
+                    className=""
                     placeholder="search by artist name"
                     value={artistFilter}
                     onChange={(e) => setArtistFilter(e.target.value)}

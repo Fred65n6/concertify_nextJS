@@ -5,15 +5,20 @@ import Artist from "@/models/artistModel";
 
 export async function POST(request: NextRequest) {
     const data = await request.formData();
+
     const file = data.get("file") as File;
-    const artistName = data.get("Artist_name");
+    const artistName = data.get("artist_name");
+    const artistFullName = data.get("artist_full_name");
+    const artistNationality = data.get("artist_nation");
+    const artistDescription = data.get("artist_description");
+    const artistDob = data.get("artist_dob");
+
 
     const artistGenre = {
-        genre_name: data.get("Artist_genre_name"),
-        genre_id: data.get("Artist_genre_id"),
+        genre_name: data.get("artist_genre_name"),
+        genre_id: data.get("artist_genre_id"),
     };
 
-    const artistNation = data.get("Artist_nation");
 
     if (!file) {
         return NextResponse.json({success: false});
@@ -35,15 +40,16 @@ export async function POST(request: NextRequest) {
 
     const newArtist = new Artist({
         artist_name: artistName,
-        artist_nation: artistNation,
+        artist_full_name: artistFullName,
+        artist_description: artistDescription,
+        artist_nation: artistNationality,
         artist_image: artistImage,
         artist_genre: artistGenre,
+        artist_dob: artistDob,
     });
 
     const savedArtist = await newArtist.save();
     console.log(savedArtist);
-
-    // You can now use concertArtist and concertName for further processing, e.g., saving them to a database.
 
     return NextResponse.json({success: true});
 }
