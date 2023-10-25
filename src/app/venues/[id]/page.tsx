@@ -6,6 +6,8 @@ import axios from "axios";
 import Image from "next/image";
 // import {StringSchemaDefinition} from "mongoose";
 import VenueCard from "@/app/components/venueCard/page";
+import LoginPage from "@/app/login/page";
+import SignupPage from "@/app/signup/page";
 import {
   SlLocationPin,
   SlHeart,
@@ -57,6 +59,17 @@ export default function SingleVenue() {
   }, [id, venues]);
 
   return (
+    <div style={{ padding: 40 }}>
+      <LoginPage />
+      <SignupPage />
+      <BreadcrumbComp
+        homeElement={"Home"}
+        separator={<span> | </span>}
+        activeClasses="brand_purple_breadcrumb"
+        containerClasses="flex py-5 brand_purple opacity-70"
+        listClasses="hover:underline mx-2 font-bold brand_purple opacity-70"
+        capitalizeLinks
+      />
     <div className="pt-8">
       {selectedVenue ? (
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8 pb-12 w-full">
