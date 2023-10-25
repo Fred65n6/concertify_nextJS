@@ -76,15 +76,6 @@ export default function SingleVenue() {
                   {selectedVenue.venue_name}
                 </h1>
               </div>
-              <div>
-                <button className="flex items-center place-content-center rounded-full bg-purple-100 brand_purple w-32 py-3 hover:bg-purple-200">
-                  <SlHeart
-                    className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
-                    id="favourites"
-                  />
-                  <span>Add</span>
-                </button>
-              </div>
             </div>
 
             <ul className="flex flex-col gap-4 pt-4">
