@@ -46,11 +46,7 @@ interface ConcertSingle {
 }
 
 const SingleConcert: React.FC = () => {
-  const [favouriteConcertId, setFavouriteConcertId] = useState("");
-  const [favouriteConcertImage, setFavouriteConcertImage] = useState("");
-  const [favouriteConcertName, setFavouriteConcertName] = useState("");
-  const [favouriteConcertDate, setFavouriteConcertDate] = useState("");
-  const [favouriteConcertArtist, setFavouriteConcertArtist] = useState("");
+  const [userData, setUserData] = useState<string | null>(null);
   const [favouriteUserId, setFavouriteUserId] = useState("");
   const [data, setData] = useState("Loading");
 
@@ -60,13 +56,20 @@ const SingleConcert: React.FC = () => {
     e.preventDefault();
     setLoading(true);
 
+    if (!selectedConcert) {
+      return;
+    }
+
     const data = new FormData();
-    data.set("Favourite_concert_id", favouriteConcertId);
-    data.set("Favourite_concert_image", favouriteConcertImage);
-    data.set("Favourite_concert_name", favouriteConcertName);
-    data.set("Favourite_concert_date", favouriteConcertDate);
-    data.set("Favourite_concert_artist", favouriteConcertArtist);
-    data.set("Favourite_user_id", favouriteUserId);
+    data.set("Favourite_concert_id", selectedConcert._id);
+    data.set("Favourite_concert_image", selectedConcert.concert_image);
+    data.set("Favourite_concert_name", selectedConcert.concert_name);
+    data.set("Favourite_concert_date", selectedConcert.concert_date);
+    data.set(
+      "Favourite_concert_artist",
+      selectedConcert.concert_artist?.artist_name
+    );
+    data.set("Favourite_user_id", userData || "");
 
     const res = await fetch("/api/data/addFavourite/", {
       method: "POST",
@@ -108,7 +111,7 @@ const SingleConcert: React.FC = () => {
   const getUserDetails = async () => {
     const res = await axios.get("/api/users/cookieUser");
     console.log(res.data);
-    setData(res.data.data._id);
+    setUserData(res.data.data._id);
   };
 
   useEffect(() => {
@@ -135,11 +138,11 @@ const SingleConcert: React.FC = () => {
             onSubmit={onSubmit}
           >
             <input
+              readOnly={true}
               className="bg-slate-100 p-4 w-72"
               type="text"
               name="Favourite_concert_id"
               value={selectedConcert._id}
-              onChange={(e) => setFavouriteConcertId(e.target.value)}
             />
             <input
               readOnly={true}
