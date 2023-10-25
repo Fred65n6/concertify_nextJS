@@ -18,7 +18,8 @@ const favouriteSchema = new mongoose.Schema({
     type: String,
   },
   favourite_concert_venue: {
-    type: String,
+    venue_id: String,
+    venue_name: String,
   },
   favourite_concert_artist: {
     type: String,
