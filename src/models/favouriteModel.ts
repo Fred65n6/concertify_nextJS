@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const favouriteSchema = new mongoose.Schema({
   favourite_user_id: {
     type: String,
-    required: true,
     unique: false,
   },
   favourite_concert_id: {
