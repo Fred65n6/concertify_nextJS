@@ -1,6 +1,7 @@
 // /components/NextBreadcrumb.jsx
 
 import React from "react";
+import PropTypes from "prop-types";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 
@@ -43,6 +44,15 @@ const BreadcrumbComp = ({
             </ul>
         </div>
     );
+};
+
+BreadcrumbComp.propTypes = {
+    homeElement: PropTypes.any,
+    separator: PropTypes.any,
+    containerClasses: PropTypes.any,
+    listClasses: PropTypes.any,
+    activeClasses: PropTypes.any,
+    capitalizeLinks: PropTypes.any,
 };
 
 export default BreadcrumbComp;
