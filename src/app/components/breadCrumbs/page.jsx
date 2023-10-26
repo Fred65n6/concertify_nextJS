@@ -1,28 +1,8 @@
-// /components/NextBreadcrumb.tsx
-"use client";
+// /components/NextBreadcrumb.jsx
 
-import React, {ReactNode} from "react";
-
+import React from "react";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
-
-// type TBreadCrumbProps = {
-//   homeElement: ReactNode;
-//   separator: ReactNode;
-//   containerClasses?: string;
-//   listClasses?: string;
-//   activeClasses?: string;
-//   capitalizeLinks?: boolean;
-// };
-
-// type BreadCrumbProps = {
-//     homeElement: String;
-//     separator: String;
-//     containerClasses: any;
-//     listClasses: any;
-//     activeClasses: String;
-//     capitalizeLinks: String;
-// };
 
 const BreadcrumbComp = ({
     homeElement,
@@ -31,13 +11,6 @@ const BreadcrumbComp = ({
     listClasses,
     activeClasses,
     capitalizeLinks,
-}: {
-    homeElement: ReactNode;
-    separator: ReactNode;
-    containerClasses?: string;
-    listClasses?: string;
-    activeClasses?: string;
-    capitalizeLinks?: boolean;
 }) => {
     const paths = usePathname();
     const pathNames = paths.split("/").filter((path) => path);
