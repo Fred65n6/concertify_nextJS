@@ -2,6 +2,16 @@ import {writeFile} from "fs/promises";
 import {NextRequest, NextResponse} from "next/server";
 import {v4 as uuidv4} from "uuid";
 import Concert from "@/models/concertModel";
+import AWS from "aws-sdk";
+
+// Load AWS credentials and configuration from environment variables
+AWS.config.update({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION,
+});
+
+const s3 = new AWS.S3();
 
 export async function POST(request: NextRequest) {
     const data = await request.formData();
@@ -37,31 +47,42 @@ export async function POST(request: NextRequest) {
     const uuid = uuidv4();
     const fileExtension = file.name.split(".").pop();
     const newFileName = `${uuid}.${fileExtension}`;
-    const path = `public/concert_images/${newFileName}`;
+    const s3BucketName = "concertify"; // Replace with your S3 bucket name
+    const s3ObjectKey = `concert_images/${newFileName}`;
 
-    // Writing the file to the filesystem
-    await writeFile(path, buffer);
-    console.log(`Open ${path} to see the uploaded file`);
+    const params = {
+        Bucket: s3BucketName,
+        Key: s3ObjectKey,
+        Body: buffer,
+    };
 
-    const image = `concert_images/${newFileName}`;
+    try {
+        await s3.upload(params).promise();
+        console.log(`File uploaded to S3: ${s3ObjectKey}`);
 
-    const newConcert = new Concert({
-        concert_name: concertName,
-        concer_date: concertDate,
-        concert_start: concertStart,
-        concert_doors: concertDoors,
-        concert_image: image,
-        concert_date: concertDate,
-        concert_description: concertDescription,
-        concert_genre: concertGenre,
-        concert_artist: concertArtist,
-        concert_venue: concertVenue,
-    });
+        const concertImage = `concert_images/${newFileName}`;
 
-    const savedConcert = await newConcert.save();
-    console.log(savedConcert);
+        const newConcert = new Concert({
+            concert_name: concertName,
+            concer_date: concertDate,
+            concert_start: concertStart,
+            concert_doors: concertDoors,
+            concert_image: concertImage,
+            concert_date: concertDate,
+            concert_description: concertDescription,
+            concert_genre: concertGenre,
+            concert_artist: concertArtist,
+            concert_venue: concertVenue,
+        });
 
-    // You can now use concertArtist and concertName for further processing, e.g., saving them to a database.
+        const savedConcert = await newConcert.save();
+        console.log(savedConcert);
 
-    return NextResponse.json({success: true});
+        // You can now use concertArtist and concertName for further processing, e.g., saving them to a database.
+
+        return NextResponse.json({success: true});
+    } catch (error) {
+        console.error("Error uploading file to S3:", error);
+        return NextResponse.json({success: false});
+    }
 }

@@ -64,7 +64,7 @@ const ConcertLoopview: React.FC = () => {
                             key={concert._id}
                         >
                             <Image
-                                src={"/" + concert.concert_image}
+                                src={`https://concertify.s3.eu-central-1.amazonaws.com/${concert.concert_image}`}
                                 width={200}
                                 height={200}
                                 alt="concert"

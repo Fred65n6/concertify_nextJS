@@ -58,19 +58,12 @@ export default function SingleArtist() {
 
     return (
         <div>
-            <BreadcrumbComp
-            // homeElement={"Home"}
-            // separator={<span> | </span>}
-            // activeClasses="brand_purple_breadcrumb"
-            // containerClasses="flex py-5 brand_purple opacity-70"
-            // listClasses="hover:underline mx-2 font-bold brand_purple opacity-70"
-            // capitalizeLinks
-            />
+            <BreadcrumbComp />
             {selectedArtist ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
                     <figure>
                         <Image
-                            src={"/" + selectedArtist.artist_image}
+                            src={`https://concertify.s3.eu-central-1.amazonaws.com/${selectedArtist.artist_image}`}
                             width={200}
                             height={200}
                             alt="artist image"
