@@ -17,25 +17,30 @@ const BreadcrumbComp = () => {
     const pathNames = paths.split("/").filter((path) => path);
 
     return (
-        <div className="flex">
-            <ul className="flex py-5 brand_purple opacity-70 gap-2">
-                <li className="">
+        <div className="flex mt-4 mb-12">
+            <ul className="flex items-center gap-2 brand_purple opacity-60">
+                <li className="hover:underline">
                     <Link href={"/"}>{config.homeElement}</Link>
                 </li>
                 {pathNames.length > 0 && config.separator}
                 {pathNames.map((link, index) => {
                     let href = `/${pathNames.slice(0, index + 1).join("/")}`;
-                    // let itemClasses =
-                    //     paths === href
-                    //         ? `${config.listClasses} ${config.activeClasses}`
-                    //         : config.listClasses;
+                    let isActive = paths === href;
                     let itemLink = config.capitalizeLinks
                         ? link[0].toUpperCase() + link.slice(1, link.length)
                         : link;
                     return (
                         <React.Fragment key={index}>
-                            <li>
-                                <Link href={href}>{itemLink}</Link>
+                            <li
+                                className={
+                                    isActive
+                                        ? `active-breadcrumb ${config.activeClasses}`
+                                        : config.listClasses
+                                }
+                            >
+                                <Link className="hover:underline" href={href}>
+                                    {itemLink}
+                                </Link>
                             </li>
                             {pathNames.length !== index + 1 && config.separator}
                         </React.Fragment>

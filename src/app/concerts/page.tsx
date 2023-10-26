@@ -53,14 +53,7 @@ const ConcertLoopview: React.FC = () => {
         <>
             <LoginPage />
             <SignupPage />
-            <BreadcrumbComp
-            // homeElement={"Home"}
-            // separator={<span> | </span>}
-            // activeClasses="brand_purple_breadcrumb"
-            // containerClasses="flex py-5 brand_purple opacity-70"
-            // listClasses="hover:underline mx-2 font-bold brand_purple opacity-70"
-            // capitalizeLinks
-            />
+            <BreadcrumbComp />
             <Filter data={concerts} onDataFiltered={handleDataFiltered} />
             <h1 className="font-bold text-4xl pb-4 pt-8">All concerts</h1>
             <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8 pb-20">
