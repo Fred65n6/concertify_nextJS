@@ -1,7 +1,6 @@
 "use client";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import VenueCard from "../components/venueCard/page";
 import Link from "next/link";
 import Image from "next/image";
 import BreadcrumbComp from "../components/breadCrumbs/page";
@@ -18,7 +17,6 @@ interface Venue {
 
 const VenueList: React.FC = () => {
     const [venues, setVenues] = useState<Venue[]>([]);
-    const [currentPage, setCurrentPage] = useState<number>(1);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,8 +44,6 @@ const VenueList: React.FC = () => {
             <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8 pb-40 pt-10">
                 {venues.map((venue) => (
                     <article className="w-auto" key={venue._id}>
-                        {/* <ul className="md:flex gap-8">
-                        <li className="grid gap-2 w-[500px]"> */}
                         <Link href={"/venues/" + venue._id} key={venue._id}>
                             <Image
                                 src={"/venue_images/" + venue.venue_image}
@@ -67,8 +63,6 @@ const VenueList: React.FC = () => {
                         <div className="text-gray-400 text-sm dark:text-gray-400">
                             {venue.venue_location}
                         </div>
-                        {/* </li>
-                    </ul> */}
                     </article>
                 ))}
             </div>

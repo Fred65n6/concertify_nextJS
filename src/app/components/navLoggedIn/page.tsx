@@ -36,7 +36,10 @@ const nav_logged = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link className="flex gap-2 items-center" href="/">
+                            <Link
+                                className="flex gap-2 items-center"
+                                href="/favourites"
+                            >
                                 <SlHeart
                                     className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5"
                                     id="favourites"
@@ -88,7 +91,10 @@ const nav_logged = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link className="flex flex-col items-center" href="/">
+                        <Link
+                            className="flex flex-col items-center"
+                            href="/favourites"
+                        >
                             <SlHeart
                                 className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
                                 id="favourites"
