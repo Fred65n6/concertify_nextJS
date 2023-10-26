@@ -39,7 +39,7 @@
         "src/app/components/search/searchbar.jsx",
         "src/app/components/filter/page.tsx",
         "src/app/components/filter/page.jsx",
-        "src/app/components/breadCrumbs/page.jsx"
+        "src/app/components/breadCrumbs/page.tsx"
     ],
     "exclude": ["node_modules"]
 }

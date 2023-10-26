@@ -1,18 +1,26 @@
-// /components/NextBreadcrumb.jsx
+// /components/NextBreadcrumb.tsx
 
-import React from "react";
-import PropTypes from "prop-types";
+import React, {ReactNode} from "react";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 
-const BreadcrumbComp = ({
+interface BreadcrumbProps {
+    homeElement: ReactNode;
+    separator: ReactNode;
+    containerClasses?: string;
+    listClasses?: string;
+    activeClasses?: string;
+    capitalizeLinks?: boolean;
+}
+
+const BreadcrumbComp: React.FC<BreadcrumbProps> = ({
     homeElement,
     separator,
     containerClasses,
     listClasses,
     activeClasses,
     capitalizeLinks,
-}) => {
+}: BreadcrumbProps) => {
     const paths = usePathname();
     const pathNames = paths.split("/").filter((path) => path);
 
@@ -44,15 +52,6 @@ const BreadcrumbComp = ({
             </ul>
         </div>
     );
-};
-
-BreadcrumbComp.propTypes = {
-    homeElement: PropTypes.any,
-    separator: PropTypes.any,
-    containerClasses: PropTypes.any,
-    listClasses: PropTypes.any,
-    activeClasses: PropTypes.any,
-    capitalizeLinks: PropTypes.any,
 };
 
 export default BreadcrumbComp;
