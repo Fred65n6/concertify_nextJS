@@ -34,12 +34,12 @@ const VenueList: React.FC = () => {
     return (
         <>
             <BreadcrumbComp
-                homeElement={"Home"}
-                separator={<span> | </span>}
-                activeClasses="brand_purple_breadcrumb"
-                containerClasses="flex py-5 brand_purple opacity-70"
-                listClasses="hover:underline mx-2 font-bold brand_purple opacity-70"
-                capitalizeLinks
+            // homeElement={"Home"}
+            // separator={<span> | </span>}
+            // activeClasses="brand_purple_breadcrumb"
+            // containerClasses="flex py-5 brand_purple opacity-70"
+            // listClasses="hover:underline mx-2 font-bold brand_purple opacity-70"
+            // capitalizeLinks
             />
             <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8 pb-40 pt-10">
                 {venues.map((venue) => (
