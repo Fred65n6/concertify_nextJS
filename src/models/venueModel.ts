@@ -8,10 +8,18 @@ const venueSchema = new mongoose.Schema({
     },
     venue_address: {
         type: String,
-        required: [true, "please provide the venue_address"],
+    },
+    venue_description: {
+        type: String,
     },
     venue_image: {
         type: String,
+    },
+    venue_location: {
+        type: String,
+    },
+    venue_size: {
+        tyoe: String,
     },
 });
 

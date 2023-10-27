@@ -8,6 +8,9 @@ export async function POST(request: NextRequest) {
     const file = data.get("file") as File;
     const venueName = data.get("Venue_name");
     const venueAddress = data.get("Venue_address");
+    const venueLocation = data.get("Venue_location");
+    const venueSize = data.get("Venue_size");
+    const venueDescription = data.get("Venue_description");
 
     if (!file) {
         return NextResponse.json({success: false});
@@ -31,6 +34,9 @@ export async function POST(request: NextRequest) {
         venue_name: venueName,
         venue_image: image,
         venue_address: venueAddress,
+        venue_location: venueLocation,
+        venue_size: venueSize,
+        venue_description: venueDescription,
     });
 
     const savedVenue = await newVenue.save();
