@@ -158,15 +158,15 @@ const UploadForm: React.FC = () => {
 
                 {/* Concert date */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                        <label htmlFor="Concert_date">Concert date:</label>
-                        <input
-                            className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                            type="date"
-                            name="Concert_date"
-                            value={concertDate}
-                            onChange={(e) => setConcertDate(e.target.value)}
-                            placeholder="Concert Date"
-                        />
+                    <label htmlFor="Concert_date">Concert date:</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="date"
+                        name="Concert_date"
+                        value={concertDate}
+                        onChange={(e) => setConcertDate(e.target.value)}
+                        placeholder="Concert Date"
+                    />
                 </div>
 
                 {/* Concert start time */}
@@ -197,7 +197,9 @@ const UploadForm: React.FC = () => {
 
                 {/* Description */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="Concert_description">Concert description</label>
+                    <label htmlFor="Concert_description">
+                        Concert description
+                    </label>
                     <input
                         className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         type="text"
@@ -293,7 +295,7 @@ const UploadForm: React.FC = () => {
 
                 {/* Select genre */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                <label htmlFor="Concert_genre">Genre</label>
+                    <label htmlFor="Concert_genre">Genre</label>
                     <select
                         className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         value={selectedGenre ? selectedGenre._id : ""}
@@ -332,7 +334,6 @@ const UploadForm: React.FC = () => {
                     />
                 </div>
 
-
                 {/* Upload image */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <input
@@ -351,10 +352,7 @@ const UploadForm: React.FC = () => {
                 </button>
             </form>
 
-            <div
-                id="concertUploadedMessage"
-                className="hidden"
-            >
+            <div id="concertUploadedMessage" className="hidden">
                 <h2 className="text-2xl">Concert uploaded successfully 🎉</h2>
                 <div className="flex gap-4 mt-8">
                     <a

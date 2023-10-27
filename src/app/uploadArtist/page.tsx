@@ -98,7 +98,7 @@ const UploadForm: React.FC = () => {
                         value={artistName}
                         onChange={(e) => setArtistName(e.target.value)}
                         placeholder="Artist name"
-                        />
+                    />
                 </div>
 
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
@@ -111,7 +111,7 @@ const UploadForm: React.FC = () => {
                         value={artistFullName}
                         onChange={(e) => setArtistFullName(e.target.value)}
                         placeholder="Full name"
-                        />
+                    />
                 </div>
 
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
@@ -124,9 +124,8 @@ const UploadForm: React.FC = () => {
                         value={artistDescription}
                         onChange={(e) => setArtistDescription(e.target.value)}
                         placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                        />
+                    />
                 </div>
-
 
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="artist_full_name">Date of birth</label>
@@ -138,9 +137,8 @@ const UploadForm: React.FC = () => {
                         value={artistDob}
                         onChange={(e) => setArtistDob(e.target.value)}
                         placeholder="Date of birth"
-                        />
+                    />
                 </div>
-
 
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="artist_genre">Genre</label>
@@ -213,11 +211,8 @@ const UploadForm: React.FC = () => {
                     {loading ? "Processing" : "Confirm"}
                 </button>
             </form>
-            <div
-                id="artistUploadedMessage"
-                className="gap-8 text-center hidden"
-            >
-                                <h2 className="text-2xl">Artist uploaded successfully 🎉</h2>
+            <div id="artistUploadedMessage" className="hidden">
+                <h2 className="text-2xl">Artist uploaded successfully 🎉</h2>
                 <div className="flex gap-4 mt-8">
                     <a
                         className="brand_gradient py-2 px-4 text-white rounded-full"
@@ -232,7 +227,7 @@ const UploadForm: React.FC = () => {
                         See all artists
                     </a>
                 </div>
-        </div>
+            </div>
         </div>
     );
 };
