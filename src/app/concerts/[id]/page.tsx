@@ -198,7 +198,7 @@ const SingleConcert: React.FC = () => {
 
                     <figure>
                         <Image
-                            src={"/" + selectedConcert.concert_image}
+                            src={`https://concertify.s3.eu-central-1.amazonaws.com/${selectedConcert.concert_image}`}
                             width={200}
                             height={200}
                             alt="concert"

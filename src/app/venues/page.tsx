@@ -39,11 +39,11 @@ const VenueList: React.FC = () => {
                     <article className="w-auto" key={venue._id}>
                         <Link href={"/venues/" + venue._id} key={venue._id}>
                             <Image
-                                src={"/venue_images/" + venue.venue_image}
+                                src={`https://concertify.s3.eu-central-1.amazonaws.com/${venue.venue_image}`}
                                 width={200}
                                 height={200}
                                 alt="concert"
-                                className="rounded-lg  object-cover w-[300px] h-[200px]"
+                                className="rounded-lg object-cover w-[300px] h-[200px]"
                             />
                         </Link>
 

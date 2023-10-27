@@ -38,21 +38,14 @@ const ArtistLoopview: React.FC = () => {
         <>
             <LoginPage />
             <SignupPage />
-            <BreadcrumbComp
-            // homeElement={"Home"}
-            // separator={<span> | </span>}
-            // activeClasses="brand_purple_breadcrumb"
-            // containerClasses="flex py-5 brand_purple opacity-70"
-            // listClasses="hover:underline mx-2 font-bold brand_purple opacity-70"
-            // capitalizeLinks
-            />
+            <BreadcrumbComp />
             <h1 className="font-bold text-4xl pb-4">All artists</h1>
             <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8">
                 {artists?.map((artist) => (
                     <article className="w-auto" key={artist._id}>
                         <Link href={"/artists/" + artist._id} key={artist._id}>
                             <Image
-                                src={"/" + artist.artist_image}
+                                src={`https://concertify.s3.eu-central-1.amazonaws.com/${artist.artist_image}`}
                                 width={200}
                                 height={200}
                                 alt="artist_image"

@@ -60,27 +60,13 @@ const ConcertCard: React.FC = () => {
     // ----- Slice the venues array to display only the venues for the current page
     const concertsToDisplay = concerts.slice(startIndex, endIndex);
 
-    // ----- Function to handle next page
-    // const nextPage = () => {
-    //     if (currentPage < Math.ceil(concerts.length / concertsPerPage)) {
-    //         setCurrentPage(currentPage + 1);
-    //     }
-    // };
-
-    // // ----- Function to handle previous page
-    // const previousPage = () => {
-    //     if (currentPage > 1) {
-    //         setCurrentPage(currentPage - 1);
-    //     }
-    // };
-
     return (
         <>
             {concertsToDisplay?.map((concert) => (
                 <article className="flex-shrink-0 grid pb-8" key={concert._id}>
                     <Link href={"/concerts/" + concert._id} key={concert._id}>
                         <Image
-                            src={"/" + concert.concert_image}
+                            src={`https://concertify.s3.eu-central-1.amazonaws.com/${concert.concert_image}`}
                             width={200}
                             height={200}
                             alt="concert"
