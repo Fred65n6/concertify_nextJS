@@ -22,7 +22,7 @@ const UploadForm: React.FC = () => {
         data.set("Venue_name", venueName);
         data.set("Venue_address", venueAddress);
         data.set("Venue_size", venueSize);
-        data.set("Venue_locatio ", venueLocation);
+        data.set("Venue_location ", venueLocation);
         data.set("Venue_description", venueDescription);
 
         const res = await fetch("/api/data/uploadVenue/", {
@@ -47,7 +47,7 @@ const UploadForm: React.FC = () => {
         );
         const uploadVenueForm = document.getElementById("uploadVenueForm");
         venueUploadedMessage?.classList.remove("hidden");
-        venueUploadedMessage?.classList.add("grid"); // Add the "grid" class to make it visible
+        venueUploadedMessage?.classList.add("grid");
         uploadVenueForm?.classList.add("hidden");
         window.scrollTo(0, 0);
     };
