@@ -15,6 +15,7 @@ import {
   SlClock,
   SlControlPlay,
   SlCalender,
+  SlHeart,
 } from "react-icons/sl";
 import { HiOutlineArrowRight } from "react-icons/hi";
 import BreadcrumbComp from "@/app/components/breadCrumbs/page";
@@ -139,62 +140,6 @@ const SingleConcert: React.FC = () => {
       <BreadcrumbComp />
       {selectedConcert ? (
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
-          <form
-            className="flex flex-col items-center gap-8 pb-12"
-            onSubmit={onSubmit}
-          >
-            <input
-              readOnly={true}
-              className="bg-slate-100 p-4 w-72"
-              type="text"
-              name="Favourite_concert_id"
-              value={selectedConcert._id}
-            />
-            <input
-              readOnly={true}
-              className="bg-slate-100 p-4 w-72"
-              type="text"
-              name="Favourite_concert_image"
-              value={selectedConcert.concert_image}
-            />
-            <input
-              readOnly={true}
-              className="bg-slate-100 p-4 w-72"
-              type="text"
-              name="Favourite_concert_name"
-              value={selectedConcert.concert_name}
-            />
-            <input
-              readOnly={true}
-              className="bg-slate-100 p-4 w-72"
-              type="text"
-              name="Favourite_concert_date"
-              value={selectedConcert.concert_date}
-            />
-            <input
-              readOnly={true}
-              className="bg-slate-100 p-4 w-72"
-              type="text"
-              name="Favourite_concert_artist"
-              value={selectedConcert.concert_artist.artist_name}
-            />
-            <input
-              readOnly={true}
-              className="bg-slate-100 p-4 w-72"
-              type="text"
-              name="Favourite_user_id"
-              value={data}
-            />
-
-            <button
-              className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
-              type="submit"
-              value="upload"
-            >
-              {loading ? "Processing" : "Favourite"}
-            </button>
-          </form>
-
           <figure>
             <Image
               src={`https://concertify.s3.eu-central-1.amazonaws.com/${selectedConcert.concert_image}`}
@@ -205,9 +150,69 @@ const SingleConcert: React.FC = () => {
             />
           </figure>
           <section>
-            <h1 className="text-3xl font-bold my-2">
-              {selectedConcert.concert_name}
-            </h1>
+            <div className="flex md:justify-between">
+              <h1 className="text-3xl font-bold my-2">
+                {selectedConcert.concert_name}
+              </h1>
+              <form
+                className="flex flex-col items-center gap-8 pb-12"
+                onSubmit={onSubmit}
+              >
+                <input
+                  readOnly={true}
+                  className="bg-slate-100 p-4 w-72 hidden"
+                  type="text"
+                  name="Favourite_concert_id"
+                  value={selectedConcert._id}
+                />
+                <input
+                  readOnly={true}
+                  className="bg-slate-100 p-4 w-72 hidden"
+                  type="text"
+                  name="Favourite_concert_image"
+                  value={selectedConcert.concert_image}
+                />
+                <input
+                  readOnly={true}
+                  className="bg-slate-100 p-4 w-72 hidden"
+                  type="text"
+                  name="Favourite_concert_name"
+                  value={selectedConcert.concert_name}
+                />
+                <input
+                  readOnly={true}
+                  className="bg-slate-100 p-4 w-72 hidden"
+                  type="text"
+                  name="Favourite_concert_date"
+                  value={selectedConcert.concert_date}
+                />
+                <input
+                  readOnly={true}
+                  className="bg-slate-100 p-4 w-72 hidden"
+                  type="text"
+                  name="Favourite_concert_artist"
+                  value={selectedConcert.concert_artist.artist_name}
+                />
+                <input
+                  readOnly={true}
+                  className="bg-slate-100 p-4 w-72 hidden"
+                  type="text"
+                  name="Favourite_user_id"
+                  value={data}
+                />
+
+                <button
+                  className="flex items-center place-content-center rounded-full bg-purple-100 brand_purple w-10 h-10  hover:bg-purple-200"
+                  type="submit"
+                  value="upload"
+                >
+                  <SlHeart
+                    className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
+                    id="favourites"
+                  />
+                </button>
+              </form>
+            </div>
 
             <ul className="flex flex-col gap-4">
               {/* Concert genre tag*/}
