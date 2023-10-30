@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast/headless";
 import Link from "next/link";
+import jwt_decode from "jwt-decode"; // You'll need a library to decode the JWT token
 
 export default function LoginPage() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
