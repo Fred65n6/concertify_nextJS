@@ -24,6 +24,16 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    favourites: [
+        {
+            favourite_concert_id: String,
+            favourite_concert_image: String,
+            favourite_concert_name: String,
+            favourite_concert_date: String,
+            favourite_concert_artist: String,
+            // Add other fields as needed for each favorite
+        },
+    ],
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,
