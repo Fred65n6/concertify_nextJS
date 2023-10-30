@@ -136,24 +136,31 @@ const UploadForm: React.FC = () => {
     };
 
     return (
-        <div className="flex-col items-center flex">
+        <div className="flex flex-col w-full md:w-4/6 gap-6 mb-24">
+            <h1 className="font-bold text-4xl pb-4">Upload a concert</h1>
             <form
                 id="uploadConcertForm"
-                className="flex flex-col items-center gap-8 pb-12"
+                className="flex flex-col gap-8 w-full"
                 onSubmit={onSubmit}
             >
-                <input
-                    className="bg-slate-100 p-4 w-72"
-                    type="text"
-                    name="Concert_name"
-                    value={concertName}
-                    onChange={(e) => setConcertName(e.target.value)}
-                    placeholder="Concert Name"
-                />
-                <div className="grid">
+                {/* Concert name */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="Concert_name">Concert name</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        name="Concert_name"
+                        value={concertName}
+                        onChange={(e) => setConcertName(e.target.value)}
+                        placeholder="Concert Name"
+                    />
+                </div>
+
+                {/* Concert date */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="Concert_date">Concert date:</label>
                     <input
-                        className="bg-slate-100 p-4 w-72"
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         type="date"
                         name="Concert_date"
                         value={concertDate}
@@ -161,10 +168,12 @@ const UploadForm: React.FC = () => {
                         placeholder="Concert Date"
                     />
                 </div>
-                <div className="grid">
+
+                {/* Concert start time */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="Concert_start">Concert start time:</label>
                     <input
-                        className="bg-slate-100 p-4 w-72"
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         type="time"
                         name="Concert_start"
                         value={concertStart}
@@ -172,10 +181,12 @@ const UploadForm: React.FC = () => {
                         placeholder="Concert start time"
                     />
                 </div>
-                <div className="grid">
+
+                {/* Doors open */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="Concert_doors">Doors open at:</label>
                     <input
-                        className="bg-slate-100 p-4 w-72"
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         type="time"
                         name="Concert_doors"
                         value={concertDoors}
@@ -183,129 +194,155 @@ const UploadForm: React.FC = () => {
                         placeholder="Concert Doors"
                     />
                 </div>
-                <input
-                    className="bg-slate-100 p-4 w-72"
-                    type="text"
-                    name="Concert_description"
-                    value={concertDescription}
-                    onChange={(e) => setConcertDescription(e.target.value)}
-                    placeholder="Concert Description"
-                />
-                <select
-                    className="p-4 w-72"
-                    value={selectedArtist ? selectedArtist._id : ""}
-                    onChange={(e) =>
-                        setSelectedArtist(
-                            artists.find(
-                                (artist) => artist._id === e.target.value
-                            ) || null
-                        )
-                    }
-                >
-                    <option value="">Select an artist</option>
-                    {artists.map((artist) => (
-                        <option key={artist._id} value={artist._id}>
-                            {artist.artist_name}
-                        </option>
-                    ))}
-                </select>
-                <input
-                    readOnly={true}
-                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
-                    type="text"
-                    name="Concert_artist_name"
-                    value={selectedArtist ? selectedArtist.artist_name : ""}
-                    onChange={(e) => setConcertArtistName(e.target.value)}
-                    placeholder="Artist Name"
-                />
 
-                <input
-                    readOnly={true}
-                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
-                    type="text"
-                    name="Concert_artist_id"
-                    value={selectedArtist ? selectedArtist._id : ""}
-                    onChange={(e) => setConcertArtistId(e.target.value)}
-                    placeholder="Artist ID"
-                />
-                <select
-                    className="p-4 w-72"
-                    value={selectedVenue ? selectedVenue._id : ""}
-                    onChange={(e) =>
-                        setSelectedVenue(
-                            venues.find(
-                                (venue) => venue._id === e.target.value
-                            ) || null
-                        )
-                    }
-                >
-                    <option value="">Select a venue</option>
-                    {venues.map((venue) => (
-                        <option key={venue._id} value={venue._id}>
-                            {venue.venue_name}
-                        </option>
-                    ))}
-                </select>
-                <input
-                    readOnly={true}
-                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
-                    type="text"
-                    name="Concert_venue_name"
-                    value={selectedVenue ? selectedVenue.venue_name : ""}
-                    onChange={(e) => setConcertVenueName(e.target.value)}
-                    placeholder="venue Name"
-                />
-                <input
-                    readOnly={true}
-                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
-                    type="text"
-                    name="Concert_venue_id"
-                    value={selectedVenue ? selectedVenue._id : ""}
-                    onChange={(e) => setConcertVenueId(e.target.value)}
-                    placeholder="Venue ID"
-                />
-                <select
-                    className="p-4 w-72"
-                    value={selectedGenre ? selectedGenre._id : ""}
-                    onChange={(e) =>
-                        setSelectedGenre(
-                            genres.find(
-                                (genre) => genre._id === e.target.value
-                            ) || null
-                        )
-                    }
-                >
-                    <option value="">Select a genre</option>
-                    {genres.map((genre) => (
-                        <option key={genre._id} value={genre._id}>
-                            {genre.genre_name}
-                        </option>
-                    ))}
-                </select>
-                <input
-                    readOnly={true}
-                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
-                    type="text"
-                    name="Concert_genre_name"
-                    value={selectedGenre ? selectedGenre.genre_name : ""}
-                    onChange={(e) => setConcertGenreName(e.target.value)}
-                    placeholder="venue Name"
-                />
-                <input
-                    readOnly={true}
-                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
-                    type="text"
-                    name="Concert_genre_id"
-                    value={selectedGenre ? selectedGenre._id : ""}
-                    onChange={(e) => setConcertGenreId(e.target.value)}
-                    placeholder="Venue ID"
-                />
+                {/* Description */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="Concert_description">
+                        Concert description
+                    </label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        name="Concert_description"
+                        value={concertDescription}
+                        onChange={(e) => setConcertDescription(e.target.value)}
+                        placeholder="Concert Description"
+                    />
+                </div>
 
-                <input
-                    type="file"
-                    name="file"
-                    onChange={(e) => setFile(e.target.files?.[0] || null)}
-                />
+                {/* Select artist */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="Concert_artist">Artist</label>
+                    <select
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        value={selectedArtist ? selectedArtist._id : ""}
+                        onChange={(e) =>
+                            setSelectedArtist(
+                                artists.find(
+                                    (artist) => artist._id === e.target.value
+                                ) || null
+                            )
+                        }
+                    >
+                        <option value="">Select an artist</option>
+                        {artists.map((artist) => (
+                            <option key={artist._id} value={artist._id}>
+                                {artist.artist_name}
+                            </option>
+                        ))}
+                    </select>
+                    <input
+                        readOnly={true}
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full hidden"
+                        type="text"
+                        name="Concert_artist_name"
+                        value={selectedArtist ? selectedArtist.artist_name : ""}
+                        onChange={(e) => setConcertArtistName(e.target.value)}
+                        placeholder="Artist Name"
+                    />
+
+                    <input
+                        readOnly={true}
+                        className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                        type="text"
+                        name="Concert_artist_id"
+                        value={selectedArtist ? selectedArtist._id : ""}
+                        onChange={(e) => setConcertArtistId(e.target.value)}
+                        placeholder="Artist ID"
+                    />
+                </div>
+
+                {/* Select venue */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="Concert_venue">Venue</label>
+                    <select
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        value={selectedVenue ? selectedVenue._id : ""}
+                        onChange={(e) =>
+                            setSelectedVenue(
+                                venues.find(
+                                    (venue) => venue._id === e.target.value
+                                ) || null
+                            )
+                        }
+                    >
+                        <option value="">Select a venue</option>
+                        {venues.map((venue) => (
+                            <option key={venue._id} value={venue._id}>
+                                {venue.venue_name}
+                            </option>
+                        ))}
+                    </select>
+                    <input
+                        readOnly={true}
+                        className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                        type="text"
+                        name="Concert_venue_name"
+                        value={selectedVenue ? selectedVenue.venue_name : ""}
+                        onChange={(e) => setConcertVenueName(e.target.value)}
+                        placeholder="venue Name"
+                    />
+                    <input
+                        readOnly={true}
+                        className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                        type="text"
+                        name="Concert_venue_id"
+                        value={selectedVenue ? selectedVenue._id : ""}
+                        onChange={(e) => setConcertVenueId(e.target.value)}
+                        placeholder="Venue ID"
+                    />
+                </div>
+
+                {/* Select genre */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="Concert_genre">Genre</label>
+                    <select
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        value={selectedGenre ? selectedGenre._id : ""}
+                        onChange={(e) =>
+                            setSelectedGenre(
+                                genres.find(
+                                    (genre) => genre._id === e.target.value
+                                ) || null
+                            )
+                        }
+                    >
+                        <option value="">Select a genre</option>
+                        {genres.map((genre) => (
+                            <option key={genre._id} value={genre._id}>
+                                {genre.genre_name}
+                            </option>
+                        ))}
+                    </select>
+                    <input
+                        readOnly={true}
+                        className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                        type="text"
+                        name="Concert_genre_name"
+                        value={selectedGenre ? selectedGenre.genre_name : ""}
+                        onChange={(e) => setConcertGenreName(e.target.value)}
+                        placeholder="venue Name"
+                    />
+                    <input
+                        readOnly={true}
+                        className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                        type="text"
+                        name="Concert_genre_id"
+                        value={selectedGenre ? selectedGenre._id : ""}
+                        onChange={(e) => setConcertGenreId(e.target.value)}
+                        placeholder="Venue ID"
+                    />
+                </div>
+
+                {/* Upload image */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <input
+                        type="file"
+                        name="file"
+                        onChange={(e) => setFile(e.target.files?.[0] || null)}
+                    />
+                </div>
+
                 <button
                     className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
                     type="submit"
@@ -314,17 +351,23 @@ const UploadForm: React.FC = () => {
                     {loading ? "Processing" : "Upload"}
                 </button>
             </form>
-            <div
-                id="concertUploadedMessage"
-                className="gap-8 text-center hidden"
-            >
-                <h2 className="text-2xl">Concert Uploaded!</h2>
-                <a
-                    className="brand_gradient py-2 px-4 text-white rounded-full"
-                    href="/uploadConcert"
-                >
-                    Upload another
-                </a>
+
+            <div id="concertUploadedMessage" className="hidden">
+                <h2 className="text-2xl">Concert uploaded successfully 🎉</h2>
+                <div className="flex gap-4 mt-8">
+                    <a
+                        className="brand_gradient py-2 px-4 text-white rounded-full"
+                        href="/uploadConcert"
+                    >
+                        Upload another
+                    </a>
+                    <a
+                        className="rounded-full px-8 py-2 bg-purple-100 brand_purple flex items-center hover:bg-purple-200"
+                        href="/concerts"
+                    >
+                        See all concerts
+                    </a>
+                </div>
             </div>
         </div>
     );

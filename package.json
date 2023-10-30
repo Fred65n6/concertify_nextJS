@@ -18,7 +18,8 @@
         "@types/react": "18.2.22",
         "@types/react-dom": "18.2.7",
         "autoprefixer": "10.4.15",
-        "axios": "^1.5.0",
+        "aws-sdk": "^2.1481.0",
+        "axios": "^1.5.1",
         "bcryptjs": "^2.4.3",
         "eslint": "8.49.0",
         "eslint-config-next": "13.4.19",
@@ -45,7 +46,8 @@
         "tailwindcss": "3.3.3",
         "typescript": "5.2.2",
         "universal-cookie": "^6.1.1",
-        "uuid": "^9.0.1"
+        "uuid": "^9.0.1",
+        "vercel": "^32.5.0"
     },
     "devDependencies": {
         "@types/bcryptjs": "^2.4.4",

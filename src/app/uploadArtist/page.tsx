@@ -12,7 +12,10 @@ const UploadForm: React.FC = () => {
 
     const [file, setFile] = useState<File | null>(null);
     const [artistName, setArtistName] = useState("");
+    const [artistFullName, setArtistFullName] = useState("");
     const [artistNation, setArtistNation] = useState("");
+    const [artistDescription, setArtistDescription] = useState("");
+    const [artistDob, setArtistDob] = useState("");
 
     const [genres, setGenres] = useState<Genre[]>([]);
     const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
@@ -42,10 +45,13 @@ const UploadForm: React.FC = () => {
 
         const data = new FormData();
         data.set("file", file);
-        data.set("Artist_name", artistName);
-        data.set("Artist_nation", artistNation);
-        data.set("Artist_genre_id", selectedGenre!._id);
-        data.set("Artist_genre_name", selectedGenre!.genre_name);
+        data.set("artist_name", artistName);
+        data.set("artist_full_name", artistFullName);
+        data.set("artist_description", artistDescription);
+        data.set("artist_dob", artistDob);
+        data.set("artist_nation", artistNation);
+        data.set("artist_genre_id", selectedGenre!._id);
+        data.set("artist_genre_name", selectedGenre!.genre_name);
 
         const res = await fetch("/api/data/uploadArtist/", {
             method: "POST",
@@ -75,44 +81,92 @@ const UploadForm: React.FC = () => {
     };
 
     return (
-        <div className="flex-col items-center flex">
+        <div className="flex flex-col w-full md:w-4/6 gap-6 mb-24">
+            <h1 className="font-bold text-4xl pb-4">Upload an artist</h1>
             <form
                 id="uploadArtistForm"
-                className="flex flex-col items-center gap-8 pb-12"
+                className="flex flex-col gap-8 w-full"
                 onSubmit={onSubmit}
             >
-                <input
-                    className="bg-slate-100 p-4 w-72"
-                    type="text"
-                    name="Artist_name"
-                    value={artistName}
-                    onChange={(e) => setArtistName(e.target.value)}
-                    placeholder="Artist Name"
-                />
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="artist_name">Artist name</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        id="artist_name"
+                        name="artist_name"
+                        value={artistName}
+                        onChange={(e) => setArtistName(e.target.value)}
+                        placeholder="Artist name"
+                    />
+                </div>
 
-                <select
-                    className="p-4 w-72"
-                    value={selectedGenre ? selectedGenre._id : ""}
-                    onChange={(e) =>
-                        setSelectedGenre(
-                            genres.find(
-                                (genre) => genre._id === e.target.value
-                            ) || null
-                        )
-                    }
-                >
-                    <option value="">Select a genre</option>
-                    {genres.map((genre) => (
-                        <option key={genre._id} value={genre._id}>
-                            {genre.genre_name}
-                        </option>
-                    ))}
-                </select>
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="artist_full_name">Full name</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        id="artist_full_name"
+                        name="artist_full_name"
+                        value={artistFullName}
+                        onChange={(e) => setArtistFullName(e.target.value)}
+                        placeholder="Full name"
+                    />
+                </div>
+
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="artist_description">Description</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        id="artist_description"
+                        name="artist_description"
+                        value={artistDescription}
+                        onChange={(e) => setArtistDescription(e.target.value)}
+                        placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                    />
+                </div>
+
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="artist_full_name">Date of birth</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="date"
+                        id="artist_dob"
+                        name="artist_dob"
+                        value={artistDob}
+                        onChange={(e) => setArtistDob(e.target.value)}
+                        placeholder="Date of birth"
+                    />
+                </div>
+
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="artist_genre">Genre</label>
+                    <select
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        value={selectedGenre ? selectedGenre._id : ""}
+                        onChange={(e) =>
+                            setSelectedGenre(
+                                genres.find(
+                                    (genre) => genre._id === e.target.value
+                                ) || null
+                            )
+                        }
+                    >
+                        <option value="">Select a genre</option>
+                        {genres.map((genre) => (
+                            <option key={genre._id} value={genre._id}>
+                                {genre.genre_name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
                 <input
                     readOnly={true}
-                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full hidden"
                     type="text"
-                    name="Artist_genre_name"
+                    name="artist_genre_name"
                     value={selectedGenre ? selectedGenre.genre_name : ""}
                     onChange={(e) => setArtistGenreName(e.target.value)}
                     placeholder="artist genre name"
@@ -120,7 +174,7 @@ const UploadForm: React.FC = () => {
 
                 <input
                     readOnly={true}
-                    className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full hidden"
                     type="text"
                     name="Concert_genre_id"
                     value={selectedGenre ? selectedGenre._id : ""}
@@ -128,40 +182,51 @@ const UploadForm: React.FC = () => {
                     placeholder="artist genre name"
                 />
 
-                <input
-                    className="bg-slate-100 p-4 w-72"
-                    type="text"
-                    name="Artist_nation"
-                    value={artistNation}
-                    onChange={(e) => setArtistNation(e.target.value)}
-                    placeholder="Artist Nation"
-                />
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="artist_nation">Artist nationality</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        name="artist_nation"
+                        value={artistNation}
+                        onChange={(e) => setArtistNation(e.target.value)}
+                        placeholder="Two letter abbrivation (e.g. UK)"
+                    />
+                </div>
 
-                <input
-                    type="file"
-                    name="file"
-                    onChange={(e) => setFile(e.target.files?.[0] || null)}
-                />
+                <div className="form-group flex flex-col gap-2">
+                    <label htmlFor="file">Upload image</label>
+                    <input
+                        type="file"
+                        name="file"
+                        onChange={(e) => setFile(e.target.files?.[0] || null)}
+                    />
+                </div>
 
                 <button
                     className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
                     type="submit"
                     value="upload"
                 >
-                    {loading ? "Processing" : "Upload"}
+                    {loading ? "Processing" : "Confirm"}
                 </button>
             </form>
-            <div
-                id="artistUploadedMessage"
-                className="gap-8 text-center hidden"
-            >
-                <h2 className="text-2xl">Artist Uploaded!</h2>
-                <a
-                    className="brand_gradient py-2 px-4 text-white rounded-full"
-                    href="/uploadArtist"
-                >
-                    Upload another
-                </a>
+            <div id="artistUploadedMessage" className="hidden">
+                <h2 className="text-2xl">Artist uploaded successfully 🎉</h2>
+                <div className="flex gap-4 mt-8">
+                    <a
+                        className="brand_gradient py-2 px-4 text-white rounded-full"
+                        href="/uploadArtist"
+                    >
+                        Upload another
+                    </a>
+                    <a
+                        className="rounded-full px-8 py-2 bg-purple-100 brand_purple flex items-center hover:bg-purple-200"
+                        href="/artists"
+                    >
+                        See all artists
+                    </a>
+                </div>
             </div>
         </div>
     );

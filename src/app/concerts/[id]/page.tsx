@@ -48,7 +48,47 @@ interface ConcertSingle {
   concert_doors: string;
 }
 
-export default function SingleConcert() {
+const SingleConcert: React.FC = () => {
+  const [userData, setUserData] = useState<string | null>(null);
+  const [favouriteUserId, setFavouriteUserId] = useState("");
+  const [data, setData] = useState("Loading");
+
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    if (!selectedConcert) {
+      return;
+    }
+
+    const data = new FormData();
+    data.set("Favourite_concert_id", selectedConcert._id);
+    data.set("Favourite_concert_image", selectedConcert.concert_image);
+    data.set("Favourite_concert_name", selectedConcert.concert_name);
+    data.set("Favourite_concert_date", selectedConcert.concert_date);
+    data.set(
+      "Favourite_concert_artist",
+      selectedConcert.concert_artist?.artist_name
+    );
+    data.set("Favourite_user_id", userData || "");
+
+    const res = await fetch("/api/data/addFavourite/", {
+      method: "POST",
+      body: data,
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error(errorText);
+    }
+
+    if (res.ok) {
+      setLoading(false);
+    }
+  };
+
   const params = useParams();
   const id = params.id;
   const [concerts, setConcerts] = useState<ConcertSingle[]>([]);
@@ -70,6 +110,18 @@ export default function SingleConcert() {
     fetchData();
   }, []);
 
+  // Get User Cookie
+  const getUserDetails = async () => {
+    const res = await axios.get("/api/users/cookieUser");
+    console.log(res.data);
+    setUserData(res.data.data._id);
+  };
+
+  useEffect(() => {
+    // Fetch user details when the component mounts
+    getUserDetails();
+  }, []);
+
   // Use a useEffect to update the selectedConcert when the 'id' or 'concerts' array changes
   useEffect(() => {
     if (id && concerts.length > 0) {
@@ -84,19 +136,68 @@ export default function SingleConcert() {
     <div>
       <LoginPage />
       <SignupPage />
-      <BreadcrumbComp
-        homeElement={"Home"}
-        separator={<span> | </span>}
-        activeClasses="brand_purple_breadcrumb"
-        containerClasses="flex py-5 brand_purple opacity-70"
-        listClasses="hover:underline mx-2 font-bold brand_purple opacity-70"
-        capitalizeLinks
-      />
+      <BreadcrumbComp />
       {selectedConcert ? (
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
+          <form
+            className="flex flex-col items-center gap-8 pb-12"
+            onSubmit={onSubmit}
+          >
+            <input
+              readOnly={true}
+              className="bg-slate-100 p-4 w-72"
+              type="text"
+              name="Favourite_concert_id"
+              value={selectedConcert._id}
+            />
+            <input
+              readOnly={true}
+              className="bg-slate-100 p-4 w-72"
+              type="text"
+              name="Favourite_concert_image"
+              value={selectedConcert.concert_image}
+            />
+            <input
+              readOnly={true}
+              className="bg-slate-100 p-4 w-72"
+              type="text"
+              name="Favourite_concert_name"
+              value={selectedConcert.concert_name}
+            />
+            <input
+              readOnly={true}
+              className="bg-slate-100 p-4 w-72"
+              type="text"
+              name="Favourite_concert_date"
+              value={selectedConcert.concert_date}
+            />
+            <input
+              readOnly={true}
+              className="bg-slate-100 p-4 w-72"
+              type="text"
+              name="Favourite_concert_artist"
+              value={selectedConcert.concert_artist.artist_name}
+            />
+            <input
+              readOnly={true}
+              className="bg-slate-100 p-4 w-72"
+              type="text"
+              name="Favourite_user_id"
+              value={data}
+            />
+
+            <button
+              className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
+              type="submit"
+              value="upload"
+            >
+              {loading ? "Processing" : "Favourite"}
+            </button>
+          </form>
+
           <figure>
             <Image
-              src={"/" + selectedConcert.concert_image}
+              src={`https://concertify.s3.eu-central-1.amazonaws.com/${selectedConcert.concert_image}`}
               width={200}
               height={200}
               alt="concert"
@@ -206,4 +307,6 @@ export default function SingleConcert() {
       )}
     </div>
   );
-}
+};
+
+export default SingleConcert;

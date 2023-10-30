@@ -8,6 +8,9 @@ const UploadForm: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);
     const [venueName, setVenueName] = useState("");
     const [venueAddress, setVenueAddress] = useState("");
+    const [venueSize, setVenueSize] = useState("");
+    const [venueLocation, setVenueLocation] = useState("");
+    const [venueDescription, setVenueDescription] = useState("");
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -18,6 +21,9 @@ const UploadForm: React.FC = () => {
         data.set("file", file);
         data.set("Venue_name", venueName);
         data.set("Venue_address", venueAddress);
+        data.set("Venue_size", venueSize);
+        data.set("Venue_location ", venueLocation);
+        data.set("Venue_description", venueDescription);
 
         const res = await fetch("/api/data/uploadVenue/", {
             method: "POST",
@@ -41,7 +47,7 @@ const UploadForm: React.FC = () => {
         );
         const uploadVenueForm = document.getElementById("uploadVenueForm");
         venueUploadedMessage?.classList.remove("hidden");
-        venueUploadedMessage?.classList.add("grid"); // Add the "grid" class to make it visible
+        venueUploadedMessage?.classList.add("grid");
         uploadVenueForm?.classList.add("hidden");
         window.scrollTo(0, 0);
     };
@@ -69,6 +75,30 @@ const UploadForm: React.FC = () => {
                     value={venueAddress}
                     onChange={(e) => setVenueAddress(e.target.value)}
                     placeholder="Venue address"
+                />
+                <input
+                    className="bg-slate-100 p-4 w-72"
+                    type="text"
+                    name="Venue_location"
+                    value={venueLocation}
+                    onChange={(e) => setVenueLocation(e.target.value)}
+                    placeholder="Venue location (like KBH V)"
+                />
+                <input
+                    className="bg-slate-100 p-4 w-72"
+                    type="text"
+                    name="Venue_size"
+                    value={venueSize}
+                    onChange={(e) => setVenueSize(e.target.value)}
+                    placeholder="Venue size"
+                />
+                <input
+                    className="bg-slate-100 p-4 w-72"
+                    type="text"
+                    name="Venue_description"
+                    value={venueDescription}
+                    onChange={(e) => setVenueDescription(e.target.value)}
+                    placeholder="Venue description"
                 />
 
                 <input
