@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -7,7 +6,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Progress } from "flowbite-react";
 import { SiFacebook, SiGoogle, SiApple } from "react-icons/si";
-import ShowSignupGenres from "../components/genresSignup/page";
+import ShowGenres from "../genreDropdown/page";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -76,24 +75,6 @@ export default function SignupPage() {
     }
   };
 
-  const handleSetProfileGenres = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.post("/api/users/setGenres", user);
-      console.log("genres updated", response.data);
-      showProfileVenues();
-    } catch (error: any) {
-      if (error.response && error.response.data && error.response.data.error) {
-        setError(error.response.data.error);
-      } else {
-        setError("An error occurred during your genres selection.");
-      }
-      console.log("API genre selection failed", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const showProfileVenues = () => {
     const profileVenues = document.getElementById("profile_venues");
     const profileGenres = document.getElementById("profile_genres");
@@ -103,6 +84,7 @@ export default function SignupPage() {
       profileGenres?.classList.add("hidden");
     }
   };
+
   const showMessage = () => {
     const verifiedMessage = document.getElementById("verified_message");
     const signUpForm = document.getElementById("signup_form");
@@ -287,11 +269,40 @@ export default function SignupPage() {
               </p>
             </div>
             <div className="px-4">
-              <ShowSignupGenres />
+              {/* GENREDROPDOWN START */}
+              {/* <div>
+                <label htmlFor="genreSelect">Select genres: </label>
+                <select
+                  className="p-4"
+                  id="genreSelect"
+                  onChange={handleGenreChange}
+                  value={selectedGenre}
+                >
+                  <option value="">Select a Genre</option>
+                  {genres.map((genre) => (
+                    <option key={genre._id} value={genre.genre_name}>
+                      {genre.genre_name}
+                    </option>
+                  ))}
+                </select>
+
+                <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8 pb-10 pt-10">
+                  {selectedGenres.map((genre, index) => (
+                    <input
+                      className="brand_gradient text-white py-2 px-2 text-center rounded-full"
+                      type="text"
+                      value={genre}
+                      key={index}
+                      readOnly // Prevents user from editing the input
+                    />
+                  ))}
+                </div>
+              </div> */}
+              {/* GENREDROPDOWN SLUT */}
             </div>
             <div className="flex flex-col items-center justify-center py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
               <button
-                onClick={handleSetProfileGenres}
+                onClick={showProfileVenues}
                 className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white"
               >
                 Submit
