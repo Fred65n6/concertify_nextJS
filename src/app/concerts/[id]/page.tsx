@@ -17,6 +17,8 @@ import {
   SlCalender,
   SlHeart,
 } from "react-icons/sl";
+import { GiHearts } from "react-icons/gi";
+
 import { HiOutlineArrowRight } from "react-icons/hi";
 import BreadcrumbComp from "@/app/components/breadCrumbs/page";
 
@@ -56,7 +58,42 @@ const SingleConcert: React.FC = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const deleteFavourite = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    if (!selectedConcert) {
+      setLoading(false); // Set loading to false if there's no selected concert
+      return;
+    }
+
+    const data = new FormData();
+    data.set("Favourite_user_id", userData || "");
+    data.set("Favourite_concert_id", selectedConcert._id);
+
+    try {
+      const res = await fetch("/api/data/deleteFavourite/", {
+        method: "DELETE",
+        body: data,
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.error(errorText);
+        // Handle the error here, e.g., show an error message to the user
+      } else {
+        // Handle success case
+        setLoading(false);
+        deletedFromFavourites();
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      // Handle any unexpected errors here
+    }
+  };
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const frm = event?.target;
     e.preventDefault();
     setLoading(true);
 
@@ -87,7 +124,30 @@ const SingleConcert: React.FC = () => {
 
     if (res.ok) {
       setLoading(false);
+      addedToFavouritesMessage();
     }
+  };
+
+  const addedToFavouritesMessage = () => {
+    const notAddedToFavourites = document.getElementById(
+      "notAddedToFavourites"
+    );
+    const addedToFavourites = document.getElementById("addedToFavourites");
+
+    addedToFavourites?.classList.remove("hidden");
+    addedToFavourites?.classList.add("flex");
+    notAddedToFavourites?.classList.add("hidden");
+  };
+
+  const deletedFromFavourites = () => {
+    const notAddedToFavourites = document.getElementById(
+      "notAddedToFavourites"
+    );
+    const addedToFavourites = document.getElementById("addedToFavourites");
+
+    addedToFavourites?.classList.add("hidden");
+    addedToFavourites?.classList.remove("flex");
+    notAddedToFavourites?.classList.remove("hidden");
   };
 
   const params = useParams();
@@ -155,6 +215,7 @@ const SingleConcert: React.FC = () => {
                 {selectedConcert.concert_name}
               </h1>
               <form
+                id="notAddedToFavourites"
                 className="flex flex-col items-center gap-8 pb-12"
                 onSubmit={onSubmit}
               >
@@ -207,6 +268,38 @@ const SingleConcert: React.FC = () => {
                   value="upload"
                 >
                   <SlHeart
+                    className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
+                    id="favourites"
+                  />
+                </button>
+              </form>
+
+              <form
+                id="addedToFavourites"
+                className="hidden flex-col items-center gap-8 pb-12"
+                onSubmit={deleteFavourite}
+              >
+                <input
+                  readOnly={true}
+                  className="bg-slate-100 p-4 w-72 hidden"
+                  type="text"
+                  name="Favourite_concert_id"
+                  value={selectedConcert._id}
+                />
+                <input
+                  readOnly={true}
+                  className="bg-slate-100 p-4 w-72 hidden"
+                  type="text"
+                  name="Favourite_user_id"
+                  value={data}
+                />
+
+                <button
+                  className="flex items-center place-content-center rounded-full bg-purple-100 brand_purple w-10 h-10  hover:bg-purple-200"
+                  type="submit"
+                  value="upload"
+                >
+                  <GiHearts
                     className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
                     id="favourites"
                   />

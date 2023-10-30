@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { SlHeart } from "react-icons/sl";
+// import { SlHeart } from "react-icons/sl";
 import Image from "next/image";
 import Link from "next/link";
 import BreadcrumbComp from "../components/breadCrumbs/page";
@@ -18,13 +18,17 @@ interface Favourite {
   // Add other properties from your Venue model
 }
 const FavouriteList: React.FC = () => {
-  const [favourites, setArtists] = useState<Favourite[]>([]);
+  const [favourites, setFavourites] = useState<Favourite[]>([]);
+
+  const [userData, setUserData] = useState<string | null>(null);
+  const [favouriteUserId, setFavouriteUserId] = useState("");
+  const [data, setData] = useState("Loading");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("/api/data/favouriteData"); // Replace with your actual API endpoint
-        setArtists(response.data.data);
+        setFavourites(response.data.data);
       } catch (error) {
         console.error("Error fetching venues:", error);
       }
@@ -32,6 +36,30 @@ const FavouriteList: React.FC = () => {
 
     fetchData();
   }, []);
+
+  // Get User Cookie
+  const getUserDetails = async () => {
+    const res = await axios.get("/api/users/cookieUser");
+    console.log(res.data);
+    setUserData(res.data.data._id);
+  };
+
+  useEffect(() => {
+    // Fetch user details when the component mounts
+    getUserDetails();
+  }, []);
+
+  // Use a useEffect to update the selectedVenue when the 'id' or 'venues' array changes
+  // useEffect(() => {
+  //   if (data && favourites.length > 0) {
+  //     const matchingFavourite = favourites.find(
+  //       (favourite) => favourite.favourite_user_id === data
+  //     );
+  //     setFavourites(matchingFavourite || null);
+  //   } else {
+  //     setFavourites(null);
+  //   }
+  // }, [data, favourites]);
 
   return (
     <>
@@ -60,7 +88,7 @@ const FavouriteList: React.FC = () => {
                     ? favourite.favourite_concert_name
                     : "Unknown concert_name"}
                 </h4>
-                <button
+                {/* <button
                   className="flex items-center place-content-center rounded-full bg-purple-100 brand_purple w-10 h-10  hover:bg-purple-200"
                   type="submit"
                   value="upload"
@@ -69,7 +97,7 @@ const FavouriteList: React.FC = () => {
                     className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
                     id="favourites"
                   />
-                </button>
+                </button> */}
               </div>
               <p className="text-gray-600 text-sm dark:text-gray-400">
                 <span className="font-bold mr-1">
