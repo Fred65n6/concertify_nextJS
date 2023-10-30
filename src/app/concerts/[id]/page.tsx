@@ -70,6 +70,10 @@ const SingleConcert: React.FC = () => {
     data.set("Favourite_concert_name", selectedConcert.concert_name);
     data.set("Favourite_concert_date", selectedConcert.concert_date);
     data.set(
+      "Favourite_concert_venue",
+      selectedConcert.concert_venue?.venue_name
+    );
+    data.set(
       "Favourite_concert_artist",
       selectedConcert.concert_artist?.artist_name
     );
@@ -199,6 +203,13 @@ const SingleConcert: React.FC = () => {
                   type="text"
                   name="Favourite_concert_artist"
                   value={selectedConcert.concert_artist.artist_name}
+                />
+                <input
+                  readOnly={true}
+                  className="bg-slate-100 p-4 w-72 hidden"
+                  type="text"
+                  name="Favourite_concert_venue"
+                  value={selectedConcert.concert_venue?.venue_name}
                 />
 
                 <input
