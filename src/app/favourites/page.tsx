@@ -49,17 +49,9 @@ const FavouriteList: React.FC = () => {
     getUserDetails();
   }, []);
 
-  // Use a useEffect to update the selectedVenue when the 'id' or 'venues' array changes
-  // useEffect(() => {
-  //   if (data && favourites.length > 0) {
-  //     const matchingFavourite = favourites.find(
-  //       (favourite) => favourite.favourite_user_id === data
-  //     );
-  //     setFavourites(matchingFavourite || null);
-  //   } else {
-  //     setFavourites(null);
-  //   }
-  // }, [data, favourites]);
+  const userFavorites = favourites.filter(
+    (favourite) => favourite.favourite_user_id === userData
+  );
 
   return (
     <>
@@ -67,7 +59,7 @@ const FavouriteList: React.FC = () => {
       <div>
         <h1 className="font-bold text-4xl pb-4 pt-8">Favourites</h1>
         <ul className="grid md:grid-cols-4 gap-8">
-          {favourites.map((favourite) => (
+          {userFavorites.map((favourite) => (
             <article className="w-auto" key={favourite._id}>
               <Link href={"/concerts/" + favourite.favourite_concert_id}>
                 <Image
@@ -88,16 +80,6 @@ const FavouriteList: React.FC = () => {
                     ? favourite.favourite_concert_name
                     : "Unknown concert_name"}
                 </h4>
-                {/* <button
-                  className="flex items-center place-content-center rounded-full bg-purple-100 brand_purple w-10 h-10  hover:bg-purple-200"
-                  type="submit"
-                  value="upload"
-                >
-                  <SlHeart
-                    className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
-                    id="favourites"
-                  />
-                </button> */}
               </div>
               <p className="text-gray-600 text-sm dark:text-gray-400">
                 <span className="font-bold mr-1">
