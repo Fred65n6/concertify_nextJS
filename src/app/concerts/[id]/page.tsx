@@ -150,7 +150,7 @@ const SingleConcert: React.FC = () => {
                 const errorText = await res.text();
                 console.error(errorText);
             } else {
-                deletedavourite();
+                setIsInFavorites(false);
                 setLoading(false);
             }
         } catch (error) {
@@ -191,19 +191,11 @@ const SingleConcert: React.FC = () => {
                 console.error(errorText);
             } else {
                 setLoading(false);
-                addedFavourite();
+                setIsInFavorites(true);
             }
         } catch (error) {
             console.error("An error occurred:", error);
         }
-    };
-
-    const addedFavourite = () => {
-        setIsInFavorites(true);
-    };
-
-    const deletedavourite = () => {
-        setIsInFavorites(false);
     };
 
     return (
