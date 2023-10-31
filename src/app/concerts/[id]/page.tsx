@@ -7,7 +7,9 @@ import Image from "next/image";
 import Link from "next/link";
 import SignupPage from "@/app/signup/page";
 import LoginPage from "@/app/login/page";
-
+import {GiHearts} from "react-icons/gi";
+import {HiOutlineArrowRight} from "react-icons/hi";
+import BreadcrumbComp from "@/app/components/breadCrumbs/page";
 import {
     SlLocationPin,
     SlStar,
@@ -17,9 +19,6 @@ import {
     SlCalender,
     SlHeart,
 } from "react-icons/sl";
-import {GiHearts} from "react-icons/gi";
-import {HiOutlineArrowRight} from "react-icons/hi";
-import BreadcrumbComp from "@/app/components/breadCrumbs/page";
 
 interface ConcertSingle {
     _id: string;
@@ -60,93 +59,6 @@ const SingleConcert: React.FC = () => {
     const [selectedConcert, setSelectedConcert] =
         useState<ConcertSingle | null>(null);
     const [isInFavorites, setIsInFavorites] = useState(false);
-
-    const deleteFavourite = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setLoading(true);
-
-        if (!selectedConcert) {
-            setLoading(false);
-            return;
-        }
-
-        const data = new FormData();
-        data.set("Favourite_user_id", userData || "");
-        data.set("Favourite_concert_id", selectedConcert._id);
-
-        try {
-            const res = await fetch("/api/data/deleteFavourite/", {
-                method: "DELETE",
-                body: data,
-            });
-            if (!res.ok) {
-                const errorText = await res.text();
-                console.error(errorText);
-            } else {
-                setLoading(false);
-                deletedFromFavourites();
-            }
-        } catch (error) {
-            console.error("An error occurred:", error);
-        }
-    };
-
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setLoading(true);
-
-        if (!selectedConcert) {
-            return;
-        }
-
-        const data = new FormData();
-        data.set("Favourite_concert_id", selectedConcert._id);
-        data.set("Favourite_concert_image", selectedConcert.concert_image);
-        data.set("Favourite_concert_name", selectedConcert.concert_name);
-        data.set("Favourite_concert_date", selectedConcert.concert_date);
-        data.set(
-            "Favourite_concert_artist",
-            selectedConcert.concert_artist?.artist_name
-        );
-        data.set("Favourite_user_id", userData || "");
-
-        const res = await fetch("/api/data/addFavourite/", {
-            method: "POST",
-            body: data,
-        });
-
-        if (!res.ok) {
-            const errorText = await res.text();
-            console.error(errorText);
-        }
-
-        if (res.ok) {
-            setLoading(false);
-            addedToFavouritesMessage();
-        }
-    };
-
-    const addedToFavouritesMessage = () => {
-        const notAddedToFavourites = document.getElementById(
-            "notAddedToFavourites"
-        );
-        const addedToFavourites = document.getElementById("addedToFavourites");
-
-        addedToFavourites?.classList.remove("hidden");
-        addedToFavourites?.classList.add("flex");
-        notAddedToFavourites?.classList.add("hidden");
-    };
-
-    const deletedFromFavourites = () => {
-        const notAddedToFavourites = document.getElementById(
-            "notAddedToFavourites"
-        );
-        const addedToFavourites = document.getElementById("addedToFavourites");
-
-        addedToFavourites?.classList.add("hidden");
-        addedToFavourites?.classList.remove("flex");
-        notAddedToFavourites?.classList.remove("hidden");
-    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -216,6 +128,84 @@ const SingleConcert: React.FC = () => {
         }
     }, [id, concerts]);
 
+    const deleteFavourite = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setLoading(true);
+
+        if (!selectedConcert) {
+            setLoading(false);
+            return;
+        }
+
+        const data = new FormData();
+        data.set("Favourite_user_id", userData || "");
+        data.set("Favourite_concert_id", selectedConcert._id);
+
+        try {
+            const res = await fetch("/api/data/deleteFavourite/", {
+                method: "DELETE",
+                body: data,
+            });
+            if (!res.ok) {
+                const errorText = await res.text();
+                console.error(errorText);
+            } else {
+                deletedavourite();
+                setLoading(false);
+            }
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
+    };
+
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setLoading(true);
+
+        if (!selectedConcert) {
+            return;
+        }
+
+        const data = new FormData();
+        data.set("Favourite_concert_id", selectedConcert._id);
+        data.set("Favourite_concert_image", selectedConcert.concert_image);
+        data.set("Favourite_concert_name", selectedConcert.concert_name);
+        data.set("Favourite_concert_date", selectedConcert.concert_date);
+        data.set(
+            "Favourite_concert_artist",
+            selectedConcert.concert_artist?.artist_name
+        );
+        data.set(
+            "Favourite_concert_venue",
+            selectedConcert.concert_venue?.venue_name
+        );
+        data.set("Favourite_user_id", userData || "");
+        try {
+            const res = await fetch("/api/data/addFavourite/", {
+                method: "POST",
+                body: data,
+            });
+
+            if (!res.ok) {
+                const errorText = await res.text();
+                console.error(errorText);
+            } else {
+                setLoading(false);
+                addedFavourite();
+            }
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
+    };
+
+    const addedFavourite = () => {
+        setIsInFavorites(true);
+    };
+
+    const deletedavourite = () => {
+        setIsInFavorites(false);
+    };
+
     return (
         <div>
             <LoginPage />
@@ -239,7 +229,6 @@ const SingleConcert: React.FC = () => {
                             </h1>
                             {isInFavorites ? (
                                 <form
-                                    id="addedToFavourites"
                                     className="flex flex-col items-center gap-8 pb-12"
                                     onSubmit={deleteFavourite}
                                 >
@@ -259,6 +248,7 @@ const SingleConcert: React.FC = () => {
                                     />
 
                                     <button
+                                        id="addedToFavourites"
                                         className="flex items-center place-content-center rounded-full bg-purple-100 brand_purple w-10 h-10  hover:bg-purple-200"
                                         type="submit"
                                         value="upload"
@@ -271,7 +261,6 @@ const SingleConcert: React.FC = () => {
                                 </form>
                             ) : (
                                 <form
-                                    id="notAddedToFavourites"
                                     className="flex flex-col items-center gap-8 pb-12"
                                     onSubmit={onSubmit}
                                 >

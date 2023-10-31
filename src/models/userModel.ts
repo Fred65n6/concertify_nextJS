@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema({
             favourite_concert_name: String,
             favourite_concert_date: String,
             favourite_concert_artist: String,
+            favourite_concert_venue: String,
             // Add other fields as needed for each favorite
         },
     ],
