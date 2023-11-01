@@ -35,7 +35,15 @@ export default function LoginPage() {
       setLoading(true);
       const response = await axios.post("/api/users/login", user);
       console.log("Login success", response.data);
-      window.location.reload();
+      // window.location.reload();
+
+      if (response.data.isAdmin) {
+        // Admin user, redirect to admin page
+        router.push("/admin"); // Replace with your admin page URL
+      } else {
+        // Regular user, redirect to regular user page
+        router.push("/profile"); // Replace with your regular user page URL
+      }
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.error) {
         setError(error.response.data.error);

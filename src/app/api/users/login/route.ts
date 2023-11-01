@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     // Check if the user is an admin
     if (user.isAdmin) {
       // This user is an admin; you can handle admin-specific tasks here
-      const tokenData = {
+      const tokenDataAdmin = {
         id: user._id,
         username: user.username,
         email: user.email,
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
       };
 
       // Create and set the token as before
-      const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
+      const token = await jwt.sign(tokenDataAdmin, process.env.TOKEN_SECRET!, {
         expiresIn: "1d",
       });
 
