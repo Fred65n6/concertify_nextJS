@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast/headless";
 import Link from "next/link";
+import jwt from "jsonwebtoken"; // Import jsonwebtoken
 
 export default function LoginPage() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -34,7 +35,18 @@ export default function LoginPage() {
       setLoading(true);
       const response = await axios.post("/api/users/login", user);
       console.log("Login success", response.data);
-      window.location.reload();
+      console.log(response.data);
+      // const decodedToken = jwt.decode(response.data.token) as {
+      //   isAdmin: boolean;
+      // };
+      // window.location.reload();
+      if (response.data.isAdmin) {
+        // Admin user, redirect to admin page
+        router.push("/admin");
+      } else {
+        // Regular user, redirect to regular user page
+        router.push("/");
+      }
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.error) {
         setError(error.response.data.error);
