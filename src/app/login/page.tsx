@@ -35,6 +35,7 @@ export default function LoginPage() {
       setLoading(true);
       const response = await axios.post("/api/users/login", user);
       console.log("Login success", response.data);
+      console.log(response.data);
       // const decodedToken = jwt.decode(response.data.token) as {
       //   isAdmin: boolean;
       // };
@@ -44,7 +45,7 @@ export default function LoginPage() {
         router.push("/admin");
       } else {
         // Regular user, redirect to regular user page
-        router.push("/profile");
+        router.push("/");
       }
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.error) {
