@@ -1,4 +1,3 @@
-import {getConcertData} from "@/helpers/getConcertData";
 import {NextRequest, NextResponse} from "next/server";
 import Concert from "@/models/concertModel";
 import {connect} from "@/dbConfig/dbConfig";
@@ -7,7 +6,6 @@ connect();
 
 export async function GET(request: NextRequest, response: NextResponse) {
     try {
-        const concertId = await getConcertData(request);
         const concert = await Concert.find();
         
         return NextResponse.json({
