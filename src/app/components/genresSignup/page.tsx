@@ -1,13 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { userAgent } from "next/server";
 
 interface Genre {
   _id: string;
   genre_name: string;
 }
 
-const ShowGenres: React.FC = () => {
+const ShowSignupGenres: React.FC = () => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<string | undefined>();
@@ -30,6 +31,10 @@ const ShowGenres: React.FC = () => {
     setSelectedGenres([...selectedGenres, selectedGenre]);
     setSelectedGenre(""); // Clear the selectedGenre
   };
+
+  const [user, setUser] = React.useState({
+    profileGenres: "",
+  });
 
   return (
     <div>
@@ -63,4 +68,4 @@ const ShowGenres: React.FC = () => {
   );
 };
 
-export default ShowGenres;
+export default ShowSignupGenres;

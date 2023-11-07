@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Progress } from "flowbite-react";
 import { SiFacebook, SiGoogle, SiApple } from "react-icons/si";
+import ShowSignupGenres from "../components/genresSignup/page";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -72,6 +73,24 @@ export default function SignupPage() {
       profileGenres.classList.remove("hidden");
       profileGenres.classList.add("block");
       welcomePopup?.classList.add("hidden");
+    }
+  };
+
+  const handleSetProfileGenres = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post("/api/users/setGenres", user);
+      console.log("genres updated", response.data);
+      showProfileVenues();
+    } catch (error: any) {
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
+      } else {
+        setError("An error occurred during your genres selection.");
+      }
+      console.log("API genre selection failed", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -255,28 +274,35 @@ export default function SignupPage() {
         </div>
         {/* PROFILE GENRES MODUL */}
         <div id="profile_genres" className="hidden">
-          <div className="flex flex-col items-center justify-center py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
-            <div className="w-[300px] lg:w-[500px] mb-10">
-              <Progress color="purple" progress={33} />
+          <div className="bg-white w-[400px] md:w-[600px] lg:w-[800px] py-8 dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+            <div className="flex flex-col items-center justify-center">
+              <div className="w-[300px] lg:w-[500px] mb-10">
+                <Progress color="purple" progress={33} />
+              </div>
+              <h1 className="mb-4 text-3xl font-bold text-center mx-6">
+                What music genres do you like?
+              </h1>
+              <p className="mb-6 text-center mx-6">
+                Get your own personalized recommendations
+              </p>
             </div>
-            <h1 className="mb-4 text-3xl font-bold text-center mx-6">
-              What music genres do you like?
-            </h1>
-            <p className="mb-6 text-center mx-6">
-              Get your own personalized recommendations
-            </p>
-            <button
-              onClick={showProfileVenues}
-              className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white"
-            >
-              Submit
-            </button>
-            <button
-              onClick={showMessage}
-              className="mb-4 mt-2 px-12 py-4 rounded-full text-purple-700"
-            >
-              Skip
-            </button>
+            <div className="px-4">
+              <ShowSignupGenres />
+            </div>
+            <div className="flex flex-col items-center justify-center py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+              <button
+                onClick={handleSetProfileGenres}
+                className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white"
+              >
+                Submit
+              </button>
+              <button
+                onClick={showMessage}
+                className="mb-4 mt-2 px-12 py-4 rounded-full text-purple-700"
+              >
+                Skip
+              </button>
+            </div>
           </div>
         </div>
         {/* PROFILE VENUES MODUL */}
