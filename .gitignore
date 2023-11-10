@@ -28,8 +28,6 @@ yarn-error.log*
 .env
 .env*.local
 
-/forgotPassword/route.ts
-
 # vercel
 .vercel
 
