@@ -71,7 +71,9 @@ export default function Home() {
                     Experience <span className="brand_purple">Copenhagen</span>{" "}
                     through <span className="brand_purple">live music</span>
                 </h1>
+                
             )}
+            <p>URI TEST</p>
             <div className="">
                 <LoginPage />
             </div>
