@@ -7,7 +7,7 @@ import {NextApiRequest, NextApiResponse} from "next";
 
 connect();
 
-export default async function forgotPassword(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {

@@ -15,7 +15,7 @@ interface User {
     username: string;
 }
 
-export default function SignupPage() {
+export default function forgotPassword() {
     const router = useRouter();
     const [user, setUser] = React.useState<User>({
         email: "",
