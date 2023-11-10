@@ -1,3 +1,5 @@
+// src/pages/signup.tsx
+
 "use client";
 
 import Link from "next/link";
@@ -7,9 +9,15 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import {NextApiResponse} from "next";
 
-export default function SingupPage() {
+interface User {
+    email: string;
+    password: string;
+    username: string;
+}
+
+export default function SignupPage() {
     const router = useRouter();
-    const [user, setUser] = React.useState({
+    const [user, setUser] = React.useState<User>({
         email: "",
         password: "",
         username: "",
@@ -18,7 +26,7 @@ export default function SingupPage() {
     const [buttonDisabled, setButtonDisabled] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
 
-    // Send information til API'en signup
+    // Send information to API for signup
     const sendLink = async () => {
         try {
             setLoading(true);
@@ -40,12 +48,12 @@ export default function SingupPage() {
         const mailSendMessage = document.getElementById("mailSendMessage");
         const forgotForm = document.getElementById("forgotForm");
         mailSendMessage?.classList.remove("hidden");
-        mailSendMessage?.classList.add("block"); // Add the "grid" class to make it visible
+        mailSendMessage?.classList.add("block");
         forgotForm?.classList.add("hidden");
         console.log("showMessage");
     };
 
-    //DISABLE SIGNUP KNAP, HVIS FELTER IKKE ER UDFYLDT
+    // DISABLE SIGNUP BUTTON IF FIELDS ARE NOT FILLED
 
     useEffect(() => {
         if (user.email.length > 0) {
@@ -55,14 +63,14 @@ export default function SingupPage() {
         }
     }, [user]);
 
-    //TEMPLATE FOR SIGNUP
+    // TEMPLATE FOR SIGNUP
 
     return (
         <div className="">
             <div className="flex flex-col items-center justify-center py-2 mt-24">
                 <div className="hidden" id="mailSendMessage">
                     <h2 className="text-2xl">
-                        We've send a message to your email with a password reset
+                        We've sent a message to your email with a password reset
                         link.
                     </h2>
                 </div>
@@ -93,6 +101,7 @@ export default function SingupPage() {
                     <button
                         onClick={sendLink}
                         className="mb-6 brand_gradient px-12 py-4 rounded-full text-white mt-8"
+                        disabled={buttonDisabled}
                     >
                         {buttonDisabled ? "Missing fields" : "Send reset link"}
                     </button>

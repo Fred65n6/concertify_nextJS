@@ -3,15 +3,22 @@ import User from "@/models/userModel";
 import {NextRequest, NextResponse} from "next/server";
 import bcryptjs from "bcryptjs";
 import {sendEmail} from "@/helpers/mailer";
+import {NextApiRequest, NextApiResponse} from "next";
 
 connect();
 
-export async function POST(request: NextRequest) {
-    try {
-        const reqBody = await request.json();
-        const {email} = reqBody;
+export default async function forgotPassword(
+    req: NextApiRequest,
+    res: NextApiResponse
+) {
+    if (req.method !== "POST") {
+        return res.status(405).json({error: "Method Not Allowed", status: 405});
+    }
 
-        console.log(reqBody);
+    try {
+        const {email} = req.body;
+
+        console.log(req.body);
 
         //check if user already exists
         const user = await User.findOne({email});
