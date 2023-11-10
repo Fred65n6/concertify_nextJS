@@ -7,7 +7,7 @@ import {NextApiRequest, NextApiResponse} from "next";
 
 connect();
 
-export default async function forgotPassword(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
@@ -33,7 +33,13 @@ export default async function forgotPassword(
                 userId: user.id,
             });
         }
-    } catch (error: any) {
-        return NextResponse.json({error: error.message}), {status: 500};
+        res.status(200).json({
+            message: "Success",
+            success: true,
+        });
+    } catch (error) {
+        console.error("Error:", error);
+        // In case of an error, send a JSON response with an appropriate error status
+        res.status(500).json({status: 500, error: "Internal Server Error"});
     }
 }
