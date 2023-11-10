@@ -3,22 +3,15 @@ import User from "@/models/userModel";
 import {NextRequest, NextResponse} from "next/server";
 import bcryptjs from "bcryptjs";
 import {sendEmail} from "@/helpers/mailer";
-import {NextApiRequest, NextApiResponse} from "next";
 
 connect();
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse
-) {
-    if (req.method !== "POST") {
-        return res.status(405).json({error: "Method Not Allowed", status: 405});
-    }
-
+export async function POST(request: NextRequest) {
     try {
-        const {email} = req.body;
+        const reqBody = await request.json();
+        const {email} = reqBody;
 
-        console.log(req.body);
+        console.log(reqBody);
 
         //check if user already exists
         const user = await User.findOne({email});
@@ -33,13 +26,7 @@ export default async function handler(
                 userId: user.id,
             });
         }
-        res.status(200).json({
-            message: "Success",
-            success: true,
-        });
-    } catch (error) {
-        console.error("Error:", error);
-        // In case of an error, send a JSON response with an appropriate error status
-        res.status(500).json({status: 500, error: "Internal Server Error"});
+    } catch (error: any) {
+        return NextResponse.json({error: error.message}), {status: 500};
     }
 }
