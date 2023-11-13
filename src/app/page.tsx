@@ -72,9 +72,6 @@ export default function Home() {
                     through <span className="brand_purple">live music</span>
                 </h1>
             )}
-            <p>test
-                
-            </p>
             <div className="">
                 <LoginPage />
             </div>
