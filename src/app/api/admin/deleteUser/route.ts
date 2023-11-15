@@ -1,4 +1,3 @@
-// Import necessary modules and models
 import { NextRequest, NextResponse } from 'next/server';
 import User from '@/models/userModel';
 

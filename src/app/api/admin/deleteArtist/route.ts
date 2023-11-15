@@ -1,36 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
-import Venue from '@/models/venueModel';
+import Artist from '@/models/artistModel';
 
 
 export async function DELETE(request: NextRequest) {
     try {
       const data = await request.json();
-      const venueId = data.venueId;
+      const artistId = data.artistId;
   
-      if (!venueId) {
+      if (!artistId) {
         return NextResponse.json(
           { success: false, error: 'Missing required parameters' },
           { status: 400 }
         );
       }
   
-      const deletionResult = await Venue.deleteOne({ _id: venueId });
+      const deletionResult = await Artist.deleteOne({ _id: artistId });
   
       if (deletionResult.deletedCount === 0) {
         return NextResponse.json(
-          { success: false, error: ' Venue not found' },
+          { success: false, error: ' Artist not found' },
           { status: 404 }
         );
       }
   
       return NextResponse.json({
         success: true,
-        message: 'Venue deleted successfully',
+        message: 'Artist was deleted successfully',
       });
     } catch (error) {
-      console.error('Error deleting venue:', error);
+      console.error('Error deleting artist:', error);
       return NextResponse.json(
-        { success: false, error: 'Error deleting venue' },
+        { success: false, error: 'Error deleting artist' },
         { status: 500 }
       );
     }

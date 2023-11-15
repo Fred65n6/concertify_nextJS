@@ -23,7 +23,9 @@ const Admin: React.FC = () => {
   const [artists, setArtists] = useState<[]>([]);
   const [venues, setVenues] = useState<[]>([]);
   const [users, setUsers] = useState<User[]>([]);
-  const [user, setUser] = useState<User | null>(null);
+  // const [user, setUser] = useState<User | null>(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,6 +86,19 @@ useEffect(() => {
   const totalArtists = artists.length;
   const totalUsers = users.length;
 
+  const openModule = (user: User) => {
+    setSelectedUser(user);
+    const deleteUserModule = document.getElementById("delete_user_module");
+    deleteUserModule?.classList.remove("hidden");
+    deleteUserModule?.classList.add("grid");
+};
+
+const closeModule = () => {
+  const deleteUserModule = document.getElementById("delete_user_module");
+  deleteUserModule?.classList.add("hidden");
+  deleteUserModule?.classList.remove("grid");
+};
+
   const handleDeleteUser = async (userId: string) => {
     try {
       const res = await fetch('/api/admin/deleteUser', {
@@ -98,7 +113,8 @@ useEffect(() => {
         const result = await res.json();
         if (result.success) {
           console.log(result.message);
-          // Handle success, update state, etc.
+          setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId)); // Removing the deleted user from the state
+          closeModule();
         } else {
           console.error(result.error);
         }
@@ -157,31 +173,82 @@ useEffect(() => {
         </section>
 
         <form className="flex flex-col items-center gap-8 pb-12">
-        {users?.map((user) => (
-          <div key={user._id}>
-            <p>{user.username}</p>
-            <input
-              readOnly={true}
-              className="bg-slate-100 p-4 w-72"
-              type="text"
-              name="user_id"
-              value={user._id}
-            />
-            <button
-              type="button" // Change type to button
-              className="text-[#5311BF]"
-              onClick={() => handleDeleteUser(user._id)}
-            >
-              <AiFillDelete
-                className="fill-[#5311BF] dark:fill-[#8e0bf5] w-5 h-5"
-                id="deleteUser"
-                value="upload"
-              />
-            </button>
-          </div>
-        ))}
-      </form>
+          <table className="w-full">
+            <thead>
+              <tr className="lg:flex justify-start w-full">
+                <th className="text-left w-1/2">User id</th>
+                <th className="text-left w-1/2">Username</th>
+                <th className="text-left w-1/2">User email</th>
+                <th className="text-right w-1/12"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {users?.map((user) => (
+                <tr key={user._id} className="flex justify-start w-full">
+                  <td className="text-left w-1/2">{user._id}</td>
+                  <td className="text-left w-1/2">{user.username}</td>
+                  <td className="text-left w-1/2">{user.email}</td>
+                  <td className="text-right w-1/12">
+                  <button
+                      type="button"
+                      className="text-[#5311BF]"
+                      onClick={() => openModule(user)}
+                    >
+                      <AiFillDelete
+                        className="fill-[#5311BF] dark:fill-[#8e0bf5] w-5 h-5"
+                        id="deleteUser"
+                        value="upload"
+                      />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </form>
       </div>
+
+      {selectedUser && (
+      <div id="delete_user_module" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+        <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#202124]">
+          <button
+              type="button"
+              onClick={closeModule}
+              className="cursor-pointer ml-[75%]"
+          >
+              <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+              >
+                  <path
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m7 7l10 10M7 17L17 7"
+                  />
+              </svg>
+          </button>
+
+          <div className="flex flex-col gap-4 justify-center text-center items-center">
+            <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
+            <p className="dark:text-white">
+              You are about to delete{" "}
+              <span className="italic font-bold">{selectedUser.username}</span>. This action can not be reverted.
+          </p>
+          <button 
+            type="button"
+            onClick={() => handleDeleteUser(selectedUser._id)}
+            className="rounded-full w-fit h-fit py-4 px-4 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
+            Yes I am sure
+          </button>
+          </div>
+        </div>
+      </div>
+      )}
+
     </>
   );
 };
