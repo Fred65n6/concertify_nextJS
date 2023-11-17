@@ -2,13 +2,12 @@
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { SlUser } from "react-icons/sl";
 import { AiFillDelete } from "react-icons/ai";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
 import { RiEdit2Fill } from "react-icons/ri";
-import {SlMusicToneAlt} from "react-icons/sl";
-
+import {SlMusicToneAlt, SlArrowLeft} from "react-icons/sl";
+import Link from "../../../node_modules/next/link";
 
 interface Artist {
   _id: string;
@@ -106,6 +105,16 @@ const closeEditModule = () => {
       <LoginPage />
       <SignupPage />
       <div>
+      <Link
+            className="flex align-middle gap-2"
+            href="/admin-dashboard"
+        >
+            <SlArrowLeft
+                className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4 pt-1"
+                id="arrow_right"
+                />
+                Back to dashboard
+        </Link>
         <h1 className="font-bold text-4xl pb-4 pt-8">Admin / <span className="text-[#5311BF] dark:text-[#8e0bf5]">artists</span></h1>
 
         <section className="flex gap-8 my-8">
@@ -234,19 +243,23 @@ const closeEditModule = () => {
         <div className="flex flex-col gap-4 justify-center text-center items-center">
         <input
             readOnly={true}
-            className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+            className="hidden"
             type="text"
             name="artist_id"
             value={selectedArtist._id}
             />
 
+          <div className="flex gap-2 items-center">
+            <label htmlFor="artist_name">Artist name</label>
             <input
                 readOnly={true}
-                className="bg-slate-100 p-4 w-72"
+                className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                 type="text"
                 name="artist_name"
                 value={selectedArtist.artist_name}
             />
+          </div>
+
 
 
         <button 

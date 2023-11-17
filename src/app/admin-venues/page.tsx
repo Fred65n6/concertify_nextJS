@@ -2,7 +2,6 @@
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { SlUser } from "react-icons/sl";
 import { AiFillDelete } from "react-icons/ai";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
@@ -11,50 +10,30 @@ import {SlMusicToneAlt, SlArrowLeft} from "react-icons/sl";
 import Link from "../../../node_modules/next/link";
 
 
-interface Concert {
+interface Venue {
     _id: string;
-    concert_artist: {
-        artist_id: string;
-        artist_name: string;
-        artist_instagram: string;
-        artist_youtube: string;
-        artist_facebook: string;
-        artist_twitter: string;
-        artist_spotify: string;
-    };
-    concert_date: string;
-    concert_description: string;
-    concert_image: string;
-    concert_name: string;
-    concert_start: string;
-    concert_genre: {
-        genre_id: string;
-        genre_name: string;
-    };
-    concert_venue: {
-        venue_id: string;
-        venue_name: string;
-        venue_address: string;
-        venue_location: string;
-    };
-    concert_doors: string;
-}
-
+    venue_name: string;
+    venue_address: string;
+    venue_size: string;
+    venue_location: string;
+    venue_description: string;
+    venue_image: string;
+  }
 const Admin: React.FC = () => {
-//   const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const params = useParams();
   const id = params.id;
-  const [concerts, setConcerts] = useState<[]>([]);
-  const [selectedConcert, setSelectedConcert] = useState<Concert | null>(null);
+  const [venues, setVenues] = useState<[]>([]);
+  const [selectedVenue, setSelectedVenue] = useState<Venue | null>(null);
 
 
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await axios.get("/api/data/concertData");
-            setConcerts(response.data.data);
+            const response = await axios.get("/api/data/venueData");
+            setVenues(response.data.data);
         } catch (error) {
-            console.error("Error fetching concerts:", error);
+            console.error("Error fetching venues:", error);
         }
     };
 
@@ -62,40 +41,39 @@ const Admin: React.FC = () => {
 }, []);
 
 
-  const totalConcerts = concerts.length;
+  const totalVenues = venues.length;
 
-  const openDeleteModule = (concert: Concert) => {
-    setSelectedConcert(concert);
-    const deleteConcertModule = document.getElementById("delete_concert_id");
-    deleteConcertModule?.classList.remove("hidden");
-    deleteConcertModule?.classList.add("grid");
+  const openDeleteModule = (venue: Venue) => {
+    setSelectedVenue(venue);
+    const deleteVenueModule = document.getElementById("delete_venue_id");
+    deleteVenueModule?.classList.remove("hidden");
+    deleteVenueModule?.classList.add("grid");
 };
 
 const closeDeleteModule = () => {
-  const deleteConcertModule = document.getElementById("delete_concert_id");
-  deleteConcertModule?.classList.add("hidden");
-  deleteConcertModule?.classList.remove("grid");
+  const deleteVenueModule = document.getElementById("delete_venue_id");
+  deleteVenueModule?.classList.add("hidden");
+  deleteVenueModule?.classList.remove("grid");
 };
 
-
-const openEditModule = (concert: Concert) => {
-    setSelectedConcert(concert);
-    const deleteConcertModule = document.getElementById("edit_concert_id");
-    deleteConcertModule?.classList.remove("hidden");
-    deleteConcertModule?.classList.add("grid");
+const openEditModule = (venue: Venue) => {
+    setSelectedVenue(venue);
+    const deleteVenueModule = document.getElementById("edit_venue_id");
+    deleteVenueModule?.classList.remove("hidden");
+    deleteVenueModule?.classList.add("grid");
 };
 
 const closeEditModule = () => {
-  const deleteConcertModule = document.getElementById("edit_concert_id");
-  deleteConcertModule?.classList.add("hidden");
-  deleteConcertModule?.classList.remove("grid");
+  const deleteVenueModule = document.getElementById("edit_venue_id");
+  deleteVenueModule?.classList.add("hidden");
+  deleteVenueModule?.classList.remove("grid");
 };
 
-  const handleDeleteConcert = async (concertId: string) => {
+  const handleDeleteVenue = async (venueId: string) => {
     try {
-      const res = await fetch('/api/admin/deleteConcert', {
+      const res = await fetch('/api/admin/deleteVenue', {
         method: 'DELETE',
-        body: JSON.stringify({ concertId }),
+        body: JSON.stringify({ venueId }),
       });
   
       if (!res.ok) {
@@ -105,14 +83,14 @@ const closeEditModule = () => {
         const result = await res.json();
         if (result.success) {
           console.log(result.message);
-          setConcerts((prevConcert) => prevConcert.filter((concert) => concert._id !== concertId)); // Removing the deleted user from the state
+          setVenues((prevVenue) => prevVenue.filter((venue) => venue._id !== venueId)); // Removing the deleted venue from the state
           closeDeleteModule();
         } else {
           console.error(result.error);
         }
       }
     } catch (error) {
-      console.error('Error deleting concert:', error);
+      console.error('Error deleting venue:', error);
     }
   };
 
@@ -123,7 +101,7 @@ const closeEditModule = () => {
       <LoginPage />
       <SignupPage />
       <div>
-        <Link
+      <Link
             className="flex align-middle gap-2"
             href="/admin-dashboard"
         >
@@ -133,13 +111,13 @@ const closeEditModule = () => {
                 />
                 Back to dashboard
         </Link>
-        <h1 className="font-bold text-4xl pb-4 pt-8">Admin / <span className="text-[#5311BF] dark:text-[#8e0bf5]">concerts</span></h1>
+        <h1 className="font-bold text-4xl pb-4 pt-8">Admin / <span className="text-[#5311BF] dark:text-[#8e0bf5]">venues</span></h1>
 
         <section className="flex gap-8 my-8">
           <div className="flex flex-col gap-4 align-middle">
             <div className="flex gap-2">
               <SlMusicToneAlt className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="user" />
-              <span>There are {totalConcerts} concerts in total</span>
+              <span>There are {totalVenues} venues in total</span>
             </div>
           </div>
         </section>
@@ -148,24 +126,26 @@ const closeEditModule = () => {
           <table className="w-full">
             <thead>
               <tr className="lg:flex justify-start w-full">
-                <th className="text-left w-1/2">Concert name</th>
-                <th className="text-left w-1/2">Artist</th>
-                <th className="text-left w-1/2">Venue</th>
+                <th className="text-left w-1/2">Venue name</th>
+                <th className="text-left w-1/2">Address</th>
+                <th className="text-left w-1/2">Location</th>
+                <th className="text-left w-1/2">Venue size (people)</th>
                 <th className="text-right w-1/12"></th>
                 <th className="text-right w-1/12"></th>
               </tr>
             </thead>
             <tbody>
-              {concerts?.map((concert) => (
-                <tr key={concert._id} className="flex justify-start w-full">
-                  <td className="text-left w-1/2">{concert.concert_name}</td>
-                  <td className="text-left w-1/2">{concert.concert_artist.artist_name}</td>
-                  <td className="text-left w-1/2">{concert.concert_venue.venue_name}</td>
+              {venues?.map((venue) => (
+                <tr key={venue._id} className="flex justify-start w-full">
+                  <td className="text-left w-1/2">{venue.venue_name}</td>
+                  <td className="text-left w-1/2">{venue.venue_address}</td>
+                  <td className="text-left w-1/2">{venue.venue_location}</td>
+                  <td className="text-left w-1/2">{venue.venue_size}</td>
                   <td className="text-right w-1/12">
                     <button
                       type="button"
                       className="text-[#5311BF]"
-                      onClick={() => openEditModule(concert)}
+                      onClick={() => openEditModule(venue)}
                     >
                         <RiEdit2Fill />
                     </button>
@@ -174,12 +154,12 @@ const closeEditModule = () => {
                     <button
                       type="button"
                       className="text-[#5311BF]"
-                      onClick={() => openDeleteModule(concert)}
+                      onClick={() => openDeleteModule(venue)}
                     >
 
                       <AiFillDelete
                         className="fill-[#5311BF] dark:fill-[#8e0bf5] w-5 h-5"
-                        id="deleteConcert"
+                        id="deleteArtist"
                         value="upload"
                       />
                     </button>
@@ -192,9 +172,9 @@ const closeEditModule = () => {
       </div>
 
 
-    {/* DELETE CONCERT MODULE */}
-      {selectedConcert && (
-      <div id="delete_concert_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+    {/* DELETE VENUE MODULE */}
+      {selectedVenue && (
+      <div id="delete_venue_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
         <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#202124]">
           <button
               type="button"
@@ -220,11 +200,11 @@ const closeEditModule = () => {
                 <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
                 <p className="dark:text-white">
                 You are about to delete{" "}
-                <span className="italic font-bold">{selectedConcert.concert_name}</span>. This action can not be reverted.
+                <span className="italic font-bold">{selectedVenue.venue_name}</span>. This action can not be reverted.
             </p>
             <button 
                 type="button"
-                onClick={() => handleDeleteConcert(selectedConcert._id)}
+                onClick={() => handleDeleteVenue(selectedVenue._id)}
                 className="rounded-full w-fit h-fit py-4 px-4 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
                 Yes I am sure
             </button>
@@ -233,9 +213,9 @@ const closeEditModule = () => {
       </div>
       )}
 
-    {/* EDIT CONCERT MODULE */}
-    {selectedConcert && (
-    <div id="edit_concert_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+    {/* EDIT VENUE MODULE */}
+    {selectedVenue && (
+    <div id="edit_venue_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
     <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#202124]">
         <button
             type="button"
@@ -263,40 +243,28 @@ const closeEditModule = () => {
             readOnly={true}
             className="hidden"
             type="text"
-            name="concert_id"
-            value={selectedConcert._id}
+            name="venue_id"
+            value={selectedVenue._id}
             />
-            
-          <div className="flex gap-2 items-center">
-            <label htmlFor="concert_description">Concert name</label>
+
+        <div className="flex gap-2 items-center">
+            <label htmlFor="venue_name">Venue name</label>
             <input
                 readOnly={true}
                 className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                 type="text"
-                name="concert_name"
-                value={selectedConcert.concert_name}
+                name="venue_name"
+                value={selectedVenue.venue_name}
             />
-            </div>
-
-            <div className="flex gap-2 items-center">
-              <label htmlFor="concert_description">Description</label>
-              <input
-                  readOnly={true}
-                  className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                  type="text"
-                  name="concert_description"
-                  value={selectedConcert.concert_description}
-              />
-            </div>
+        </div>
 
 
-
-        {/* <button 
-            type="button"
-            onClick={() => handleSaveChanges(selectedConcert._id)}
+        <button 
+            // type="button"
+            // onClick={() => handleSaveChanges(selectedVenue._id)}
             className="rounded-full w-fit h-fit py-4 px-4 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
             Save changes
-        </button> */}
+        </button>
 
         </div>
     </div>
