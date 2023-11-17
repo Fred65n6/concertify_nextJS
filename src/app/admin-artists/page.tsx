@@ -10,50 +10,35 @@ import { RiEdit2Fill } from "react-icons/ri";
 import {SlMusicToneAlt} from "react-icons/sl";
 
 
-interface Concert {
-    _id: string;
-    concert_artist: {
-        artist_id: string;
-        artist_name: string;
-        artist_instagram: string;
-        artist_youtube: string;
-        artist_facebook: string;
-        artist_twitter: string;
-        artist_spotify: string;
-    };
-    concert_date: string;
-    concert_description: string;
-    concert_image: string;
-    concert_name: string;
-    concert_start: string;
-    concert_genre: {
-        genre_id: string;
-        genre_name: string;
-    };
-    concert_venue: {
-        venue_id: string;
-        venue_name: string;
-        venue_address: string;
-        venue_location: string;
-    };
-    concert_doors: string;
+interface Artist {
+  _id: string;
+  artist_name: string;
+  artist_full_name: string;
+  artist_nation: string;
+  artist_description: string;
+  artist_image: string;
+  artist_dob: string;
+  artist_genre: {
+      genre_id: string;
+      genre_name: string;
+  };
 }
 
 const Admin: React.FC = () => {
-//   const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const params = useParams();
   const id = params.id;
-  const [concerts, setConcerts] = useState<[]>([]);
-  const [selectedConcert, setSelectedConcert] = useState<Concert | null>(null);
+  const [artists, setArtists] = useState<[]>([]);
+  const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
 
 
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await axios.get("/api/data/concertData");
-            setConcerts(response.data.data);
+            const response = await axios.get("/api/data/artistData");
+            setArtists(response.data.data);
         } catch (error) {
-            console.error("Error fetching concerts:", error);
+            console.error("Error fetching artists:", error);
         }
     };
 
@@ -61,40 +46,39 @@ const Admin: React.FC = () => {
 }, []);
 
 
-  const totalConcerts = concerts.length;
+  const totalArtists = artists.length;
 
-  const openDeleteModule = (concert: Concert) => {
-    setSelectedConcert(concert);
-    const deleteConcertModule = document.getElementById("delete_concert_id");
-    deleteConcertModule?.classList.remove("hidden");
-    deleteConcertModule?.classList.add("grid");
+  const openDeleteModule = (artist: Artist) => {
+    setSelectedArtist(artist);
+    const deleteArtistModule = document.getElementById("delete_artist_id");
+    deleteArtistModule?.classList.remove("hidden");
+    deleteArtistModule?.classList.add("grid");
 };
 
 const closeDeleteModule = () => {
-  const deleteConcertModule = document.getElementById("delete_concert_id");
-  deleteConcertModule?.classList.add("hidden");
-  deleteConcertModule?.classList.remove("grid");
+  const deleteArtistModule = document.getElementById("delete_artist_id");
+  deleteArtistModule?.classList.add("hidden");
+  deleteArtistModule?.classList.remove("grid");
 };
 
-
-const openEditModule = (concert: Concert) => {
-    setSelectedConcert(concert);
-    const deleteConcertModule = document.getElementById("edit_concert_id");
-    deleteConcertModule?.classList.remove("hidden");
-    deleteConcertModule?.classList.add("grid");
+const openEditModule = (artist: Artist) => {
+    setSelectedArtist(artist);
+    const deleteArtistModule = document.getElementById("edit_artist_id");
+    deleteArtistModule?.classList.remove("hidden");
+    deleteArtistModule?.classList.add("grid");
 };
 
 const closeEditModule = () => {
-  const deleteConcertModule = document.getElementById("edit_concert_id");
-  deleteConcertModule?.classList.add("hidden");
-  deleteConcertModule?.classList.remove("grid");
+  const deleteArtistModule = document.getElementById("edit_artist_id");
+  deleteArtistModule?.classList.add("hidden");
+  deleteArtistModule?.classList.remove("grid");
 };
 
-  const handleDeleteConcert = async (concertId: string) => {
+  const handleDeleteArtist = async (artistId: string) => {
     try {
-      const res = await fetch('/api/admin/deleteConcert', {
+      const res = await fetch('/api/admin/deleteArtist', {
         method: 'DELETE',
-        body: JSON.stringify({ concertId }),
+        body: JSON.stringify({ artistId }),
       });
   
       if (!res.ok) {
@@ -104,14 +88,14 @@ const closeEditModule = () => {
         const result = await res.json();
         if (result.success) {
           console.log(result.message);
-          setConcerts((prevConcert) => prevConcert.filter((concert) => concert._id !== concertId)); // Removing the deleted user from the state
+          setArtists((prevArtist) => prevArtist.filter((artist) => artist._id !== artistId)); // Removing the deleted artist from the state
           closeDeleteModule();
         } else {
           console.error(result.error);
         }
       }
     } catch (error) {
-      console.error('Error deleting concert:', error);
+      console.error('Error deleting artist:', error);
     }
   };
 
@@ -122,13 +106,13 @@ const closeEditModule = () => {
       <LoginPage />
       <SignupPage />
       <div>
-        <h1 className="font-bold text-4xl pb-4 pt-8">Admin / <span className="text-[#5311BF] dark:text-[#8e0bf5]">concerts</span></h1>
+        <h1 className="font-bold text-4xl pb-4 pt-8">Admin / <span className="text-[#5311BF] dark:text-[#8e0bf5]">artists</span></h1>
 
         <section className="flex gap-8 my-8">
           <div className="flex flex-col gap-4 align-middle">
             <div className="flex gap-2">
               <SlMusicToneAlt className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="user" />
-              <span>There are {totalConcerts} concerts in total</span>
+              <span>There are {totalArtists} artists in total</span>
             </div>
           </div>
         </section>
@@ -137,26 +121,24 @@ const closeEditModule = () => {
           <table className="w-full">
             <thead>
               <tr className="lg:flex justify-start w-full">
-                <th className="text-left w-1/2">Concert id</th>
-                <th className="text-left w-1/2">Concert name</th>
-                <th className="text-left w-1/2">Artist</th>
-                <th className="text-left w-1/2">Venue</th>
+                <th className="text-left w-1/2">Artist id</th>
+                <th className="text-left w-1/2">Artist name</th>
+                <th className="text-left w-1/2">Full name</th>
                 <th className="text-right w-1/12"></th>
                 <th className="text-right w-1/12"></th>
               </tr>
             </thead>
             <tbody>
-              {concerts?.map((concert) => (
-                <tr key={concert._id} className="flex justify-start w-full">
-                  <td className="text-left w-1/2">{concert._id}</td>
-                  <td className="text-left w-1/2">{concert.concert_name}</td>
-                  <td className="text-left w-1/2">{concert.concert_artist.artist_name}</td>
-                  <td className="text-left w-1/2">{concert.concert_venue.venue_name}</td>
+              {artists?.map((artist) => (
+                <tr key={artist._id} className="flex justify-start w-full">
+                  <td className="text-left w-1/2">{artist._id}</td>
+                  <td className="text-left w-1/2">{artist.artist_name}</td>
+                  <td className="text-left w-1/2">{artist.artist_full_name}</td>
                   <td className="text-right w-1/12">
                     <button
                       type="button"
                       className="text-[#5311BF]"
-                      onClick={() => openEditModule(concert)}
+                      onClick={() => openEditModule(artist)}
                     >
                         <RiEdit2Fill />
                     </button>
@@ -165,12 +147,12 @@ const closeEditModule = () => {
                     <button
                       type="button"
                       className="text-[#5311BF]"
-                      onClick={() => openDeleteModule(concert)}
+                      onClick={() => openDeleteModule(artist)}
                     >
 
                       <AiFillDelete
                         className="fill-[#5311BF] dark:fill-[#8e0bf5] w-5 h-5"
-                        id="deleteConcert"
+                        id="deleteArtist"
                         value="upload"
                       />
                     </button>
@@ -183,9 +165,9 @@ const closeEditModule = () => {
       </div>
 
 
-    {/* DELETE CONCERT MODULE */}
-      {selectedConcert && (
-      <div id="delete_concert_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+    {/* DELETE ARTISTK MODULE */}
+      {selectedArtist && (
+      <div id="delete_artist_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
         <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#202124]">
           <button
               type="button"
@@ -211,11 +193,11 @@ const closeEditModule = () => {
                 <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
                 <p className="dark:text-white">
                 You are about to delete{" "}
-                <span className="italic font-bold">{selectedConcert.concert_name}</span>. This action can not be reverted.
+                <span className="italic font-bold">{selectedArtist.artist_name}</span>. This action can not be reverted.
             </p>
             <button 
                 type="button"
-                onClick={() => handleDeleteConcert(selectedConcert._id)}
+                onClick={() => handleDeleteArtist(selectedArtist._id)}
                 className="rounded-full w-fit h-fit py-4 px-4 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
                 Yes I am sure
             </button>
@@ -224,9 +206,9 @@ const closeEditModule = () => {
       </div>
       )}
 
-    {/* EDIT CONCERT MODULE */}
-    {selectedConcert && (
-    <div id="edit_concert_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+    {/* EDIT ARTIST MODULE */}
+    {selectedArtist && (
+    <div id="edit_artist_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
     <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#202124]">
         <button
             type="button"
@@ -252,35 +234,27 @@ const closeEditModule = () => {
         <div className="flex flex-col gap-4 justify-center text-center items-center">
         <input
             readOnly={true}
-            className="bg-slate-100 p-4 w-72 hidden"
+            className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
             type="text"
-            name="concert_id"
-            value={selectedConcert._id}
+            name="artist_id"
+            value={selectedArtist._id}
             />
 
             <input
                 readOnly={true}
                 className="bg-slate-100 p-4 w-72"
                 type="text"
-                name="concert_name"
-                value={selectedConcert.concert_name}
-            />
-
-            <input
-                readOnly={true}
-                className="bg-slate-100 p-4 w-72"
-                type="text"
-                name="concert_description"
-                value={selectedConcert.concert_description}
+                name="artist_name"
+                value={selectedArtist.artist_name}
             />
 
 
-        {/* <button 
-            type="button"
-            onClick={() => handleSaveChanges(selectedConcert._id)}
+        <button 
+            // type="button"
+            // onClick={() => handleSaveChanges(selectedArtist._id)}
             className="rounded-full w-fit h-fit py-4 px-4 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
             Save changes
-        </button> */}
+        </button>
 
         </div>
     </div>
