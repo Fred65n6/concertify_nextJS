@@ -6,7 +6,7 @@ import { AiFillDelete } from "react-icons/ai";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
 import { RiEdit2Fill } from "react-icons/ri";
-import {SlMusicToneAlt, SlArrowLeft} from "react-icons/sl";
+import {SlMusicToneAlt, SlArrowLeft, SlPlus} from "react-icons/sl";
 import Link from "../../../node_modules/next/link";
 
 interface Artist {
@@ -117,16 +117,18 @@ const closeEditModule = () => {
         </Link>
         <h1 className="font-bold text-4xl pb-4 pt-8">Admin / <span className="text-[#5311BF] dark:text-[#8e0bf5]">artists</span></h1>
 
-        <section className="flex gap-8 my-8">
-          <div className="flex flex-col gap-4 align-middle">
+        <section className="flex w-full justify-between py-8 items-center border-b-2 border-gray-100">
             <div className="flex gap-2">
               <SlMusicToneAlt className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="user" />
-              <span>There are {totalArtists} artists in total</span>
+              <span>There are <span className="text-[#5311BF] dark:text-[#8e0bf5] font-bold">{totalArtists}</span> artists in total</span>
             </div>
-          </div>
+            <button className="flex gap-2 rounded-full bg-purple-100 brand_purple items-center px-8 py-2 hover:bg-purple-200">
+              <Link href="/admin-upload-artist">Upload new artist</Link>
+              <SlPlus/>
+          </button>
         </section>
 
-        <form className="flex flex-col items-center gap-8 pb-12">
+        <form className="flex flex-col items-center gap-8 py-8">
           <table className="w-full">
             <thead>
               <tr className="lg:flex justify-start w-full">

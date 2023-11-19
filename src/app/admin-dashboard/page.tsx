@@ -2,7 +2,7 @@
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { SlUser } from "react-icons/sl";
+import { SlUser, SlArrowRight } from "react-icons/sl";
 import { AiFillDelete } from "react-icons/ai";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
@@ -134,9 +134,13 @@ const closeModule = () => {
      <section className="flex gap-4 mt-10">
 
        <Link href={"/admin-concerts/"} className="w-full">
-       <article className="bg-[#F2EEFB] w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-[#dcd6ea]">
+       <article className="bg-purple-100 w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
          <div className="flex justify-between">
            <p className="font-thin text-sm text-black">Total concerts</p>
+           <SlArrowRight
+                className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
+                id="arrow_right"
+                />
          </div>
          <span className="font-bold text-2xl text-[#5311BF]">{totalConcerts}</span>
        </article>
@@ -144,18 +148,26 @@ const closeModule = () => {
 
 
        <Link href={"/admin-artists/"} className="w-full">
-       <article className="bg-[#F2EEFB] gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-[#dcd6ea]">
+       <article className="bg-purple-100 gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
          <div className="flex justify-between">
              <p className="font-thin text-sm text-black">Total artists</p>
+            <SlArrowRight
+                className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
+                id="arrow_right"
+                />
            </div>
            <span className="font-bold text-2xl text-[#5311BF]">{totalArtists}</span>
        </article>
        </Link>
 
        <Link href={"/admin-venues/"} className="w-full">
-       <article className="bg-[#F2EEFB] w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-[#dcd6ea]">
+       <article className="bg-purple-100 w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
          <div className="flex justify-between">
              <p className="font-thin text-sm text-black">Total venues</p>
+             <SlArrowRight
+                className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
+                id="arrow_right"
+                />
            </div>
            <span className="font-bold text-2xl text-[#5311BF]">{totalVenues}</span>
        </article>

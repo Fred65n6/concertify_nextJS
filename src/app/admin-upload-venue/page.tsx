@@ -1,6 +1,8 @@
 "use client";
 import React, {useState} from "react";
-("");
+import { SlArrowLeft } from "react-icons/sl";
+import Link from "../../../node_modules/next/link";
+
 
 const UploadForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
@@ -53,14 +55,25 @@ const UploadForm: React.FC = () => {
     };
 
     return (
-        <div className="flex-col items-center flex">
+        <div className="flex flex-col w-full md:w-4/6 gap-6 mb-24">
+            <Link
+                className="flex align-middle gap-2"
+                href="/admin-venues"
+            >
+            <SlArrowLeft
+                className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4 pt-1"
+                id="arrow_right"
+                />
+                Back to venues overview
+            </Link>
+            <h1 className="font-bold text-4xl pb-4">Upload a venue</h1>
             <form
                 id="uploadVenueForm"
-                className="flex flex-col items-center gap-8 pb-12"
+                className="flex flex-col gap-8 w-full"
                 onSubmit={onSubmit}
             >
                 <input
-                    className="bg-slate-100 p-4 w-72"
+                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                     type="text"
                     name="Venue_name"
                     value={venueName}
@@ -69,7 +82,7 @@ const UploadForm: React.FC = () => {
                 />
 
                 <input
-                    className="bg-slate-100 p-4 w-72"
+                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                     type="text"
                     name="Venue_address"
                     value={venueAddress}
@@ -77,7 +90,7 @@ const UploadForm: React.FC = () => {
                     placeholder="Venue address"
                 />
                 <input
-                    className="bg-slate-100 p-4 w-72"
+                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                     type="text"
                     name="Venue_location"
                     value={venueLocation}
@@ -85,7 +98,7 @@ const UploadForm: React.FC = () => {
                     placeholder="Venue location (like KBH V)"
                 />
                 <input
-                    className="bg-slate-100 p-4 w-72"
+                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                     type="text"
                     name="Venue_size"
                     value={venueSize}
@@ -93,7 +106,7 @@ const UploadForm: React.FC = () => {
                     placeholder="Venue size"
                 />
                 <input
-                    className="bg-slate-100 p-4 w-72"
+                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                     type="text"
                     name="Venue_description"
                     value={venueDescription}
@@ -111,18 +124,30 @@ const UploadForm: React.FC = () => {
                     type="submit"
                     value="upload"
                 >
-                    {loading ? "Processing" : "Upload"}
+                    {loading ? "Processing" : "Confirm"}
                 </button>
             </form>
-            <div id="venueUploadedMessage" className="gap-8 text-center hidden">
-                <h2 className="text-2xl">Venue Uploaded!</h2>
-                <a
-                    className="brand_gradient py-2 px-4 text-white rounded-full"
-                    href="/uploadVenue"
-                >
-                    Upload another
-                </a>
+
+            <div id="venueUploadedMessage" className="hidden">
+                <h2 className="text-2xl">Venue uploaded successfully 🎉</h2>
+                <div className="flex gap-4 mt-8">
+                    <a
+                        className="brand_gradient py-2 px-4 text-white rounded-full"
+                        href="/admin-upload-venue"
+                    >
+                        Upload another
+                    </a>
+                    <a
+                        className="rounded-full px-8 py-2 bg-purple-100 brand_purple flex items-center hover:bg-purple-200"
+                        href="/venues"
+                    >
+                        See all venues
+                    </a>
+                </div>
             </div>
+
+
+
         </div>
     );
 };
