@@ -1,6 +1,8 @@
 "use client";
-import React, {useState, ChangeEvent} from "react";
+import React, {useState, useEffect, ChangeEvent} from "react";
 import {FaSearch} from "react-icons/fa";
+import { isNull } from "util";
+
 
 interface SearchInputProps {
     setResults: React.Dispatch<React.SetStateAction<any[]>>;
@@ -40,8 +42,10 @@ export const SearchBar: React.FC<SearchInputProps> = ({setResults}) => {
                 <input
                     type="textarea"
                     className="bg-slate-100 outline-none dark:text-black"
-                    placeholder="Type to search..."
+                    placeholder="Search artists..."
                     value={input}
+                    // onBlur={() => setInput("")}
+                    onBlur={() => handleChange("")}
                     onChange={(e: ChangeEvent<HTMLInputElement>) =>
                         handleChange(e.target.value)
                     }

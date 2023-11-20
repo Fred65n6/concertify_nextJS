@@ -43,7 +43,6 @@ export default function SingleArtist() {
                 console.error("Error fetching artists:", error);
             }
         };
-
         fetchData();
     }, []);
 

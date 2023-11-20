@@ -1,9 +1,11 @@
 "use client";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {SearchBar} from "./searchbar";
-import {SearchResultsList} from "./searchResultsList";
+import { SearchResultsList } from "./searchResultsList";
+
 
 function Search() {
+
     const [results, setResults] = useState([]);
 
     return (
