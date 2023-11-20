@@ -16,14 +16,10 @@ interface User {
 }
 
 const Admin: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const params = useParams();
-  const id = params.id;
   const [concerts, setConcerts] = useState<[]>([]);
   const [artists, setArtists] = useState<[]>([]);
   const [venues, setVenues] = useState<[]>([]);
   const [users, setUsers] = useState<User[]>([]);
-  // const [user, setUser] = useState<User | null>(null);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
 
@@ -113,7 +109,7 @@ const closeModule = () => {
         const result = await res.json();
         if (result.success) {
           console.log(result.message);
-          setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId)); // Removing the deleted user from the state
+          setUsers(elm => elm.filter(user => user._id !== userId)); // Removing the deleted user from the state
           closeModule();
         } else {
           console.error(result.error);
