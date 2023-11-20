@@ -67,8 +67,8 @@ export default function Home() {
                     <span className="brand_purple">{data.username}</span>
                 </h1>
             ) : (
-                <h1 className="text-2xl md:text-4xl font-bold">
-                    Experience <span className="brand_purple">Copenhagen</span>{" "}
+                <h1 className="text-3xl md:text-4xl font-bold">
+                    Experience <span className="brand_purple">Copenhagen</span>{" "} <span className="md:hidden"><br /></span>
                     through <span className="brand_purple">live music</span>
                 </h1>
             )}
@@ -80,8 +80,8 @@ export default function Home() {
             </div>
 
             {/* Concerts */}
-            <section className="pt-24 pb-4  md:h-[600px]">
-                <h2 className="font-bold text-xl pb-8">
+            <section className="md:pt-24 pt-12 pb-4 md:h-[600px]">
+                <h2 className="font-bold text-xl pb-4 md:pb-8">
                     Concerts you need to experience
                 </h2>
                 <div className="flex md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
@@ -100,15 +100,15 @@ export default function Home() {
             </section>
 
             {/* Venues */}
-            <section className="pb-40">
-                <h2 className="font-bold text-xl">
+            <section className="pb-36 md:pt-0 pt-12">
+                <h2 className="font-bold text-xl pb-4">
                     Venues you need to experience
                 </h2>
                 <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
                     <VenueCard />
                 </div>
                 <Link
-                    className="place-self-end flex items-center md:hidden"
+                    className="justify-end flex items-center"
                     href="/venues"
                 >
                     View all venues
