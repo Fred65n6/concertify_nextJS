@@ -42,7 +42,7 @@ export default function LoginPage() {
             // window.location.reload();
             if (response.data.isAdmin) {
                 // Admin user, redirect to admin page
-                router.push("/admin");
+                router.push("/admin-dashboard");
             } else {
                 // Regular user, redirect to regular user page
                 window.location.reload();
