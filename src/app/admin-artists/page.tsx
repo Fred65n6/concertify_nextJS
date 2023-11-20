@@ -1,5 +1,4 @@
 "use client";
-import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { AiFillDelete } from "react-icons/ai";
@@ -24,13 +23,9 @@ interface Artist {
 }
 
 const Admin: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const params = useParams();
-  const id = params.id;
-  const [artists, setArtists] = useState<[]>([]);
+  const [artists, setArtists] = useState<Artist[]>([]);
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
-
-
+  
   useEffect(() => {
     const fetchData = async () => {
         try {
@@ -73,6 +68,8 @@ const closeEditModule = () => {
   deleteArtistModule?.classList.remove("grid");
 };
 
+
+
   const handleDeleteArtist = async (artistId: string) => {
     try {
       const res = await fetch('/api/admin/deleteArtist', {
@@ -87,7 +84,7 @@ const closeEditModule = () => {
         const result = await res.json();
         if (result.success) {
           console.log(result.message);
-          setArtists((prevArtist) => prevArtist.filter((artist) => artist._id !== artistId)); // Removing the deleted artist from the state
+          setArtists(elm => elm.filter(artist => artist._id !== artistId));
           closeDeleteModule();
         } else {
           console.error(result.error);
@@ -97,6 +94,7 @@ const closeEditModule = () => {
       console.error('Error deleting artist:', error);
     }
   };
+  
 
 
 
