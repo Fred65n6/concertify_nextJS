@@ -9,6 +9,7 @@ import VenueCard from "./components/venueCard/page";
 import Link from "next/link";
 import {SlArrowRight, SlArrowLeft} from "react-icons/sl";
 
+
 export default function Home() {
     const router = useRouter();
     const [loading, setLoading] = useState(true); // Initialize as loading
@@ -108,7 +109,7 @@ export default function Home() {
                     <VenueCard />
                 </div>
                 <Link
-                    className="justify-end flex items-center"
+                    className="justify-end flex items-center md:hidden"
                     href="/venues"
                 >
                     View all venues

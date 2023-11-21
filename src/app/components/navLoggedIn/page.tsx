@@ -18,14 +18,9 @@ const NavLogged = () => {
     try {
       const response = await axios.get("/api/users/cookieUser");
       const userData: User = response.data.data;
-
       if (userData.isAdmin) {
-        console.log(userData)
-        console.log(`User is admin`);
         setIsAdmin(true);
       } else {
-        console.log(userData)
-        console.log(`User is not admin`);
         setIsAdmin(false);
       }
     } catch (error) {

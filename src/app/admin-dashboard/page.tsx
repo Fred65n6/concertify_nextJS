@@ -22,25 +22,17 @@ const Admin: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
-
-  useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const response = await axios.get("/api/data/userData");
-            setUsers(response.data.data);
-        } catch (error) {
-            console.error("Error fetching users:", error);
-        }
-    };
-
-    fetchData();
-}, []);
-
 useEffect(() => {
   const fetchData = async () => {
       try {
+          const response = await axios.get("/api/data/userData");
+          setUsers(response.data.data);
           const responseVenues = await axios.get("/api/data/venueData");
           setVenues(responseVenues.data.data);
+          const responseConcerts = await axios.get("/api/data/concertData");
+          setConcerts(responseConcerts.data.data);
+          const responseArtists = await axios.get("/api/data/artistData");
+          setArtists(responseArtists.data.data);
       } catch (error) {
           console.error("Error fetching venues:", error);
       }
@@ -48,33 +40,6 @@ useEffect(() => {
 
   fetchData();
 }, []);
-
-useEffect(() => {
-  const fetchData = async () => {
-      try {
-          const responseConcerts = await axios.get("/api/data/concertData");
-          setConcerts(responseConcerts.data.data);
-      } catch (error) {
-          console.error("Error fetching concerts:", error);
-      }
-  };
-
-  fetchData();
-}, []);
-
-useEffect(() => {
-  const fetchData = async () => {
-      try {
-          const responseArtists = await axios.get("/api/data/artistData");
-          setArtists(responseArtists.data.data);
-      } catch (error) {
-          console.error("Error fetching artists:", error);
-      }
-  };
-
-  fetchData();
-}, []);
-
 
 
   const totalConcerts = concerts.length;
