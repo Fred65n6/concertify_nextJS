@@ -20,7 +20,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <html lang="en">
             <body>
                 <div
-                    className={`${plusJakartaSans.className} dark:bg-[#202124] dark:text-white`}
+                    className={`${plusJakartaSans.className} dark:bg-[#1a1230] dark:text-white`}
                 >
                     {showComponent ? ( // Render your component here
                         <Nav_logged />
