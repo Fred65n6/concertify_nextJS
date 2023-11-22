@@ -40,6 +40,6 @@
         "src/app/components/filter/page.tsx",
         "src/app/components/filter/page.jsx",
         "src/app/components/breadCrumbs/page.tsx"
-, "src/app/forgotPassword/page.tsx", "middleware.ts"    ],
+, "src/app/forgotPassword/page.tsx", "src/middleware.ts"    ],
     "exclude": ["node_modules"]
 }
