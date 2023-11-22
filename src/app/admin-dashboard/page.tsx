@@ -1,5 +1,4 @@
 "use client";
-import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { SlUser, SlArrowRight } from "react-icons/sl";
@@ -24,23 +23,26 @@ const Admin: React.FC = () => {
 
 useEffect(() => {
   const fetchData = async () => {
-      try {
-          const response = await axios.get("/api/data/userData");
-          setUsers(response.data.data);
-          const responseVenues = await axios.get("/api/data/venueData");
-          setVenues(responseVenues.data.data);
-          const responseConcerts = await axios.get("/api/data/concertData");
-          setConcerts(responseConcerts.data.data);
-          const responseArtists = await axios.get("/api/data/artistData");
-          setArtists(responseArtists.data.data);
-      } catch (error) {
-          console.error("Error fetching venues:", error);
-      }
-  };
-
-  fetchData();
-}, []);
-
+        try {
+          const shouldReload = localStorage.getItem('shouldReload');
+            if (shouldReload) {
+              localStorage.removeItem('shouldReload');
+              window.location.reload();
+            }
+            const response = await axios.get("/api/data/userData");
+            setUsers(response.data.data);
+            const responseVenues = await axios.get("/api/data/venueData");
+            setVenues(responseVenues.data.data);
+            const responseConcerts = await axios.get("/api/data/concertData");
+            setConcerts(responseConcerts.data.data);
+            const responseArtists = await axios.get("/api/data/artistData");
+            setArtists(responseArtists.data.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+    fetchData();
+  }, []);
 
   const totalConcerts = concerts.length;
   const totalVenues = venues.length;
@@ -52,13 +54,13 @@ useEffect(() => {
     const deleteUserModule = document.getElementById("delete_user_module");
     deleteUserModule?.classList.remove("hidden");
     deleteUserModule?.classList.add("grid");
-};
+  };
 
-const closeModule = () => {
-  const deleteUserModule = document.getElementById("delete_user_module");
-  deleteUserModule?.classList.add("hidden");
-  deleteUserModule?.classList.remove("grid");
-};
+  const closeModule = () => {
+    const deleteUserModule = document.getElementById("delete_user_module");
+    deleteUserModule?.classList.add("hidden");
+    deleteUserModule?.classList.remove("grid");
+  };
 
   const handleDeleteUser = async (userId: string) => {
     try {
@@ -221,7 +223,6 @@ const closeModule = () => {
         </div>
       </div>
       )}
-
     </>
   );
 };

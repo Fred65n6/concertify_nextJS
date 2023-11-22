@@ -40,6 +40,11 @@ export default function Home() {
     };
 
     useEffect(() => {
+        const shouldReload = localStorage.getItem('shouldReload');
+            if (shouldReload) {
+              localStorage.removeItem('shouldReload');
+              window.location.reload();
+            }
         getUserDetails();
     }, []);
 

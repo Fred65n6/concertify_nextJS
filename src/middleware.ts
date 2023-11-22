@@ -5,8 +5,8 @@ import type { NextRequest } from 'next/server'
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
 
-  const isAdminPath = path === '/admin-dashboard' 
-//   const isRestrictedPath = path === '/login' || path === '/signup' || path === '/verifyemail'
+  const isAdminPath = path === '/admin-dashboard' || path === '/admin-artist' || path === '/admin-concerts' || path === '/admin-upload-artist' || path === '/admin-uploadconcert' || path === '/admin-upload-venue' || path === '/admin-venues';
+  const isRestrictedPath = path === '/favourites' || path === '/profile';
 
   const token = request.cookies.get('token')?.value || ''
   const adminToken = request.cookies.get('adminToken')?.value || ''
@@ -15,13 +15,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.nextUrl))
   }
 
-//   if (!isPublicPath && !token) {
-//     return NextResponse.redirect(new URL('/login', request.nextUrl))
-//   }
+  if (isRestrictedPath && (!token || !adminToken)) {
+    return NextResponse.redirect(new URL('/', request.nextUrl))
+  }
     
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
   matcher: [
     '/',
@@ -29,7 +28,14 @@ export const config = {
     '/login',
     '/signup',
     '/verifyemail',
-    '/admin-dashboard'
+    '/admin-dashboard',
+    '/favourites',
+    '/admin-concerts',
+    '/admin-venues',
+    '/admin-artists',
+    '/admin-upload-artist',
+    '/admin-upload-venue',
+    '/admin-upload-concert',
   ]
 }
 

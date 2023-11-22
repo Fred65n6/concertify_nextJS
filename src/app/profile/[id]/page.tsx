@@ -30,8 +30,8 @@ export default function UserProfile({params}: any) {
             await axios.get("/api/users/logout");
             console.log("log out successfull");
             // Set a flag in localStorage to indicate a successful login
-            localStorage.setItem("successfulLogin", "true");
-            window.location.reload();
+            router.push("/");
+            localStorage.setItem('shouldReload', 'true');
         } catch (error: any) {
             console.log(error.message);
         } finally {
