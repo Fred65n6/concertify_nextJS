@@ -70,12 +70,12 @@ export default function Home() {
             ) : data.username ? (
                 <h1 className="text-4xl font-bold">
                     Welcome back{" "}
-                    <span className="brand_purple">{data.username}</span>
+                    <span className="brand_purple dark:text-purple-500">{data.username}</span>
                 </h1>
             ) : (
                 <h1 className="text-3xl md:text-4xl font-bold">
-                    Experience <span className="brand_purple">Copenhagen</span>{" "} <span className="md:hidden"><br /></span>
-                    through <span className="brand_purple">live music</span>
+                    Experience <span className="brand_purple dark:text-purple-500">Copenhagen</span>{" "} <span className="md:hidden"><br /></span>
+                    through <span className="brand_purple dark:text-purple-500">live music</span>
                 </h1>
             )}
             <div className="">

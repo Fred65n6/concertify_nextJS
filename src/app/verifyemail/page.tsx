@@ -49,9 +49,6 @@ export default function VerifyEmailPage() {
           <h2 className="text-2xl brand_purple pt-4">
             Your email has been verified
           </h2>
-          <Link className="brand_purple text-2xl underline" href="/">
-            Go to Login
-          </Link>
         </div>
       )}
       {error && (

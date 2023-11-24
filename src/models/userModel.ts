@@ -32,7 +32,18 @@ const userSchema = new mongoose.Schema({
             favourite_concert_date: String,
             favourite_concert_artist: String,
             favourite_concert_venue: String,
-            // Add other fields as needed for each favorite
+        },
+    ],
+    genres: [
+        {
+            genre_name: String,
+            genre_id: String,
+        },
+    ],
+    venues: [
+        {
+            venue_name: String,
+            venue_id: String,
         },
     ],
     forgotPasswordToken: String,
