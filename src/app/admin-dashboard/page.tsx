@@ -92,48 +92,46 @@ const closeModule = () => {
       <SignupPage />
       <div>
         <h1 className="font-bold text-4xl pb-4 pt-8">Admin dashboard</h1>
-     <section className="flex gap-4 mt-10">
+        <section className="flex gap-4 mt-10">
+          <Link href={"/admin-concerts/"} className="w-full">
+          <article className="bg-purple-100 w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
+            <div className="flex justify-between">
+              <p className="font-thin text-sm text-black">Total concerts</p>
+              <SlArrowRight
+                    className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
+                    id="arrow_right"
+                    />
+            </div>
+            <span className="font-bold text-2xl text-[#5311BF]">{totalConcerts}</span>
+          </article>
+          </Link>
 
-       <Link href={"/admin-concerts/"} className="w-full">
-       <article className="bg-purple-100 w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
-         <div className="flex justify-between">
-           <p className="font-thin text-sm text-black">Total concerts</p>
-           <SlArrowRight
-                className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
-                id="arrow_right"
-                />
-         </div>
-         <span className="font-bold text-2xl text-[#5311BF]">{totalConcerts}</span>
-       </article>
-       </Link>
+          <Link href={"/admin-artists/"} className="w-full">
+          <article className="bg-purple-100 gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
+            <div className="flex justify-between">
+                <p className="font-thin text-sm text-black">Total artists</p>
+                <SlArrowRight
+                    className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
+                    id="arrow_right"
+                    />
+              </div>
+              <span className="font-bold text-2xl text-[#5311BF]">{totalArtists}</span>
+          </article>
+          </Link>
 
-
-       <Link href={"/admin-artists/"} className="w-full">
-       <article className="bg-purple-100 gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
-         <div className="flex justify-between">
-             <p className="font-thin text-sm text-black">Total artists</p>
-            <SlArrowRight
-                className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
-                id="arrow_right"
-                />
-           </div>
-           <span className="font-bold text-2xl text-[#5311BF]">{totalArtists}</span>
-       </article>
-       </Link>
-
-       <Link href={"/admin-venues/"} className="w-full">
-       <article className="bg-purple-100 w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
-         <div className="flex justify-between">
-             <p className="font-thin text-sm text-black">Total venues</p>
-             <SlArrowRight
-                className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
-                id="arrow_right"
-                />
-           </div>
-           <span className="font-bold text-2xl text-[#5311BF]">{totalVenues}</span>
-       </article>
-       </Link>
-     </section>
+          <Link href={"/admin-venues/"} className="w-full">
+          <article className="bg-purple-100 w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
+            <div className="flex justify-between">
+                <p className="font-thin text-sm text-black">Total venues</p>
+                <SlArrowRight
+                    className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
+                    id="arrow_right"
+                    />
+              </div>
+              <span className="font-bold text-2xl text-[#5311BF]">{totalVenues}</span>
+          </article>
+          </Link>
+        </section>
 
         <h2 className="font-bold text-xl pb-4 pt-8">Users</h2>
         <section className="flex gap-8 mb-8">
