@@ -2,11 +2,12 @@
 import React, {ReactNode, useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
+import { SlArrowLeft } from "react-icons/sl";
 
 const BreadcrumbComp = () => {
     const [config] = useState({
         homeElement: "Home",
-        separator: " / ",
+        separator: <SlArrowLeft className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4 pt-1" id="arrow_back"/>,
         containerClasses: "",
         listClasses: "",
         activeClasses: "active",
@@ -18,7 +19,7 @@ const BreadcrumbComp = () => {
 
     return (
         <div className="flex mt-4 mb-12">
-            <ul className="flex items-center gap-2 brand_purple opacity-60">
+            <ul className="flex items-center gap-2 text-gray-600 dark:text-[#5311BF]">
                 <li className="hover:underline">
                     <Link href={"/"}>{config.homeElement}</Link>
                 </li>
