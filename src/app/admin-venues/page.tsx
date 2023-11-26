@@ -6,7 +6,7 @@ import { AiFillDelete } from "react-icons/ai";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
 import { RiEdit2Fill } from "react-icons/ri";
-import {SlMusicToneAlt, SlArrowLeft, SlPlus} from "react-icons/sl";
+import {SlMusicToneAlt, SlArrowLeft, SlPlus, SlQuestion} from "react-icons/sl";
 import Link from "../../../node_modules/next/link";
 
 
@@ -196,7 +196,10 @@ const handleDeleteVenue = async (venueId: string) => {
               </svg>
           </button>
             <div className="flex flex-col gap-4 justify-center text-center items-center">
-                <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
+              <div className="flex gap-2">
+                  <SlQuestion />
+                  <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
+                </div>
                 <p className="dark:text-white">
                 You are about to delete{" "}
                 <span className="italic font-bold">{selectedVenue.venue_name}</span>. This action can not be reverted.

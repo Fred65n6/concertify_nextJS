@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { SlUser, SlArrowRight } from "react-icons/sl";
+import { SlUser, SlArrowRight, SlQuestion } from "react-icons/sl";
 import { AiFillDelete } from "react-icons/ai";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
@@ -206,7 +206,10 @@ useEffect(() => {
           </button>
 
           <div className="flex flex-col gap-4 justify-center text-center items-center">
-            <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
+            <div className="flex gap-2">
+              <SlQuestion />
+              <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
+            </div>
             <p className="dark:text-white">
               You are about to delete{" "}
               <span className="italic font-bold">{selectedUser.username}</span>. This action can not be reverted.

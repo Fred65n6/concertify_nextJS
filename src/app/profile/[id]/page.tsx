@@ -8,16 +8,34 @@ import { RiEdit2Fill } from "react-icons/ri";
 import { CgClose } from "react-icons/cg";
 import { SlLogout } from "react-icons/sl";
 
+interface Genre {
+    _id: string;
+    genre_name: string;
+  }
+
+interface Venue {
+    _id: string;
+    venue_name: string;
+}
+
 
 
 export default function UserProfile({params}: any) {
     const router = useRouter();
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState<string>("");
+
+    const [genres, setGenres] = useState<Genre[]>([]);
+    const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+    const [selectedGenre, setSelectedGenre] = useState<string>("");
+    const [venues, setVenues] = useState<Venue[]>([]);
+    const [selectedVenues, setSelectedVenues] = useState<string[]>([]);
+    const [selectedVenue, setSelectedVenue] = useState<string>("");
+
     const [data, setData] = useState({
         username: "unknown",
         userId: null,
-        userEmail: "unknown",
+        userEmail: "unknown"
     });
     const [user, setUser] = React.useState({
         newpassword: "",
@@ -50,6 +68,8 @@ export default function UserProfile({params}: any) {
                 username: userData.username,
                 userId: userData._id,
                 userEmail: userData.email,
+                genres: userData.genres,
+                venues: userData.venues,
             });
         } catch (error: any) {
             console.error(error.message);
@@ -153,7 +173,7 @@ export default function UserProfile({params}: any) {
             <h1 className="dark:text-white font-bold text-3xl">Profile / <span className="text-[#5311BF] dark:text-[#8e0bf5]">{data.username}</span></h1>
             
             <section className="flex gap-4 mt-10">
-                <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">
+                <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
                     <p className="text-lg dark:text-black">
                         Email: <span className="brand_purple">{data.userEmail}</span>
                     </p>
@@ -188,6 +208,18 @@ export default function UserProfile({params}: any) {
                 </div>
             </section>
 
+            {/* PREFERENCES */}
+            <section className="mt-8">
+                <h2 className="dark:text-white font-bold text-xl">Preferences</h2>
+
+                <div>
+                {selectedGenres.map((genre, index) => (
+                    <p> Genres: <span className="brand_purple">{data.genres.genre_name}</span></p>
+                ))}
+
+              </div>
+            </section>
+
             {/* LOG OUT BUTTON */}
             <button
                 onClick={logout}
@@ -197,8 +229,6 @@ export default function UserProfile({params}: any) {
                 <SlLogout className="fill-[#5311BF] dark:fill-white"/>
             </button>
             
-
-
 
             {/* CHANGE USERNAME MODAL */}
             <div id="changeUsernameModal" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">

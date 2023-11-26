@@ -19,7 +19,7 @@ const BreadcrumbComp = () => {
 
     return (
         <div className="flex mt-4 mb-12">
-            <ul className="flex items-center gap-2 text-gray-600 dark:text-[#5311BF]">
+            <ul className="flex items-center gap-2 text-[#5311BF] dark:text-white">
                 <li className="hover:underline">
                     <Link href={"/"}>{config.homeElement}</Link>
                 </li>
