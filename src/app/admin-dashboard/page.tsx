@@ -6,6 +6,7 @@ import { AiFillDelete } from "react-icons/ai";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
 import Link from "next/link";
+import { CgClose } from "react-icons/cg";
 
 
 interface User {
@@ -184,26 +185,14 @@ useEffect(() => {
       {selectedUser && (
       <div id="delete_user_module" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
         <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#202124]">
-          <button
-              type="button"
-              onClick={closeModule}
-              className="cursor-pointer ml-[75%]"
-          >
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-              >
-                  <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m7 7l10 10M7 17L17 7"
-                  />
-              </svg>
+        <button
+            type="button"
+            onClick={closeModule}
+            className="cursor-pointer ml-[100%]"
+            >
+            <CgClose/>
           </button>
+         
 
           <div className="flex flex-col gap-4 justify-center text-center items-center">
             <div className="flex gap-2">

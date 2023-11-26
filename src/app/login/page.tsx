@@ -76,7 +76,7 @@ export default function LoginPage() {
     return (
         <>
         <div id="login_module" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-            <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#202124]">
+        <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
             <button
                 type="button"
                 onClick={closeLoginModule}
@@ -85,17 +85,17 @@ export default function LoginPage() {
                 <CgClose/>
             </button>
             
-            <span className="mb-4 text-3xl font-bold dark:text-black">
+            <span className="mb-4 text-3xl font-bold dark:text-white">
             {loading ? "Processing" : "Login"}
             </span>
-            <p className="mb-6 dark:text-black">
+            <p className="mb-6 dark:dark:text-gray-100">
                 Login to continue exploring
             </p>
             <div className="flex flex-col gap-4 w-full">
                 <div className="flex flex-col w-full gap-2">
-                    <label htmlFor="email" className="w-fit text-sm text-gray-600">Email</label>
+                    <label htmlFor="email" className="w-fit text-sm dark:text-gray-100">Email</label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                         type="text"
                         id="email"
                         value={user.email}
@@ -104,9 +104,9 @@ export default function LoginPage() {
                     />
                 </div>
                 <div className="flex flex-col w-full gap-2">
-                    <label htmlFor="password" className="w-fit text-sm text-gray-600">Password</label>
+                    <label htmlFor="password" className="w-fit text-sm dark:text-gray-100">Password</label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                         type="password"
                         id="password"
                         value={user.password}
@@ -129,7 +129,7 @@ export default function LoginPage() {
             </button>
             <div className="grid gap-4 text-center mt-4">
                 <div className="flex gap-2">
-                    <span className="text-gray-700">Dont have an account yet?</span>
+                    <span className="dard:dark:text-gray-100">Dont have an account yet?</span>
                     <button
                         className="text-purple-700 hover:underline"
                         onClick={openSignupModule}

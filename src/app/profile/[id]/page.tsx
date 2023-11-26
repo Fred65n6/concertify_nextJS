@@ -200,7 +200,7 @@ export default function UserProfile({params}: any) {
 
                     <div className="flex items-center justify-between mb-8 md:hidden">
                         <p className="text-lg dark:text-black">
-                            Switch theme
+                            Dark mode
                         </p>
 
                         <ThemeSwitcher/>
@@ -209,15 +209,38 @@ export default function UserProfile({params}: any) {
             </section>
 
             {/* PREFERENCES */}
-            <section className="mt-8">
-                <h2 className="dark:text-white font-bold text-xl">Preferences</h2>
 
-                <div>
-                {selectedGenres.map((genre, index) => (
-                    <p> Genres: <span className="brand_purple">{data.genres.genre_name}</span></p>
-                ))}
+            <section className="flex gap-4 mt-10">
+                <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
+                    <div className="flex flex-col gap-4">
+                        <h2 className="text-black font-bold text-xl">Preferred genres</h2>
+                            <div className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8">
+                                <span className="text-[#5311BF]">Genere</span>
+                            </div>
+                        {/* {selectedGenres.map((genre, index) => (
+                            <p> Genres: <span className="brand_purple">{data.genres.genre_name}</span></p>
+                        ))} */}
+                    </div>
+                </div>
 
-              </div>
+                <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
+                    <div className="flex flex-col gap-4">
+                        <h2 className="text-black font-bold text-xl">Preferred venues</h2>
+                        <div className="flex flex-wrap gap-4">
+                            <div className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8">
+                                <span className="text-[#5311BF]">Venue</span>
+                            </div>
+
+                            <div className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8">
+                                <span className="text-[#5311BF]">Venue</span>
+                            </div>
+
+                            <div className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8">
+                                <span className="text-[#5311BF]">Venue</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             {/* LOG OUT BUTTON */}

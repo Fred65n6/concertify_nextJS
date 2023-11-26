@@ -75,8 +75,8 @@ const VenueCard: React.FC = () => {
           <div className="text-black text-xl font-bold dark:text-white pt-2">
             {venue.venue_name}
           </div>
-          <p className="text-gray-600 text-sm dark:text-gray-400 pt-1">
-            <span className="font-bold mr-1">{venue.venue_address}, </span>
+          <p className="text-black text-sm dark:text-gray-100">
+            <span className="mr-1">{venue.venue_address}, </span>
             {venue.venue_location}
           </p>
         </article>

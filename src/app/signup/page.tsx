@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Progress } from "flowbite-react";
+import { CgClose } from "react-icons/cg";
 
 
 interface Genre {
@@ -233,11 +234,18 @@ export default function SignupPage() {
 
   return (
     <>
-      <div id="signup_module" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50"      >
+      <div id="signup_module" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
         {/* SIGNUP FORM: STEP 1 */}
         <div id="signup_form">
-          <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#202124]">
-              <span className="mb-4 text-3xl font-bold dark:text-black">
+          <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
+          <button
+                  type="button"
+                  onClick={closeSignupModule}
+                  className="cursor-pointer ml-[100%]"
+                  >
+                  <CgClose/>
+              </button>
+              <span className="mb-4 text-3xl font-bold dark:text-white">
                 {loading ? "Processing" : "Sign up"}
               </span>
               <p className="mb-6">To get a personalised experience</p>
@@ -247,9 +255,9 @@ export default function SignupPage() {
 
                 {/* USERNAME */}
                 <div className="flex flex-col w-full gap-2">
-                  <label htmlFor="username" className="w-fit text-sm text-gray-600">Username</label>
+                  <label htmlFor="username" className="w-fit text-sm dark:text-gray-100">Username</label>
                   <input
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                     type="text"
                     id="username"
                     value={user.username}
@@ -260,9 +268,9 @@ export default function SignupPage() {
 
                 {/* EMAIL */}
                 <div className="flex flex-col w-full gap-2">
-                  <label htmlFor="email" className="w-fit text-sm text-gray-600">Email</label>
+                  <label htmlFor="email" className="w-fit text-sm dark:text-gray-100">Email</label>
                   <input
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                     type="text"
                     id="email"
                     value={user.email}
@@ -274,9 +282,9 @@ export default function SignupPage() {
                 <div className="flex gap-4">
                   {/* PASSWORD */}
                   <div className="flex flex-col w-full gap-2">
-                    <label htmlFor="password" className="w-fit text-sm text-gray-600">Password</label>
+                    <label htmlFor="password" className="w-fit text-sm dark:text-gray-100">Password</label>
                     <input
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                       type="password"
                       id="password"
                       value={user.password}
@@ -287,9 +295,9 @@ export default function SignupPage() {
 
                   {/* CONFIRM PASSWORD */}
                   <div className="flex flex-col w-full gap-2">
-                    <label htmlFor="confirmpassword" className="w-fit text-sm text-gray-600">Confirm password</label>
+                    <label htmlFor="confirmpassword" className="w-fit text-sm dark:text-gray-100">Confirm password</label>
                     <input
-                      className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                      className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                       type="password"
                       id="confirmpassword"
                       value={user.confirmpassword}
