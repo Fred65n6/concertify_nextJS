@@ -1,11 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { SlUser, SlArrowRight } from "react-icons/sl";
+import { SlUser, SlArrowRight, SlQuestion } from "react-icons/sl";
 import { AiFillDelete } from "react-icons/ai";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
 import Link from "next/link";
+import { CgClose } from "react-icons/cg";
 
 
 interface User {
@@ -94,48 +95,46 @@ useEffect(() => {
       <SignupPage />
       <div>
         <h1 className="font-bold text-4xl pb-4 pt-8">Admin dashboard</h1>
-     <section className="flex gap-4 mt-10">
+        <section className="flex gap-4 mt-10">
+          <Link href={"/admin-concerts/"} className="w-full">
+          <article className="bg-purple-100 w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
+            <div className="flex justify-between">
+              <p className="font-thin text-sm text-black">Total concerts</p>
+              <SlArrowRight
+                    className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
+                    id="arrow_right"
+                    />
+            </div>
+            <span className="font-bold text-2xl text-[#5311BF]">{totalConcerts}</span>
+          </article>
+          </Link>
 
-       <Link href={"/admin-concerts/"} className="w-full">
-       <article className="bg-purple-100 w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
-         <div className="flex justify-between">
-           <p className="font-thin text-sm text-black">Total concerts</p>
-           <SlArrowRight
-                className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
-                id="arrow_right"
-                />
-         </div>
-         <span className="font-bold text-2xl text-[#5311BF]">{totalConcerts}</span>
-       </article>
-       </Link>
+          <Link href={"/admin-artists/"} className="w-full">
+          <article className="bg-purple-100 gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
+            <div className="flex justify-between">
+                <p className="font-thin text-sm text-black">Total artists</p>
+                <SlArrowRight
+                    className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
+                    id="arrow_right"
+                    />
+              </div>
+              <span className="font-bold text-2xl text-[#5311BF]">{totalArtists}</span>
+          </article>
+          </Link>
 
-
-       <Link href={"/admin-artists/"} className="w-full">
-       <article className="bg-purple-100 gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
-         <div className="flex justify-between">
-             <p className="font-thin text-sm text-black">Total artists</p>
-            <SlArrowRight
-                className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
-                id="arrow_right"
-                />
-           </div>
-           <span className="font-bold text-2xl text-[#5311BF]">{totalArtists}</span>
-       </article>
-       </Link>
-
-       <Link href={"/admin-venues/"} className="w-full">
-       <article className="bg-purple-100 w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
-         <div className="flex justify-between">
-             <p className="font-thin text-sm text-black">Total venues</p>
-             <SlArrowRight
-                className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
-                id="arrow_right"
-                />
-           </div>
-           <span className="font-bold text-2xl text-[#5311BF]">{totalVenues}</span>
-       </article>
-       </Link>
-     </section>
+          <Link href={"/admin-venues/"} className="w-full">
+          <article className="bg-purple-100 w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
+            <div className="flex justify-between">
+                <p className="font-thin text-sm text-black">Total venues</p>
+                <SlArrowRight
+                    className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
+                    id="arrow_right"
+                    />
+              </div>
+              <span className="font-bold text-2xl text-[#5311BF]">{totalVenues}</span>
+          </article>
+          </Link>
+        </section>
 
         <h2 className="font-bold text-xl pb-4 pt-8">Users</h2>
         <section className="flex gap-8 mb-8">
@@ -186,29 +185,20 @@ useEffect(() => {
       {selectedUser && (
       <div id="delete_user_module" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
         <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#202124]">
-          <button
-              type="button"
-              onClick={closeModule}
-              className="cursor-pointer ml-[75%]"
-          >
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-              >
-                  <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m7 7l10 10M7 17L17 7"
-                  />
-              </svg>
+        <button
+            type="button"
+            onClick={closeModule}
+            className="cursor-pointer ml-[100%]"
+            >
+            <CgClose/>
           </button>
+         
 
           <div className="flex flex-col gap-4 justify-center text-center items-center">
-            <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
+            <div className="flex gap-2">
+              <SlQuestion />
+              <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
+            </div>
             <p className="dark:text-white">
               You are about to delete{" "}
               <span className="italic font-bold">{selectedUser.username}</span>. This action can not be reverted.

@@ -8,6 +8,7 @@ import SignupPage from "../signup/page";
 import { RiEdit2Fill } from "react-icons/ri";
 import {SlMusicToneAlt, SlArrowLeft, SlPlus} from "react-icons/sl";
 import Link from "../../../node_modules/next/link";
+import { CgClose } from "react-icons/cg";
 
 
 interface Venue {
@@ -108,12 +109,12 @@ const handleDeleteVenue = async (venueId: string) => {
                 />
                 Back to dashboard
         </Link>
-        <h1 className="font-bold text-4xl pb-4 pt-8">Admin / <span className="text-[#5311BF] dark:text-[#8e0bf5]">venues</span></h1>
+        <h1 className="font-bold text-4xl pb-4 pt-8">Admin / <span className="text-[#5311BF] dark:text-purple-500">venues</span></h1>
 
-        <section className="flex w-full justify-between py-8 items-center border-b-2 border-gray-100">
+        <section className="flex w-full justify-between py-8 items-center border-b-[1px] border-gray-100 dark:border-[#23124b]">
             <div className="flex gap-2">
-              <SlMusicToneAlt className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="user" />
-              <span>There are <span className="text-[#5311BF] dark:text-[#8e0bf5] font-bold">{totalVenues}</span> venues in total</span>
+              <SlMusicToneAlt className="stroke-[#5311BF] dark:stroke-purple-500 w-5 h-5" id="user" />
+              <span>There are <span className="text-[#5311BF] dark:text-purple-500 font-bold">{totalVenues}</span> venues in total</span>
             </div>
             <button className="flex gap-2 rounded-full bg-purple-100 brand_purple items-center px-8 py-2 hover:bg-purple-200">
               <Link href="/admin-upload-venue">Upload new venue</Link>
@@ -143,7 +144,7 @@ const handleDeleteVenue = async (venueId: string) => {
                   <td className="text-right w-1/12">
                     <button
                       type="button"
-                      className="text-[#5311BF]"
+                      className="text-[#5311BF] dark:text-white"
                       onClick={() => openEditModule(venue)}
                     >
                         <RiEdit2Fill />
@@ -152,12 +153,12 @@ const handleDeleteVenue = async (venueId: string) => {
                   <td className="text-right w-1/12">
                     <button
                       type="button"
-                      className="text-[#5311BF]"
+                      className="text-[#5311BF] dark:text-white"
                       onClick={() => openDeleteModule(venue)}
                     >
 
                       <AiFillDelete
-                        className="fill-[#5311BF] dark:fill-[#8e0bf5] w-5 h-5"
+                        className="fill-[#5311BF] dark:fill-white w-5 h-5"
                         id="deleteArtist"
                         value="upload"
                       />
@@ -174,27 +175,15 @@ const handleDeleteVenue = async (venueId: string) => {
     {/* DELETE VENUE MODULE */}
       {selectedVenue && (
       <div id="delete_venue_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-        <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#202124]">
-          <button
-              type="button"
-              onClick={closeDeleteModule}
-              className="cursor-pointer ml-[75%]"
-          >
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-              >
-                  <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m7 7l10 10M7 17L17 7"
-                  />
-              </svg>
+        <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
+        <button
+            type="button"
+            onClick={closeDeleteModule}
+            className="cursor-pointer ml-[100%]"
+            >
+            <CgClose/>
           </button>
+         
             <div className="flex flex-col gap-4 justify-center text-center items-center">
                 <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
                 <p className="dark:text-white">
@@ -215,27 +204,14 @@ const handleDeleteVenue = async (venueId: string) => {
     {/* EDIT VENUE MODULE */}
     {selectedVenue && (
     <div id="edit_venue_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-    <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#202124]">
-        <button
-            type="button"
-            onClick={closeEditModule}
-            className="cursor-pointer ml-[75%]"
+    <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
+    <button
+        type="button"
+        onClick={closeEditModule}
+        className="cursor-pointer ml-[100%]"
         >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-            >
-                <path
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m7 7l10 10M7 17L17 7"
-                />
-            </svg>
-        </button>
+        <CgClose/>
+    </button>
 
         <div className="flex flex-col gap-4 justify-center text-center items-center">
         <input

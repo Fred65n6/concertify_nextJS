@@ -88,7 +88,7 @@ export default function Home() {
             {/* Concerts */}
             <section className="md:pt-24 pt-12 pb-4 md:h-[600px]">
                 <h2 className="font-bold text-xl pb-4 md:pb-8">
-                    Concerts you need to experience
+                    <span className="text-[#5311BF] dark:text-purple-500">Concerts</span> you need to experience
                 </h2>
                 <div className="flex md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
                     <ConcertCard />
@@ -108,7 +108,7 @@ export default function Home() {
             {/* Venues */}
             <section className="pb-36 md:pt-0 pt-12">
                 <h2 className="font-bold text-xl pb-4">
-                    Venues you need to experience
+                    <span className="text-[#5311BF] dark:text-purple-500">Venues</span> you need to experience
                 </h2>
                 <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
                     <VenueCard />

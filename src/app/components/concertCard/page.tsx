@@ -70,7 +70,7 @@ const ConcertCard: React.FC = () => {
               width={200}
               height={200}
               alt="concert"
-              className="rounded-lg  object-cover w-full h-[200px]"
+              className="rounded-lg object-cover w-full h-[200px]"
             />
           </Link>
 
@@ -84,8 +84,8 @@ const ConcertCard: React.FC = () => {
               : "Unknown concert_name"}
           </h4>
 
-          <p className="text-gray-600 text-sm flex dark:text-gray-400 pt-1">
-            <span className="font-bold mr-1">
+          <p className="text-black text-sm dark:text-gray-100">
+            <span>
               {concert.concert_venue?.venue_name},{" "}
             </span>
             {concert.concert_date}

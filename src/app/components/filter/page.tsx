@@ -1,6 +1,8 @@
 "use client";
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import { SlLocationPin, SlCalender, SlStar, SlMusicToneAlt } from "react-icons/sl";
+
 
 const Filter: React.FC<any> = ({data, onDataFiltered}) => {
     const [dateFilter, setDateFilter] = useState<string>("");
@@ -81,33 +83,24 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
     ]);
 
     return (
-        <div className="border-[1px] lg:rounded-full rounded-2xl lg:my-8 border-solid border-purple-800 grid grid-cols-2 lg:flex lg:py-6 p-4 lg:px-12 justify-between">
-            <div className="pb-4 md:pb-0">
+        // <div className="border-[1px] lg:rounded-full rounded-2xl lg:my-8 border-solid border-purple-800 grid grid-cols-2 lg:flex lg:py-6 p-4 lg:px-12 justify-between">
+        <div className="grid grid-cols-1 lg:flex lg:py-6 p-4 lg:px-0 justify-between gap-4">
+            <div className="pb-4 md:pb-0 w-full md:w-1/4">
                 <label
-                    className=" text-sm md:text-lg font-bold flex gap-2 mb-4 items-center"
+                    className=" flex gap-2 mb-4 mt-0 items-center w-fit text-sm md:text-lg text-[#5311BF] dark:text-white"
                     htmlFor="venue"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M12 12q.825 0 1.413-.588T14 10q0-.825-.588-1.413T12 8q-.825 0-1.413.588T10 10q0 .825.588 1.413T12 12Zm0 10q-4.025-3.425-6.012-6.362T4 10.2q0-3.75 2.413-5.975T12 2q3.175 0 5.588 2.225T20 10.2q0 2.5-1.988 5.438T12 22Z"
-                        />
-                    </svg>
-                    Search venues
+                    <SlLocationPin/>
+                    Venue
                 </label>
                 <select
-                className="dark:text-slate-500"
+                    className="border-[1px] rounded-full border-solid border-[#5311BF] px-8 py-4 w-full dark:text-black dark:border-0"
                     name="venue"
                     value={venueFilter}
                     onChange={(e) => setVenueFilter(e.target.value)}
                 >
-                    <option className="border-none t-2" value="">
-                        All Venues
+                    <option className="border-none t-2 " value="">
+                        Select
                     </option>
                     {venues.map((venue) => (
                         <option
@@ -121,23 +114,13 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                 </select>
             </div>
 
-            <div className="pb-4 md:pb-0">
+            <div className="pb-4 md:pb-0 w-full md:w-1/4">
                 <label
-                    className=" text-sm md:text-lg font-bold flex gap-2 mb-4 items-center"
+                    className=" flex gap-2 mb-4 mt-0 items-center w-fit text-sm md:text-lg text-[#5311BF] dark:text-white"
                     htmlFor="date"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M12 14q-.425 0-.713-.288T11 13q0-.425.288-.713T12 12q.425 0 .713.288T13 13q0 .425-.288.713T12 14Zm-4 0q-.425 0-.713-.288T7 13q0-.425.288-.713T8 12q.425 0 .713.288T9 13q0 .425-.288.713T8 14Zm8 0q-.425 0-.713-.288T15 13q0-.425.288-.713T16 12q.425 0 .713.288T17 13q0 .425-.288.713T16 14Zm-4 4q-.425 0-.713-.288T11 17q0-.425.288-.713T12 16q.425 0 .713.288T13 17q0 .425-.288.713T12 18Zm-4 0q-.425 0-.713-.288T7 17q0-.425.288-.713T8 16q.425 0 .713.288T9 17q0 .425-.288.713T8 18Zm8 0q-.425 0-.713-.288T15 17q0-.425.288-.713T16 16q.425 0 .713.288T17 17q0 .425-.288.713T16 18ZM5 22q-.825 0-1.413-.588T3 20V6q0-.825.588-1.413T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.588 1.413T19 22H5Zm0-2h14V10H5v10Z"
-                        />
-                    </svg>
-                    Search by date
+                    <SlCalender/>
+                    Date
                 </label>
                 <input
                 className="dark:text-slate-500"
@@ -146,34 +129,29 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                     placeholder="Filter by date"
                     value={dateFilter}
                     onChange={(e) => setDateFilter(e.target.value)}
+                    className="border-[1px] rounded-full border-solid border-[#5311BF] px-8 py-4 w-full dark:text-black dark:border-0"
                 />
             </div>
 
-            <div className="pb-4 md:pb-0">
+            <div className="pb-4 md:pb-0 w-full md:w-1/4">
                 <label
-                    className=" text-sm md:text-lg font-bold flex gap-2 mb-4 items-center"
+                    className=" flex gap-2 mb-4 mt-0 items-center w-fit text-sm md:text-lg text-[#5311BF] dark:text-white"
                     htmlFor="genre"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="m12 18.275l-4.15 2.5q-.275.175-.575.15t-.525-.2q-.225-.175-.35-.438t-.05-.587l1.1-4.725L3.775 11.8q-.25-.225-.312-.513t.037-.562q.1-.275.3-.45t.55-.225l4.85-.425l1.875-4.45q.125-.3.388-.45t.537-.15q.275 0 .537.15t.388.45l1.875 4.45l4.85.425q.35.05.55.225t.3.45q.1.275.038.563t-.313.512l-3.675 3.175l1.1 4.725q.075.325-.05.588t-.35.437q-.225.175-.525.2t-.575-.15l-4.15-2.5Z"
-                        />
-                    </svg>
-                    Search by genre
+                    <SlMusicToneAlt/>
+                    Genre
                 </label>
                 <select
+<<<<<<< HEAD
                     className="dark:text-slate-500"
+=======
+                    className="border-[1px] rounded-full border-solid border-[#5311BF] px-8 py-4 w-full dark:text-black dark:border-0"
+>>>>>>> dd2b39d6fee7e6d904242d40cc19094be94bda2a
                     name="genre"
                     value={genreFilter}
                     onChange={(e) => setGenreFilter(e.target.value)}
                 >
-                    <option value="">All Genres</option>
+                    <option value="">Select</option>
                     {genres.map((genre) => (
                         <option key={genre} value={genre}>
                             {genre}
@@ -182,30 +160,20 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                 </select>
             </div>
 
-            <div className="pb-4 md:pb-0">
+            <div className="pb-4 md:pb-0 w-full md:w-1/4">
                 <label
-                    className=" text-sm md:text-lg font-bold flex gap-2 mb-4 mt-0 items-center"
+                    className=" flex gap-2 mb-4 mt-0 items-center w-fit text-sm md:text-lg text-[#5311BF] dark:text-white"
                     htmlFor="artist"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M12 14q-1.25 0-2.125-.875T9 11V5q0-1.25.875-2.125T12 2q1.25 0 2.125.875T15 5v6q0 1.25-.875 2.125T12 14Zm0 7q-.425 0-.713-.288T11 20v-2.1q-2.325-.3-3.95-1.925t-1.975-3.9q-.075-.425.225-.75T6.1 11q.35 0 .625.262t.35.638q.325 1.75 1.7 2.925T12 16q1.85 0 3.225-1.175t1.7-2.925q.075-.375.362-.638t.638-.262q.475 0 .775.325t.225.75q-.35 2.275-1.975 3.9T13 17.9V20q0 .425-.288.713T12 21Z"
-                        />
-                    </svg>
-                    Search for artists
+                    <SlStar/>
+                    Artists
                 </label>
 
                 <input
                     name="artist"
                     type="text"
-                    className="w-[85%]"
-                    placeholder="search by artist name"
+                    className="border-[1px] rounded-full border-solid border-[#5311BF] px-8 py-4 w-full dark:text-black dark:border-0"
+                    placeholder="Type to search..."
                     value={artistFilter}
                     onChange={(e) => setArtistFilter(e.target.value)}
                 />

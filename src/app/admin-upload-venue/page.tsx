@@ -73,40 +73,40 @@ const UploadForm: React.FC = () => {
                 onSubmit={onSubmit}
             >
                 <input
-                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                     type="text"
                     name="Venue_name"
                     value={venueName}
                     onChange={(e) => setVenueName(e.target.value)}
-                    placeholder="Venue Name"
+                    placeholder="Venue name"
                 />
 
                 <input
-                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                     type="text"
                     name="Venue_address"
                     value={venueAddress}
                     onChange={(e) => setVenueAddress(e.target.value)}
-                    placeholder="Venue address"
+                    placeholder="Address"
                 />
                 <input
-                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                     type="text"
                     name="Venue_location"
                     value={venueLocation}
                     onChange={(e) => setVenueLocation(e.target.value)}
-                    placeholder="Venue location (like KBH V)"
+                    placeholder="Location (e.g. Copenhagen V)"
                 />
                 <input
-                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                     type="text"
                     name="Venue_size"
                     value={venueSize}
                     onChange={(e) => setVenueSize(e.target.value)}
-                    placeholder="Venue size"
+                    placeholder="Size (measured in people)"
                 />
                 <input
-                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                     type="text"
                     name="Venue_description"
                     value={venueDescription}

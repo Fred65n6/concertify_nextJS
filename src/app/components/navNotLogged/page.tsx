@@ -33,17 +33,17 @@ const NavLogged = () => {
                             alt="concertify_logo"
                         />
                     </Link>
-                    <ul className="flex gap-10 brand_purple dark:text-[#8e0bf5]">
+                    <ul className="flex gap-10 brand_purple dark:text-purple-500">
                         <li>
                             <Link
                                 className="flex gap-2 items-center"
                                 href="/concerts"
                             >
                                 <SlGrid
-                                    className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
+                                    className="fill-[#5311BF] dark:fill-purple-500 w-5 h-5"
                                     id="explore"
                                 />
-                                <span className="text-md text-[#5311BF] dark:text-[#ececec]">
+                                <span className="text-md text-[#5311BF] dark:text-purple-500">
                                     Explore
                                 </span>
                             </Link>
@@ -86,7 +86,7 @@ const NavLogged = () => {
                         <li>
                         <Link className="flex gap-2 items-center" href="/concerts">
                             <SlGrid
-                            className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5"
+                            className="fill-[#5311BF] dark:fill-purple-500 w-5 h-5"
                             id="explore"
                             />
                         </Link>

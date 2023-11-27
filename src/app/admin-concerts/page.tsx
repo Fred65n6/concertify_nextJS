@@ -6,8 +6,9 @@ import { AiFillDelete } from "react-icons/ai";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
 import { RiEdit2Fill } from "react-icons/ri";
-import {SlMusicToneAlt, SlArrowLeft} from "react-icons/sl";
+import {SlMusicToneAlt, SlArrowLeft, SlQuestion} from "react-icons/sl";
 import Link from "../../../node_modules/next/link";
+import { CgClose } from "react-icons/cg";
 
 
 interface Concert {
@@ -131,12 +132,12 @@ const closeEditModule = () => {
                 />
                 Back to dashboard
         </Link>
-        <h1 className="font-bold text-4xl pb-4 pt-8">Admin / <span className="text-[#5311BF] dark:text-[#8e0bf5]">concerts</span></h1>
+        <h1 className="font-bold text-4xl pb-4 pt-8">Admin / <span className="text-[#5311BF] dark:text-purple-500">concerts</span></h1>
 
-        <section className="flex w-full justify-between py-8 items-center border-b-2 border-gray-100">
+        <section className="flex w-full justify-between py-8 items-center border-b-[1px] border-gray-100 dark:border-[#23124b]">
             <div className="flex gap-2">
-              <SlMusicToneAlt className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="user" />
-              <span>There are <span className="text-[#5311BF] dark:text-[#8e0bf5] font-bold">{totalConcerts}</span> concerts in total</span>
+              <SlMusicToneAlt className="stroke-[#5311BF] dark:stroke-purple-500 w-5 h-5" id="user" />
+              <span>There are <span className="text-[#5311BF] dark:text-purple-500 font-bold">{totalConcerts}</span> concerts in total</span>
             </div>
             <button className="flex gap-2 rounded-full bg-purple-100 brand_purple items-center px-8 py-2 hover:bg-purple-200">
               <Link href="/admin-upload-concert">Upload new concert</Link>
@@ -144,41 +145,42 @@ const closeEditModule = () => {
           </button>
         </section>
 
-          <form className="flex flex-col items-center gap-8 py-8">
+          {/* <form className="flex flex-col items-center gap-8 py-8"> */}
+          <form className="">
             <table className="w-full">
               <thead>
                 <tr className="lg:flex justify-start w-full">
-                  <th className="text-left w-1/2">Concert name</th>
-                  <th className="text-left w-1/2">Artist</th>
-                  <th className="text-left w-1/2">Venue</th>
-                  <th className="text-right w-1/12"></th>
-                  <th className="text-right w-1/12"></th>
+                  <th className="text-left w-fit md:w-1/2">Concert name</th>
+                  <th className="text-left w-fit md:w-1/2">Artist</th>
+                  <th className="text-left w-fit md:w-1/2">Date</th>
+                  <th className="text-left w-fit md:w-1/2">Venue</th>
+                  <th className="text-right w-fit md:w-1/12"></th>
+                  <th className="text-right w-fit md:w-1/12"></th>
                 </tr>
               </thead>
               <tbody>
                 {concerts?.map((concert) => (
                   <tr key={concert._id} className="flex justify-start w-full">
-                    <td className="text-left w-1/2">{concert.concert_name}</td>
-                    <td className="text-left w-1/2">{concert.concert_artist.artist_name}</td>
-                    <td className="text-left w-1/2">{concert.concert_venue.venue_name}</td>
-                    <td className="text-right w-1/12">
+                    <td className="text-left w-fit md:w-1/2">{concert.concert_name}</td>
+                    <td className="text-left w-fit md:w-1/2">{concert.concert_artist.artist_name}</td>
+                    <td className="text-left w-fit md:w-1/2">{concert.concert_date}</td>
+                    <td className="text-left w-fit md:w-1/2">{concert.concert_venue.venue_name}</td>
+                    <td className="text-right w-fit md:w-1/12">
                       <button
                         type="button"
-                        className="text-[#5311BF]"
                         onClick={() => openEditModule(concert)}
                       >
-                          <RiEdit2Fill />
+                          <RiEdit2Fill className="fill-[#5311BF] dark:fill-white"/>
                       </button>
                     </td>
-                    <td className="text-right w-1/12">
+                    <td className="text-right w-fit md:w-1/12">
                       <button
                         type="button"
-                        className="text-[#5311BF]"
                         onClick={() => openDeleteModule(concert)}
                       >
 
                         <AiFillDelete
-                          className="fill-[#5311BF] dark:fill-[#8e0bf5] w-5 h-5"
+                          className="fill-[#5311BF] dark:fill-white w-5 h-5"
                           id="deleteConcert"
                           value="upload"
                         />
@@ -196,31 +198,19 @@ const closeEditModule = () => {
       {selectedConcert && (
       <div id="delete_concert_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
         <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#202124]">
-          <button
-              type="button"
-              onClick={closeDeleteModule}
-              className="cursor-pointer ml-[75%]"
-          >
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-              >
-                  <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m7 7l10 10M7 17L17 7"
-                  />
-              </svg>
+        <button
+            type="button"
+            onClick={closeDeleteModule}
+            className="cursor-pointer ml-[100%]"
+            >
+            <CgClose/>
           </button>
+
             <div className="flex flex-col gap-4 justify-center text-center items-center">
-                <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
-                <p className="dark:text-white">
-                You are about to delete{" "}
-                <span className="italic font-bold">{selectedConcert.concert_name}</span>. This action can not be reverted.
+              <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
+              <p className="dark:text-white">
+              You are about to delete{" "}
+              <span className="italic font-bold">{selectedConcert.concert_name}</span>. This action can not be reverted.
             </p>
             <button 
                 type="button"
@@ -237,27 +227,14 @@ const closeEditModule = () => {
     {selectedConcert && (
     <div id="edit_concert_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
     <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#202124]">
-        <button
-            type="button"
-            onClick={closeEditModule}
-            className="cursor-pointer ml-[75%]"
+      <button
+        type="button"
+        onClick={closeEditModule}
+        className="cursor-pointer ml-[100%]"
         >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-            >
-                <path
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m7 7l10 10M7 17L17 7"
-                />
-            </svg>
-        </button>
-
+        <CgClose/>
+      </button>
+        
         <div className="flex flex-col gap-4 justify-center text-center items-center">
         <input
             readOnly={true}
