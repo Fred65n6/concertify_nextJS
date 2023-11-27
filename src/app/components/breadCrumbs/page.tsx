@@ -18,7 +18,7 @@ const BreadcrumbComp = () => {
 
     return (
         <div className="flex mt-4 mb-12">
-            <ul className="flex items-center gap-2 brand_purple opacity-60">
+            <ul className="flex items-center gap-2 brand_purple dark:text-purple-300 opacity-60">
                 <li className="hover:underline">
                     <Link href={"/"}>{config.homeElement}</Link>
                 </li>

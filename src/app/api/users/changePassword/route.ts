@@ -5,6 +5,14 @@ import bcryptjs from "bcryptjs";
 
 connect();
 
+
+function validatePassword(password:string) {
+    // Password must contain at least one uppercase letter, one digit, and one special character
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+.])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+    return passwordRegex.test(password);
+}
+
+
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
@@ -24,6 +32,14 @@ export async function POST(request: NextRequest) {
 
         if (!user) {
             return NextResponse.json({error: "Invalid token"}, {status: 400});
+        }
+
+        // Validate password
+        if (!validatePassword(password)) {
+            return NextResponse.json(
+                { error: "Password must include one uppercase letter, one digit, and one special character" },
+                { status: 400 }
+            );
         }
 
         const salt = await bcryptjs.genSalt(10);

@@ -33,18 +33,28 @@
 
 .active-breadcrumb {
     /* Add your custom styles for the active item here */
-    color: #5311bf;
+    /* color: #6d34c9;
+    font-weight: 500;
+    pointer-events: none;
+    opacity: 1; */
+    text-decoration: underline;
+    /* Add any other styles you want */
+}
+
+/* .active-breadcrumb:hover {
+    text-decoration: none;
+  
+} */
+
+.dark-active-breadcrumb {
+    /* Add your custom styles for the active item here */
+    color: rgb(154, 38, 61);
     font-weight: 500;
     pointer-events: none;
     opacity: 1;
     /* Add any other styles you want */
 }
 
-.active-breadcrumb:hover {
-    /* Add your custom styles for the active item here */
-    text-decoration: none;
-    /* Add any other styles you want */
-}
 
 .brand_purple {
     color: #5311bf;

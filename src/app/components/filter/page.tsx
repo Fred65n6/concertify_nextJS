@@ -101,6 +101,7 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                     Search venues
                 </label>
                 <select
+                className="dark:text-slate-500"
                     name="venue"
                     value={venueFilter}
                     onChange={(e) => setVenueFilter(e.target.value)}
@@ -139,6 +140,7 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                     Search by date
                 </label>
                 <input
+                className="dark:text-slate-500"
                     name="date"
                     type="date"
                     placeholder="Filter by date"
@@ -166,6 +168,7 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                     Search by genre
                 </label>
                 <select
+                    className="dark:text-slate-500"
                     name="genre"
                     value={genreFilter}
                     onChange={(e) => setGenreFilter(e.target.value)}
