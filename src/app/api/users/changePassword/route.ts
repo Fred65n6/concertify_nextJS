@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
         // Validate password
         if (!validatePassword(password)) {
             return NextResponse.json(
-                { error: "Password must include one uppercase letter, one digit, and one special character" },
+                { error: "Password must include one uppercase letter, one digit, one special character and be at least 9 characters long" },
                 { status: 400 }
             );
         }
