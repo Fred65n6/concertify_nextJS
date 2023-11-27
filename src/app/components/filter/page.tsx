@@ -123,7 +123,6 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                     Date
                 </label>
                 <input
-                className="dark:text-slate-500"
                     name="date"
                     type="date"
                     placeholder="Filter by date"
@@ -142,11 +141,7 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                     Genre
                 </label>
                 <select
-<<<<<<< HEAD
-                    className="dark:text-slate-500"
-=======
                     className="border-[1px] rounded-full border-solid border-[#5311BF] px-8 py-4 w-full dark:text-black dark:border-0"
->>>>>>> dd2b39d6fee7e6d904242d40cc19094be94bda2a
                     name="genre"
                     value={genreFilter}
                     onChange={(e) => setGenreFilter(e.target.value)}
