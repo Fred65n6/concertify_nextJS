@@ -234,7 +234,7 @@ export default function SignupPage() {
 
   return (
     <>
-      <div id="signup_module" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+      <div id="signup_module" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
         {/* SIGNUP FORM: STEP 1 */}
         <div id="signup_form">
           <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">

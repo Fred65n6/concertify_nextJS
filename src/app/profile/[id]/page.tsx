@@ -25,12 +25,9 @@ export default function UserProfile({params}: any) {
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState<string>("");
 
-    const [genres, setGenres] = useState<Genre[]>([]);
-    const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-    const [selectedGenre, setSelectedGenre] = useState<string>("");
-    const [venues, setVenues] = useState<Venue[]>([]);
-    const [selectedVenues, setSelectedVenues] = useState<string[]>([]);
-    const [selectedVenue, setSelectedVenue] = useState<string>("");
+    const [genres, setGenres] = useState<any[]>([]);
+    const [venues, setVenues] = useState<any[]>([]);
+
 
     const [data, setData] = useState({
         username: "unknown",
@@ -64,22 +61,21 @@ export default function UserProfile({params}: any) {
             const res = await axios.get("/api/users/cookieUser");
             console.log(res.data);
             const userData = res.data.data;
+            setGenres(res.data.data.genres);
+            setVenues(res.data.data.venues);
             setData({
                 username: userData.username,
                 userId: userData._id,
                 userEmail: userData.email,
-                genres: userData.genres,
-                venues: userData.venues,
             });
         } catch (error: any) {
             console.error(error.message);
         }
     };
-    useEffect(() => {
-        getUserDetails();
-    }, []);
+
 
     useEffect(() => {
+        getUserDetails();
         setUser({...user, email: data.userEmail});
     }, [data.userEmail]);
 
@@ -170,33 +166,39 @@ export default function UserProfile({params}: any) {
 
     return (
         <div className="grid pt-8">
-            <h1 className="dark:text-white font-bold text-3xl">Profile / <span className="text-[#5311BF] dark:text-[#8e0bf5]">{data.username}</span></h1>
+            <h1 className="dark:text-white font-bold text-3xl">Profile / <span className="text-[#5311BF] dark:text-purple-500">{data.username}</span></h1>
             
             <section className="flex gap-4 mt-10">
-                <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
-                    <p className="text-lg dark:text-black">
-                        Email: <span className="brand_purple">{data.userEmail}</span>
-                    </p>
+                <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">
+                    <div className="flex flex-col item-center justify-between">
+                        <p className="text-sm dark:text-black">Email:</p>
+                        <div className="flex justify-between">
+                            <span className="brand_purple">{data.userEmail}</span>
+                           
+                        </div>
+                    </div>
 
-                    <div className="flex item-center justify-between">
-                        <p className="text-lg dark:text-black">
-                            Username:{" "}
+                    <div className="flex flex-col item-center justify-between">
+                        <p className="text-sm dark:text-black">Username:</p>
+                        <div className="flex justify-between">
                             <span className="brand_purple">{data.username}</span>
-                        </p>
-                        <button onClick={openChangeUsernamedModal}>
-                        <RiEdit2Fill className="dark:fill-black"/>
-                        </button>
+                            <button onClick={openChangeUsernamedModal}>
+                                <RiEdit2Fill className="dark:fill-black"/>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col item-center justify-between">
+                        <p className="text-sm dark:text-black">Password:</p>
+                        <div className="flex justify-between">
+                            <span className="brand_purple">********</span>
+                            <button onClick={openChangePasswordModal}>
+                                <RiEdit2Fill className="dark:fill-black"/>
+                            </button>
+                        </div>
                     </div>
                     
-                    <div className="flex items-center justify-between">
-                        <p className="text-lg dark:text-black">
-                            Password: <span className="brand_purple">********</span>
-                        </p>
 
-                        <button onClick={openChangePasswordModal}>
-                            <RiEdit2Fill className="dark:fill-black"/>
-                        </button>
-                    </div>
 
                     <div className="flex items-center justify-between mb-8 md:hidden">
                         <p className="text-lg dark:text-black">
@@ -209,36 +211,38 @@ export default function UserProfile({params}: any) {
             </section>
 
             {/* PREFERENCES */}
-
-            <section className="flex gap-4 mt-10">
+            <section className="flex flex-col md:flex-row gap-4 mt-10">
                 <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
                     <div className="flex flex-col gap-4">
                         <h2 className="text-black font-bold text-xl">Preferred genres</h2>
-                            <div className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8">
-                                <span className="text-[#5311BF]">Genere</span>
-                            </div>
-                        {/* {selectedGenres.map((genre, index) => (
-                            <p> Genres: <span className="brand_purple">{data.genres.genre_name}</span></p>
-                        ))} */}
+                            <ul className="flex flex-wrap gap-2">
+                                {genres.map((genre: any) => (
+                                    <article
+                                        className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8 text-[#5311BF]"
+                                        key={genre._id}>
+                                        <p>{genre.genre_name}</p>
+                                    </article>
+                                    ))}
+                                </ul>
+
                     </div>
                 </div>
+
+
 
                 <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
                     <div className="flex flex-col gap-4">
                         <h2 className="text-black font-bold text-xl">Preferred venues</h2>
-                        <div className="flex flex-wrap gap-4">
-                            <div className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8">
-                                <span className="text-[#5311BF]">Venue</span>
-                            </div>
-
-                            <div className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8">
-                                <span className="text-[#5311BF]">Venue</span>
-                            </div>
-
-                            <div className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8">
-                                <span className="text-[#5311BF]">Venue</span>
-                            </div>
-                        </div>
+                        <ul className="flex flex-wrap gap-2">
+                            {venues.map((venue: any) => (
+                                <article
+                                    className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8 text-[#5311BF]"
+                                    key={venue._id}>
+                                    <p>{venue.venue_name}</p>
+                                </article>
+                            ))}
+                        </ul>
+                        
                     </div>
                 </div>
             </section>
@@ -251,11 +255,12 @@ export default function UserProfile({params}: any) {
                 <span className="text-[#5311BF] dark:text-white">Log out</span>
                 <SlLogout className="fill-[#5311BF] dark:fill-white"/>
             </button>
+                    
             
 
             {/* CHANGE USERNAME MODAL */}
             <div id="changeUsernameModal" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-                <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#202124]">
+                <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
                     <button
                         type="button"
                         onClick={closeUsernameModule}
@@ -265,7 +270,7 @@ export default function UserProfile({params}: any) {
                     </button>
 
                     <div className="flex flex-col w-full gap-2">
-                        <span className="w-full text-xl font-semibold text-[#5311BF] dark:text-[#8e0bf5] mb-6">Change username</span>
+                        <span className="w-full text-xl font-semibold text-[#5311BF] dark:text-purple-500 mb-6">Change username</span>
                         <input
                             readOnly={true}
                             className="m-2 p-2 rounded-md text-left text-black bg-slate-200 hidden"
@@ -275,7 +280,7 @@ export default function UserProfile({params}: any) {
                             onChange={(e) => setUser({...user, email: e.target.value})}
                             placeholder=""
                         />
-                        <label htmlFor="password" className="w-fit text-sm text-gray-600">Choose a new username</label>
+                        <label htmlFor="password" className="w-fit text-sm text-gray-600 dark:text-gray-100">Choose a new username</label>
                         <input
                             className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                             type="text"
@@ -295,14 +300,14 @@ export default function UserProfile({params}: any) {
                         onClick={changeUsername}
                         className="m-4 brand_gradient px-12 py-4 rounded-full text-white mt-8"
                     >
-                        Confirm
+                        Save
                     </button>
                 </div>
             </div>
 
             {/* CHANGE PASSWORD MODAL */}
             <div id="changePasswordModal" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-                <div className="p-10 mx-4 md:m-0 flex flex-col items-center md:w-[800px] bg-white rounded-lg dark:bg-[#202124]">
+                <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
                     <button
                         type="button"
                         onClick={closePasswordModule}
@@ -311,7 +316,7 @@ export default function UserProfile({params}: any) {
                         <CgClose/>
                     </button>
                     <div className="flex flex-col gap-4 items-center w-full">
-                        <span className="w-full text-xl font-semibold text-[#5311BF] dark:text-[#8e0bf5] mb-6">Change password</span>
+                        <span className="w-full text-xl font-semibold text-[#5311BF] dark:text-purple-500 mb-6">Change password</span>
                             <div className="flex flex-col gap-4 w-full">
                                 <div className="flex flex-col w-full gap-2">
                                     <input
@@ -323,9 +328,9 @@ export default function UserProfile({params}: any) {
                                         onChange={(e) => setUser({...user, email: e.target.value})}
                                         placeholder=""
                                     />
-                                    <label htmlFor="password" className="w-fit text-sm text-gray-600">Old password</label>
+                                    <label htmlFor="password" className="w-fit text-sm text-gray-600 dark:text-gray-100">Old password</label>
                                     <input
-                                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                                         type="password"
                                         id="password"
                                         value={user.password}
@@ -337,9 +342,9 @@ export default function UserProfile({params}: any) {
                                 </div>
 
                                 <div className="flex flex-col w-full gap-2">
-                                    <label htmlFor="password" className="w-fit text-sm text-gray-600">New password</label>
+                                    <label htmlFor="password" className="w-fit text-sm text-gray-600 dark:text-gray-100">New password</label>
                                     <input
-                                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                                         type="password"
                                         id="password"
                                         value={user.newpassword}
@@ -351,7 +356,7 @@ export default function UserProfile({params}: any) {
                                 </div>
 
                                 <div className="flex flex-col w-full gap-2">
-                                    <label htmlFor="confirm_password" className="w-fit text-sm text-gray-600">
+                                    <label htmlFor="confirm_password" className="w-fit text-sm text-gray-600 dark:text-gray-100">
                                         Confirm new password
                                     </label>
                                     <input
@@ -372,7 +377,7 @@ export default function UserProfile({params}: any) {
                         onClick={changePassword}
                         className="m-4 brand_gradient px-12 py-4 rounded-full text-white mt-8"
                     >
-                        Confirm
+                        Save
                     </button>
                 </div>
             </div>

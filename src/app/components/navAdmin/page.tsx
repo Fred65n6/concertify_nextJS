@@ -107,47 +107,47 @@ return (
 </div>
 
 {/* MOBILE */}
-<div className="flex md:hidden p-4 fixed bottom-0 w-full bg-white dark:bg-[#121212] drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
+<div className="flex md:hidden py-6 px-4 z-50 fixed bottom-0 w-full bg-white dark:bg-[#12082a] dark:border dark:bt-[1px] dark:border-[#23124b] drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
    <ul className="flex gap-10 brand_purple justify-evenly w-full">
       <li>
-         <Link className="flex flex-col items-center" href="/concerts">
+         <Link 
+         // className="flex flex-col items-center" 
+         href="/concerts">
          <SlGrid
             className="fill-[#5311BF] dark:fill-white w-5 h-5"
             id="explore"
             />
-         <span className="text-[#5311BF] dark:text-white">Explore</span>
-         </Link>
-      </li>
-      <li>
-         <Link className="flex flex-col items-center" href="/favourites">
-         <SlHeart
-            className="text-[#5311BF] dark:text-white w-5 h-5"
-            id="favourites"
-            />
-         <span className="text-[#5311BF] dark:text-white">Favourites</span>
          </Link>
       </li>
       <li>
          <Link 
-            className="flex flex-col items-center" 
+         // className="flex flex-col items-center" 
+         href="/favourites">
+         <SlHeart
+            className="text-[#5311BF] dark:text-white w-5 h-5"
+            id="favourites"
+            />
+         </Link>
+      </li>
+      <li>
+         <Link 
+            // className="flex flex-col items-center" 
             href="/admin-dashboard">
          <SlLock
             className="fill-[#5311BF] dark:fill-white w-5 h-5"
             id="dashboard"
             />
-         <span className="text-[#5311BF] dark:text-white">Admin</span>
          </Link>
       </li>
       <li>
          <Link
-            className="flex flex-col items-center"
+            // className="flex flex-col items-center"
             href="/profile/${data}"
             >
          <SlEmotsmile
             className="fill-[#5311BF] dark:fill-white w-5 h-5"
             id="user"
             />
-         <span className="text-[#5311BF] dark:text-white">Profile</span>
          </Link>
       </li>
    </ul>
