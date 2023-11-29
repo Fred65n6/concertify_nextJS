@@ -84,7 +84,7 @@ const ConcertCard: React.FC = () => {
               : "Unknown concert_name"}
           </h4>
 
-          <p className="text-gray-600 text-sm dark:text-gray-400 pt-1">
+          <p className="text-gray-600 text-sm flex dark:text-gray-400 pt-1">
             <span className="font-bold mr-1">
               {concert.concert_venue?.venue_name},{" "}
             </span>

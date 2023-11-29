@@ -16,35 +16,23 @@ interface User {
 }
 
 const Admin: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const params = useParams();
-  const id = params.id;
   const [concerts, setConcerts] = useState<[]>([]);
   const [artists, setArtists] = useState<[]>([]);
   const [venues, setVenues] = useState<[]>([]);
   const [users, setUsers] = useState<User[]>([]);
-  // const [user, setUser] = useState<User | null>(null);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const response = await axios.get("/api/data/userData");
-            setUsers(response.data.data);
-        } catch (error) {
-            console.error("Error fetching users:", error);
-        }
-    };
-
-    fetchData();
-}, []);
 
 useEffect(() => {
   const fetchData = async () => {
       try {
+          const response = await axios.get("/api/data/userData");
+          setUsers(response.data.data);
           const responseVenues = await axios.get("/api/data/venueData");
           setVenues(responseVenues.data.data);
+          const responseConcerts = await axios.get("/api/data/concertData");
+          setConcerts(responseConcerts.data.data);
+          const responseArtists = await axios.get("/api/data/artistData");
+          setArtists(responseArtists.data.data);
       } catch (error) {
           console.error("Error fetching venues:", error);
       }
@@ -52,33 +40,6 @@ useEffect(() => {
 
   fetchData();
 }, []);
-
-useEffect(() => {
-  const fetchData = async () => {
-      try {
-          const responseConcerts = await axios.get("/api/data/concertData");
-          setConcerts(responseConcerts.data.data);
-      } catch (error) {
-          console.error("Error fetching concerts:", error);
-      }
-  };
-
-  fetchData();
-}, []);
-
-useEffect(() => {
-  const fetchData = async () => {
-      try {
-          const responseArtists = await axios.get("/api/data/artistData");
-          setArtists(responseArtists.data.data);
-      } catch (error) {
-          console.error("Error fetching artists:", error);
-      }
-  };
-
-  fetchData();
-}, []);
-
 
 
   const totalConcerts = concerts.length;
@@ -113,7 +74,7 @@ const closeModule = () => {
         const result = await res.json();
         if (result.success) {
           console.log(result.message);
-          setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId)); // Removing the deleted user from the state
+          setUsers(elm => elm.filter(user => user._id !== userId)); // Removing the deleted user from the state
           closeModule();
         } else {
           console.error(result.error);

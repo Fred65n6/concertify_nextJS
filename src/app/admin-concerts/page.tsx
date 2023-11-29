@@ -1,5 +1,4 @@
 "use client";
-import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { SlPlus } from "react-icons/sl";
@@ -41,10 +40,7 @@ interface Concert {
 }
 
 const Admin: React.FC = () => {
-//   const [loading, setLoading] = useState(false);
-  const params = useParams();
-  const id = params.id;
-  const [concerts, setConcerts] = useState<[]>([]);
+  const [concerts, setConcerts] = useState<Concert[]>([]);
   const [selectedConcert, setSelectedConcert] = useState<Concert | null>(null);
 
 
@@ -91,6 +87,7 @@ const closeEditModule = () => {
   deleteConcertModule?.classList.remove("grid");
 };
 
+
   const handleDeleteConcert = async (concertId: string) => {
     try {
       const res = await fetch('/api/admin/deleteConcert', {
@@ -105,7 +102,8 @@ const closeEditModule = () => {
         const result = await res.json();
         if (result.success) {
           console.log(result.message);
-          setConcerts((prevConcert) => prevConcert.filter((concert) => concert._id !== concertId)); // Removing the deleted user from the state
+          setConcerts(elm => elm.filter(concert => concert._id !== concertId));
+
           closeDeleteModule();
         } else {
           console.error(result.error);

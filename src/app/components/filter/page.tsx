@@ -81,10 +81,10 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
     ]);
 
     return (
-        <div className="border-[1px] rounded-full my-8 border-solid border-purple-800 flex py-6 px-12 justify-between">
-            <div className="">
+        <div className="border-[1px] lg:rounded-full rounded-2xl lg:my-8 border-solid border-purple-800 grid grid-cols-2 lg:flex lg:py-6 p-4 lg:px-12 justify-between">
+            <div className="pb-4 md:pb-0">
                 <label
-                    className="text-lg font-bold flex gap-2 mb-4 items-center"
+                    className=" text-sm md:text-lg font-bold flex gap-2 mb-4 items-center"
                     htmlFor="venue"
                 >
                     <svg
@@ -120,9 +120,9 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                 </select>
             </div>
 
-            <div className="">
+            <div className="pb-4 md:pb-0">
                 <label
-                    className="text-lg font-bold flex gap-2 mb-4 items-center"
+                    className=" text-sm md:text-lg font-bold flex gap-2 mb-4 items-center"
                     htmlFor="date"
                 >
                     <svg
@@ -147,9 +147,9 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                 />
             </div>
 
-            <div className="">
+            <div className="pb-4 md:pb-0">
                 <label
-                    className="text-lg font-bold flex gap-2 mb-4 items-center"
+                    className=" text-sm md:text-lg font-bold flex gap-2 mb-4 items-center"
                     htmlFor="genre"
                 >
                     <svg
@@ -179,9 +179,9 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                 </select>
             </div>
 
-            <div className="">
+            <div className="pb-4 md:pb-0">
                 <label
-                    className="text-lg font-bold flex gap-2 mb-2 mt-2 items-center"
+                    className=" text-sm md:text-lg font-bold flex gap-2 mb-4 mt-0 items-center"
                     htmlFor="artist"
                 >
                     <svg
@@ -201,7 +201,7 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
                 <input
                     name="artist"
                     type="text"
-                    className=""
+                    className="w-[85%]"
                     placeholder="search by artist name"
                     value={artistFilter}
                     onChange={(e) => setArtistFilter(e.target.value)}

@@ -20,12 +20,8 @@ interface Venue {
     venue_image: string;
   }
 const Admin: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const params = useParams();
-  const id = params.id;
-  const [venues, setVenues] = useState<[]>([]);
+  const [venues, setVenues] = useState<Venue[]>([]);
   const [selectedVenue, setSelectedVenue] = useState<Venue | null>(null);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,30 +65,31 @@ const closeEditModule = () => {
   deleteVenueModule?.classList.remove("grid");
 };
 
-  const handleDeleteVenue = async (venueId: string) => {
-    try {
-      const res = await fetch('/api/admin/deleteVenue', {
-        method: 'DELETE',
-        body: JSON.stringify({ venueId }),
-      });
-  
-      if (!res.ok) {
-        const errorText = await res.text();
-        console.error(errorText);
+const handleDeleteVenue = async (venueId: string) => {
+  try {
+    const res = await fetch('/api/admin/deleteVenue', {
+      method: 'DELETE',
+      body: JSON.stringify({ venueId }),
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error(errorText);
+    } else {
+      const result = await res.json();
+      if (result.success) {
+        console.log(result.message);
+        setVenues(elm => elm.filter(venue => venue._id !== venueId));
+
+        closeDeleteModule();
       } else {
-        const result = await res.json();
-        if (result.success) {
-          console.log(result.message);
-          setVenues((prevVenue) => prevVenue.filter((venue) => venue._id !== venueId)); // Removing the deleted venue from the state
-          closeDeleteModule();
-        } else {
-          console.error(result.error);
-        }
+        console.error(result.error);
       }
-    } catch (error) {
-      console.error('Error deleting venue:', error);
     }
-  };
+  } catch (error) {
+    console.error('Error deleting venue:', error);
+  }
+};
 
 
 

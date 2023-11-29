@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
       };
 
       // Create and set the token as before
-      const token = await jwt.sign(tokenDataAdmin, process.env.TOKEN_SECRET!, {
+      const adminToken = await jwt.sign(tokenDataAdmin, process.env.TOKEN_SECRET!, {
         expiresIn: "1d",
       });
 
@@ -60,12 +60,13 @@ export async function POST(request: NextRequest) {
         isAdmin: true,
       });
 
-      response.cookies.set("token", token, {
+      response.cookies.set("adminToken", adminToken, {
         httpOnly: false,
       });
 
       return response;
     }
+
     // ADMIN STUFF END
     else {
       //create token data

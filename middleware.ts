@@ -1,23 +1,34 @@
-// import {NextResponse} from "next/server";
-// import type {NextRequest} from "next/server";
+// import { getDataFromToken } from "@/helpers/getDataFromToken";
+// import User from "@/models/userModel";
+// import { connect } from "@/dbConfig/dbConfig";
+// import { NextRequest, NextResponse } from "next/server";
 
-// // This function can be marked `async` if using `await` inside
-// export function middleware(request: NextRequest) {
-//     const path = request.nextUrl.pathname;
+// export const middleware = async (request: NextRequest, response: NextResponse) => {
+//   const path = request.nextUrl.pathname;
 
-//     const isPublicPath = path === "/login" || path === "/signup";
+//   try {
+//     connect();
+//     const isRestrictedPath = path === "/favourites" || path === "/admin-dashboard";
 
-//     const token = request.cookies.get("token")?.value || "";
+//     const userId = await getDataFromToken(request);
+//     const user = await User.findOne({ _id: userId }).select("isAdmin");
 
-//     if (isPublicPath && token) {
-//         return NextResponse.redirect(new URL("/", request.nextUrl));
+//     if (user && user.isAdmin) {
+//       // User is an admin, allow access to the admin-dashboard
+//       return response;
+//     } else if (isRestrictedPath) {
+//       // User is not an admin and trying to access a restricted path, deny access
+//       return NextResponse.redirect(new URL("/", request.nextUrl));
 //     }
-//     if (!isPublicPath && !token) {
-//         return NextResponse.redirect(new URL("/login", request.nextUrl));
-//     }
-// }
 
-// // See "Matching Paths" below to learn more
-// export const config = {
-//     matcher: ["/", "/profile", "/login", "/signup"],
+//     // If the path is not restricted and user is not admin, continue processing the request
+//     return response;
+//   } catch (error: any) {
+//     return NextResponse.json({ error: error.message }, { status: 400 });
+//   }
 // };
+
+// export const config = {
+//   matcher: ["/", "/login", "/signup", "/favourites", "/admin-dashboard"],
+// };
+

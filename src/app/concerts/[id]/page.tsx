@@ -56,9 +56,9 @@ const SingleConcert: React.FC = () => {
     const params = useParams();
     const id = params.id;
     const [concerts, setConcerts] = useState<ConcertSingle[]>([]);
-    const [selectedConcert, setSelectedConcert] =
-        useState<ConcertSingle | null>(null);
+    const [selectedConcert, setSelectedConcert] = useState<ConcertSingle | null>(null);
     const [isInFavorites, setIsInFavorites] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,6 +70,8 @@ const SingleConcert: React.FC = () => {
             }
         };
         fetchData();
+        getFavouriteDetails();
+        getUserDetails();
     }, []);
 
     // Get User Cookie
@@ -102,19 +104,13 @@ const SingleConcert: React.FC = () => {
         }
     };
 
-    useEffect(() => {
-        getFavouriteDetails();
-    }, []);
 
     const getUserDetails = async () => {
         const res = await axios.get("/api/users/cookieUser");
+        setIsLoggedIn(true)
         console.log(res.data);
         setUserData(res.data.data._id);
     };
-
-    useEffect(() => {
-        getUserDetails();
-    }, []);
 
     // Use a useEffect to update the selectedConcert when the 'id' or 'concerts' array changes
     useEffect(() => {
@@ -157,6 +153,7 @@ const SingleConcert: React.FC = () => {
             console.error("An error occurred:", error);
         }
     };
+    
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -196,6 +193,7 @@ const SingleConcert: React.FC = () => {
         } catch (error) {
             console.error("An error occurred:", error);
         }
+        
     };
 
     return (
@@ -215,11 +213,15 @@ const SingleConcert: React.FC = () => {
                         />
                     </figure>
                     <section>
-                        <div className="flex md:justify-between">
+
+                        <div className="flex items-center md:justify-between">
                             <h1 className="text-3xl font-bold my-2">
                                 {selectedConcert.concert_name}
                             </h1>
-                            {isInFavorites ? (
+                            
+                            {isLoggedIn ? ( 
+                            <div className="">
+                            {isInFavorites ?(
                                 <form
                                     className="flex flex-col items-center gap-8 pb-12"
                                     onSubmit={deleteFavourite}
@@ -313,6 +315,10 @@ const SingleConcert: React.FC = () => {
                                         />
                                     </button>
                                 </form>
+                            )}
+                            </div>
+                            ): (
+                                <div ><a className="brand_purple opacity-50" href="/login">+ Log in to add to favourite</a></div>
                             )}
                         </div>
 
