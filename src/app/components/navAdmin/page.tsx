@@ -111,8 +111,7 @@ return (
    <ul className="flex gap-10 brand_purple justify-evenly w-full">
       <li>
          <Link 
-         // className="flex flex-col items-center" 
-         href="/concerts">
+            href="/concerts">
          <SlGrid
             className="fill-[#5311BF] dark:fill-white w-5 h-5"
             id="explore"
@@ -121,8 +120,7 @@ return (
       </li>
       <li>
          <Link 
-         // className="flex flex-col items-center" 
-         href="/favourites">
+            href="/favourites">
          <SlHeart
             className="text-[#5311BF] dark:text-white w-5 h-5"
             id="favourites"
@@ -131,7 +129,6 @@ return (
       </li>
       <li>
          <Link 
-            // className="flex flex-col items-center" 
             href="/admin-dashboard">
          <SlLock
             className="fill-[#5311BF] dark:fill-white w-5 h-5"
@@ -141,7 +138,6 @@ return (
       </li>
       <li>
          <Link
-            // className="flex flex-col items-center"
             href="/profile/${data}"
             >
          <SlEmotsmile

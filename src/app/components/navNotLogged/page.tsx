@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Search from "../search/page";
 import {GrHomeRounded} from "react-icons/gr";
-import {SlGrid, SlHome, SlUser, SlHeart} from "react-icons/sl";
+import {SlGrid, SlHome, SlEmotsmile, SlHeart} from "react-icons/sl";
 import ThemeSwitcher from "../switchTheme/page";
 
 const NavLogged = () => {
@@ -33,17 +33,17 @@ const NavLogged = () => {
                             alt="concertify_logo"
                         />
                     </Link>
-                    <ul className="flex gap-10 brand_purple dark:text-purple-500">
+                    <ul className="flex gap-10 brand_purple dark:text-white">
                         <li>
                             <Link
                                 className="flex gap-2 items-center"
                                 href="/concerts"
                             >
                                 <SlGrid
-                                    className="fill-[#5311BF] dark:fill-purple-500 w-5 h-5"
+                                    className="fill-[#5311BF] dark:fill-white w-5 h-5"
                                     id="explore"
                                 />
-                                <span className="text-md text-[#5311BF] dark:text-purple-500">
+                                <span className="text-md text-[#5311BF] dark:text-white">
                                     Explore
                                 </span>
                             </Link>
@@ -55,14 +55,14 @@ const NavLogged = () => {
                     <button
                         type="button"
                         onClick={openSignupModule}
-                        className="rounded-full bg-purple-100 brand_purple w-32 py-3 hover:bg-purple-200 h-12"
+                        className="secondary_btn"
                     >
                         Signup
                     </button>
                     <button
                         type="button"
                         onClick={openLoginModule}
-                        className="rounded-full w-32 brand_gradient text-white hover:bg-purple-200 h-12"
+                        className="primary_btn"
                     >
                         Log in
                     </button>
@@ -86,7 +86,7 @@ const NavLogged = () => {
                         <li>
                         <Link className="flex gap-2 items-center" href="/concerts">
                             <SlGrid
-                            className="fill-[#5311BF] dark:fill-purple-500 w-5 h-5"
+                            className="fill-[#5311BF] dark:fill-white w-5 h-5"
                             id="explore"
                             />
                         </Link>
@@ -94,53 +94,55 @@ const NavLogged = () => {
                     </ul>
                 </div>
                 <div className="flex gap-2 items-center">
-                <Search />
-                <button className="rounded-full px-8 py-2 bg-purple-100 brand_purple flex items-center gap-2 m-auto hover:bg-purple-200">
-                    <Link href="/profile/${data}">Profile</Link>
-                    <SlUser
-                    className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5"
-                    id="user"
-                    />
-                </button>
-                <ThemeSwitcher />
+                    <Search />
+                    <button
+                        type="button"
+                        onClick={openSignupModule}
+                        className="secondary_btn"
+                    >
+                        Signup
+                    </button>
+                    <button
+                        type="button"
+                        onClick={openLoginModule}
+                        className="primary_btn"
+                    >
+                        Log in
+                    </button>
                 </div>
             </div>
 
             {/* MOBILE NAV */}
-            <div className="flex md:hidden py-6 px-4 z-50 fixed bottom-0 w-full bg-white dark:bg-[#12082a] dark:border dark:bt-[1px] dark:border-[#23124b] drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
-                <ul className="flex gap-10 brand_purple justify-evenly w-full">
+            <div className="flex md:hidden py-6 px-10 z-50 fixed bottom-0 w-full bg-white dark:bg-[#12082a] dark:border dark:bt-[1px] dark:border-[#23124b] drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
+                <ul className="flex gap-10 brand_purple justify-between w-full items-center">
                     <li>
-                        <Link className="flex flex-col items-center" href="/">
-                            <SlHome
-                                className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
-                                id="home"
-                            />
-                            Home
-                        </Link>
+                        <Link href="/">
+                        <Image
+                        src="../concertify.svg"
+                        width={25}
+                        height={30}
+                        alt="concertify_logo"
+                        />
+                    </Link>
                     </li>
                     <li>
-                        <Link
-                            className="flex flex-col items-center"
-                            href="/concerts"
-                        >
-                            <SlGrid
-                                className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
-                                id="explore"
-                            />
-                            Explore
-                        </Link>
-                    </li>
-                    <li>
-                        <button
-                            className="flex flex-col items-center"
-                            onClick={openLoginModule}
-                        >
-                            <SlUser
-                                className="stroke-[#5311BF] dark:stroke-[#8e0bf5 w-5 h-5"
-                                id="user"
-                            />
-                            Log in
-                        </button>
+                        <div className="flex gap-4">
+                            <button
+                                type="button"
+                                onClick={openSignupModule}
+                                className="secondary_btn"
+                            >
+                                Signup
+                            </button>
+                            <button
+                                type="button"
+                                onClick={openLoginModule}
+                                className="primary_btn"
+                            >
+                                Log in
+                            </button>
+                            
+                        </div>
                     </li>
                 </ul>
             </div>

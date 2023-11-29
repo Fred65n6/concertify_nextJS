@@ -101,3 +101,35 @@
     cursor: pointer;
     text-align: center;
 }
+
+.input_light {
+
+}
+
+.input_dark {
+
+}
+
+.primary_btn {
+    border-radius: 9999px; 
+    width: 8rem; 
+    height: 3rem; 
+    color: #ffffff;
+    background:
+        linear-gradient(
+        90deg,
+        rgb(142, 11, 245) 0%,
+        rgba(83, 17, 191, 1) 81%,
+        rgba(65, 32, 136, 1) 100%
+    );
+}
+
+.secondary_btn {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem; 
+    border-radius: 9999px; 
+    width: 8rem; 
+    height: 3rem; 
+    background-color: #EDE9FE;
+    color: #5311bf;
+}

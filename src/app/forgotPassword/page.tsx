@@ -5,6 +5,8 @@ import React, {useEffect} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
+import LoginPage from "../login/page";
+import SignupPage from "../signup/page";
 
 const ForgotPassword = () => {
     const router = useRouter();
@@ -39,12 +41,11 @@ const ForgotPassword = () => {
         const mailSendMessage = document.getElementById("mailSendMessage");
         const forgotForm = document.getElementById("forgotForm");
         mailSendMessage?.classList.remove("hidden");
-        mailSendMessage?.classList.add("block"); // Add the "grid" class to make it visible
+        mailSendMessage?.classList.add("block"); 
         forgotForm?.classList.add("hidden");
         console.log("showMessage");
     };
 
-    // DISABLE SIGNUP KNAP, HVIS FELTER IKKE ER UDFYLDT
 
     useEffect(() => {
         if (user.email.length > 0) {
@@ -56,6 +57,8 @@ const ForgotPassword = () => {
 
     return (
         <div className="">
+            <LoginPage/>
+            <SignupPage/>
             <div className="flex flex-col items-center justify-center py-2 mt-24">
                 <div className="hidden" id="mailSendMessage">
                     <h2 className="text-2xl">
@@ -66,34 +69,36 @@ const ForgotPassword = () => {
             </div>
 
             <div
-                className="flex flex-col items-center justify-center py-2"
+                className="flex flex-col items-center justify-center py-2 gap-8"
                 id="forgotForm"
             >
-                <h1 className="mb-4 text-4xl pb-4">
-                    {loading ? "Processing" : "Send password reset link"}
-                </h1>
-                <hr />
-                <div className="grid gap-2 text-center items-center">
-                    <label className="text-center" htmlFor="email">
-                        Type your email
+            <h1 className="font-bold text-4xl">
+                {loading ? "Processing" : "Forgot you password?"}
+            </h1>
+            <h2 className="text-md pb-4">
+                {loading ? "Please wait" : "Don't worry. Enter your email and we'll send you a link to reset your password."}
+            </h2>
+
+                <div className="grid gap-2 items-center">
+                    <label className="text-sm text-gray-600 dark:text-gray-100" htmlFor="email">
+                        Your email
                     </label>
                     <input
-                        className="m-2 p-2 rounded-md text-left text-black bg-slate-200"
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full text-black"
                         type="text"
                         id="email"
                         value={user.email}
                         onChange={(e) =>
                             setUser({...user, email: e.target.value})
                         }
-                        placeholder="email"
+                        placeholder="Start typing..."
                     />
                     <button
                         onClick={sendLink}
                         className="mb-6 brand_gradient px-12 py-4 rounded-full text-white mt-8"
                     >
-                        {buttonDisabled ? "Missing fields" : "Send reset link"}
+                        {buttonDisabled ? "Please enter your email" : "Send reset link"}
                     </button>
-                    <Link href="/login">Go to login</Link>
                 </div>
             </div>
         </div>

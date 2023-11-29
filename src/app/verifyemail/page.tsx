@@ -3,6 +3,10 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import LoginPage from "../login/page";
+import SignupPage from "../signup/page";
+import Image from "../../../node_modules/next/image";
+
 
 export default function VerifyEmailPage() {
   const [token, setToken] = useState("");
@@ -41,21 +45,25 @@ export default function VerifyEmailPage() {
   }, [token]);
 
   return (
-    <div className="flex flex-col items-center justify-center py-2">
-      <h1 className="text-4xl">Verify Email</h1>
-
-      {verified && (
-        <div className="text-center grid gap-4">
-          <h2 className="text-2xl brand_purple pt-4">
-            Your email has been verified
-          </h2>
-        </div>
-      )}
-      {error && (
-        <div className="pt-4">
-          <h2 className="text-4xl text-red-500">There was an Error</h2>
-        </div>
-      )}
-    </div>
+    <>
+      <LoginPage />
+      <SignupPage />
+   
+      <div className="flex flex-col items-center justify-center py-2">
+        {verified && (
+          <div className="text-center grid gap-4">
+            <h1 className="font-bold text-4xl pb-4 pt-8">Hooray! 🎉</h1>
+            <h2 className="text-xl text black dark:text-gray-100 pt-4">
+              Your email has been verified, and you are ready to log in!
+            </h2>
+          </div>
+        )}
+        {error && (
+          <div className="pt-4">
+            <h1 className="font-bold text-4xl pb-4 pt-8">Oh no, looks like something went wrong ☹️</h1>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
