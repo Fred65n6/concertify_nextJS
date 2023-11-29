@@ -346,7 +346,7 @@ const SingleConcert: React.FC = () => {
                                         className="fill-[#5311BF] dark:fill-[#8e0bf5] w-5 h-5"
                                         id="artist"
                                     />
-                                    <p className="text-[#5311BF] dark:text-[#8e0bf5] text-sm align-middle">
+                                    <p className="text-[#5311BF] dark:text-purple-500 text-sm align-middle">
                                         Read more about{" "}
                                         {
                                             selectedConcert.concert_artist
@@ -408,7 +408,7 @@ const SingleConcert: React.FC = () => {
                                         className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
                                         id="se_all"
                                     />
-                                    <p className="text-[#5311BF] dark:text-[#8e0bf5] text-sm align-middle">
+                                    <p className="text-[#5311BF] dark:text-purple-500 text-sm align-middle">
                                         See all concerts
                                     </p>
                                 </Link>
