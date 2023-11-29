@@ -107,7 +107,7 @@ const NavLogged = () => {
             </div>
 
             {/* MOBILE NAV */}
-            <div className="flex md:hidden p-4 fixed bottom-0 w-full bg-white">
+            <div className="flex md:hidden py-6 px-4 z-50 fixed bottom-0 w-full bg-white dark:bg-[#12082a] dark:border dark:bt-[1px] dark:border-[#23124b] drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
                 <ul className="flex gap-10 brand_purple justify-evenly w-full">
                     <li>
                         <Link className="flex flex-col items-center" href="/">
