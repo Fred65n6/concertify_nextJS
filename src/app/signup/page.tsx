@@ -338,7 +338,7 @@ export default function SignupPage() {
 
         {/* GENRE PREFERENCES: STEP 2 */}
         <div id="signup_preference_genres" className="m-auto hidden">
-          <div className="flex flex-col items-center justify-center p-8 bg-white w-fit m-8 md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+          <div className="flex flex-col items-center justify-center p-8 bg-white w-fit m-8 md:w-[600px] lg:w-[800px] dark:bg-[#12082a] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <div className="w-[300px] lg:w-[500px] mb-10">
               <Progress color="purple" progress={33} />
             </div>
@@ -403,7 +403,7 @@ export default function SignupPage() {
 
         {/* VENUE PREFERENCES: STEP 3 */}
         <div id="signup_preference_venues" className="m-auto hidden">
-          <div className="flex flex-col items-center justify-center p-8 bg-white min-h-fit w-fit m-8 md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+          <div className="flex flex-col items-center justify-center p-8 bg-white min-h-fit w-fit m-8 md:w-[600px] lg:w-[800px] dark:bg-[#12082a] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <div className="w-[300px] lg:w-[500px] mb-10">
               <Progress color="purple" progress={66} />
             </div>
@@ -468,7 +468,7 @@ export default function SignupPage() {
 
         {/* WELCOME ON BOARD MODAL */}
         <div id="welcome_modal" className="hidden">
-          <div className="flex flex-col items-center justify-center py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+          <div className="flex flex-col items-center justify-center py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#12082a] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <img className="my-10" src="../concertify_logo.svg" alt="" />
             <h1 className="my-4 text-3xl font-bold">
               Welcome {user.username}!
@@ -491,7 +491,7 @@ export default function SignupPage() {
 
          {/* SIGN UP FLOW COMPLETE MESSAGE */}
         <div id="signup_flow_complete" className="hidden">
-          <div className="flex flex-col items-center justify-center pt-4 p-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+          <div className="flex flex-col items-center justify-center pt-4 p-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#12082a] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <div className="w-[300px] lg:w-[500px] mt-10">
               <Progress color="purple" progress={100} />
             </div>

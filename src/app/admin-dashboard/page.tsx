@@ -184,7 +184,7 @@ useEffect(() => {
 
       {selectedUser && (
       <div id="delete_user_module" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-        <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#202124]">
+        <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
         <button
             type="button"
             onClick={closeModule}
