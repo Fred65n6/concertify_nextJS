@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { SlUser, SlArrowRight, SlQuestion } from "react-icons/sl";
+import { SlUser, SlArrowRight } from "react-icons/sl";
 import { AiFillDelete } from "react-icons/ai";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
@@ -149,7 +149,7 @@ useEffect(() => {
         <form className="flex flex-col items-center gap-8 pb-12">
           <table className="w-full">
             <thead>
-              <tr className="lg:flex justify-start w-full">
+            <tr className="lg:flex justify-start w-full mb-4 text-[#5311BF] dark:text-purple-500">
                 <th className="text-left w-1/2">User id</th>
                 <th className="text-left w-1/2">Username</th>
                 <th className="text-left w-1/2">User email</th>
@@ -158,7 +158,7 @@ useEffect(() => {
             </thead>
             <tbody>
               {users?.map((user) => (
-                <tr key={user._id} className="flex justify-start w-full">
+                <tr key={user._id} className="flex justify-start w-full mb-2">
                   <td className="text-left w-1/2">{user._id}</td>
                   <td className="text-left w-1/2">{user.username}</td>
                   <td className="text-left w-1/2">{user.email}</td>
@@ -196,7 +196,6 @@ useEffect(() => {
 
           <div className="flex flex-col gap-4 justify-center text-center items-center">
             <div className="flex gap-2">
-              <SlQuestion />
               <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
             </div>
             <p className="dark:text-white">
@@ -206,7 +205,7 @@ useEffect(() => {
           <button 
             type="button"
             onClick={() => handleDeleteUser(selectedUser._id)}
-            className="rounded-full w-fit h-fit py-4 px-4 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
+            className="primary_btn">
             Yes I am sure
           </button>
           </div>

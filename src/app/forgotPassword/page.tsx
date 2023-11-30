@@ -84,7 +84,7 @@ const ForgotPassword = () => {
                         Your email
                     </label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full text-black"
+                        className="input_field"
                         type="text"
                         id="email"
                         value={user.email}
@@ -95,7 +95,7 @@ const ForgotPassword = () => {
                     />
                     <button
                         onClick={sendLink}
-                        className="mb-6 brand_gradient px-12 py-4 rounded-full text-white mt-8"
+                        className="primary_btn"
                     >
                         {buttonDisabled ? "Please enter your email" : "Send reset link"}
                     </button>

@@ -74,7 +74,7 @@ const SingleConcert: React.FC = () => {
         getUserDetails();
     }, []);
 
-    // Get User Cookie
+    // GET USER COOKIE
     const getFavouriteDetails = async () => {
         try {
             const res = await axios.get("/api/users/cookieUser");
@@ -86,15 +86,12 @@ const SingleConcert: React.FC = () => {
                 );
                 console.log("Favorite Concert IDs:", favoriteConcertIds);
 
-                // Check if 'id' is in 'favoriteConcertIds'
                 if (favoriteConcertIds.includes(id)) {
                     console.log(`The ID ${id} is in favorites.`);
                     setIsInFavorites(true);
-                    // Do something if the ID is in favorites
                 } else {
                     console.log(`The ID ${id} is not in favorites.`);
                     setIsInFavorites(false);
-                    // Do something if the ID is not in favorites
                 }
             } else {
                 console.log("No favorites or data found");
@@ -112,7 +109,6 @@ const SingleConcert: React.FC = () => {
         setUserData(res.data.data._id);
     };
 
-    // Use a useEffect to update the selectedConcert when the 'id' or 'concerts' array changes
     useEffect(() => {
         if (id && concerts.length > 0) {
             const matchingConcert = concerts.find(
@@ -317,18 +313,18 @@ const SingleConcert: React.FC = () => {
                                 </form>
                             )}
                             </div>
-                            ): (
-                                <div ><a className="brand_purple opacity-50" href="/login">+ Log in to add to favourite</a></div>
-                            )}
+                            ): 
+                            <div></div>
+                            }
                         </div>
 
                         <ul className="flex flex-col gap-4">
                             <li className="flex gap-2">
                                 <SlMusicToneAlt
-                                    className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5"
+                                    className="stroke-gray-600 dark:stroke-gray-200 w-5 h-5"
                                     id="genre"
                                 />
-                                <p className="text-gray-600 dark:text-slate-400 text-sm align-middle">
+                                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                                     {selectedConcert.concert_genre.genre_name}
                                 </p>
                             </li>
@@ -343,7 +339,7 @@ const SingleConcert: React.FC = () => {
                             >
                                 <li className="flex gap-2">
                                     <SlStar
-                                        className="fill-[#5311BF] dark:fill-[#8e0bf5] w-5 h-5"
+                                        className="fill-[#5311BF] dark:fill-purple-500 w-5 h-5"
                                         id="artist"
                                     />
                                     <p className="text-[#5311BF] dark:text-purple-500 text-sm align-middle">
@@ -359,10 +355,10 @@ const SingleConcert: React.FC = () => {
                             {/* Concert date*/}
                             <li className="flex gap-2">
                                 <SlCalender
-                                    className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5"
+                                    className="stroke-gray-600 dark:stroke-gray-200 w-5 h-5"
                                     id="date"
                                 />
-                                <p className="text-gray-600 dark:text-slate-400 align-middle">
+                                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                                     {selectedConcert.concert_date}
                                 </p>
                             </li>
@@ -370,10 +366,10 @@ const SingleConcert: React.FC = () => {
                             {/* Doors open*/}
                             <li className="flex gap-2">
                                 <SlClock
-                                    className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5"
+                                    className="stroke-gray-600 dark:stroke-gray-200 w-5 h-5"
                                     id="doors"
                                 />
-                                <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                                     Doors open: {selectedConcert.concert_doors}
                                 </p>
                             </li>
@@ -381,10 +377,10 @@ const SingleConcert: React.FC = () => {
                             {/* Concert start*/}
                             <li className="flex gap-2">
                                 <SlControlPlay
-                                    className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5"
+                                    className="stroke-gray-600 dark:stroke-gray-200 w-5 h-5"
                                     id="concert_start"
                                 />
-                                <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                                     Concert start:{" "}
                                     {selectedConcert.concert_start}
                                 </p>
@@ -393,10 +389,10 @@ const SingleConcert: React.FC = () => {
                             {/* Location*/}
                             <li className="flex gap-2">
                                 <SlLocationPin
-                                    className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5"
+                                    className="stroke-gray-600 dark:stroke-gray-200 w-5 h-5"
                                     id="location"
                                 />
-                                <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                                     {selectedConcert.concert_venue.venue_name}
                                 </p>
                             </li>
@@ -405,7 +401,7 @@ const SingleConcert: React.FC = () => {
                             <li className="flex gap-2">
                                 <Link className="flex gap-2" href="/concerts/">
                                     <HiOutlineArrowRight
-                                        className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
+                                        className="stroke-[#5311BF] dark:stroke-purple-500 w-5 h-5"
                                         id="se_all"
                                     />
                                     <p className="text-[#5311BF] dark:text-purple-500 text-sm align-middle">

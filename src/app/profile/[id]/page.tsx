@@ -145,7 +145,6 @@ export default function UserProfile({params}: any) {
                 user
             );
             console.log("password changed", response.data);
-            // showPasswordChangeMessage();
         } catch (error: any) {
             if (
                 error.response &&
@@ -247,7 +246,7 @@ export default function UserProfile({params}: any) {
                 </div>
             </section>
 
-            {/* LOG OUT BUTTON */}
+            {/* LOG OUT LINK */}
             <button
                 onClick={logout}
                 className="w-full flex gap-2 items-center mt-12"
@@ -273,7 +272,7 @@ export default function UserProfile({params}: any) {
                         <span className="w-full text-xl font-semibold text-[#5311BF] dark:text-purple-500 mb-6">Change username</span>
                         <input
                             readOnly={true}
-                            className="m-2 p-2 rounded-md text-left text-black bg-slate-200 hidden"
+                            className="hidden"
                             type="text"
                             id="email"
                             value={user.email}
@@ -282,7 +281,7 @@ export default function UserProfile({params}: any) {
                         />
                         <label htmlFor="password" className="w-fit text-sm text-gray-600 dark:text-gray-100">Choose a new username</label>
                         <input
-                            className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                            className="input_field"
                             type="text"
                             id="newUsername"
                             placeholder="Start typing..."
@@ -330,7 +329,7 @@ export default function UserProfile({params}: any) {
                                     />
                                     <label htmlFor="password" className="w-fit text-sm text-gray-600 dark:text-gray-100">Old password</label>
                                     <input
-                                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                                        className="input_field"
                                         type="password"
                                         id="password"
                                         value={user.password}
@@ -344,7 +343,7 @@ export default function UserProfile({params}: any) {
                                 <div className="flex flex-col w-full gap-2">
                                     <label htmlFor="password" className="w-fit text-sm text-gray-600 dark:text-gray-100">New password</label>
                                     <input
-                                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                                        className="input_field"
                                         type="password"
                                         id="password"
                                         value={user.newpassword}
@@ -360,7 +359,7 @@ export default function UserProfile({params}: any) {
                                         Confirm new password
                                     </label>
                                     <input
-                                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                                        className="input_field"
                                         type="password"
                                         id="confirm_password"
                                         value={user.confirmpassword}

@@ -57,6 +57,8 @@ export default function SingleArtist() {
 
     return (
         <div>
+            <SignupPage/>
+            <LoginPage/>
             <BreadcrumbComp />
             {selectedArtist ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
@@ -78,10 +80,10 @@ export default function SingleArtist() {
                             {/* Full name*/}
                             <li className="flex gap-2">
                                 <SlStar
-                                    className="fill-gray-600 text-sm dark:fill-gray-400 w-5 h-5"
+                                    className="fill-gray-600 dark:fill-gray-200 w-5 h-5"
                                     id="artist_fullname"
                                 />
-                                <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                                     Full name: {selectedArtist.artist_name}
                                 </p>
                             </li>
@@ -89,10 +91,10 @@ export default function SingleArtist() {
                             {/* Genre*/}
                             <li className="flex gap-2">
                                 <SlMusicToneAlt
-                                    className="fill-gray-600 text-sm dark:fill-gray-400 w-5 h-5"
+                                    className="fill-gray-600 dark:fill-gray-200 w-5 h-5"
                                     id="artist_genre"
                                 />
-                                <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                                     Genre:{" "}
                                     {selectedArtist.artist_genre.genre_name}
                                 </p>
@@ -101,10 +103,10 @@ export default function SingleArtist() {
                             {/* Date of birth*/}
                             <li className="flex gap-2">
                                 <PiBalloon
-                                    className="fill-gray-600 text-sm dark:fill-gray-400 w-5 h-5"
+                                    className="fill-gray-600 dark:fill-gray-200 w-5 h-5"
                                     id="dob"
                                 />
-                                <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                                     Born:{" "}
                                     {selectedArtist.artist_dob
                                         ? selectedArtist.artist_dob

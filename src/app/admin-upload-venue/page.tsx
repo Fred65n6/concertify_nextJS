@@ -73,7 +73,7 @@ const UploadForm: React.FC = () => {
                 onSubmit={onSubmit}
             >
                 <input
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                    className="input_field"
                     type="text"
                     name="Venue_name"
                     value={venueName}
@@ -82,7 +82,7 @@ const UploadForm: React.FC = () => {
                 />
 
                 <input
-                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                    className="input_field"
                     type="text"
                     name="Venue_address"
                     value={venueAddress}
@@ -90,7 +90,7 @@ const UploadForm: React.FC = () => {
                     placeholder="Address"
                 />
                 <input
-                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                    className="input_field"
                     type="text"
                     name="Venue_location"
                     value={venueLocation}
@@ -98,7 +98,7 @@ const UploadForm: React.FC = () => {
                     placeholder="Location (e.g. Copenhagen V)"
                 />
                 <input
-                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                    className="input_field"
                     type="text"
                     name="Venue_size"
                     value={venueSize}
@@ -106,7 +106,7 @@ const UploadForm: React.FC = () => {
                     placeholder="Size (measured in people)"
                 />
                 <input
-                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                    className="input_field"
                     type="text"
                     name="Venue_description"
                     value={venueDescription}
@@ -120,11 +120,11 @@ const UploadForm: React.FC = () => {
                     onChange={(e) => setFile(e.target.files?.[0] || null)}
                 />
                 <button
-                    className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
+                    className="primary_btn"
                     type="submit"
                     value="upload"
                 >
-                    {loading ? "Processing" : "Confirm"}
+                    {loading ? "Processing" : "Confirm and upload venue"}
                 </button>
             </form>
 
@@ -132,13 +132,13 @@ const UploadForm: React.FC = () => {
                 <h2 className="text-2xl">Venue uploaded successfully 🎉</h2>
                 <div className="flex gap-4 mt-8">
                     <a
-                        className="brand_gradient py-2 px-4 text-white rounded-full"
+                        className="primary_btn"
                         href="/admin-upload-venue"
                     >
                         Upload another
                     </a>
                     <a
-                        className="rounded-full px-8 py-2 bg-purple-100 brand_purple flex items-center hover:bg-purple-200"
+                        className="secondary_btn"
                         href="/venues"
                     >
                         See all venues

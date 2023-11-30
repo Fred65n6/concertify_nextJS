@@ -49,14 +49,14 @@ export default function ResetPassword() {
                     Enter your new password
                 </label>
                 <input
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full text-black"
+                    className="input_field"
                     type="password"
                     placeholder="Start typing..."
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <input
-                className="hidden"
+                    className="hidden"
                     readOnly={true}
                     type="token"
                     placeholder="token"

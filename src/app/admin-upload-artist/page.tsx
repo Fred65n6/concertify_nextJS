@@ -103,7 +103,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="artist_name">Artist name</label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         type="text"
                         id="artist_name"
                         name="artist_name"
@@ -116,7 +116,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="artist_full_name">Full name</label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         type="text"
                         id="artist_full_name"
                         name="artist_full_name"
@@ -129,7 +129,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="artist_description">Description</label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         type="text"
                         id="artist_description"
                         name="artist_description"
@@ -142,7 +142,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="artist_full_name">Date of birth</label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         type="date"
                         id="artist_dob"
                         name="artist_dob"
@@ -155,7 +155,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="artist_genre">Genre</label>
                     <select
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         value={selectedGenre ? selectedGenre._id : ""}
                         onChange={(e) =>
                             setSelectedGenre(
@@ -176,7 +176,7 @@ const UploadForm: React.FC = () => {
 
                 <input
                     readOnly={true}
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full hidden"
+                    className="hidden"
                     type="text"
                     name="artist_genre_name"
                     value={selectedGenre ? selectedGenre.genre_name : ""}
@@ -186,7 +186,7 @@ const UploadForm: React.FC = () => {
 
                 <input
                     readOnly={true}
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full hidden"
+                    className="hidden"
                     type="text"
                     name="Concert_genre_id"
                     value={selectedGenre ? selectedGenre._id : ""}
@@ -197,7 +197,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="artist_nation">Artist nationality</label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         type="text"
                         name="artist_nation"
                         value={artistNation}
@@ -216,24 +216,24 @@ const UploadForm: React.FC = () => {
                 </div>
 
                 <button
-                    className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
+                    className="primary_btn"
                     type="submit"
                     value="upload"
                 >
-                    {loading ? "Processing" : "Confirm"}
+                    {loading ? "Processing" : "Confirm and upload artist"}
                 </button>
             </form>
             <div id="artistUploadedMessage" className="hidden">
                 <h2 className="text-2xl">Artist uploaded successfully 🎉</h2>
                 <div className="flex gap-4 mt-8">
                     <a
-                        className="brand_gradient py-2 px-4 text-white rounded-full"
+                        className="primary_btn"
                         href="/admin-upload-artist"
                     >
                         Upload another
                     </a>
                     <a
-                        className="rounded-full px-8 py-2 bg-purple-100 brand_purple flex items-center hover:bg-purple-200"
+                        className="secondary_btn"
                         href="/artists"
                     >
                         See all artists

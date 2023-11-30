@@ -102,19 +102,19 @@
     text-align: center;
 }
 
-.input_light {
 
-}
-
-.input_dark {
-
-}
-
+/* BUTTONS */
 .primary_btn {
-    border-radius: 9999px; 
-    width: 8rem; 
-    height: 3rem; 
-    color: #ffffff;
+    display: flex; 
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    gap: 0.5rem; 
+    width: fit-content; 
+    height: fit-content; 
+    color: #ffffff; 
+    border-radius:50px;
     background:
         linear-gradient(
         90deg,
@@ -124,12 +124,87 @@
     );
 }
 
-.secondary_btn {
+.login_btn {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem; 
-    border-radius: 9999px; 
+    border-radius:50px;
+    width: 8rem; 
+    height: 3rem; 
+    background:
+        linear-gradient(
+        90deg,
+        rgb(142, 11, 245) 0%,
+        rgba(83, 17, 191, 1) 81%,
+        rgba(65, 32, 136, 1) 100%
+    );
+    color: #ffffff;
+}
+
+.signup_btn {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem; 
+    border-radius:50px;
     width: 8rem; 
     height: 3rem; 
     background-color: #EDE9FE;
     color: #5311bf;
+}
+
+
+.secondary_btn {
+    display: flex; 
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    gap: 0.5rem; 
+    width: fit-content; 
+    height: fit-content; 
+    border-radius:50px;
+    background-color: #EDE9FE;
+    color: #5311bf;
+    align-items: center; 
+
+}
+
+
+/* FORMS AND FIELDS */
+.input_field {
+    padding-top: 1rem;
+    padding-bottom: 1rem; 
+    padding-left: 2rem;
+    padding-right: 2rem; 
+    border-radius: 9999px; 
+    border-width: 0; 
+    width: 100%; 
+    color: #2c2c2c; 
+    background-color: rgb(241 245 249);
+}
+
+
+
+
+/* MODALS */
+.modal_overlay {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    z-index: 50; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+    height: 100vh; 
+    backdrop-blur: blur(4px); 
+    background-color: rgb(15 23 42 / 0.5);
+}
+
+
+.modal_dark {
+
+
+}
+
+
+.modal {
+
 }

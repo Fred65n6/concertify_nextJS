@@ -257,7 +257,7 @@ export default function SignupPage() {
                 <div className="flex flex-col w-full gap-2">
                   <label htmlFor="username" className="w-fit text-sm dark:text-gray-100">Username</label>
                   <input
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                    className="input_field"
                     type="text"
                     id="username"
                     value={user.username}
@@ -270,7 +270,7 @@ export default function SignupPage() {
                 <div className="flex flex-col w-full gap-2">
                   <label htmlFor="email" className="w-fit text-sm dark:text-gray-100">Email</label>
                   <input
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                    className="input_field"
                     type="text"
                     id="email"
                     value={user.email}
@@ -284,7 +284,7 @@ export default function SignupPage() {
                   <div className="flex flex-col w-full gap-2">
                     <label htmlFor="password" className="w-fit text-sm dark:text-gray-100">Password</label>
                     <input
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                    className="input_field"
                       type="password"
                       id="password"
                       value={user.password}
@@ -297,7 +297,7 @@ export default function SignupPage() {
                   <div className="flex flex-col w-full gap-2">
                     <label htmlFor="confirmpassword" className="w-fit text-sm dark:text-gray-100">Confirm password</label>
                     <input
-                      className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                      className="input_field"
                       type="password"
                       id="confirmpassword"
                       value={user.confirmpassword}
@@ -369,10 +369,10 @@ export default function SignupPage() {
                 {selectedGenres.map((genre, index) => (
                   <div key={index} className="relative">
                     <input
-                    className="border-2 w-40 border-purple-700 brand_purple py-2 px-2 text-center rounded-full"
-                    type="text"
+                      className="border-2 w-40 border-purple-700 brand_purple py-2 px-2 text-center rounded-full"
+                      type="text"
                       value={genre}
-                      readOnly 
+                      readOnly={true}
                     />
                     <button
                       type="button"
@@ -389,7 +389,7 @@ export default function SignupPage() {
                 type="email"
                 id="emailInput"
                 value={user.email}
-                readOnly
+                readOnly={true}
                 className="hidden"
               />
 
@@ -438,7 +438,7 @@ export default function SignupPage() {
                       className="border-2 w-40 border-purple-700 brand_purple py-2 px-2 text-center rounded-full"
                       type="text"
                       value={venue}
-                      readOnly
+                      readOnly={true}
                     />
                     <button
                       type="button"
@@ -456,10 +456,10 @@ export default function SignupPage() {
                 id="emailInput"
                 value={user.email}
                 className="hidden"
-                readOnly
+                readOnly={true}
               />
       
-              <button type="submit" value="upload" className="rounded-full bg-purple-700 m-auto w-fit h-fit py-4 px-12 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
+              <button type="submit" value="upload" className="primary_btn">
                 Submit
               </button>
             </form>
@@ -482,7 +482,7 @@ export default function SignupPage() {
             </p>
             <button
               onClick={selectPrefferedGenres}
-              className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white"
+              className="primary_btn"
             >
               Get Started
             </button>
@@ -504,7 +504,7 @@ export default function SignupPage() {
             <p className="mt-5 mb-10 text-center">
               After that, you are ready to explore the Concertify universe!
             </p>
-            <button onClick={closeSignup} className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white">Close</button>
+            <button onClick={closeSignup} className="primary_btn">Close</button>
           </div>
         </div>
       </div>

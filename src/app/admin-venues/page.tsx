@@ -20,7 +20,7 @@ interface Venue {
     venue_description: string;
     venue_image: string;
   }
-const Admin: React.FC = () => {
+const AdminVenuesOverview: React.FC = () => {
   const [venues, setVenues] = useState<Venue[]>([]);
   const [selectedVenue, setSelectedVenue] = useState<Venue | null>(null);
 
@@ -116,7 +116,7 @@ const handleDeleteVenue = async (venueId: string) => {
               <SlMusicToneAlt className="stroke-[#5311BF] dark:stroke-purple-500 w-5 h-5" id="user" />
               <span>There are <span className="text-[#5311BF] dark:text-purple-500 font-bold">{totalVenues}</span> venues in total</span>
             </div>
-            <button className="flex gap-2 rounded-full bg-purple-100 brand_purple items-center px-8 py-2 hover:bg-purple-200">
+            <button className="secondary_btn">
               <Link href="/admin-upload-venue">Upload new venue</Link>
               <SlPlus/>
           </button>
@@ -125,7 +125,7 @@ const handleDeleteVenue = async (venueId: string) => {
         <form className="flex flex-col items-center gap-8 py-8">
           <table className="w-full">
             <thead>
-              <tr className="lg:flex justify-start w-full">
+            <tr className="lg:flex justify-start w-full mb-4 text-[#5311BF] dark:text-purple-500">
                 <th className="text-left w-1/2">Venue name</th>
                 <th className="text-left w-1/2">Address</th>
                 <th className="text-left w-1/2">Location</th>
@@ -136,7 +136,7 @@ const handleDeleteVenue = async (venueId: string) => {
             </thead>
             <tbody>
               {venues?.map((venue) => (
-                <tr key={venue._id} className="flex justify-start w-full">
+                <tr key={venue._id} className="flex justify-start w-full mb-2">
                   <td className="text-left w-1/2">{venue.venue_name}</td>
                   <td className="text-left w-1/2">{venue.venue_address}</td>
                   <td className="text-left w-1/2">{venue.venue_location}</td>
@@ -203,15 +203,15 @@ const handleDeleteVenue = async (venueId: string) => {
 
     {/* EDIT VENUE MODULE */}
     {selectedVenue && (
-    <div id="edit_venue_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-    <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
-    <button
-        type="button"
-        onClick={closeEditModule}
-        className="cursor-pointer ml-[100%]"
-        >
-        <CgClose/>
-    </button>
+      <div id="edit_venue_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+        <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
+        <button
+            type="button"
+            onClick={closeEditModule}
+            className="cursor-pointer ml-[100%]"
+            >
+            <CgClose/>
+        </button>
 
         <div className="flex flex-col gap-4 justify-center text-center items-center">
         <input
@@ -237,17 +237,17 @@ const handleDeleteVenue = async (venueId: string) => {
         <button 
             // type="button"
             // onClick={() => handleSaveChanges(selectedVenue._id)}
-            className="rounded-full w-fit h-fit py-4 px-4 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
+            className="primary_btn">
             Save changes
         </button>
 
         </div>
-    </div>
-    </div>
+        </div>
+      </div>
     )}
 
     </>
   );
 };
 
-export default Admin;
+export default AdminVenuesOverview;

@@ -55,14 +55,14 @@ const NavLogged = () => {
                     <button
                         type="button"
                         onClick={openSignupModule}
-                        className="secondary_btn"
+                        className="signup_btn"
                     >
                         Signup
                     </button>
                     <button
                         type="button"
                         onClick={openLoginModule}
-                        className="primary_btn"
+                        className="login_btn"
                     >
                         Log in
                     </button>

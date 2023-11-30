@@ -199,7 +199,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="Concert_doors">Doors open at:</label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         type="time"
                         name="Concert_doors"
                         value={concertDoors}
@@ -214,7 +214,7 @@ const UploadForm: React.FC = () => {
                         Concert description
                     </label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         type="text"
                         name="Concert_description"
                         value={concertDescription}
@@ -227,7 +227,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="Concert_artist">Artist</label>
                     <select
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         value={selectedArtist ? selectedArtist._id : ""}
                         onChange={(e) =>
                             setSelectedArtist(
@@ -246,7 +246,7 @@ const UploadForm: React.FC = () => {
                     </select>
                     <input
                         readOnly={true}
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full hidden"
+                        className="hidden"
                         type="text"
                         name="Concert_artist_name"
                         value={selectedArtist ? selectedArtist.artist_name : ""}
@@ -256,7 +256,7 @@ const UploadForm: React.FC = () => {
 
                     <input
                         readOnly={true}
-                        className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                        className="hidden"
                         type="text"
                         name="Concert_artist_id"
                         value={selectedArtist ? selectedArtist._id : ""}
@@ -269,7 +269,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="Concert_venue">Venue</label>
                     <select
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         value={selectedVenue ? selectedVenue._id : ""}
                         onChange={(e) =>
                             setSelectedVenue(
@@ -288,7 +288,7 @@ const UploadForm: React.FC = () => {
                     </select>
                     <input
                         readOnly={true}
-                        className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                        className="hidden"
                         type="text"
                         name="Concert_venue_name"
                         value={selectedVenue ? selectedVenue.venue_name : ""}
@@ -297,7 +297,7 @@ const UploadForm: React.FC = () => {
                     />
                     <input
                         readOnly={true}
-                        className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                        className="hidden"
                         type="text"
                         name="Concert_venue_id"
                         value={selectedVenue ? selectedVenue._id : ""}
@@ -310,7 +310,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="Concert_genre">Genre</label>
                     <select
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         value={selectedGenre ? selectedGenre._id : ""}
                         onChange={(e) =>
                             setSelectedGenre(
@@ -329,7 +329,7 @@ const UploadForm: React.FC = () => {
                     </select>
                     <input
                         readOnly={true}
-                        className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                        className="hidden"
                         type="text"
                         name="Concert_genre_name"
                         value={selectedGenre ? selectedGenre.genre_name : ""}
@@ -338,7 +338,7 @@ const UploadForm: React.FC = () => {
                     />
                     <input
                         readOnly={true}
-                        className="bg-slate-300 p-4 w-72 text-slate-500 hidden"
+                        className="hidden"
                         type="text"
                         name="Concert_genre_id"
                         value={selectedGenre ? selectedGenre._id : ""}
@@ -357,11 +357,11 @@ const UploadForm: React.FC = () => {
                 </div>
 
                 <button
-                    className="brand_gradient px-4 py-2 cursor-pointer text-white rounded-full w-72"
+                    className="primary_btn"
                     type="submit"
                     value="upload"
                 >
-                    {loading ? "Processing" : "Confirm"}
+                    {loading ? "Processing" : "Confirm and upload concert"}
                 </button>
             </form>
 
@@ -369,13 +369,13 @@ const UploadForm: React.FC = () => {
                 <h2 className="text-2xl">Concert uploaded successfully 🎉</h2>
                 <div className="flex gap-4 mt-8">
                     <a
-                        className="brand_gradient py-2 px-4 text-white rounded-full"
+                        className="primary_btn"
                         href="/admin-upload-concert"
                     >
                         Upload another
                     </a>
                     <a
-                        className="rounded-full px-8 py-2 bg-purple-100 brand_purple flex items-center hover:bg-purple-200"
+                        className="secondary_btn"
                         href="/concerts"
                     >
                         See all concerts

@@ -19,7 +19,6 @@ interface ArtistLoop {
 
 const ArtistLoopview: React.FC = () => {
     const [artists, setArtists] = useState<ArtistLoop[]>([]);
-    // const [filteredArtists, setFilteredArtists] = useState<ArtistLoop[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {

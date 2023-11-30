@@ -23,7 +23,7 @@ interface Artist {
   };
 }
 
-const Admin: React.FC = () => {
+const AdminArtistsOverview: React.FC = () => {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
   
@@ -121,7 +121,7 @@ const closeEditModule = () => {
               <SlMusicToneAlt className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="user" />
               <span>There are <span className="text-[#5311BF] dark:text-purple-500 font-bold">{totalArtists}</span> artists in total</span>
             </div>
-            <button className="flex gap-2 rounded-full bg-purple-100 brand_purple items-center px-8 py-2 hover:bg-purple-200">
+              <button className="secondary_btn">
               <Link href="/admin-upload-artist">Upload new artist</Link>
               <SlPlus/>
           </button>
@@ -130,7 +130,7 @@ const closeEditModule = () => {
         <form className="flex flex-col items-center gap-8 py-8">
           <table className="w-full">
             <thead>
-              <tr className="lg:flex justify-start w-full">
+            <tr className="lg:flex justify-start w-full mb-4 text-[#5311BF] dark:text-purple-500">
                 <th className="text-left w-1/2">Artist id</th>
                 <th className="text-left w-1/2">Artist name</th>
                 <th className="text-left w-1/2">Full name</th>
@@ -140,7 +140,7 @@ const closeEditModule = () => {
             </thead>
             <tbody>
               {artists?.map((artist) => (
-                <tr key={artist._id} className="flex justify-start w-full">
+                <tr key={artist._id} className="flex justify-start w-full mb-2">
                   <td className="text-left w-1/2">{artist._id}</td>
                   <td className="text-left w-1/2">{artist.artist_name}</td>
                   <td className="text-left w-1/2">{artist.artist_full_name}</td>
@@ -173,7 +173,7 @@ const closeEditModule = () => {
       </div>
 
 
-    {/* DELETE ARTISTK MODULE */}
+    {/* DELETE ARTIST MODAL */}
       {selectedArtist && (
       <div id="delete_artist_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
         <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
@@ -194,7 +194,7 @@ const closeEditModule = () => {
             <button 
                 type="button"
                 onClick={() => handleDeleteArtist(selectedArtist._id)}
-                className="rounded-full w-fit h-fit py-4 px-4 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
+                className="primary_btn">
                 Yes I am sure
             </button>
             </div>
@@ -202,49 +202,44 @@ const closeEditModule = () => {
       </div>
       )}
 
-    {/* EDIT ARTIST MODULE */}
+    {/* EDIT ARTIST MODAL */}
     {selectedArtist && (
     <div id="edit_artist_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-    <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
-      <button
-        type="button"
-        onClick={closeEditModule}
-        className="cursor-pointer ml-[100%]"
-        >
-        <CgClose/>
-      </button>
-        
-        <div className="flex flex-col gap-4 justify-center text-center items-center">
-        <input
-            readOnly={true}
-            className="hidden"
-            type="text"
-            name="artist_id"
-            value={selectedArtist._id}
-            />
-
-          <div className="flex gap-2 items-center">
-            <label htmlFor="artist_name">Artist name</label>
+      <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
+        <button
+          type="button"
+          onClick={closeEditModule}
+          className="cursor-pointer ml-[100%]"
+          >
+          <CgClose/>
+        </button>
+          
+          <div className="flex flex-col gap-4 justify-center text-center items-center w-full">
             <input
                 readOnly={true}
-                className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                className="hidden"
                 type="text"
-                name="artist_name"
-                value={selectedArtist.artist_name}
-            />
+                name="artist_id"
+                value={selectedArtist._id}
+                />
+
+              <div className="flex gap-2 items-center">
+                <label htmlFor="artist_name">Artist name</label>
+                <input
+                    readOnly={true}
+                    className="input_field"
+                    type="text"
+                    name="artist_name"
+                    value={selectedArtist.artist_name}
+                />
+              </div>
+
+            <button 
+                className="primary_btn">
+                Save changes
+            </button>
           </div>
-
-
-
-        <button 
-            // type="button"
-            // onClick={() => handleSaveChanges(selectedArtist._id)}
-            className="rounded-full w-fit h-fit py-4 px-4 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
-            Save changes
-        </button>
-
-        </div>
-    </div>
+      </div>
     </div>
     )}
 
@@ -252,4 +247,4 @@ const closeEditModule = () => {
   );
 };
 
-export default Admin;
+export default AdminArtistsOverview;

@@ -40,7 +40,7 @@ interface Concert {
     concert_doors: string;
 }
 
-const Admin: React.FC = () => {
+const AdminConcertsOverview: React.FC = () => {
   const [concerts, setConcerts] = useState<Concert[]>([]);
   const [selectedConcert, setSelectedConcert] = useState<Concert | null>(null);
 
@@ -89,31 +89,35 @@ const closeEditModule = () => {
 };
 
 
-  const handleDeleteConcert = async (concertId: string) => {
-    try {
-      const res = await fetch('/api/admin/deleteConcert', {
-        method: 'DELETE',
-        body: JSON.stringify({ concertId }),
-      });
-  
-      if (!res.ok) {
-        const errorText = await res.text();
-        console.error(errorText);
-      } else {
-        const result = await res.json();
-        if (result.success) {
-          console.log(result.message);
-          setConcerts(elm => elm.filter(concert => concert._id !== concertId));
+const handleDeleteConcert = async (concertId: string) => {
+  try {
+    const res = await fetch('/api/admin/deleteConcert', {
+      method: 'DELETE',
+      body: JSON.stringify({ concertId }),
+    });
 
-          closeDeleteModule();
-        } else {
-          console.error(result.error);
-        }
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error(errorText);
+    } else {
+      const result = await res.json();
+      if (result.success) {
+        console.log(result.message);
+        setConcerts(elm => elm.filter(concert => concert._id !== concertId));
+
+        closeDeleteModule();
+      } else {
+        console.error(result.error);
       }
-    } catch (error) {
-      console.error('Error deleting concert:', error);
     }
-  };
+  } catch (error) {
+    console.error('Error deleting concert:', error);
+  }
+};
+
+const handleSaveChanges = async () => {
+  console.log("ok")
+};
 
 
 
@@ -139,17 +143,16 @@ const closeEditModule = () => {
               <SlMusicToneAlt className="stroke-[#5311BF] dark:stroke-purple-500 w-5 h-5" id="user" />
               <span>There are <span className="text-[#5311BF] dark:text-purple-500 font-bold">{totalConcerts}</span> concerts in total</span>
             </div>
-            <button className="flex gap-2 rounded-full bg-purple-100 brand_purple items-center px-8 py-2 hover:bg-purple-200">
+            <button className="secondary_btn">
               <Link href="/admin-upload-concert">Upload new concert</Link>
               <SlPlus/>
           </button>
         </section>
 
-          {/* <form className="flex flex-col items-center gap-8 py-8"> */}
           <form className="">
-            <table className="w-full">
+            <table className="w-full mt-8">
               <thead>
-                <tr className="lg:flex justify-start w-full">
+                <tr className="lg:flex justify-start w-full mb-4 text-[#5311BF] dark:text-purple-500">
                   <th className="text-left w-fit md:w-1/2">Concert name</th>
                   <th className="text-left w-fit md:w-1/2">Artist</th>
                   <th className="text-left w-fit md:w-1/2">Date</th>
@@ -158,9 +161,9 @@ const closeEditModule = () => {
                   <th className="text-right w-fit md:w-1/12"></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="mb-8">
                 {concerts?.map((concert) => (
-                  <tr key={concert._id} className="flex justify-start w-full">
+                  <tr key={concert._id} className="flex justify-start w-full mb-2">
                     <td className="text-left w-fit md:w-1/2">{concert.concert_name}</td>
                     <td className="text-left w-fit md:w-1/2">{concert.concert_artist.artist_name}</td>
                     <td className="text-left w-fit md:w-1/2">{concert.concert_date}</td>
@@ -198,13 +201,13 @@ const closeEditModule = () => {
       {selectedConcert && (
       <div id="delete_concert_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
         <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
-        <button
-            type="button"
-            onClick={closeDeleteModule}
-            className="cursor-pointer ml-[100%]"
-            >
-            <CgClose/>
-          </button>
+          <button
+              type="button"
+              onClick={closeDeleteModule}
+              className="cursor-pointer ml-[100%]"
+              >
+              <CgClose/>
+            </button>
 
             <div className="flex flex-col gap-4 justify-center text-center items-center">
               <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
@@ -215,7 +218,7 @@ const closeEditModule = () => {
             <button 
                 type="button"
                 onClick={() => handleDeleteConcert(selectedConcert._id)}
-                className="rounded-full w-fit h-fit py-4 px-4 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
+                className="primary_btn">
                 Yes I am sure
             </button>
             </div>
@@ -225,58 +228,71 @@ const closeEditModule = () => {
 
     {/* EDIT CONCERT MODULE */}
     {selectedConcert && (
-    <div id="edit_concert_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-    <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
-      <button
-        type="button"
-        onClick={closeEditModule}
-        className="cursor-pointer ml-[100%]"
-        >
-        <CgClose/>
-      </button>
-        
-        <div className="flex flex-col gap-4 justify-center text-center items-center">
-        <input
-            readOnly={true}
-            className="hidden"
-            type="text"
-            name="concert_id"
-            value={selectedConcert._id}
-            />
-            
-          <div className="flex gap-2 items-center">
-            <label htmlFor="concert_description">Concert name</label>
-            <input
-                readOnly={true}
-                className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                type="text"
-                name="concert_name"
-                value={selectedConcert.concert_name}
-            />
-            </div>
-
-            <div className="flex gap-2 items-center">
-              <label htmlFor="concert_description">Description</label>
-              <input
-                  readOnly={true}
-                  className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                  type="text"
-                  name="concert_description"
-                  value={selectedConcert.concert_description}
+      <div id="edit_concert_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+      <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
+        <button
+          type="button"
+          onClick={closeEditModule}
+          className="cursor-pointer ml-[100%]"
+          >
+          <CgClose/>
+        </button>
+          
+        <div className="flex flex-col gap-4 w-full">
+          <h2 className="font-bold text-lg text-[#5311BF] dark:text-purple-500">Concert information</h2>
+          <input
+              readOnly={true}
+              className="hidden"
+              type="text"
+              name="concert_id"
+              value={selectedConcert._id}
               />
+
+            <div className="flex gap-8 border-y-[1px] border-gray-100 dark:border-[#23124b] py-4">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="artist_name" className="text-sm">Artist</label>
+                <span className="font-bold">{selectedConcert.concert_artist.artist_name}</span>
+              </div> 
+              <div className="flex flex-col gap-2">
+                <label htmlFor="artist_name" className="text-sm">Venue</label>
+                <span className="font-bold">{selectedConcert.concert_venue.venue_name}</span>
+              </div>  
             </div>
 
+              <div className="flex flex-col gap-2">
+                <label htmlFor="concert_name" className="text-sm">Concert name</label>
+                <input
+                    readOnly={true}
+                    className="input_field"
+                    type="text"
+                    name="concert_name"
+                    value={selectedConcert.concert_name}
+                />
+                </div>
+
+              <div className="flex flex-col gap-2">
+                <label htmlFor="concert_description" className="text-sm dark:text-gray-100">Description</label>
+                <input
+                    readOnly={true}
+                    className="input_field"
+                    type="text"
+                    name="concert_description"
+                    value={selectedConcert.concert_description}
+                />
+              </div>
 
 
-        {/* <button 
-            type="button"
-            onClick={() => handleSaveChanges(selectedConcert._id)}
-            className="rounded-full w-fit h-fit py-4 px-4 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
-            Save changes
-        </button> */}
 
-        </div>
-    </div>
+          <button 
+              type="button"
+              // onClick={() => handleSaveChanges(selectedConcert._id)}
+              onClick={handleSaveChanges}
+              className="primary_btn">
+              Save changes
+          </button>
+
+          </div>
+      </div>
     </div>
     )}
 
@@ -284,4 +300,4 @@ const closeEditModule = () => {
   );
 };
 
-export default Admin;
+export default AdminConcertsOverview;
