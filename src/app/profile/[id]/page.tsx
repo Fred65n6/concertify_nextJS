@@ -264,7 +264,7 @@ export default function UserProfile({params}: any) {
 
 
                     <div className="flex items-center justify-between mb-8 md:hidden">
-                        <p className="text-lg dark:text-black">
+                        <p className="text-sm dark:text-black">
                             Dark mode
                         </p>
 
