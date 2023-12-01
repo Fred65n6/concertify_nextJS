@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     const { email, password } = reqBody;
     console.log(reqBody);
 
-    //check if user exists
+    // -- Check if user exists
     const user = await User.findOne({ email });
     if (!user) {
       return NextResponse.json(
@@ -22,14 +22,14 @@ export async function POST(request: NextRequest) {
     }
     console.log("user exists");
 
-    //check if password is correct
+    // -- Check if password is correct
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
       return NextResponse.json({ error: "Invalid password" }, { status: 400 });
     }
     console.log(user);
 
-    // Check if the user is verified
+    // -- Check if the user is verified
     if (!user.isVerified) {
       console.log("user not verified");
       return NextResponse.json(
@@ -38,18 +38,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // ADMIN STUFF
+
     // Check if the user is an admin
     if (user.isAdmin) {
-      // This user is an admin; you can handle admin-specific tasks here
+      // Create token data for admin users
       const tokenDataAdmin = {
         id: user._id,
         username: user.username,
         email: user.email,
-        isAdmin: true, // You can include the admin flag in the token data
+        isAdmin: true, 
       };
 
-      // Create and set the token as before
+      // Create and set the adminToken
       const adminToken = await jwt.sign(tokenDataAdmin, process.env.TOKEN_SECRET!, {
         expiresIn: "1d",
       });
@@ -67,9 +67,9 @@ export async function POST(request: NextRequest) {
       return response;
     }
 
-    // ADMIN STUFF END
+    // If the user is not admin:
     else {
-      //create token data
+      // Create token data for normal users
       const tokenData = {
         id: user._id,
         username: user.username,
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
         isAdmin: false,
       };
 
-      //create token
+      // Create and set the token for normal users
       const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
         expiresIn: "1d",
       });
