@@ -7,6 +7,8 @@ import ThemeSwitcher from "../../components/switchTheme/page";
 import { RiEdit2Fill } from "react-icons/ri";
 import { CgClose } from "react-icons/cg";
 import { SlLogout } from "react-icons/sl";
+import Image from "next/image";
+import User from "@/models/userModel"
 
 interface Genre {
     _id: string;
@@ -18,15 +20,29 @@ interface Venue {
     venue_name: string;
 }
 
+interface Artist {
+    artist_name: string;
+    artist_dob: string;
+    artist_image: string;
+    artist_nation: string;
+    artist_full_namde: string;
+    artist_genre:string;
+}
+
+interface User {
+    _id: string;
+    isArtist: boolean;
+  }
 
 
 export default function UserProfile({params}: any) {
     const router = useRouter();
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState<string>("");
-
+    const [isArtist, setIsArtist] = useState(false);
     const [genres, setGenres] = useState<any[]>([]);
     const [venues, setVenues] = useState<any[]>([]);
+    const [artist, setArtist] = useState<any[]>([]);
 
 
     const [data, setData] = useState({
@@ -61,8 +77,14 @@ export default function UserProfile({params}: any) {
             const res = await axios.get("/api/users/cookieUser");
             console.log(res.data);
             const userData = res.data.data;
+            const adminData: User = res.data.data;
+            if (adminData.isArtist) {
+                setIsArtist(true)
+            } 
             setGenres(res.data.data.genres);
             setVenues(res.data.data.venues);
+            setArtist(res.data.data.artist);
+            
             setData({
                 username: userData.username,
                 userId: userData._id,
@@ -93,6 +115,12 @@ export default function UserProfile({params}: any) {
         UsernameModal?.classList.add("grid");
     };
 
+    const openEditArtistModal = () => {
+        const modal = document.getElementById("changeArtistNameModal");
+        modal?.classList.remove("hidden");
+        modal?.classList.add("grid");
+    };
+
     
     const closeUsernameModule = () => {
         const changeUsernameModule = document.getElementById("changeUsernameModal");
@@ -106,6 +134,11 @@ export default function UserProfile({params}: any) {
         modal?.classList.remove("grid");
       };
 
+      const closeEditArtistModal = () => {
+        const modal = document.getElementById("changeArtistNameModal");
+        modal?.classList.add("hidden");
+        modal?.classList.remove("grid");
+      };
 
     // -- CHANGE USERNAME
     const changeUsername = async () => {
@@ -136,6 +169,35 @@ export default function UserProfile({params}: any) {
         }
     };
 
+    // -- CHANGE USERNAME
+    const editArtist = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.post(
+                "/api/users/changeUsername",
+                user
+            );
+            console.log("username changed", response.data);
+            // showUsernameChangeMessage();
+        } catch (error: any) {
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.error
+            ) {
+                setError(error.response.data.error);
+            } else {
+                setError("An error occurred during signup.");
+            }
+            console.log("API signup failed", error);
+        } finally {
+            setLoading(false);
+            closeEditArtistModal();
+            window.location.reload();
+
+        }
+    };
+
     // -- CHANGE PASSWORD
     const changePassword = async () => {
         try {
@@ -145,6 +207,7 @@ export default function UserProfile({params}: any) {
                 user
             );
             console.log("password changed", response.data);
+            // showPasswordChangeMessage();
         } catch (error: any) {
             if (
                 error.response &&
@@ -161,6 +224,7 @@ export default function UserProfile({params}: any) {
             closeUsernameModule();
         }
     };
+
 
 
     return (
@@ -209,6 +273,46 @@ export default function UserProfile({params}: any) {
                 </div>
             </section>
 
+            {isArtist ? (
+                <section className="flex gap-4 mt-10 first-letter:">
+                <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">   
+                <h2 className="text-black font-bold text-xl">Artist info</h2>
+                <ul className="flex flex-col w-full md:grid-cols-4 gap-8">
+                        {artist.map((artist: any) => (
+                            <article
+                                className="w-full text-sm grid gap-4"
+                                key={artist.artist_name}>
+
+                                <p >Artist name: <br /><span className="text-base brand_purple">{artist.artist_name}</span></p>
+
+                                <p >Artist name: <br /><span className="text-base brand_purple">{artist.artist_full_name}</span></p>
+
+                                <p >Date of birth: <br /><span className="text-base brand_purple">{artist.artist_dob}</span></p>
+
+                                <p >Artist genre: <br /><span className="text-base brand_purple">{artist.artist_genre[0].genre_name}</span></p>
+
+                                <p >Artist nation: <br /><span className="text-base brand_purple">{artist.artist_nation}</span></p>
+
+                                <p >Artist description: <br /><span className="text-base brand_purple">{artist.artist_description}</span></p>
+                            
+                                <Image
+                                src={`https://concertify.s3.eu-central-1.amazonaws.com/${artist.artist_image}`}
+                                width={200}
+                                height={200}
+                                alt="artist image"
+                                className="h-auto w-40 pt-4"
+                            />
+                            </article>
+                        ))}
+
+                        <button className=""><a href="/edit-user-artist">Edit artist</a></button>
+                    </ul>
+                </div>
+                </section>
+                ) : (
+                    <div className=""></div>
+                )}
+
             {/* PREFERENCES */}
             <section className="flex flex-col md:flex-row gap-4 mt-10">
                 <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
@@ -249,7 +353,7 @@ export default function UserProfile({params}: any) {
             {/* LOG OUT LINK */}
             <button
                 onClick={logout}
-                className="w-full flex gap-2 items-center mt-12"
+                className="w-full flex gap-2 items-center mt-12 mb-12"
             >
                 <span className="text-[#5311BF] dark:text-white">Log out</span>
                 <SlLogout className="fill-[#5311BF] dark:fill-white"/>

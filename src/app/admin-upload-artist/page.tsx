@@ -11,6 +11,7 @@ interface Genre {
 
 const UploadForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
+    const [error, setError] = React.useState<string>("");
 
     const [file, setFile] = useState<File | null>(null);
     const [artistName, setArtistName] = useState("");
@@ -61,8 +62,9 @@ const UploadForm: React.FC = () => {
         });
 
         if (!res.ok) {
-            const errorText = await res.text();
+            const errorText = await res.json();
             console.error(errorText);
+            setError("Error uploading artist");
         }
 
         if (res.ok) {
@@ -84,6 +86,7 @@ const UploadForm: React.FC = () => {
 
     return (
         <div className="flex flex-col w-full md:w-4/6 gap-6 mb-24">
+            
             <Link
                 className="flex align-middle gap-2"
                 href="/admin-artists"
@@ -215,6 +218,7 @@ const UploadForm: React.FC = () => {
                     />
                 </div>
 
+                <div className="flex gap-2">
                 <button
                     className="primary_btn"
                     type="submit"
@@ -222,6 +226,9 @@ const UploadForm: React.FC = () => {
                 >
                     {loading ? "Processing" : "Confirm and upload artist"}
                 </button>
+                </div>
+
+                {error && <div className="text-red-500">{error}</div>}
             </form>
             <div id="artistUploadedMessage" className="hidden">
                 <h2 className="text-2xl">Artist uploaded successfully 🎉</h2>

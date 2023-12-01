@@ -68,6 +68,11 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({success: true});
     } catch (error) {
         console.error("Error uploading file to S3:", error);
-        return NextResponse.json({success: false});
+        return new NextResponse(JSON.stringify({ success: false, error: "Internal Server Error" }), {
+            status: 500,
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
     }
 }

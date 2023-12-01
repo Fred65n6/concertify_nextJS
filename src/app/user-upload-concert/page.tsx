@@ -1,0 +1,371 @@
+"use client";
+import React, {useState, useEffect} from "react";
+import { SlArrowLeft } from "react-icons/sl";
+import Link from "../../../node_modules/next/link";
+import axios from 'axios'
+
+interface Artist {
+    _id: string;
+    artist_name: string;
+    // Add more artist properties as needed
+}
+interface Venue {
+    _id: string;
+    venue_name: string;
+    // Add more artist properties as needed
+}
+interface Genre {
+    _id: string;
+    genre_name: string;
+    // Add more artist properties as needed
+}
+
+interface User {
+    _id: string;
+    isArtist: boolean;
+  }
+
+const UploadForm: React.FC = () => {
+    const [loading, setLoading] = useState(false);
+
+    const [file, setFile] = useState<File | null>(null);
+    const [concertName, setConcertName] = useState("");
+    const [concertDate, setConcertDate] = useState("");
+    const [concertStart, setConcertStart] = useState("");
+    const [concertDoors, setConcertDoors] = useState("");
+    const [concertDescription, setConcertDescription] = useState("");
+    const [concertVenueId, setConcertVenueId] = useState("");
+    const [concertVenueName, setConcertVenueName] = useState("");
+
+    const [isArtist, setIsArtist] = useState(false);
+    const [genres, setGenres] = useState<any[]>([]);
+    const [artist, setArtist] = useState<any[]>([]);
+
+    const [venues, setVenues] = useState<Venue[]>([]);
+    const [selectedVenue, setSelectedVenue] = useState<Venue | null>(null);
+    const [data, setData] = useState({
+        username: "unknown",
+        userId: null,
+        userEmail: "unknown"
+    });
+    const [user, setUser] = React.useState({
+        newpassword: "",
+        email: "",
+        password: "",
+        confirmpassword: "",
+        newUsername: "",
+    });
+
+    
+
+    useEffect(() => {
+        const fetchVenues = async () => {
+            try {
+                const response = await fetch("/api/data/venueData");
+                if (response.ok) {
+                    const data = await response.json();
+                    setVenues(data.data as Venue[]);
+                }
+            } catch (error) {
+                console.error("Error fetching artists: ", error);
+            }
+        };
+        const fetchGenres = async () => {
+            try {
+                const response = await fetch("/api/data/genreData");
+                if (response.ok) {
+                    const data = await response.json();
+                    setGenres(data.data as Genre[]);
+                }
+            } catch (error) {
+                console.error("Error fetching artists: ", error);
+            }
+        };
+        fetchVenues();
+        fetchGenres();
+        getUserDetails()
+    }, []);
+
+    const getUserDetails = async () => {
+        try {
+            const res = await axios.get("/api/users/cookieUser");
+            console.log(res.data);
+            const userData = res.data.data;
+            const adminData: User = res.data.data;
+            if (adminData.isArtist) {
+                setIsArtist(true)
+            } 
+            setGenres(res.data.data.genres);
+            setVenues(res.data.data.venues);
+            setArtist(res.data.data.artist);
+            
+            setData({
+                username: userData.username,
+                userId: userData._id,
+                userEmail: userData.email,
+            });
+        } catch (error: any) {
+            console.error(error.message);
+        }
+    };
+
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!file) return;
+        setLoading(true);
+
+        const data = new FormData();
+        data.set("file", file);
+        data.set("Concert_artist_name", artist[0].artist_name);
+        data.set("Concert_artist_id", artist[0]._id);
+        data.set("Concert_genre_id", artist[0].artist_genre[0].genre_id);
+        data.set("Concert_genre_name", artist[0].artist_genre[0].genre_name);
+        data.set("Concert_name", concertName);
+        data.set("Concert_date", concertDate);
+        data.set("Concert_start", concertStart);
+        data.set("Concert_doors", concertDoors);
+        data.set("Concert_description", concertDescription);
+        data.set("Concert_venue_id", selectedVenue!._id);
+        data.set("Concert_venue_name", selectedVenue!.venue_name);
+
+        const res = await fetch("/api/data/uploadConcert/", {
+            method: "POST",
+            body: data,
+        });
+
+        if (!res.ok) {
+            const errorText = await res.text();
+            console.error(errorText);
+        }
+
+        if (res.ok) {
+            setLoading(false);
+            showUploadMessage();
+        }
+    };
+
+    const showUploadMessage = () => {
+        const concertUploadedMessage = document.getElementById(
+            "concertUploadedMessage"
+        );
+        const uploadConcertForm = document.getElementById("uploadConcertForm");
+        concertUploadedMessage?.classList.remove("hidden");
+        concertUploadedMessage?.classList.add("grid"); // Add the "grid" class to make it visible
+        uploadConcertForm?.classList.add("hidden");
+        window.scrollTo(0, 0);
+    };
+
+    return (
+        <div className="flex flex-col w-full md:w-4/6 gap-6 mb-24">
+            <h1 className="font-bold text-4xl pb-4">Upload a concert</h1>
+            {artist.map((artist: any) => (
+            <form
+                id="uploadConcertForm"
+                className="flex flex-col gap-8 w-full"
+                onSubmit={onSubmit}
+            >
+
+                {/* Concert artist */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="artist_name">Concert artist <span className="brand_purple text-2xl">*</span></label>
+                    <input
+                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        id="artist_name"
+                        name="artist_name"
+                        value={artist.artist_name}
+                        readOnly
+                    />
+                </div>
+
+                <div className="hidden">
+                    <label htmlFor="artist_name">Concert artist <span className="brand_purple text-2xl">*</span></label>
+                    <input
+                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        id="artist_name"
+                        name="artist_name"
+                        value={artist._id}
+                        readOnly
+                    />
+                </div>
+
+                {/* Concert genre */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="artist_name">Concert genre <span className="brand_purple text-2xl">*</span></label>
+                    <input
+                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        id="artist_name"
+                        name="artist_name"
+                        value={artist.artist_genre[0].genre_name}
+                        readOnly
+                    />
+                </div>
+
+                <div className="hidden">
+                    <label htmlFor="artist_name">Concert genre <span className="brand_purple text-2xl">*</span></label>
+                    <input
+                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        id="artist_name"
+                        name="artist_name"
+                        value={artist.artist_genre[0].genre_id}
+                        readOnly
+                    />
+                </div>
+
+                {/* Concert name */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="Concert_name">Concert name</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        name="Concert_name"
+                        value={concertName}
+                        onChange={(e) => setConcertName(e.target.value)}
+                        placeholder="Concert Name"
+                    />
+                </div>
+
+                {/* Concert date */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="Concert_date">Concert date:</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="date"
+                        name="Concert_date"
+                        value={concertDate}
+                        onChange={(e) => setConcertDate(e.target.value)}
+                        placeholder="Concert Date"
+                    />
+                </div>
+
+                {/* Concert start time */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="Concert_start">Concert start time:</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="time"
+                        name="Concert_start"
+                        value={concertStart}
+                        onChange={(e) => setConcertStart(e.target.value)}
+                        placeholder="Concert start time"
+                    />
+                </div>
+
+                {/* Doors open */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="Concert_doors">Doors open at:</label>
+                    <input
+                        className="input_field"
+                        type="time"
+                        name="Concert_doors"
+                        value={concertDoors}
+                        onChange={(e) => setConcertDoors(e.target.value)}
+                        placeholder="Concert Doors"
+                    />
+                </div>
+
+                {/* Description */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="Concert_description">
+                        Concert description
+                    </label>
+                    <input
+                        className="input_field"
+                        type="text"
+                        name="Concert_description"
+                        value={concertDescription}
+                        onChange={(e) => setConcertDescription(e.target.value)}
+                        placeholder="Concert Description"
+                    />
+                </div>
+
+
+                {/* Select venue */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="Concert_venue">Venue</label>
+                    <select
+                        className="input_field"
+                        value={selectedVenue ? selectedVenue._id : ""}
+                        onChange={(e) =>
+                            setSelectedVenue(
+                                venues.find(
+                                    (venue) => venue._id === e.target.value
+                                ) || null
+                            )
+                        }
+                    >
+                        <option value="">Select a venue</option>
+                        {venues.map((venue) => (
+                            <option key={venue._id} value={venue._id}>
+                                {venue.venue_name}
+                            </option>
+                        ))}
+                    </select>
+                    <input
+                        readOnly={true}
+                        className="hidden"
+                        type="text"
+                        name="Concert_venue_name"
+                        value={selectedVenue ? selectedVenue.venue_name : ""}
+                        onChange={(e) => setConcertVenueName(e.target.value)}
+                        placeholder="venue Name"
+                    />
+                    <input
+                        readOnly={true}
+                        className="hidden"
+                        type="text"
+                        name="Concert_venue_id"
+                        value={selectedVenue ? selectedVenue._id : ""}
+                        onChange={(e) => setConcertVenueId(e.target.value)}
+                        placeholder="Venue ID"
+                    />
+                </div>
+
+               
+
+                {/* Upload image */}
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <input
+                        type="file"
+                        name="file"
+                        onChange={(e) => setFile(e.target.files?.[0] || null)}
+                    />
+                </div>
+
+                <button
+                    className="primary_btn mt-4"
+                    type="submit"
+                    value="upload"
+                >
+                    {loading ? "Processing" : "Confirm and upload concert"}
+                </button>
+                <p className="mt-8"><span className="brand_purple text-2xl">*</span> theese values can't be changed</p>
+
+            </form>
+            ))}
+
+            <div id="concertUploadedMessage" className="hidden">
+                <h2 className="text-2xl">Concert uploaded successfully 🎉</h2>
+                <div className="flex gap-4 mt-8">
+                    <a
+                        className="primary_btn"
+                        href="/admin-upload-concert"
+                    >
+                        Upload another
+                    </a>
+                    <a
+                        className="secondary_btn"
+                        href="/concerts"
+                    >
+                        See all concerts
+                    </a>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default UploadForm;

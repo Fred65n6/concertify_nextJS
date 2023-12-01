@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Link from "next/link";
 import { Progress } from "flowbite-react";
 import { CgClose } from "react-icons/cg";
 
@@ -94,6 +95,20 @@ export default function SignupPage() {
     if (signUpWindow) {
       signUpWindow.classList.add("hidden");
       signUpWindow.classList.remove("grid");
+    }
+  }
+
+  
+
+  const openSignup = () => {
+    const signUpWindow = document.getElementById("userSignup");
+    const userPick = document.getElementById("userPick");
+    if (signUpWindow) {
+      signUpWindow.classList.remove("hidden");
+      signUpWindow.classList.add("flex");
+      userPick?.classList.add("hidden")
+      userPick?.classList.remove("grid")
+
     }
   }
 
@@ -236,8 +251,29 @@ export default function SignupPage() {
     <>
       <div id="signup_module" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
         {/* SIGNUP FORM: STEP 1 */}
+
+
         <div id="signup_form">
-          <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
+
+
+          <div id="userPick" className="p-10 mx-4 md:m-0 grid gap-6 items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
+          <button
+                  type="button"
+                  onClick={closeSignupModule}
+                  className="cursor-pointer ml-[100%]"
+                  >
+                  <CgClose/>
+              </button>
+            <h2 className="grid m-auto text-2xl font-bold">Sign up</h2>
+            <h3 className="text-center">To get your personalised Concertify experience <br />Tell us who you are:</h3>
+            <div className="flex m-auto gap-4 mt-8">
+            <button onClick={openSignup} className="bg-slate-100 brand_gradient text-white dark:text-white px-6 py-4 rounded-full ">a concert lover</button>
+            <button className="bg-slate-100 brand_gradient text-white dark:text-white px-6 py-4 rounded-full  "><Link href="/artist-signup">a verified artist/band</Link></button>
+            </div>
+          </div>
+
+
+          <div id="userSignup" className="p-10 mx-4 md:m-0 hidden flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
           <button
                   type="button"
                   onClick={closeSignupModule}
@@ -257,7 +293,7 @@ export default function SignupPage() {
                 <div className="flex flex-col w-full gap-2">
                   <label htmlFor="username" className="w-fit text-sm dark:text-gray-100">Username</label>
                   <input
-                    className="input_field"
+                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                     type="text"
                     id="username"
                     value={user.username}
@@ -270,7 +306,7 @@ export default function SignupPage() {
                 <div className="flex flex-col w-full gap-2">
                   <label htmlFor="email" className="w-fit text-sm dark:text-gray-100">Email</label>
                   <input
-                    className="input_field"
+                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                     type="text"
                     id="email"
                     value={user.email}
@@ -284,7 +320,7 @@ export default function SignupPage() {
                   <div className="flex flex-col w-full gap-2">
                     <label htmlFor="password" className="w-fit text-sm dark:text-gray-100">Password</label>
                     <input
-                    className="input_field"
+                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                       type="password"
                       id="password"
                       value={user.password}
@@ -297,7 +333,7 @@ export default function SignupPage() {
                   <div className="flex flex-col w-full gap-2">
                     <label htmlFor="confirmpassword" className="w-fit text-sm dark:text-gray-100">Confirm password</label>
                     <input
-                      className="input_field"
+                      className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                       type="password"
                       id="confirmpassword"
                       value={user.confirmpassword}
@@ -338,7 +374,7 @@ export default function SignupPage() {
 
         {/* GENRE PREFERENCES: STEP 2 */}
         <div id="signup_preference_genres" className="m-auto hidden">
-          <div className="flex flex-col items-center justify-center p-8 bg-white w-fit m-8 md:w-[600px] lg:w-[800px] dark:bg-[#12082a] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] rounded-lg">
+          <div className="flex flex-col items-center justify-center p-8 bg-white w-fit m-8 md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <div className="w-[300px] lg:w-[500px] mb-10">
               <Progress color="purple" progress={33} />
             </div>
@@ -351,7 +387,7 @@ export default function SignupPage() {
 
             <form className="grid gap-2 w-full" action="" onSubmit={submitSelectedGenres}>
               <select
-                  className="bg-slate-100 border-0 px-8 py-4 rounded-full text-black"
+                  className="bg-slate-100 border-0 px-8 py-4 rounded-full"
                   id="genreSelect"
                   onChange={handleGenreChange}
                   value={selectedGenre}
@@ -369,10 +405,10 @@ export default function SignupPage() {
                 {selectedGenres.map((genre, index) => (
                   <div key={index} className="relative">
                     <input
-                      className="border-2 w-40 border-purple-700 brand_purple py-2 px-2 text-center rounded-full"
-                      type="text"
+                    className="border-2 w-40 border-purple-700 brand_purple py-2 px-2 text-center rounded-full"
+                    type="text"
                       value={genre}
-                      readOnly={true}
+                      readOnly 
                     />
                     <button
                       type="button"
@@ -389,7 +425,7 @@ export default function SignupPage() {
                 type="email"
                 id="emailInput"
                 value={user.email}
-                readOnly={true}
+                readOnly
                 className="hidden"
               />
 
@@ -403,12 +439,12 @@ export default function SignupPage() {
 
         {/* VENUE PREFERENCES: STEP 3 */}
         <div id="signup_preference_venues" className="m-auto hidden">
-          <div className="flex flex-col items-center justify-center p-8 bg-white min-h-fit w-fit m-8 md:w-[600px] lg:w-[800px] dark:bg-[#12082a] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] rounded-lg">
+          <div className="flex flex-col items-center justify-center p-8 bg-white min-h-fit w-fit m-8 md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <div className="w-[300px] lg:w-[500px] mb-10">
               <Progress color="purple" progress={66} />
             </div>
             <h1 className="mb-4 text-3xl font-bold text-center mx-6">
-              Which venues do your prefer?
+              Which venues are your prefer?
             </h1>
             <p className="mb-6 text-center mx-6">
               You can select as many as you like, to get your own personalized recommendations.
@@ -416,12 +452,12 @@ export default function SignupPage() {
             
             <form className="grid gap-2 w-full" action="" onSubmit={submitSelectedVenues}>
               <select
-                className="bg-slate-100 border-0 px-8 py-4 rounded-full text-black"
+                className="bg-slate-100 border-0 px-8 py-4 rounded-full"
                 id="venueSelect"
                 onChange={handleVenueChange}
                 value={selectedVenue}
               >
-                <option value="" className="text-black dark:text-black">My favourite venues are...</option>
+                <option value="">My favourite venues are...</option>
                 {venues.map((venue) => (
                   <option key={venue._id} value={venue.venue_name}>
                     {venue.venue_name}
@@ -438,7 +474,7 @@ export default function SignupPage() {
                       className="border-2 w-40 border-purple-700 brand_purple py-2 px-2 text-center rounded-full"
                       type="text"
                       value={venue}
-                      readOnly={true}
+                      readOnly
                     />
                     <button
                       type="button"
@@ -456,10 +492,10 @@ export default function SignupPage() {
                 id="emailInput"
                 value={user.email}
                 className="hidden"
-                readOnly={true}
+                readOnly
               />
       
-              <button type="submit" value="upload" className="primary_btn">
+              <button type="submit" value="upload" className="rounded-full bg-purple-700 m-auto w-fit h-fit py-4 px-12 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
                 Submit
               </button>
             </form>
@@ -468,7 +504,7 @@ export default function SignupPage() {
 
         {/* WELCOME ON BOARD MODAL */}
         <div id="welcome_modal" className="hidden">
-          <div className="flex flex-col items-center justify-center py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#12082a] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] rounded-lg">
+          <div className="flex flex-col items-center justify-center py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <img className="my-10" src="../concertify_logo.svg" alt="" />
             <h1 className="my-4 text-3xl font-bold">
               Welcome {user.username}!
@@ -482,7 +518,7 @@ export default function SignupPage() {
             </p>
             <button
               onClick={selectPrefferedGenres}
-              className="primary_btn"
+              className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white"
             >
               Get Started
             </button>
@@ -491,7 +527,7 @@ export default function SignupPage() {
 
          {/* SIGN UP FLOW COMPLETE MESSAGE */}
         <div id="signup_flow_complete" className="hidden">
-          <div className="flex flex-col items-center justify-center pt-4 p-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#12082a] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] rounded-lg">
+          <div className="flex flex-col items-center justify-center pt-4 p-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <div className="w-[300px] lg:w-[500px] mt-10">
               <Progress color="purple" progress={100} />
             </div>
@@ -504,7 +540,7 @@ export default function SignupPage() {
             <p className="mt-5 mb-10 text-center">
               After that, you are ready to explore the Concertify universe!
             </p>
-            <button onClick={closeSignup} className="primary_btn">Close</button>
+            <button onClick={closeSignup} className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white">Close</button>
           </div>
         </div>
       </div>
