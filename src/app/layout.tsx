@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
-    const showComponent = hasCookie('token') || hasCookie('adminToken');
+    const showComponent = hasCookie('token') || hasCookie('adminToken') || hasCookie('artistToken');
 
     return (
         <html lang="en">

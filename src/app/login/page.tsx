@@ -5,7 +5,6 @@ import axios from "axios";
 import Link from "next/link";
 import jwt from "jsonwebtoken"; // Import jsonwebtoken
 import { CgClose } from "react-icons/cg";
-import ButtonPrimary from "../components/buttonPrimary/page";
 
 
 export default function LoginPage() {
@@ -72,7 +71,7 @@ export default function LoginPage() {
 
     return (
         <>
-        <div id="login_module" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+        <div id="login_module" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
             <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
                 <button
                     type="button"

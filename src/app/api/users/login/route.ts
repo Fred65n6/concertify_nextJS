@@ -38,7 +38,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-
     // Check if the user is an admin
     if (user.isAdmin) {
       // Create token data for admin users
@@ -61,6 +60,33 @@ export async function POST(request: NextRequest) {
       });
 
       response.cookies.set("adminToken", adminToken, {
+        httpOnly: false,
+      });
+
+      return response;
+    }
+
+    else if (user.isArtist) {
+      // Create token data for admin users
+      const tokenDataArtist = {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        isArtist: true, 
+      };
+
+      // Create and set the adminToken
+      const artistToken = await jwt.sign(tokenDataArtist, process.env.TOKEN_SECRET!, {
+        expiresIn: "1d",
+      });
+
+      const response = NextResponse.json({
+        message: "Artist login successful",
+        success: true,
+        isArtist: true,
+      });
+
+      response.cookies.set("artistToken", artistToken, {
         httpOnly: false,
       });
 

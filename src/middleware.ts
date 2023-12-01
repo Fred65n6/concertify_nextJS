@@ -7,11 +7,17 @@ export function middleware(request: NextRequest) {
 
   const isAdminPath = path === '/admin-dashboard' || path === '/admin-artist' || path === '/admin-concerts' || path === '/admin-upload-artist' || path === '/admin-uploadconcert' || path === '/admin-upload-venue' || path === '/admin-venues';
   const isRestrictedPath = path === '/favourites' || path === '/profile' || path === '/profile/${data}';
+  const isArtistPath = path === '/user-upload-concert';
 
   const token = request.cookies.get('token')?.value || ''
   const adminToken = request.cookies.get('adminToken')?.value || ''
+  const artistToken = request.cookies.get('artistToken')?.value || ''
 
   if(isAdminPath && !adminToken) {
+    return NextResponse.redirect(new URL('/', request.nextUrl))
+  }
+
+  if(isArtistPath && !artistToken) {
     return NextResponse.redirect(new URL('/', request.nextUrl))
   }
 
@@ -36,7 +42,8 @@ export const config = {
     '/admin-upload-artist',
     '/admin-upload-venue',
     '/admin-upload-concert',
-    '/profile/${data}'
+    '/profile/${data}',
+    '/user-upload-concert'
   ]
 }
 
