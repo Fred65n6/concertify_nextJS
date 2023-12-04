@@ -24,8 +24,10 @@ const UploadForm: React.FC = () => {
         data.set("Venue_name", venueName);
         data.set("Venue_address", venueAddress);
         data.set("Venue_size", venueSize);
-        data.set("Venue_location ", venueLocation);
+        data.set("Venue_location", venueLocation);
         data.set("Venue_description", venueDescription);
+
+        console.log(data)
 
         const res = await fetch("/api/data/uploadVenue/", {
             method: "POST",
@@ -97,6 +99,7 @@ const UploadForm: React.FC = () => {
                     onChange={(e) => setVenueLocation(e.target.value)}
                     placeholder="Location (e.g. Copenhagen V)"
                 />
+
                 <input
                     className="input_field"
                     type="text"

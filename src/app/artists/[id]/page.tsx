@@ -100,6 +100,17 @@ export default function SingleArtist() {
                                 </p>
                             </li>
 
+                            <li className="flex gap-2">
+                                <SlMusicToneAlt
+                                    className="fill-gray-600 dark:fill-gray-200 w-5 h-5"
+                                    id="artist_genre"
+                                />
+                                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
+                                    Nation:{" "}
+                                    {selectedArtist.artist_nation}
+                                </p>
+                            </li>
+
                             {/* Date of birth*/}
                             <li className="flex gap-2">
                                 <PiBalloon

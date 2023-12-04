@@ -41,7 +41,7 @@ const UploadForm: React.FC = () => {
             try {
                 const data = new FormData();
                 data.set("file", file);
-                data.set("artist_name", artistName);
+                data.set("artist_name", artist[0].artist_name);
                 data.set("artist_full_name", artistFullName);
                 data.set("artist_description", artistDescription);
                 data.set("artist_email", artist[0].artist_email);
@@ -69,7 +69,7 @@ const UploadForm: React.FC = () => {
             try {
 
                 const data = new FormData();
-                data.set("artist_name", artistName);
+                data.set("artist_name", artist[0].artist_name);
                 data.set("artist_email", artist[0].artist_email);
                 data.set("artist_full_name", artistFullName);
                 data.set("artist_description", artistDescription);

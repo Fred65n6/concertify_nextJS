@@ -22,6 +22,12 @@ const artistSchema = new mongoose.Schema({
     artist_dob: {
         type: String,
     },
+    artist_description: {
+        type: String,
+    },
+    artist_email: {
+        type: String,
+    }
 });
 
 const Artist =

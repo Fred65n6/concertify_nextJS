@@ -12,17 +12,18 @@ export const SearchBar: React.FC<SearchInputProps> = ({setResults}) => {
     const [input, setInput] = useState<string>("");
 
     const fetchData = (value: string) => {
-        const apiUrl = "/api/data/artistData";
+        const apiUrl = "/api/data/concertData";
 
         fetch(apiUrl)
             .then((response) => response.json())
             .then((json) => {
-                const results = json.data.filter((artist: any) => {
+                const results = json.data.filter((concert: any) => {
                     return (
                         value &&
-                        artist &&
-                        artist.artist_name &&
-                        artist.artist_name.toLowerCase().includes(value)
+                        concert &&
+                        (concert.concert_name.toLowerCase().includes(value) ||
+                            concert.concert_artist.artist_name.toLowerCase().includes(value) ||
+                            concert.concert_venue.venue_name.toLowerCase().includes(value))
                     );
                 });
                 setResults(results);

@@ -8,14 +8,14 @@ export const SearchResultsList = ({ results}) => {
   };
 
   return (
-    <div className="absolute pl-4 w-72 h-52 overflow-scroll">
+    <div className="absolute p-4 h-52 overflow-scroll">
       {results.map((result, id) => (
-        <Link onClick={handleLinkClick} key={result._id} href={"/artists/" + result._id}>
-          <SearchResult
-            result={result.artist_name}
-            key={id}
-          />
-        </Link>
+       <Link onClick={handleLinkClick} key={result._id} href={"/concerts/" + result._id}>
+       <SearchResult
+         result={`${result.concert_name} - ${result.concert_artist.artist_name} - ${result.concert_venue.venue_name}`}
+         key={id}
+       />
+     </Link>
       ))}
     </div>
   );
