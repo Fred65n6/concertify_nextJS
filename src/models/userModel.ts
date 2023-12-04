@@ -50,6 +50,15 @@ const userSchema = new mongoose.Schema({
             venue_id: String,
         },
     ],
+    concerts: [
+        {
+            concert_name: String,
+            concert_venue_name: String,
+            concert_date: String,
+            concert_start: String,
+            concert_image: String,
+        }
+    ],
     artist: [
         {   
             artist_email: String,

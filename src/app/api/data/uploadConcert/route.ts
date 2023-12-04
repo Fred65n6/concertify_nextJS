@@ -3,6 +3,7 @@ import {NextRequest, NextResponse} from "next/server";
 import {v4 as uuidv4} from "uuid";
 import Concert from "@/models/concertModel";
 import AWS from "aws-sdk";
+import User from "@/models/userModel"
 
 // Load AWS credentials and configuration from environment variables
 AWS.config.update({
@@ -20,6 +21,7 @@ export async function POST(request: NextRequest) {
     const concertDate = data.get("Concert_date");
     const concertStart = data.get("Concert_start");
     const concertDoors = data.get("Concert_doors");
+    const concertArtistEmail = data.get("Concert_artist_email");
     const concertDescription = data.get("Concert_description");
 
     const concertGenre = {
@@ -73,13 +75,26 @@ export async function POST(request: NextRequest) {
             concert_genre: concertGenre,
             concert_artist: concertArtist,
             concert_venue: concertVenue,
+            concert_artist_email: concertArtistEmail,
         });
 
         const savedConcert = await newConcert.save();
         console.log(savedConcert);
 
-        // You can now use concertArtist and concertName for further processing, e.g., saving them to a database.
-
+        if (concertArtistEmail) {
+            const user = await User.findOne({email: concertArtistEmail});
+            console.log(user)
+    
+            const newConcert = {
+                concert_name: concertName,
+                concert_date: concertDescription,
+                concert_venue: concertVenue,
+                concert_start: concertStart,
+                artist_imeage: concertImage,
+            }
+            user.concerts.push(newConcert);
+            await user.save();
+        }
         return NextResponse.json({success: true});
     } catch (error) {
         console.error("Error uploading file to S3:", error);

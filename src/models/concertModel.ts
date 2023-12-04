@@ -22,6 +22,9 @@ const concertSchema = new mongoose.Schema({
     concert_description: {
         type: String,
     },
+    concert_artist_email: {
+        type: String,
+    },
     concert_start: {
         type: String,
     },

@@ -36,8 +36,6 @@ const AdminArtistsOverview: React.FC = () => {
     const [artistNation, setArtistNation] = useState("");
     const [artistDescription, setArtistDescription] = useState("");
     const [artistDob, setArtistDob] = useState("");
-    const [artistEmail, setArtistEmail] = useState("");
-    const [artist, setArtist] = useState<any[]>([]);
   
   useEffect(() => {
     fetchData();
@@ -357,18 +355,6 @@ const closeEditModule = () => {
                     />
                 </div>
 
-                {/* <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_description">Artist email</label>
-                    <input
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                    type="text"
-                    id="artist_email"
-                    name="artist_email"
-                    defaultValue={selectedArtist.artist_email}
-                    readOnly
-                    />
-                </div> */}
-
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="artist_full_name">Date of birth</label>
                     <input
@@ -414,31 +400,6 @@ const closeEditModule = () => {
                     {loading ? "Processing" : "Confirm"}
                 </button>
             </form>
-          
-          {/* <div className="flex flex-col gap-4 justify-center text-center items-center w-full">
-            <input
-                readOnly={true}
-                className="hidden"
-                type="text"
-                name="artist_id"
-                value={selectedArtist._id}
-                />
-
-              <div className="flex gap-2 items-center">
-                <label htmlFor="artist_name">Artist name</label>
-                <input
-                    readOnly={true}
-                    className="input_field"
-                    type="text"
-                    name="artist_name"
-                    value={selectedArtist.artist_name}
-                />
-              </div> */}
-
-            {/* <button 
-                className="primary_btn">
-                Save changes
-            </button> */}
           </div>
     </div>
     )}

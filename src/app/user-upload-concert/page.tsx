@@ -117,6 +117,7 @@ const UploadForm: React.FC = () => {
         const data = new FormData();
         data.set("file", file);
         data.set("Concert_artist_name", artist[0].artist_name);
+        data.set("Concert_artist_email", artist[0].artist_email);
         data.set("Concert_artist_id", artist[0]._id);
         data.set("Concert_genre_id", artist[0].artist_genre[0].genre_id);
         data.set("Concert_genre_name", artist[0].artist_genre[0].genre_name);
@@ -183,6 +184,18 @@ const UploadForm: React.FC = () => {
                     <input
                         className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
                         type="text"
+                        id="artist_email"
+                        name="artist_email"
+                        value={artist.artist_email}
+                        readOnly
+                    />
+                </div>
+
+                <div className="hidden">
+                    <label htmlFor="artist_name">Concert artist <span className="brand_purple text-2xl">*</span></label>
+                    <input
+                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
                         id="artist_name"
                         name="artist_name"
                         value={artist._id}
@@ -214,6 +227,7 @@ const UploadForm: React.FC = () => {
                         readOnly
                     />
                 </div>
+
 
                 {/* Concert name */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">

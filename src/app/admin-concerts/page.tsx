@@ -10,7 +10,6 @@ import {SlMusicToneAlt, SlArrowLeft, SlQuestion} from "react-icons/sl";
 import Link from "../../../node_modules/next/link";
 import { CgClose } from "react-icons/cg";
 
-
 interface Concert {
     _id: string;
     concert_artist: {
@@ -27,6 +26,7 @@ interface Concert {
     concert_image: string;
     concert_name: string;
     concert_start: string;
+    concert_artist_email: string;
     concert_genre: {
         genre_id: string;
         genre_name: string;
@@ -40,24 +40,31 @@ interface Concert {
     concert_doors: string;
 }
 
+
 const AdminConcertsOverview: React.FC = () => {
   const [concerts, setConcerts] = useState<Concert[]>([]);
   const [selectedConcert, setSelectedConcert] = useState<Concert | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [concertName, setConcertName] = useState("");
+  const [concertStart, setConcertStart] = useState("");
+  const [concertDate, setConcertDate] = useState("");
+  const [concertDescription, setConcertDescription] = useState("");
+  const [concertDoors, setConcertDoors] = useState("");
 
 
   useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const response = await axios.get("/api/data/concertData");
-            setConcerts(response.data.data);
-        } catch (error) {
-            console.error("Error fetching concerts:", error);
-        }
-    };
-
     fetchData();
 }, []);
 
+  const fetchData = async () => {
+    try {
+        const response = await axios.get("/api/data/concertData");
+        setConcerts(response.data.data);
+    } catch (error) {
+        console.error("Error fetching concerts:", error);
+    }
+  };
 
   const totalConcerts = concerts.length;
 
@@ -115,8 +122,69 @@ const handleDeleteConcert = async (concertId: string) => {
   }
 };
 
-const handleSaveChanges = async () => {
-  console.log("ok")
+const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setLoading(true);
+
+  if (file) {
+      try {
+          const data = new FormData();
+          data.set("file", file);
+          data.set("concert_name", concertName);
+          data.set("concert_date", concertDate);
+          data.set("concert_description", concertDescription);
+          data.set("concert_start", concertStart);
+          data.set("concert_doors", concertDoors);
+          data.set("concert_id", selectedConcert!.concert_artist_email);
+          data.set("concert_artist_email", selectedConcert!._id);
+
+          console.log(data)
+
+          const res = await fetch("/api/data/editConcert/", {
+              method: "POST",
+              body: data,
+          });
+
+          if (!res.ok) {
+              const errorText = await res.text();
+              console.error(errorText);
+          } else {
+              setLoading(false);
+          }
+      } catch (error) {
+          console.error("Error uploading artist with file: ", error);
+      }
+  } else {
+      try {
+
+          const data = new FormData();
+          data.set("concert_name", concertName);
+          data.set("concert_date", concertDate);
+          data.set("concert_description", concertDescription);
+          data.set("concert_start", concertStart);
+          data.set("concert_doors", concertDoors);
+          data.set("concert_artist_email", selectedConcert!.concert_artist_email);
+          data.set("concert_id", selectedConcert!._id);
+
+          console.log(data)
+      
+          const res = await fetch("/api/data/editConcert/", {
+              method: "POST",
+              body: data,
+          });
+
+          if (!res.ok) {
+              const errorText = await res.text();
+              console.error(errorText);
+          } else {
+              setLoading(false);
+              closeEditModule();
+              fetchData();
+          }
+      } catch (error) {
+          console.error("Error uploading concert without file: ", error);
+      }
+  }
 };
 
 
@@ -199,7 +267,7 @@ const handleSaveChanges = async () => {
 
     {/* DELETE CONCERT MODULE */}
       {selectedConcert && (
-      <div id="delete_concert_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+      <div id="delete_concert_id" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
         <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
           <button
               type="button"
@@ -228,72 +296,131 @@ const handleSaveChanges = async () => {
 
     {/* EDIT CONCERT MODULE */}
     {selectedConcert && (
-      <div id="edit_concert_id" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-      <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
-        <button
-          type="button"
-          onClick={closeEditModule}
-          className="cursor-pointer ml-[100%]"
-          >
-          <CgClose/>
-        </button>
-          
-        <div className="flex flex-col gap-4 w-full">
-          <h2 className="font-bold text-lg text-[#5311BF] dark:text-purple-500">Concert information</h2>
-          <input
-              readOnly={true}
-              className="hidden"
-              type="text"
-              name="concert_id"
-              value={selectedConcert._id}
-              />
-
-            <div className="flex gap-8 border-y-[1px] border-gray-100 dark:border-[#23124b] py-4">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="artist_name" className="text-sm">Artist</label>
-                <span className="font-bold">{selectedConcert.concert_artist.artist_name}</span>
-              </div> 
-              <div className="flex flex-col gap-2">
-                <label htmlFor="artist_name" className="text-sm">Venue</label>
-                <span className="font-bold">{selectedConcert.concert_venue.venue_name}</span>
-              </div>  
-            </div>
-
-              <div className="flex flex-col gap-2">
-                <label htmlFor="concert_name" className="text-sm">Concert name</label>
-                <input
-                    readOnly={true}
-                    className="input_field"
-                    type="text"
-                    name="concert_name"
-                    value={selectedConcert.concert_name}
-                />
+      <div id="edit_concert_id" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+              <div className="p-10 grid md_grid-cols-2 items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
+              <button
+              type="button"
+              onClick={closeEditModule}
+              className="cursor-pointer ml-[100%]"
+              >
+              <CgClose/>
+            </button>
+                <form
+                key={selectedConcert.concert_name}
+                id="uploadArtistForm"
+                onSubmit={onSubmit}
+                >
+                <div className="grid md:grid-cols-2 gap-8 w-full">
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="concert_name">Concert name</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        id="concert_name"
+                        name="concert_name"
+                        value={concertName}
+                        onChange={(e) => setConcertName(e.target.value)}
+                        placeholder={selectedConcert.concert_name}
+                    />
                 </div>
 
-              <div className="flex flex-col gap-2">
-                <label htmlFor="concert_description" className="text-sm dark:text-gray-100">Description</label>
-                <input
-                    readOnly={true}
-                    className="input_field"
-                    type="text"
-                    name="concert_description"
-                    value={selectedConcert.concert_description}
-                />
-              </div>
+                <div className="hidden">
+                    <label htmlFor="artist_name">Concert id</label>
+                    <input
+                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        id="concert_id"
+                        name="concert_id"
+                        value={selectedConcert._id}
+                        readOnly
+                    />
+                </div>
+
+                <div className="hidden">
+                    <label htmlFor="artist_name">Artist email</label>
+                    <input
+                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        id="concert_artist_email"
+                        name="concert_artist_email"
+                        value={selectedConcert.concert_artist_email}
+                        readOnly
+                    />
+                </div>
+
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="artist_full_name">Concert date</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="date"
+                        id="concert_date"
+                        name="concert_date"
+                        value={concertDate}
+                        onChange={(e) => setConcertDate(e.target.value)}
+                        placeholder={selectedConcert.concert_date}
+                    />
+                </div>
+
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="concert_name">Concert start time </label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="time"
+                        id="concert_start"
+                        name="concert_start"
+                        value={concertStart}
+                        onChange={(e) => setConcertStart(e.target.value)}
+                        placeholder={selectedConcert.concert_start}
+                    />
+                </div>
+
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="artist_full_name">Concert doors</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="time"
+                        id="Concert start"
+                        name="Concert start"
+                        value={concertDoors}
+                        onChange={(e) => setConcertDoors(e.target.value)}
+                        placeholder={selectedConcert.concert_doors}
+                    />
+                </div>
+
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="artist_full_name">Concert start time</label>
+                    <input
+                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        id="Concert description"
+                        name="Concert description"
+                        value={concertDescription}
+                        onChange={(e) => setConcertDescription(e.target.value)}
+                        placeholder={selectedConcert.concert_description}
+                    />
+                </div>
 
 
+                <div className="form-group flex flex-col gap-2">
+                    <label htmlFor="file">Change image</label>
+                    <input
+                        type="file"
+                        name="file"
+                        onChange={(e) => setFile(e.target.files?.[0] || null)}
+                    />
+                </div>
+                </div>
 
-          <button 
-              type="button"
-              // onClick={() => handleSaveChanges(selectedConcert._id)}
-              onClick={handleSaveChanges}
-              className="primary_btn">
-              Save changes
-          </button>
-
-          </div>
+                <button
+                    className="brand_gradient px-4 grid m-auto py-2 cursor-pointer mt-8 text-white rounded-full w-72"
+                    type="submit"
+                    value="upload"
+                >
+                    {loading ? "Processing" : "Confirm"}
+                </button>
+            </form>
+            </div>
       </div>
-    </div>
     )}
 
     </>
