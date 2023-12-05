@@ -7,17 +7,16 @@ import Image from "next/image";
 import Link from "next/link";
 import SignupPage from "@/app/signup/page";
 import LoginPage from "@/app/login/page";
-import {GiHearts} from "react-icons/gi";
-import {HiOutlineArrowRight} from "react-icons/hi";
+import { PiHeartStraightFill, PiHeartStraightLight } from "react-icons/pi";
 import BreadcrumbComp from "@/app/components/breadCrumbs/page";
+import { BsArrowRight } from "react-icons/bs";
 import {
     SlLocationPin,
     SlStar,
     SlMusicToneAlt,
     SlClock,
     SlControlPlay,
-    SlCalender,
-    SlHeart,
+    SlCalender
 } from "react-icons/sl";
 
 interface ConcertSingle {
@@ -210,7 +209,7 @@ const SingleConcert: React.FC = () => {
                     </figure>
                     <section>
 
-                        <div className="flex items-center md:justify-between">
+                        <div className="flex items-center justify-between py-8 md:py-0">
                             <h1 className="text-3xl font-bold my-2">
                                 {selectedConcert.concert_name}
                             </h1>
@@ -219,7 +218,7 @@ const SingleConcert: React.FC = () => {
                             <div className="">
                             {isInFavorites ?(
                                 <form
-                                    className="flex flex-col items-center gap-8 pb-12"
+                                    className="flex flex-col items-center gap-8"
                                     onSubmit={deleteFavourite}
                                 >
                                     <input
@@ -239,11 +238,11 @@ const SingleConcert: React.FC = () => {
 
                                     <button
                                         id="addedToFavourites"
-                                        className="flex items-center place-content-center rounded-full bg-purple-100 brand_purple w-10 h-10  hover:bg-purple-200"
+                                        className="flex items-center place-content-center rounded-full bg-purple-100 brand_purple w-10 h-10 hover:bg-purple-200"
                                         type="submit"
                                         value="upload"
                                     >
-                                        <GiHearts
+                                        <PiHeartStraightFill
                                             className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
                                             id="favourites"
                                         />
@@ -251,7 +250,7 @@ const SingleConcert: React.FC = () => {
                                 </form>
                             ) : (
                                 <form
-                                    className="flex flex-col items-center gap-8 pb-12"
+                                    className="flex flex-col items-center gap-8"
                                     onSubmit={onSubmit}
                                 >
                                     <input
@@ -305,7 +304,7 @@ const SingleConcert: React.FC = () => {
                                         type="submit"
                                         value="upload"
                                     >
-                                        <SlHeart
+                                        <PiHeartStraightLight
                                             className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
                                             id="favourites"
                                         />
@@ -398,21 +397,21 @@ const SingleConcert: React.FC = () => {
                             </li>
 
                             {/* See all concerts*/}
-                            <li className="flex gap-2">
+                            {/* <li className="flex gap-2">
                                 <Link className="flex gap-2" href="/concerts/">
-                                    <HiOutlineArrowRight
-                                        className="stroke-[#5311BF] dark:stroke-purple-500 w-5 h-5"
+                                    <BsArrowRight
+                                        className="fill-[#5311BF] dark:fill-purple-500 w-5 h-5"
                                         id="se_all"
                                     />
                                     <p className="text-[#5311BF] dark:text-purple-500 text-sm align-middle">
                                         See all concerts
                                     </p>
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
 
-                        <div className="border-t-[1px] border-[#979C9E] pt-4 mt-4">
-                            <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                        <div className="border-t-[1px] border-[#979C9E] dark:border-[#23124b] pt-4 mt-4">
+                            <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                                 {selectedConcert.concert_description}
                             </p>
                         </div>

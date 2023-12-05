@@ -107,12 +107,12 @@ const UploadForm: React.FC = () => {
     };
 
     const showUploadMessage = () => {
-        const artistUploadedMessage = document.getElementById(
-            "artistUploadedMessage"
+        const artistEditCompleteMessage = document.getElementById(
+            "artistEditCompleteMessage"
         );
         const uploadArtistForm = document.getElementById("uploadArtistForm");
-        artistUploadedMessage?.classList.remove("hidden");
-        artistUploadedMessage?.classList.add("grid");
+        artistEditCompleteMessage?.classList.remove("hidden");
+        artistEditCompleteMessage?.classList.add("grid");
         uploadArtistForm?.classList.add("hidden");
         window.scrollTo(0, 0);
     };
@@ -128,20 +128,22 @@ const UploadForm: React.FC = () => {
                 className="flex flex-col gap-8 w-full"
                 onSubmit={onSubmit}
                 >
+                <p className="mt-8 text-sm"><span className="brand_purple dark:text-purple-500">*</span> Theese values can not be changed.</p>
+
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_name">Artist name <span className="brand_purple text-2xl">*</span></label>
+                    <label htmlFor="artist_name" className="text-sm">Artist name <span className="brand_purple">*</span></label>
                     <input
                         className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
                         type="text"
                         id="artist_name"
                         name="artist_name"
                         value={artist.artist_name}
-                        readOnly
+                        readOnly={true}
                     />
                 </div>
 
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_name">Artist genre <span className="brand_purple text-2xl">*</span></label>
+                    <label htmlFor="artist_name" className="text-sm">Artist genre <span className="brand_purple">*</span></label>
                     <input
                         className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
                         type="text"
@@ -153,7 +155,7 @@ const UploadForm: React.FC = () => {
                 </div>
 
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_full_name">Full name</label>
+                    <label htmlFor="artist_full_name" className="text-sm">Full name</label>
                     <input
                         className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         type="text"
@@ -166,7 +168,7 @@ const UploadForm: React.FC = () => {
                 </div>
 
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_description">Description</label>
+                    <label htmlFor="artist_description" className="text-sm">Description</label>
                     <input
                         className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         type="text"
@@ -179,7 +181,7 @@ const UploadForm: React.FC = () => {
                 </div>
 
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_description">Artist email</label>
+                    <label htmlFor="artist_description" className="text-sm">Artist email</label>
                     <input
                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                     type="text"
@@ -191,7 +193,7 @@ const UploadForm: React.FC = () => {
                 </div>
 
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_full_name">Date of birth</label>
+                    <label htmlFor="artist_full_name" className="text-sm">Date of birth</label>
                     <input
                         className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         type="date"
@@ -206,7 +208,7 @@ const UploadForm: React.FC = () => {
                 
 
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_nation">Artist nationality</label>
+                    <label htmlFor="artist_nation" className="text-sm">Artist nationality</label>
                     <input
                         className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         type="text"
@@ -218,7 +220,7 @@ const UploadForm: React.FC = () => {
                 </div>
 
                 <div className="form-group flex flex-col gap-2">
-                    <label htmlFor="file">Upload image</label>
+                    <label htmlFor="file" className="text-sm">Upload image</label>
                     <input
                         type="file"
                         name="file"
@@ -233,15 +235,12 @@ const UploadForm: React.FC = () => {
                 >
                     {loading ? "Processing" : "Confirm"}
                 </button>
-                <p className="mt-8"><span className="brand_purple text-2xl">*</span> theese values can't be changed</p>
             </form>
             ))}
 
             
-            <div id="artistUploadedMessage" className="hidden">
-                <h2 className="text-2xl">Artist editted successfully 🎉</h2>
-                <div className="flex gap-4 mt-8">
-                </div>
+            <div id="artistEditCompleteMessage" className="hidden">
+                <h2 className="text-2xl">Your artist information was successfully changed 🎉</h2>
             </div>
         </div>
     );

@@ -9,17 +9,7 @@ import VenueCard from "@/app/components/venueCard/page";
 import LoginPage from "@/app/login/page";
 import SignupPage from "@/app/signup/page";
 import BreadcrumbComp from "@/app/components/breadCrumbs/page";
-
-import {
-  SlLocationPin,
-  SlHeart,
-  SlCalender,
-  SlSocialInstagram,
-  SlSocialFacebook,
-  SlSocialTwitter,
-  SlSocialYoutube,
-  SlUserFollowing,
-} from "react-icons/sl";
+import {SlLocationPin, SlCalender, SlUserFollowing} from "react-icons/sl";
 
 interface VenueSingle {
   _id: string;
@@ -61,7 +51,7 @@ export default function SingleVenue() {
   }, [id, venues]);
 
   return (
-    <div className="pt-8">
+    <div className="py-8">
       <LoginPage />
       <SignupPage />
       <BreadcrumbComp />
@@ -76,24 +66,9 @@ export default function SingleVenue() {
               className="h-full object-cover w-full rounded-lg"
             />
           </figure>
-          <section>
-            <div className="flex justify-between">
-              <div className="">
-                <h1 className="text-3xl font-bold p-2">
-                  {selectedVenue.venue_name}
-                </h1>
-              </div>
-              <div>
-                <button className="flex items-center place-content-center rounded-full bg-purple-100 brand_purple w-32 py-3 hover:bg-purple-200">
-                  <SlHeart
-                    className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
-                    id="favourites"
-                  />
-                  <span>Add</span>
-                </button>
-              </div>
-            </div>
 
+          <section className="venue_information">
+          <h1 className="text-3xl font-bold p-2">{selectedVenue.venue_name}</h1>
             <ul className="flex flex-col gap-4 pt-4">
               {/* Location */}
               <li className="flex gap-2">
@@ -101,7 +76,7 @@ export default function SingleVenue() {
                   className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
                   id="favourites"
                 />
-                <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                   {selectedVenue.venue_address}, {selectedVenue.venue_location}
                 </p>
               </li>
@@ -111,7 +86,7 @@ export default function SingleVenue() {
                   className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5"
                   id="venue_size"
                 />
-                <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                   {selectedVenue.venue_size}
                 </p>
               </li>
@@ -121,57 +96,41 @@ export default function SingleVenue() {
                   className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5"
                   id="date"
                 />
-                <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                   What is on today?
                 </p>
                 <hr />
                 {/* her skal der fetches data om hvilke koncerter, der spiller */}
               </li>
             </ul>
-            <div className="border-t-[1px] border-[#979C9E] pt-4 mt-4">
-              <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
+            <div className="border-t-[1px] border-[#979C9E] dark:border-[#23124b] pt-4 mt-4">
+              <p className="text-gray-600 text-sm dark:text-gray-300 align-middle">
                 {selectedVenue.venue_description}
               </p>
-              <div className="flex pt-5 gap-4">
-                <SlSocialInstagram
-                  className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5"
-                  id="instagram"
-                />
-                <SlSocialTwitter
-                  className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5"
-                  id="twitter"
-                />
-                <SlSocialFacebook
-                  className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5"
-                  id="facebook"
-                />
-                <SlSocialYoutube
-                  className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5"
-                  id="youtube"
-                />
-              </div>
             </div>
           </section>
         </div>
       ) : (
         <p>Loading...</p>
       )}
+
       {/* Event schedule section */}
       {selectedVenue ? (
         <section className="pb-12">
           <h2 className="text-2xl font-bold">
-            Event Schedule at {selectedVenue.venue_name}
+            Event Schedule at <span className="brand_purple dark:text-purple-500">{selectedVenue.venue_name}</span>
           </h2>
           <div></div>
         </section>
       ) : (
         <p>Loading...</p>
       )}
+      
       {/* Other venues section */}
       {selectedVenue ? (
         <section className="">
           <h2 className="text-2xl font-bold">
-            Other venues you need to experience
+            <span className="brand_purple dark:text-purple-500">Other venues</span> you need to experience
           </h2>
           <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
             <VenueCard />

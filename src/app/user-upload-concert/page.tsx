@@ -157,7 +157,7 @@ const UploadForm: React.FC = () => {
 
     return (
         <div className="flex flex-col w-full md:w-4/6 gap-6 mb-24">
-            <h1 className="font-bold text-4xl pb-4">Upload a concert</h1>
+            <h1 className="dark:text-white font-bold text-3xl">Upload a concert / <span className="text-[#5311BF] dark:text-purple-500">{data.username}</span></h1>
             {artist.map((artist: any) => (
             <form
                 id="uploadConcertForm"
@@ -166,8 +166,9 @@ const UploadForm: React.FC = () => {
             >
 
                 {/* Concert artist */}
+                <p className="mt-8 text-sm"><span className="brand_purple dark:text-purple-500">*</span> Theese values can not be changed.</p>
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_name">Concert artist <span className="brand_purple text-2xl">*</span></label>
+                    <label htmlFor="artist_name" className="text-sm">Concert artist <span className="brand_purple dark:text-purple-500">*</span></label>
                     <input
                         className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
                         type="text"
@@ -179,7 +180,7 @@ const UploadForm: React.FC = () => {
                 </div>
 
                 <div className="hidden">
-                    <label htmlFor="artist_name">Concert artist <span className="brand_purple text-2xl">*</span></label>
+                    <label htmlFor="artist_name" className="text-sm">Concert artist <span className="brand_purple text-2xl">*</span></label>
                     <input
                         className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
                         type="text"
@@ -192,24 +193,24 @@ const UploadForm: React.FC = () => {
 
                 {/* Concert genre */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_name">Concert genre <span className="brand_purple text-2xl">*</span></label>
+                    <label htmlFor="genre" className="text-sm">Concert genre <span className="brand_purple dark:text-purple-500">*</span></label>
                     <input
                         className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
                         type="text"
-                        id="artist_name"
-                        name="artist_name"
+                        id="genre"
+                        name="genre"
                         value={artist.artist_genre[0].genre_name}
                         readOnly
                     />
                 </div>
 
                 <div className="hidden">
-                    <label htmlFor="artist_name">Concert genre <span className="brand_purple text-2xl">*</span></label>
+                    <label htmlFor="artist_name">Concert genre <span className="brand_purple dark:text-purple-500">*</span></label>
                     <input
                         className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
                         type="text"
-                        id="artist_name"
-                        name="artist_name"
+                        id="genre"
+                        name="genre"
                         value={artist.artist_genre[0].genre_id}
                         readOnly
                     />
@@ -217,7 +218,7 @@ const UploadForm: React.FC = () => {
 
                 {/* Concert name */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="Concert_name">Concert name</label>
+                    <label htmlFor="Concert_name" className="text-sm">Concert name</label>
                     <input
                         className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         type="text"
@@ -230,7 +231,7 @@ const UploadForm: React.FC = () => {
 
                 {/* Concert date */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="Concert_date">Concert date:</label>
+                    <label htmlFor="Concert_date" className="text-sm">Concert date:</label>
                     <input
                         className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         type="date"
@@ -243,7 +244,7 @@ const UploadForm: React.FC = () => {
 
                 {/* Concert start time */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="Concert_start">Concert start time:</label>
+                    <label htmlFor="Concert_start" className="text-sm">Concert start time:</label>
                     <input
                         className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         type="time"
@@ -256,7 +257,7 @@ const UploadForm: React.FC = () => {
 
                 {/* Doors open */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="Concert_doors">Doors open at:</label>
+                    <label htmlFor="Concert_doors" className="text-sm">Doors open at:</label>
                     <input
                         className="input_field"
                         type="time"
@@ -269,7 +270,7 @@ const UploadForm: React.FC = () => {
 
                 {/* Description */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="Concert_description">
+                    <label htmlFor="Concert_description" className="text-sm">
                         Concert description
                     </label>
                     <input
@@ -285,7 +286,7 @@ const UploadForm: React.FC = () => {
 
                 {/* Select venue */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="Concert_venue">Venue</label>
+                    <label htmlFor="Concert_venue" className="text-sm">Venue</label>
                     <select
                         className="input_field"
                         value={selectedVenue ? selectedVenue._id : ""}
@@ -328,6 +329,7 @@ const UploadForm: React.FC = () => {
 
                 {/* Upload image */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="file" className="text-sm">Upload image</label>
                     <input
                         type="file"
                         name="file"
@@ -342,8 +344,6 @@ const UploadForm: React.FC = () => {
                 >
                     {loading ? "Processing" : "Confirm and upload concert"}
                 </button>
-                <p className="mt-8"><span className="brand_purple text-2xl">*</span> theese values can't be changed</p>
-
             </form>
             ))}
 

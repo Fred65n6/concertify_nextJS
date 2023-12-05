@@ -5,7 +5,7 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import {SlStar, SlMusicToneAlt} from "react-icons/sl";
+import {SlStar, SlMusicToneAlt, SlLocationPin, SlGlobeAlt} from "react-icons/sl";
 import {HiOutlineArrowRight} from "react-icons/hi";
 import {PiBalloon} from "react-icons/pi";
 import LoginPage from "@/app/login/page";
@@ -101,12 +101,11 @@ export default function SingleArtist() {
                             </li>
 
                             <li className="flex gap-2">
-                                <SlMusicToneAlt
-                                    className="fill-gray-600 dark:fill-gray-200 w-5 h-5"
-                                    id="artist_genre"
+                                <SlGlobeAlt className="fill-gray-600 dark:fill-gray-200 w-5 h-5"
+                                    id="artist_nation"
                                 />
                                 <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
-                                    Nation:{" "}
+                                    Nationality:{" "}
                                     {selectedArtist.artist_nation}
                                 </p>
                             </li>
@@ -115,7 +114,7 @@ export default function SingleArtist() {
                             <li className="flex gap-2">
                                 <PiBalloon
                                     className="fill-gray-600 dark:fill-gray-200 w-5 h-5"
-                                    id="dob"
+                                    id="artist_dob"
                                 />
                                 <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
                                     Born:{" "}
@@ -126,7 +125,7 @@ export default function SingleArtist() {
                             </li>
 
                             {/* See all concerts*/}
-                            <li className="flex gap-2">
+                            {/* <li className="flex gap-2">
                                 <Link className="flex gap-2" href="/concerts/">
                                     <HiOutlineArrowRight
                                         className="stroke-[#5311BF] dark:stroke-purple-500 w-5 h-5"
@@ -136,10 +135,10 @@ export default function SingleArtist() {
                                         See all concerts
                                     </p>
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
 
-                        <div className="border-t-[1px] border-[#979C9E] pt-4 mt-4">
+                        <div className="border-t-[1px] border-[#979C9E] dark:border-[#23124b] pt-4 mt-4">
                             <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                                 {selectedArtist.artist_description}
                             </p>

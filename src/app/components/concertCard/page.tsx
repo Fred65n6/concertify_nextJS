@@ -63,7 +63,7 @@ const ConcertCard: React.FC = () => {
   return (
     <>
       {concertsToDisplay?.map((concert) => (
-        <article className="flex-shrink-0 grid pb-8" key={concert._id}>
+        <article className="flex-shrink-0 grid md:pt-8 pb-8" key={concert._id}>
           <Link href={"/concerts/" + concert._id} key={concert._id}>
             <Image
               src={`https://concertify.s3.eu-central-1.amazonaws.com/${concert.concert_image}`}
@@ -84,7 +84,7 @@ const ConcertCard: React.FC = () => {
               : "Unknown concert_name"}
           </h4>
 
-          <p className="text-black text-sm dark:text-gray-100">
+          <p className="text-black text-sm dark:text-gray-400 pt-2">
             <span>
               {concert.concert_venue?.venue_name},{" "}
             </span>

@@ -93,7 +93,7 @@ const UploadForm: React.FC = () => {
             >
             <SlArrowLeft
                 className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4 pt-1"
-                id="arrow_right"
+                id="arrow_left"
                 />
                 Back to artists overview
             </Link>
