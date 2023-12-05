@@ -52,6 +52,7 @@ const userSchema = new mongoose.Schema({
     ],
     concerts: [
         {
+            concert_id: String,
             concert_name: String,
             concert_venue_name: String,
             concert_date: String,
@@ -61,6 +62,7 @@ const userSchema = new mongoose.Schema({
     ],
     artist: [
         {   
+            artist_id: String,
             artist_email: String,
             artist_description: String,
             artist_name: String,

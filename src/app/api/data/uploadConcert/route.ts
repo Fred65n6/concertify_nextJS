@@ -12,11 +12,16 @@ AWS.config.update({
     region: process.env.REGION,
 });
 
+const generateUUID = () => {
+    return uuidv4();
+  };
+
 const s3 = new AWS.S3();
 
 export async function POST(request: NextRequest) {
     const data = await request.formData();
     const file = data.get("file") as File;
+    const concertId = generateUUID();
     const concertName = data.get("Concert_name");
     const concertDate = data.get("Concert_date");
     const concertStart = data.get("Concert_start");
@@ -65,6 +70,7 @@ export async function POST(request: NextRequest) {
         const concertImage = `concert_images/${newFileName}`;
 
         const newConcert = new Concert({
+            concert_id: concertId,
             concert_name: concertName,
             concer_date: concertDate,
             concert_start: concertStart,
@@ -86,6 +92,7 @@ export async function POST(request: NextRequest) {
             console.log(user)
     
             const newConcert = {
+                concert_id: concertId,
                 concert_name: concertName,
                 concert_date: concertDescription,
                 concert_venue: concertVenue,

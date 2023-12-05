@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   const artistDescription = data.get("artist_description");
   const artistDob = data.get("artist_dob");
   const artistEmail = data.get("artist_email");
-  const artistId = data.get("artist_id")
+  const artistId = data.get("artist_id");
 
   try {
     let artistImage = "";
@@ -45,95 +45,53 @@ export async function POST(request: NextRequest) {
       await s3.upload(params).promise();
 
       artistImage = `artist_images/${newFileName}`;
-    } 
-
-    if (artistId) {
-
-      const artist = await Artist.findOne({ _id: artistId });
-
-      const user = await User.findOne({ email: artistEmail });
-
-      if (user) {
-        console.log("this is the user artist fetched from the artistEmail", user);
-      
-        const artistToUpdate = user.artist[0]; 
-      
-        if (artistToUpdate) {
-          if (artistName) artistToUpdate.artist_name = artistName;
-          if (artistFullName) artistToUpdate.artist_full_name = artistFullName;
-          if (artistDescription) artistToUpdate.artist_description = artistDescription;
-          if (artistNationality) artistToUpdate.artist_nation = artistNationality;
-          if (artistImage) artistToUpdate.artist_image = artistImage;
-          if (artistDob) artistToUpdate.artist_dob = artistDob;
-      
-          await user.save();
-        }
-      }
-    
-      if (artist) {
-        console.log("this is the artist fetched from the id" + artist);
-    
-        if (artistName) artist.artist_name = artistName;
-        if (artistFullName) artist.artist_full_name = artistFullName;
-        if (artistDescription) artist.artist_description = artistDescription;
-        if (artistNationality) artist.artist_nation = artistNationality;
-        if (artistImage) artist.artist_image = artistImage;
-        if (artistDob) artist.artist_dob = artistDob;
-      
-        await artist.save();
-  
-      }
-
-      return NextResponse.json({ success: true });
     }
-    
+
+    const artist = await Artist.findOne({ artist_id: artistId });
+
+    if (artist) {
+      console.log("this is the artist fetched from the id", artist);
+
+      if (artistName) artist.artist_name = artistName;
+      if (artistFullName) artist.artist_full_name = artistFullName;
+      if (artistDescription) artist.artist_description = artistDescription;
+      if (artistNationality) artist.artist_nation = artistNationality;
+      if (artistImage) artist.artist_image = artistImage;
+      if (artistDob) artist.artist_dob = artistDob;
+
+      await artist.save();
+    }
 
     if (artistEmail) {
 
-      console.log("This is " + artistEmail)
+    const user = await User.findOne({ email: artistEmail });
 
-      const artist = await Artist.findOne({ artist_name: artistName });
+    if (user) {
+      console.log("this is the user artist fetched from the artistEmail", user);
 
-      const user = await User.findOne({ email: artistEmail });
-    
-      if (artist) {
-        console.log("this is the artist fetched from the artistName", artist);
+      const artistToUpdate = user.artist[0];
 
-        if (artistFullName) artist.artist_full_name = artistFullName;
-        if (artistDescription) artist.artist_description = artistDescription;
-        if (artistNationality) artist.artist_nation = artistNationality;
-        if (artistImage) artist.artist_image = artistImage;
-        if (artistDob) artist.artist_dob = artistDob;
-      
-        await artist.save();
+      if (artistToUpdate) {
+        if (artistName) artistToUpdate.artist_name = artistName;
+        if (artistFullName) artistToUpdate.artist_full_name = artistFullName;
+        if (artistDescription) artistToUpdate.artist_description = artistDescription;
+        if (artistNationality) artistToUpdate.artist_nation = artistNationality;
+        if (artistImage) artistToUpdate.artist_image = artistImage;
+        if (artistDob) artistToUpdate.artist_dob = artistDob;
+
+        await user.save();
       }
-
-      if (user) {
-        console.log("this is the user artist fetched from the artistEmail", user);
-      
-        const artistToUpdate = user.artist[0]; // Assuming there is only one artist in the array
-      
-        if (artistToUpdate) {
-          // Check if each field is present in the form data before updating
-          if (artistFullName) artistToUpdate.artist_full_name = artistFullName;
-          if (artistDescription) artistToUpdate.artist_description = artistDescription;
-          if (artistNationality) artistToUpdate.artist_nation = artistNationality;
-          if (artistImage) artistToUpdate.artist_image = artistImage;
-          if (artistDob) artistToUpdate.artist_dob = artistDob;
-      
-          await user.save();
-        }
-      }
-      
-    return NextResponse.json({ success: true });
-
-    } else {
-      // Handle the case where the user is not found
-      console.error(`User with email ${artistEmail} not found`);
-      return NextResponse.json({ success: false });
     }
+  }
+
+
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error uploading file to S3:", error);
     return NextResponse.json({ success: false });
   }
 }
+
+    
+
+   

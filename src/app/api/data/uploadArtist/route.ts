@@ -12,11 +12,16 @@ AWS.config.update({
     region: process.env.REGION,
 });
 
+const generateUUID = () => {
+    return uuidv4();
+  };
+
 const s3 = new AWS.S3();
 
 export async function POST(request: NextRequest) {
     const data = await request.formData();
     const file = data.get("file") as File;
+    const artistId = generateUUID();
     const artistName = data.get("artist_name");
     const artistFullName = data.get("artist_full_name");
     const artistNationality = data.get("artist_nation");
@@ -55,6 +60,7 @@ export async function POST(request: NextRequest) {
         const artistImage = `artist_images/${newFileName}`;
 
         const newArtist = new Artist({
+            artist_id: artistId,
             artist_name: artistName,
             artist_full_name: artistFullName,
             artist_description: artistDescription,
@@ -70,6 +76,7 @@ export async function POST(request: NextRequest) {
             console.log(user)
     
             const newArtist = {
+                artist_id: artistId,
                 artist_name: artistName,
                 artist_full_name: artistFullName,
                 artist_description: artistDescription,

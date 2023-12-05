@@ -10,7 +10,8 @@ import Link from "../../../node_modules/next/link";
 import { CgClose } from "react-icons/cg";
 
 interface Artist {
-  _id: string;
+
+  artist_id: string;
   artist_name: string;
   artist_full_name: string;
   artist_nation: string;
@@ -95,7 +96,7 @@ const closeEditModule = () => {
         const result = await res.json();
         if (result.success) {
           console.log(result.message);
-          setArtists(elm => elm.filter(artist => artist._id !== artistId));
+          setArtists(elm => elm.filter(artist => artist.artist_id !== artistId));
           closeDeleteModule();
         } else {
           console.error(result.error);
@@ -115,7 +116,7 @@ const closeEditModule = () => {
         try {
             const data = new FormData();
             data.set("file", file);
-            data.set("artist_id", selectedArtist!._id);
+            data.set("artist_id", selectedArtist!.artist_id);
             data.set("artist_name", artistName);
             data.set("artist_full_name", artistFullName);
             data.set("artist_description", artistDescription);
@@ -143,7 +144,7 @@ const closeEditModule = () => {
         try {
 
             const data = new FormData();
-            data.set("artist_id", selectedArtist!._id);
+            data.set("artist_id", selectedArtist!.artist_id);
             data.set("artist_name", artistName);
             data.set("artist_full_name", artistFullName);
             data.set("artist_description", artistDescription);
@@ -212,8 +213,8 @@ const closeEditModule = () => {
             </thead>
             <tbody>
               {artists?.map((artist) => (
-                <tr key={artist._id} className="flex justify-start w-full mb-2">
-                  <td className="text-left w-1/2">{artist._id}</td>
+                <tr key={artist.artist_id} className="flex justify-start w-full mb-2">
+                  <td className="text-left w-1/2">{artist.artist_id}</td>
                   <td className="text-left w-1/2">{artist.artist_name}</td>
                   <td className="text-left w-1/2">{artist.artist_full_name}</td>
                   <td className="text-right w-1/12">
@@ -265,7 +266,7 @@ const closeEditModule = () => {
             </p>
             <button 
                 type="button"
-                onClick={() => handleDeleteArtist(selectedArtist._id)}
+                onClick={() => handleDeleteArtist(selectedArtist.artist_id)}
                 className="primary_btn">
                 Yes I am sure
             </button>
@@ -312,7 +313,7 @@ const closeEditModule = () => {
                         type="text"
                         id="artist_id"
                         name="artist_id"
-                        value={selectedArtist._id}
+                        value={selectedArtist.artist_id}
                         readOnly
                     />
                 </div>

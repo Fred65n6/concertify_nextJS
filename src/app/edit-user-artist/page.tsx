@@ -20,14 +20,11 @@ interface Artist {
 const UploadForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [file, setFile] = useState<File | null>(null);
-    const [artistName, setArtistName] = useState("");
     const [artistFullName, setArtistFullName] = useState("");
     const [artistNation, setArtistNation] = useState("");
     const [artistDescription, setArtistDescription] = useState("");
     const [artistDob, setArtistDob] = useState("");
-    const [artistEmail, setArtistEmail] = useState("");
     const [artist, setArtist] = useState<any[]>([]);
-
 
     useEffect(() => {
         getUserDetails();
@@ -42,6 +39,7 @@ const UploadForm: React.FC = () => {
                 const data = new FormData();
                 data.set("file", file);
                 data.set("artist_name", artist[0].artist_name);
+                data.set("artist_id", artist[0].artist_id);
                 data.set("artist_full_name", artistFullName);
                 data.set("artist_description", artistDescription);
                 data.set("artist_email", artist[0].artist_email);
@@ -71,6 +69,7 @@ const UploadForm: React.FC = () => {
                 const data = new FormData();
                 data.set("artist_name", artist[0].artist_name);
                 data.set("artist_email", artist[0].artist_email);
+                data.set("artist_id", artist[0].artist_id);
                 data.set("artist_full_name", artistFullName);
                 data.set("artist_description", artistDescription);
                 data.set("artist_dob", artistDob);
@@ -136,6 +135,18 @@ const UploadForm: React.FC = () => {
                         id="artist_name"
                         name="artist_name"
                         value={artist.artist_name}
+                        readOnly
+                    />
+                </div>
+
+                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                    <label htmlFor="artist_name">Artist name <span className="brand_purple text-2xl">*</span></label>
+                    <input
+                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                        type="text"
+                        id="artist_name"
+                        name="artist_name"
+                        value={artist.artist_id}
                         readOnly
                     />
                 </div>

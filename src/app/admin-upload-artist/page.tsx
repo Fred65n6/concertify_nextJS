@@ -3,7 +3,6 @@ import React, {useState, useEffect} from "react";
 import {request} from "http";
 import Link from "../../../node_modules/next/link";
 import { SlArrowLeft } from "react-icons/sl";
-
 interface Genre {
     _id: string;
     genre_name: string;

@@ -3,6 +3,10 @@ import {url} from "inspector";
 import mongoose from "mongoose";
 
 const concertSchema = new mongoose.Schema({
+    concert_id: {
+        type: String,
+        unique: true,
+    },
     concert_name: {
         type: String,
         unique: false,
