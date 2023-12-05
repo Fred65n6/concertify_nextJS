@@ -34,6 +34,10 @@ interface User {
     isArtist: boolean;
   }
 
+  interface Concert {
+    concert_name: string;
+  }
+
 
 export default function UserProfile({params}: any) {
     const router = useRouter();
@@ -43,6 +47,7 @@ export default function UserProfile({params}: any) {
     const [genres, setGenres] = useState<any[]>([]);
     const [venues, setVenues] = useState<any[]>([]);
     const [artist, setArtist] = useState<any[]>([]);
+    const [concerts, setConcerts] = useState<any[]>([]);
 
 
     const [data, setData] = useState({
@@ -84,6 +89,7 @@ export default function UserProfile({params}: any) {
             setGenres(res.data.data.genres);
             setVenues(res.data.data.venues);
             setArtist(res.data.data.artist);
+            setConcerts(res.data.data.concerts);
             
             setData({
                 username: userData.username,
@@ -274,13 +280,14 @@ export default function UserProfile({params}: any) {
             </section>
 
             {isArtist ? (
+                <div className="">
                 <section className="flex gap-4 mt-10 first-letter:">
                 <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">   
                 <h2 className="text-black font-bold text-xl">Artist info</h2>
                 <ul className="flex flex-col w-full md:grid-cols-4 gap-8">
                         {artist.map((artist: any) => (
                             <article
-                                className="w-full text-sm grid gap-4"
+                                className="w-full text-sm grid gap-4 grid-cols-3"
                                 key={artist.artist_name}>
 
                                 <p >Artist name: <br /><span className="text-base brand_purple">{artist.artist_name}</span></p>
@@ -294,13 +301,13 @@ export default function UserProfile({params}: any) {
                                 <p >Artist nation: <br /><span className="text-base brand_purple">{artist.artist_nation}</span></p>
 
                                 <p >Artist description: <br /><span className="text-base brand_purple">{artist.artist_description}</span></p>
-                            
+
                                 <Image
                                 src={`https://concertify.s3.eu-central-1.amazonaws.com/${artist.artist_image}`}
                                 width={200}
                                 height={200}
                                 alt="artist image"
-                                className="h-auto w-40 pt-4"
+                                className="h-52 rounded-lg w-[100%] object-cover"
                             />
                             </article>
                         ))}
@@ -309,11 +316,31 @@ export default function UserProfile({params}: any) {
                     </ul>
                 </div>
                 </section>
+
+                <section className="mt-10">
+                <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">
+                    <ul className="flex gap-4">
+                            {concerts.map((concerts: any) => (
+                            <li
+                                className="w-full text-sm"
+                                key={concerts.concert_name}>
+
+                                <p >Concerts: <br /><span className="text-base brand_purple">{concerts.concert_name}</span></p>
+
+                            </li>
+                        ))}     
+                    </ul>
+                </div>
+                </section>
+                </div>
                 ) : (
                     <div className=""></div>
                 )}
 
+            
             {/* PREFERENCES */}
+
+            {!isArtist ? (
             <section className="flex flex-col md:flex-row gap-4 mt-10">
                 <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
                     <div className="flex flex-col gap-4">
@@ -327,11 +354,8 @@ export default function UserProfile({params}: any) {
                                     </article>
                                     ))}
                                 </ul>
-
                     </div>
                 </div>
-
-
 
                 <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
                     <div className="flex flex-col gap-4">
@@ -349,6 +373,9 @@ export default function UserProfile({params}: any) {
                     </div>
                 </div>
             </section>
+            ) : (
+                <div className=""></div>
+            )}
 
             {/* LOG OUT LINK */}
             <button
