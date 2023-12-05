@@ -21,7 +21,7 @@ import {
 } from "react-icons/sl";
 
 interface ConcertSingle {
-    _id: string;
+    concert_id: string;
     concert_artist: {
         artist_id: string;
         artist_name: string;
@@ -112,7 +112,7 @@ const SingleConcert: React.FC = () => {
     useEffect(() => {
         if (id && concerts.length > 0) {
             const matchingConcert = concerts.find(
-                (concert) => concert._id === id
+                (concert) => concert.concert_id === id
             );
             setSelectedConcert(matchingConcert || null);
         } else {
@@ -131,7 +131,7 @@ const SingleConcert: React.FC = () => {
 
         const data = new FormData();
         data.set("Favourite_user_id", userData || "");
-        data.set("Favourite_concert_id", selectedConcert._id);
+        data.set("Favourite_concert_id", selectedConcert.concert_id);
 
         try {
             const res = await fetch("/api/data/deleteFavourite/", {
@@ -160,7 +160,7 @@ const SingleConcert: React.FC = () => {
         }
 
         const data = new FormData();
-        data.set("Favourite_concert_id", selectedConcert._id);
+        data.set("Favourite_concert_id", selectedConcert.concert_id);
         data.set("Favourite_concert_image", selectedConcert.concert_image);
         data.set("Favourite_concert_name", selectedConcert.concert_name);
         data.set("Favourite_concert_date", selectedConcert.concert_date);
@@ -227,7 +227,7 @@ const SingleConcert: React.FC = () => {
                                         className="bg-slate-100 p-4 w-72 hidden"
                                         type="text"
                                         name="Favourite_concert_id"
-                                        value={selectedConcert._id}
+                                        value={selectedConcert.concert_id}
                                     />
                                     <input
                                         readOnly={true}
@@ -259,7 +259,7 @@ const SingleConcert: React.FC = () => {
                                         className="bg-slate-100 p-4 w-72 hidden"
                                         type="text"
                                         name="Favourite_concert_id"
-                                        value={selectedConcert._id}
+                                        value={selectedConcert.concert_id}
                                     />
                                     <input
                                         readOnly={true}

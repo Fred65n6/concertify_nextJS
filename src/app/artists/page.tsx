@@ -8,7 +8,7 @@ import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
 
 interface ArtistLoop {
-    _id: string;
+    artist_id: string;
     artist_name: string;
     artist_image: string;
     artist_genre: {
@@ -41,8 +41,8 @@ const ArtistLoopview: React.FC = () => {
             <h1 className="font-bold text-4xl pb-4">All artists</h1>
             <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8">
                 {artists?.map((artist) => (
-                    <article className="w-auto" key={artist._id}>
-                        <Link href={"/artists/" + artist._id} key={artist._id}>
+                    <article className="w-auto" key={artist.artist_id}>
+                        <Link href={"/artists/" + artist.artist_id} key={artist.artist_id}>
                             <Image
                                 src={`https://concertify.s3.eu-central-1.amazonaws.com/${artist.artist_image}`}
                                 width={200}

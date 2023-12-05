@@ -9,7 +9,7 @@ import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
 
 interface ConcertLoop {
-    _id: string;
+    concert_id: string;
     concert_artist: {
         artist_id: string;
         artist_name: string;
@@ -59,10 +59,10 @@ const ConcertLoopview: React.FC = () => {
             <h1 className="font-bold text-4xl pb-4 pt-8">All concerts</h1>
             <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8 pb-20">
                 {filteredConcerts.map((concert) => (
-                    <article className="w-auto" key={concert._id}>
+                    <article className="w-auto" key={concert.concert_id}>
                         <Link
-                            href={"/concerts/" + concert._id}
-                            key={concert._id}
+                            href={"/concerts/" + concert.concert_id}
+                            key={concert.concert_id}
                         >
                             <Image
                                 src={`https://concertify.s3.eu-central-1.amazonaws.com/${concert.concert_image}`}

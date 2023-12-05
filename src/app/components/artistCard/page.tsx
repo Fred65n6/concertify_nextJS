@@ -6,7 +6,7 @@ import Link from "next/link";
 import {SlArrowRight, SlArrowLeft} from "react-icons/sl";
 
 interface ArtistCard {
-    _id: string;
+    artist_id: string;
     artist_name: string;
     artist_image: string;
     artist_concert: {
@@ -64,8 +64,8 @@ const ArtistCard: React.FC = () => {
     return (
         <>
             {artists?.map((artist) => (
-                <article className="flex-shrink-0 grid pb-8" key={artist._id}>
-                    <Link href={"/artists/" + artist._id} key={artist._id}>
+                <article className="flex-shrink-0 grid pb-8" key={artist.artist_id}>
+                    <Link href={"/artists/" + artist.artist_id} key={artist.artist_id}>
                         <Image
                             src={"/" + artist.artist_image}
                             width={200}

@@ -13,7 +13,7 @@ import SignupPage from "@/app/signup/page";
 import BreadcrumbComp from "@/app/components/breadCrumbs/page";
 
 interface ArtistSingle {
-    _id: string;
+    artist_id: string;
     artist_name: string;
     artist_full_name: string;
     artist_nation: string;
@@ -48,7 +48,7 @@ export default function SingleArtist() {
 
     useEffect(() => {
         if (id && artists.length > 0) {
-            const matchingArtist = artists.find((artist) => artist._id === id);
+            const matchingArtist = artists.find((artist) => artist.artist_id === id);
             setSelectedArtist(matchingArtist || null);
         } else {
             setSelectedArtist(null);

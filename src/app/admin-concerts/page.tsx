@@ -11,7 +11,7 @@ import Link from "../../../node_modules/next/link";
 import { CgClose } from "react-icons/cg";
 
 interface Concert {
-    _id: string;
+    concert_id: string;
     concert_artist: {
         artist_id: string;
         artist_name: string;
@@ -110,7 +110,7 @@ const handleDeleteConcert = async (concertId: string) => {
       const result = await res.json();
       if (result.success) {
         console.log(result.message);
-        setConcerts(elm => elm.filter(concert => concert._id !== concertId));
+        setConcerts(elm => elm.filter(concert => concert.concert_id !== concertId));
 
         closeDeleteModule();
       } else {
@@ -136,7 +136,7 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           data.set("concert_start", concertStart);
           data.set("concert_doors", concertDoors);
           data.set("concert_id", selectedConcert!.concert_artist_email);
-          data.set("concert_artist_email", selectedConcert!._id);
+          data.set("concert_artist_email", selectedConcert!.concert_id);
 
           console.log(data)
 
@@ -164,7 +164,7 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           data.set("concert_start", concertStart);
           data.set("concert_doors", concertDoors);
           data.set("concert_artist_email", selectedConcert!.concert_artist_email);
-          data.set("concert_id", selectedConcert!._id);
+          data.set("concert_id", selectedConcert!.concert_id);
 
           console.log(data)
       
@@ -231,7 +231,7 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
               </thead>
               <tbody className="mb-8">
                 {concerts?.map((concert) => (
-                  <tr key={concert._id} className="flex justify-start w-full mb-2">
+                  <tr key={concert.concert_id} className="flex justify-start w-full mb-2">
                     <td className="text-left w-fit md:w-1/2">{concert.concert_name}</td>
                     <td className="text-left w-fit md:w-1/2">{concert.concert_artist.artist_name}</td>
                     <td className="text-left w-fit md:w-1/2">{concert.concert_date}</td>
@@ -285,7 +285,7 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             </p>
             <button 
                 type="button"
-                onClick={() => handleDeleteConcert(selectedConcert._id)}
+                onClick={() => handleDeleteConcert(selectedConcert.concert_id)}
                 className="primary_btn">
                 Yes I am sure
             </button>
@@ -331,7 +331,7 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                         type="text"
                         id="concert_id"
                         name="concert_id"
-                        value={selectedConcert._id}
+                        value={selectedConcert.concert_id}
                         readOnly
                     />
                 </div>
