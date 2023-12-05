@@ -21,7 +21,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.nextUrl))
   }
 
-  if (isRestrictedPath && !token && !adminToken) {
+  if (isRestrictedPath && !token && !adminToken && !artistToken) {
     return NextResponse.redirect(new URL('/', request.nextUrl))
   }
     

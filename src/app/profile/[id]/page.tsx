@@ -282,13 +282,35 @@ export default function UserProfile({params}: any) {
             {isArtist ? (
                 <div className="">
                 <section className="flex gap-4 mt-10 first-letter:">
-                <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">   
-                <h2 className="text-black font-bold text-xl">Artist info</h2>
-                <ul className="flex flex-col w-full md:grid-cols-4 gap-8">
+                <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">
+                
+                <div className="flex justify-between">
+                    <h2 className="text-black font-bold text-xl">Artist info</h2>
+                    <button >
+                        <a href="/edit-user-artist">
+                        <RiEdit2Fill className="dark:fill-black"/>
+                        </a>
+                        
+                    </button>
+                </div>
+
+                <div className="w-full">
                         {artist.map((artist: any) => (
                             <article
-                                className="w-full text-sm grid gap-4 grid-cols-3"
+                            className="flex gap-8"
                                 key={artist.artist_name}>
+
+                                <div className="">
+                                <Image
+                                src={`https://concertify.s3.eu-central-1.amazonaws.com/${artist.artist_image}`}
+                                width={200}
+                                height={200}
+                                alt="artist image"
+                                className="h-full rounded-lg w-[100%] object-cover"
+                            />
+                                </div>
+
+                                <div className="grid gap-4">
 
                                 <p >Artist name: <br /><span className="text-base brand_purple">{artist.artist_name}</span></p>
 
@@ -302,18 +324,10 @@ export default function UserProfile({params}: any) {
 
                                 <p >Artist description: <br /><span className="text-base brand_purple">{artist.artist_description}</span></p>
 
-                                <Image
-                                src={`https://concertify.s3.eu-central-1.amazonaws.com/${artist.artist_image}`}
-                                width={200}
-                                height={200}
-                                alt="artist image"
-                                className="h-52 rounded-lg w-[100%] object-cover"
-                            />
+                                </div>
                             </article>
                         ))}
-
-                        <button className=""><a href="/edit-user-artist">Edit artist</a></button>
-                    </ul>
+                    </div>
                 </div>
                 </section>
 
