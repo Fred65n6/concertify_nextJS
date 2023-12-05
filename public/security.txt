@@ -2,5 +2,5 @@ Contact: mailto:fred65n6@stud.kea.dk
 Expires: 2024-01-31T11:00:00.000Z
 Acknowledgments: https://concertify.netlify.app/hall-of-fame
 Preferred-Languages: en, dk, no
-Canonical: https://concertify.netlify.app/well-known/security.txt
+Canonical: https://concertify.netlify.app/security.txt
 Policy: https://concertify.netlify.app/security-policy
