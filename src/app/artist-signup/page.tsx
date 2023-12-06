@@ -7,6 +7,7 @@ import { Progress } from "flowbite-react";
 import { CgClose } from "react-icons/cg";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
+
 interface Genre {
   _id: string;
   genre_name: string;
@@ -25,7 +26,7 @@ interface ShowVenuesProps {
   onSubmit: (selectedVenues: string[], email: string) => void;
 }
 
-export default function SignupPage() {
+export default function ArtistSignupPage() {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<string>("");

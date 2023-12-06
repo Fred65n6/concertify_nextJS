@@ -8,11 +8,6 @@ export async function POST(request: NextRequest) {
     const reqBody = await request.json();
     const {_id, password, email} = reqBody;
 
-    console.log(password)
-
-    console.log(_id)
-
-    console.log(email)
 
     if (!_id || !password) {
         return NextResponse.json(
@@ -24,8 +19,6 @@ export async function POST(request: NextRequest) {
     try {
 
         const artist = await Artist.findOne({artist_email: email})
-
-        console.log(artist)
 
         const user = await User.findOne({ _id: _id });
 
@@ -39,12 +32,15 @@ export async function POST(request: NextRequest) {
         if (artist) {
             // Get the artist name
             const artistName = artist.artist_name;
+
+            const concerts = await Concert.find({concert_artist_email: email})
         
             // Delete concerts where concert.artist.artist_name matches
-            await Concert.deleteMany({ "concert_artist.artist_name": artistName });
+            await Concert.deleteMany({ concert_artist_email: email });
         
-            // Delete the artist
             await artist.deleteOne();
+
+            console.log(concerts)
         }
 
         const currentPassword = user.password;

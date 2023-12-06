@@ -183,7 +183,7 @@ export default function UserProfile({params}: any) {
             setLoading(true);
             const response = await axios.post(
                 "/api/users/deleteUser",
-                { _id: user._id, password: user.password } // Adjust accordingly
+                { _id: user._id, password: user.password, email: user.email} // Adjust accordingly
             );
             console.log("User deleted", response.data);
             logout();
@@ -579,6 +579,7 @@ export default function UserProfile({params}: any) {
                             readOnly={true}
                             type="text"
                             id="email"
+                            className="hidden"
                             value={user._id}
                             placeholder=""
                         />
@@ -586,13 +587,14 @@ export default function UserProfile({params}: any) {
                             readOnly={true}
                             type="text"
                             id="email"
+                            className="hidden"
                             value={user.email}
                             placeholder=""
                         />
-                        <label htmlFor="password" className="w-fit text-sm text-gray-600 dark:text-gray-100">Choose a new username</label>
+                        <label htmlFor="password" className="w-fit text-sm text-gray-600 dark:text-gray-100">Type password to delete user</label>
                         <input
                             className="input_field"
-                            type="text"
+                            type="password"
                             id="password"
                             placeholder="Start typing..."
                             value={user.password}
@@ -607,7 +609,7 @@ export default function UserProfile({params}: any) {
 
                     <button
                         onClick={deleteUser}
-                        className="m-4 brand_gradient px-12 py-4 rounded-full text-red-700 mt-8"
+                        className="m-4 text-red-700 mt-8"
                     >
                         DELETE
                     </button>
