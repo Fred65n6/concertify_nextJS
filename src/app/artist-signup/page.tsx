@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Progress } from "flowbite-react";
 import { CgClose } from "react-icons/cg";
-
-
+import LoginPage from "../login/page";
+import SignupPage from "../signup/page";
 interface Genre {
   _id: string;
   genre_name: string;
@@ -143,6 +143,8 @@ export default function SignupPage() {
 
   return (
     <>
+    <LoginPage/>
+    <SignupPage/>
       <div id="signup_module" className="grid h-screen m-auto items-center justify-center backdrop-blur-sm z-50">
         {/* SIGNUP FORM: STEP 1 */}
         <div id="signup_form">
@@ -240,7 +242,7 @@ export default function SignupPage() {
 
          {/* SIGN UP FLOW COMPLETE MESSAGE */}
         <div id="signup_flow_complete" className="hidden">
-          <div className="flex flex-col md:-mt-32 items-center justify-center p-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+          <div className="flex flex-col md:-mt-32 items-center justify-center p-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#12082a] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
             <h1 className="text-2xl font-bold text-center mx-6 mt-10">
               We've send a link to your email
             </h1>
@@ -249,7 +251,7 @@ export default function SignupPage() {
             </p>
             <p className="mt-5 mb-10 text-center text-red-500 font-bold leading-8">
               The link expires after 30 minutes! <br />
-              <span className="text-black font-normal">(If you don't complete the signup by then, contact support)</span>
+              <span className="text-black dark:text-white font-normal">(If you are not able to complete the sign-up process by then, please contact support at help@concertify.com)</span>
             </p>
             <button onClick={closeSignup} className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white">Close</button>
           </div>
