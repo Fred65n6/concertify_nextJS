@@ -313,12 +313,13 @@ const UploadForm: React.FC = () => {
                         }
                     >
                         <option value="">Select a venue</option>
-                        {venues.map((venue) => (
+                        {venues && venues.map((venue) => (
                             <option key={venue._id} value={venue._id}>
                                 {venue.venue_name}
                             </option>
                         ))}
                     </select>
+                    
                     <input
                         readOnly={true}
                         className="hidden"
