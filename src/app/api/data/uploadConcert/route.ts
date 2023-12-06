@@ -98,7 +98,6 @@ export async function POST(request: NextRequest) {
                 concert_date: concertDescription,
                 concert_venue: concertVenue,
                 concert_start: concertStart,
-                artist_imeage: concertImage,
             }
             user.concerts.push(newConcert);
             await user.save();

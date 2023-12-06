@@ -5,7 +5,7 @@ import React, {useState, useEffect} from "react";
 import {useRouter} from "next/navigation";
 import ThemeSwitcher from "../../components/switchTheme/page";
 import { CgClose } from "react-icons/cg";
-import { SlLogout, SlStar, SlMusicToneAlt, SlGlobeAlt, SlBubble, SlUser, SlNote, SlPencil } from "react-icons/sl";
+import { SlLogout, SlStar, SlMusicToneAlt, SlGlobeAlt, SlBubble, SlUser, SlPencil } from "react-icons/sl";
 import Image from "next/image";
 import User from "@/models/userModel"
 import {PiBalloon} from "react-icons/pi";
@@ -38,6 +38,8 @@ interface User {
 
   interface Concert {
     concert_name: string;
+    concert_date: string;
+    concert_image: string;
   }
 
 
@@ -284,7 +286,31 @@ export default function UserProfile({params}: any) {
                                 <button className="brand_purple"><a href="/edit-user-artist"><SlPencil className="fill-black"/></a></button>
                             </div>
                             {concerts.map((concerts: any) => (
-                                    <p className="text-black text-sm pt-2">{concerts.concert_name}</p>
+                                <div className="flex md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
+                                    <article className="flex-shrink-0 grid md:pt-8 pb-8" key={concerts._id}>
+                                        <Link href={"/concerts/" + concerts._id} key={concerts._id}>
+                                            <Image
+                                            src={`https://concertify.s3.eu-central-1.amazonaws.com/${concerts.concert_image}`}
+                                            width={200}
+                                            height={200}
+                                            alt="concert"
+                                            className="rounded-lg object-cover w-full h-[200px]"
+                                            />
+                                        </Link>
+                                        <h4 className="text-black text-xl font-bold dark:text-white pt-2">
+                                            {concerts.artist_name}
+                                        </h4>
+                                        <p className="text-black text-sm pt-2">{concerts.concert_name}</p>
+                                        <p className="text-black text-sm pt-2">{concerts.concert_date}</p>
+                                        <p className="text-black text-sm pt-2">{concerts.concert_image}</p>
+                                    
+                                    </article>
+                                    
+                                </div>
+
+ 
+
+              
                             ))}
                         </div>
 
