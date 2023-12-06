@@ -64,6 +64,9 @@ export default function Home() {
     };
 
     return (
+        <>
+        <LoginPage />
+        <SignupPage />
         <div className="grid pt-8">
             {loading ? (
                 <h1 className="text-4xl font-bold">Loading...</h1>
@@ -78,28 +81,22 @@ export default function Home() {
                     through <span className="brand_purple dark:text-purple-500">live music</span>
                 </h1>
             )}
-            <div className="">
-                <LoginPage />
-            </div>
-            <div>
-                <SignupPage />
-            </div>
 
             {/* Concerts */}
             <section className="md:pt-24 pt-12 pb-4 md:h-[600px]">
-                <h2 className="font-bold text-xl pb-4 md:pb-8">
+                <h2 className="font-bold text-2xl pb-4 md:pb-8">
                     <span className="text-[#5311BF] dark:text-purple-500">Concerts</span> you need to experience
                 </h2>
                 <div className="flex md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
                     <ConcertCard />
                 </div>
                 <Link
-                    className="justify-end flex items-center"
+                    className="justify-end flex items-center brand_purple dark:text-purple-500"
                     href="/concerts"
                 >
                     View all concerts
                     <SlArrowRight
-                        className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4 pt-1"
+                        className="w-4 h-4"
                         id="arrow_right"
                     />
                 </Link>
@@ -107,23 +104,25 @@ export default function Home() {
 
             {/* Venues */}
             <section className="pb-36 md:pt-0 pt-12">
-                <h2 className="font-bold text-xl pb-4">
+                <h2 className="font-bold text-2xl pb-4">
                     <span className="text-[#5311BF] dark:text-purple-500">Venues</span> you need to experience
                 </h2>
                 <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
                     <VenueCard />
                 </div>
                 <Link
-                    className="justify-end flex items-center md:hidden"
+                    className="justify-end flex items-center brand_purple dark:text-purple-500 md:hidden"
                     href="/venues"
                 >
                     View all venues
                     <SlArrowRight
-                        className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4 pt-1"
-                        id="arrow_right"
+                    className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
+                    id="arrow_right"
                     />
+
                 </Link>
             </section>
         </div>
+        </>
     );
 }

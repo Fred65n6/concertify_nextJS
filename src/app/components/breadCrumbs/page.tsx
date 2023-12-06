@@ -3,6 +3,7 @@ import React, {ReactNode, useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 import { SlArrowLeft } from "react-icons/sl";
+import Image from "../../../../node_modules/next/image";
 
 const BreadcrumbComp = () => {
     const [config] = useState({
@@ -18,7 +19,19 @@ const BreadcrumbComp = () => {
     const pathNames = paths.split("/").filter((path) => path);
 
     return (
-        <div className="flex mt-4 mb-12">
+        <>
+        <div className="w-full pb-8 md:hidden">
+            <figure className="">
+                <Image
+                    src="../concertify_logo.svg"
+                    width={150}
+                    height={30}
+                    alt="logo"
+                />
+            </figure>
+        </div>
+
+        <div className="hidden md:flex mt-4 mb-12">
             <ul className="flex items-center gap-2 brand_purple dark:text-purple-500">
                 <li className="hover:underline">
                     <Link href={"/"}>{config.homeElement}</Link>
@@ -49,6 +62,7 @@ const BreadcrumbComp = () => {
                 })}
             </ul>
         </div>
+        </>
     );
 };
 

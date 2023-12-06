@@ -52,7 +52,7 @@ const ArtistLoopview: React.FC = () => {
                             />
                         </Link>
 
-                        <h4 className="text-black text-xl font-bold dark:text-white">
+                        <h4 className="text-black text-xl font-bold dark:text-white pt-2">
                             {artist.artist_name}
                         </h4>
                         <div className="flex flex-col gap-2">
