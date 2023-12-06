@@ -7,7 +7,7 @@ import {sendEmail} from "@/helpers/mailer";
 connect();
 
 function validatePassword(password:string) {
-    // Password must contain at least one uppercase letter, one digit, and one special character
+    // -- Password must contain at least one uppercase letter, one digit, and one special character
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+.])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
     return passwordRegex.test(password);
 }
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 
         console.log(reqBody);
 
-        // Check if user already exists
+        // -- Check if user already exists
         const user = await User.findOne({ email });
 
         if (user) {
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Check if password and confirm password match
+        // -- Check if password and confirm password match
         if (password !== confirmpassword) {
             return NextResponse.json(
                 { error: "Password and confirm password doesn't match" },
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Validate password
+        // -- Validate password
         if (!validatePassword(password)) {
             return NextResponse.json(
                 { error: "Password must include one uppercase letter, one digit, one special character and be at least 9 characters long" },
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Hash password
+        // -- Hash the password
         const salt = await bcryptjs.genSalt(10);
         const hashedPassword = await bcryptjs.hash(password, salt);
 
@@ -66,10 +66,10 @@ export async function POST(request: NextRequest) {
         const savedUser = await newUser.save();
         console.log(savedUser);
 
-        // Send verification email
+        // -- Send verification email
         await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
 
-        // Sign up success
+        // -- Sign up success
         return NextResponse.json({
             message: "User created successfully",
             success: true,
