@@ -4,20 +4,13 @@ import { SlArrowLeft } from "react-icons/sl";
 import Link from "../../../node_modules/next/link";
 import axios from 'axios'
 
-interface Artist {
-    _id: string;
-    artist_name: string;
-    // Add more artist properties as needed
-}
 interface Venue {
     _id: string;
     venue_name: string;
-    // Add more artist properties as needed
 }
 interface Genre {
     _id: string;
     genre_name: string;
-    // Add more artist properties as needed
 }
 
 interface User {
@@ -36,11 +29,9 @@ const UploadForm: React.FC = () => {
     const [concertDescription, setConcertDescription] = useState("");
     const [concertVenueId, setConcertVenueId] = useState("");
     const [concertVenueName, setConcertVenueName] = useState("");
-
     const [isArtist, setIsArtist] = useState(false);
     const [genres, setGenres] = useState<any[]>([]);
     const [artist, setArtist] = useState<any[]>([]);
-
     const [venues, setVenues] = useState<Venue[]>([]);
     const [selectedVenue, setSelectedVenue] = useState<Venue | null>(null);
     const [data, setData] = useState({
@@ -56,35 +47,35 @@ const UploadForm: React.FC = () => {
         newUsername: "",
     });
 
-    
-
     useEffect(() => {
-        const fetchVenues = async () => {
-            try {
-                const response = await fetch("/api/data/venueData");
-                if (response.ok) {
-                    const data = await response.json();
-                    setVenues(data.data as Venue[]);
-                }
-            } catch (error) {
-                console.error("Error fetching artists: ", error);
-            }
-        };
-        const fetchGenres = async () => {
-            try {
-                const response = await fetch("/api/data/genreData");
-                if (response.ok) {
-                    const data = await response.json();
-                    setGenres(data.data as Genre[]);
-                }
-            } catch (error) {
-                console.error("Error fetching artists: ", error);
-            }
-        };
         fetchVenues();
         fetchGenres();
         getUserDetails()
     }, []);
+
+    const fetchVenues = async () => {
+        try {
+            const response = await fetch("/api/data/venueData");
+            if (response.ok) {
+                const data = await response.json();
+                setVenues(data.data as Venue[]);
+            }
+        } catch (error) {
+            console.error("Error fetching artists: ", error);
+        }
+    };
+    
+    const fetchGenres = async () => {
+        try {
+            const response = await fetch("/api/data/genreData");
+            if (response.ok) {
+                const data = await response.json();
+                setGenres(data.data as Genre[]);
+            }
+        } catch (error) {
+            console.error("Error fetching artists: ", error);
+        }
+    };
 
     const getUserDetails = async () => {
         try {

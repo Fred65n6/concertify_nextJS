@@ -7,8 +7,7 @@ import {sendEmail} from "@/helpers/mailer";
 connect();
 
 function validatePassword(password:string) {
-    // Password must contain at least one uppercase letter, one digit, and one special character
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+.])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
     return passwordRegex.test(password);
 }
 
@@ -17,9 +16,6 @@ export async function POST(request: NextRequest) {
         const reqBody = await request.json();
         const { username, email, password, confirmpassword } = reqBody;
 
-        console.log(reqBody);
-
-        // Check if user already exists
         const user = await User.findOne({ email });
 
         if (user) {
@@ -48,7 +44,7 @@ export async function POST(request: NextRequest) {
         // Validate password
         if (!validatePassword(password)) {
             return NextResponse.json(
-                { error: "Password must include one uppercase letter, one digit, one special character and be at least 9 characters long" },
+                { error: "Password must include one uppercase letter, one digit, one special character ( !@#$%^&*()_+ )and be at least 9 characters long" },
                 { status: 400 }
             );
         }

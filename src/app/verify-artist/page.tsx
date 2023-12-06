@@ -63,23 +63,6 @@ const VerifyArtistPage: React.FC = () => {
     fetchGenres();
   }, [token]);
 
-//   useEffect(() => {
-//     const verifyUserEmail = async () => {
-//       try {
-//         await axios.post("/api/users/verifyemail", { token });
-//         setVerified(true);
-//       } catch (error: any) {
-//         setError(true);
-//         console.log(error.response.data);
-//       }
-//     };
-
-//     if (token.length > 0) {
-//       verifyUserEmail();
-//     }
-//   }, [token]);
-
-
 const verifyUserEmail = async () => {
     try {
       await axios.post("/api/users/verifyemail", { token });
@@ -98,6 +81,8 @@ const verifyUserEmail = async () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    try {
     if (!file) return request;
     setLoading(true);
 
@@ -117,14 +102,22 @@ const verifyUserEmail = async () => {
         body: data,
     });
 
-    if (!res.ok) {
-        const errorText = await res.text();
-        console.error(errorText);
-    }
+    const responseData = await res.json();
 
-    if (res.ok) {
+    if (responseData.success) {
+        // Upload successful, show success message or perform other actions
         setLoading(false);
         showUploadMessage();
+    } else {
+        // Upload failed, display error message to the user
+        setError(responseData.error || "Error uploading artist.");
+        setLoading(false);
+    }
+
+} catch (error) {
+    // Handle other errors, e.g., network issues
+    console.error("Error uploading artist:", error);
+    setLoading(false);
     }
 };
 
@@ -167,6 +160,12 @@ const showUploadMessage = () => {
                         placeholder="Artist email"
                     />
                 </div>
+
+                {error && (
+                    <div className="pt-4">
+                        <h2 className="text-4xl text-red-500">{error}</h2>
+                    </div>
+                )}
 
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="artist_name">Artist name</label>
@@ -305,9 +304,6 @@ const showUploadMessage = () => {
             </div>
         </div>
         </div>
-
-        
-
       )}
       {error && (
         <div className="pt-4">

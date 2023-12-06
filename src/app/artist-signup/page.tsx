@@ -47,6 +47,43 @@ export default function ArtistSignupPage() {
     confirmpassword: "",
   });
 
+  useEffect(() => {
+    if (
+      user.email.length > 0 &&
+      user.password.length > 0 &&
+      user.username.length > 0 &&
+      user.confirmpassword.length > 0
+    ) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+    fetchData();
+    fetchVenueData();
+  }, [user]);
+
+  const fetchVenueData = async () => {
+    try {
+        const response = await axios.get("/api/data/genreData");
+        setGenres(response.data.data);
+        console.log(response);
+    } catch (error) {
+        console.error("Error fetching genres:", error);
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get<{ data: Venue[] }>("/api/data/venueData");
+      setVenues(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching venues:", error);
+      setLoading(false);
+      setError("Error fetching venues");
+    }
+  };
+
   const switchToLoginModule = () => {
     const loginModule = document.getElementById("login_module");
     const signupModule = document.getElementById("signup_module");
@@ -91,56 +128,19 @@ export default function ArtistSignupPage() {
   const signFlowUpCompleteMessage = () => {
     const signupFlowCompleteMessage = document.getElementById("signup_flow_complete");
     const signUpForm = document.getElementById("signup_form");
-    const preferredGenres = document.getElementById("signup_preference_genres");
-    const preferredVenues = document.getElementById("signup_preference_venues");
+    // const preferredGenres = document.getElementById("signup_preference_genres");
+    // const preferredVenues = document.getElementById("signup_preference_venues");
     if (signupFlowCompleteMessage) {
       signupFlowCompleteMessage.classList.remove("hidden");
       signupFlowCompleteMessage.classList.add("block");
       signUpForm?.classList.add("hidden");
-      preferredGenres?.classList.add("hidden");
-      preferredVenues?.classList.add("hidden");
+      // preferredGenres?.classList.add("hidden");
+      // preferredVenues?.classList.add("hidden");
     }
-    console.log("signFlowUpCompleteMessage");
+    console.log("have run signFlowUpCompleteMessage");
   };
 
   // Disabling the button if not all fields are filled out
-  useEffect(() => {
-    if (
-      user.email.length > 0 &&
-      user.password.length > 0 &&
-      user.username.length > 0 &&
-      user.confirmpassword.length > 0
-    ) {
-      setButtonDisabled(false);
-    } else {
-      setButtonDisabled(true);
-    }
-    fetchData();
-    fetchVenueData();
-  }, [user]);
-
-  const fetchVenueData = async () => {
-    try {
-        const response = await axios.get("/api/data/genreData");
-        setGenres(response.data.data);
-        console.log(response);
-    } catch (error) {
-        console.error("Error fetching genres:", error);
-    }
-  };
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get<{ data: Venue[] }>("/api/data/venueData");
-      setVenues(response.data.data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching venues:", error);
-      setLoading(false);
-      setError("Error fetching venues");
-    }
-  };
-
 
   return (
     <>
@@ -160,14 +160,14 @@ export default function ArtistSignupPage() {
 
                 {/* USERNAME */}
                 <div className="flex flex-col w-full gap-2">
-                  <label htmlFor="username" className="w-fit text-sm dark:text-gray-100">Artist Name</label>
+                  <label htmlFor="username" className="w-fit text-sm dark:text-gray-100">User name</label>
                   <input
                     className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
                     type="text"
                     id="username"
                     value={user.username}
                     onChange={(e) => setUser({ ...user, username: e.target.value })}
-                    placeholder="Artist name"
+                    placeholder="User name"
                   />
                 </div>
 
@@ -217,7 +217,7 @@ export default function ArtistSignupPage() {
               </div>
                {/* FORM FIELDS END */}
 
-              {error && <div className="text-red-500">{error}</div>}
+              {error && <div className="text-red-500 mt-4">{error}</div>}
             
             <button
               onClick={onSignup}

@@ -34,6 +34,16 @@ export async function POST(request: NextRequest) {
         genre_id: data.get("artist_genre_id"),
     };
 
+    const existingArtist = await Artist.findOne({ artist_name: artistName });
+
+    if (existingArtist) {
+        // Artist name is already taken
+        return NextResponse.json({
+            success: false,
+            error: "Artist name is already taken. Choose a different name.",
+        });
+    }
+
     if (!file) {
         return NextResponse.json({success: false});
     }
