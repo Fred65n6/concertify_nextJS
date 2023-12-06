@@ -73,7 +73,7 @@ const ConcertLoopview: React.FC = () => {
                             />
                         </Link>
 
-                        <h4 className="text-black text-xl font-bold dark:text-white">
+                        <h4 className="text-black text-xl font-bold dark:text-white pt-2">
                             {concert.concert_artist
                                 ? concert.concert_artist.artist_name
                                 : "Unknown Artist"}{" "}

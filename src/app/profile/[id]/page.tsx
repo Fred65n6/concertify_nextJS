@@ -4,11 +4,12 @@ import axios from "axios";
 import React, {useState, useEffect} from "react";
 import {useRouter} from "next/navigation";
 import ThemeSwitcher from "../../components/switchTheme/page";
-import { RiEdit2Fill } from "react-icons/ri";
 import { CgClose } from "react-icons/cg";
-import { SlLogout } from "react-icons/sl";
+import { SlLogout, SlStar, SlMusicToneAlt, SlGlobeAlt, SlBubble, SlUser, SlNote, SlPencil } from "react-icons/sl";
 import Image from "next/image";
 import User from "@/models/userModel"
+import {PiBalloon} from "react-icons/pi";
+
 
 interface Genre {
     _id: string;
@@ -239,6 +240,8 @@ export default function UserProfile({params}: any) {
             
             <section className="flex gap-4 mt-10">
                 <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">
+                    <h2 className="text-black font-bold text-xl">User info</h2>
+
                     <div className="flex flex-col item-center justify-between">
                         <p className="text-sm dark:text-black">Email:</p>
                         <div className="flex justify-between">
@@ -252,7 +255,7 @@ export default function UserProfile({params}: any) {
                         <div className="flex justify-between">
                             <span className="brand_purple">{data.username}</span>
                             <button onClick={openChangeUsernamedModal}>
-                                <RiEdit2Fill className="dark:fill-black"/>
+                                <SlPencil className="dark:fill-black"/>
                             </button>
                         </div>
                     </div>
@@ -262,7 +265,7 @@ export default function UserProfile({params}: any) {
                         <div className="flex justify-between">
                             <span className="brand_purple">********</span>
                             <button onClick={openChangePasswordModal}>
-                                <RiEdit2Fill className="dark:fill-black"/>
+                                <SlPencil className="dark:fill-black"/>
                             </button>
                         </div>
                     </div>
@@ -279,10 +282,12 @@ export default function UserProfile({params}: any) {
                 </div>
             </section>
 
+            {/* ARTIST INFO */}
             {isArtist ? (
                 <div className="">
                 <section className="flex gap-4 mt-10 first-letter:">
-                <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">
+
+                {/* <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">
                 
                 <div className="flex justify-between">
                     <h2 className="text-black font-bold text-xl">Artist info</h2>
@@ -328,7 +333,7 @@ export default function UserProfile({params}: any) {
                             </article>
                         ))}
                     </div>
-                </div>
+                </div> */}
                 </section>
 
                 <section className="mt-10">
@@ -345,6 +350,87 @@ export default function UserProfile({params}: any) {
                         ))}     
                     </ul>
                 </div>
+                    <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">   
+                        <div className="w-full flex justify-between">
+                            <h2 className="text-black font-bold text-xl"> Artist info</h2>
+                            <button className="brand_purple"><a href="/edit-user-artist"><SlPencil className="fill-black"/></a></button>
+
+                        </div>
+                        <div className="flex flex-col w-full md:grid-cols-4 gap-8">
+
+                            {artist.map((artist: any) => (
+                                    <article className="w-full flex flex-col-reverse md:flex-row dark:text-black gap-8" key={artist.artist_name}>
+                                        <Image
+                                        src={`https://concertify.s3.eu-central-1.amazonaws.com/${artist.artist_image}`}
+                                        width={200}
+                                        height={200}
+                                        alt="artist image"
+                                        className="h-fill w-80 bg-contain rounded-md"
+                                        />
+                                        <ul className="w-full grid gap-2">
+                                            <li className="flex flex-col item-center justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <SlStar className="fill-black w-4 h-4" id="artist_name"/>
+                                                    <p className="text-sm dark:text-black">Artist name:</p>
+                                                </div>
+                                                    <span className="text-base brand_purple pl-6">{artist.artist_name}</span>
+                                            </li>
+
+                                            <li className="flex flex-col item-center justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <SlUser className="fill-black w-4 h-4" id="artist_fullname"/>
+                                                    <p className="text-sm dark:text-black">Full name:</p>
+                                                </div>
+                                                <div className="flex gap-2 items-center">
+                                                    <span className="text-base brand_purple pl-6">{artist.artist_full_name}</span>
+                                                </div>
+                                            </li>
+
+                                            <li className="flex flex-col item-center justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <PiBalloon className="fill-black w-4 h-4" id="artist_dob"/>
+                                                    <p className="text-sm dark:text-black">Date of birth:</p>
+                                                </div>
+                                                <div className="flex gap-2 items-center">
+                                                    <span className="text-base brand_purple pl-6">{artist.artist_dob}</span>
+                                                </div>
+                                            </li>
+                                            
+
+                                            <li className="flex flex-col item-center justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <SlMusicToneAlt className="fill-black w-4 h-4" id="artist_dob"/>
+                                                    <p className="text-sm dark:text-black">Genre:</p>
+                                                </div>
+                                                <div className="flex gap-2 items-center">
+                                                    <span className="text-base brand_purple pl-6">{artist.artist_genre[0].genre_name}</span>
+                                                </div>
+                                            </li>
+
+                                            <li className="flex flex-col item-center justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <SlGlobeAlt className="fill-black w-4 h-4" id="artist_dob"/>
+                                                    <p className="text-sm dark:text-black">Nationality:</p>
+                                                </div>
+                                                <div className="flex gap-2 items-center">
+                                                    <span className="text-base brand_purple pl-6">{artist.artist_nation}</span>
+                                                </div>
+                                            </li>
+
+                                            <li className="flex flex-col item-center justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <SlBubble className="fill-black w-4 h-4" id="artist_dob"/>
+                                                    <p className="text-sm dark:text-black">Description:</p>
+                                                </div>
+                                                <div className="flex gap-2 items-center">
+                                                    <span className="text-base brand_purple pl-6">{artist.artist_description}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </article>
+                                ))}
+                        </div>
+                    </div>
                 </section>
                 </div>
                 ) : (
@@ -353,23 +439,45 @@ export default function UserProfile({params}: any) {
 
             
             {/* PREFERENCES */}
-
-            {!isArtist ? (
+            {/* {!isArtist ? ( */}
+            
             <section className="flex flex-col md:flex-row gap-4 mt-10">
-                <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
-                    <div className="flex flex-col gap-4">
-                        <h2 className="text-black font-bold text-xl">Preferred genres</h2>
-                            <ul className="flex flex-wrap gap-2">
-                                {genres.map((genre: any) => (
-                                    <article
-                                        className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8 text-[#5311BF]"
-                                        key={genre._id}>
-                                        <p>{genre.genre_name}</p>
-                                    </article>
+                {isArtist ? (
+                    <div className=""></div>
+                ): (
+                    <div>
+                        <div>
+                            <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
+                                <div className="flex flex-col gap-4">
+                                    <h2 className="text-black font-bold text-xl">Preferred genres</h2>
+                                        <ul className="flex flex-wrap gap-2">
+                                            {genres.map((genre: any) => (
+                                                <article
+                                                    className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8 text-[#5311BF]"
+                                                    key={genre._id}>
+                                                    <p>{genre.genre_name}</p>
+                                                </article>
+                                                ))}
+                                            </ul>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
+                            <div className="flex flex-col gap-4">
+                                <h2 className="text-black font-bold text-xl">Preferred venues</h2>
+                                <ul className="flex flex-wrap gap-2">
+                                    {venues.map((venue: any) => (
+                                        <article
+                                            className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8 text-[#5311BF]"
+                                            key={venue._id}>
+                                            <p>{venue.venue_name}</p>
+                                        </article>
                                     ))}
                                 </ul>
+                            </div>
+                        {/* </div> */}
                     </div>
-                </div>
 
                 <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
                     <div className="flex flex-col gap-4">
@@ -386,6 +494,10 @@ export default function UserProfile({params}: any) {
                         
                     </div>
                 </div>
+                </div>
+                )
+                
+                }
             </section>
             ) : (
                 <div className=""></div>
@@ -396,8 +508,8 @@ export default function UserProfile({params}: any) {
                 onClick={logout}
                 className="w-full flex gap-2 items-center mt-12 mb-12"
             >
-                <span className="text-[#5311BF] dark:text-white">Log out</span>
-                <SlLogout className="fill-[#5311BF] dark:fill-white"/>
+                <span className="text-[#5311BF] dark:text-white opacity-50">Log out</span>
+                <SlLogout className="fill-[#5311BF] dark:fill-white opacity-50"/>
             </button>
                     
             

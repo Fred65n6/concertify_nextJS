@@ -75,7 +75,7 @@ const ArtistCard: React.FC = () => {
                         />
                     </Link>
 
-                    <h4 className="text-black text-xl font-bold dark:text-white">
+                    <h4 className="text-black text-xl font-bold dark:text-gray-400 pt-2">
                         {artist.artist_concert.concert_name
                             ? artist.artist_concert.concert_name
                             : "Unknown Artist Concert name"}{" "}

@@ -75,21 +75,21 @@ const VenueCard: React.FC = () => {
           <div className="text-black text-xl font-bold dark:text-white pt-2">
             {venue.venue_name}
           </div>
-          <p className="text-black text-sm dark:text-gray-100">
+          <p className="text-black text-sm dark:text-gray-400">
             <span className="mr-1">{venue.venue_address}, </span>
             {venue.venue_location}
           </p>
         </article>
       ))}
 
-      <div className="hidden pagination md:flex gap-8 md:place-self-end md:col-end-5">
+      <div className="hidden pagination md:flex gap-8 md:place-self-end md:col-end-5 brand_purple dark:text-purple-500">
         {currentPage > 1 && (
           <button
             onClick={previousPage}
             className="pagination-button flex items-center"
           >
             <SlArrowLeft
-              className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
+              className="w-4 h-4"
               id="arrow_left"
             />
             Previous
@@ -97,7 +97,7 @@ const VenueCard: React.FC = () => {
         )}
         <button
           onClick={nextPage}
-          className={`flex items-center pagination-button ${
+          className={`flex items-center pagination-button brand_purple dark:text-purple-500 ${
             currentPage === Math.ceil(filteredVenues.length / venuesPerPage)
               ? "disabled"
               : ""
@@ -105,8 +105,8 @@ const VenueCard: React.FC = () => {
         >
           Next
           <SlArrowRight
-            className="stroke-gray-600 dark:stroke-[#5311BF] w-4 h-4"
-            id="arrow_right"
+              className="w-4 h-4"
+              id="arrow_right"
           />
         </button>
       </div>
