@@ -44,20 +44,19 @@ const userSchema = new mongoose.Schema({
             genre_id: String,
         },
     ],
-    venues: [
-        {
-            venue_name: String,
-            venue_id: String,
-        },
-    ],
     concerts: [
         {
             concert_id: String,
             concert_name: String,
-            concert_venue_name: String,
+            concert_image: String,
+            concert_venue: [
+                {
+                    venue_name: String,
+                    venue_id: String,
+                }
+            ],
             concert_date: String,
             concert_start: String,
-            concert_image: String,
         }
     ],
     artist: [

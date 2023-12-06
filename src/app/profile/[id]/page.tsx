@@ -9,6 +9,7 @@ import { CgClose } from "react-icons/cg";
 import { SlLogout } from "react-icons/sl";
 import Image from "next/image";
 import User from "@/models/userModel"
+import Link from "next/link";
 
 interface Genre {
     _id: string;
@@ -52,15 +53,17 @@ export default function UserProfile({params}: any) {
 
     const [data, setData] = useState({
         username: "unknown",
-        userId: null,
+        userId: "",
         userEmail: "unknown"
     });
+
     const [user, setUser] = React.useState({
         newpassword: "",
         email: "",
         password: "",
         confirmpassword: "",
         newUsername: "",
+        _id: "",
     });
 
     const logout = async () => {
@@ -68,8 +71,8 @@ export default function UserProfile({params}: any) {
             setLoading(true);
             await axios.get("/api/users/logout");
             console.log("log out successfull");
-            router.push("/");
             localStorage.setItem('shouldReload', 'true');
+            router.push("/");
         } catch (error: any) {
             console.log(error.message);
         } finally {
@@ -104,8 +107,8 @@ export default function UserProfile({params}: any) {
 
     useEffect(() => {
         getUserDetails();
-        setUser({...user, email: data.userEmail});
-    }, [data.userEmail]);
+        setUser({...user, email: data.userEmail, _id: data.userId});
+    }, [data.userEmail, data.userId]);
 
 
     // -- MODAL FUNCTIONS START
@@ -121,30 +124,29 @@ export default function UserProfile({params}: any) {
         UsernameModal?.classList.add("grid");
     };
 
-    const openEditArtistModal = () => {
-        const modal = document.getElementById("changeArtistNameModal");
+    const openDeleteUserModal = () => {
+        const modal = document.getElementById("deleteUserModal");
         modal?.classList.remove("hidden");
         modal?.classList.add("grid");
     };
 
-    
     const closeUsernameModule = () => {
         const changeUsernameModule = document.getElementById("changeUsernameModal");
         changeUsernameModule?.classList.add("hidden");
         changeUsernameModule?.classList.remove("grid");
-      };
+    };
       
     const closePasswordModule = () => {
         const modal = document.getElementById("changePasswordModal");
         modal?.classList.add("hidden");
         modal?.classList.remove("grid");
-      };
+    };
 
-      const closeEditArtistModal = () => {
-        const modal = document.getElementById("changeArtistNameModal");
-        modal?.classList.add("hidden");
-        modal?.classList.remove("grid");
-      };
+    const closeDeleteUserModule = () => {
+        const changeUsernameModule = document.getElementById("deleteUserModal");
+        changeUsernameModule?.classList.add("hidden");
+        changeUsernameModule?.classList.remove("grid");
+    };
 
     // -- CHANGE USERNAME
     const changeUsername = async () => {
@@ -175,32 +177,21 @@ export default function UserProfile({params}: any) {
         }
     };
 
-    // -- CHANGE USERNAME
-    const editArtist = async () => {
+    const deleteUser = async () => {
         try {
             setLoading(true);
             const response = await axios.post(
-                "/api/users/changeUsername",
-                user
+                "/api/users/deleteUser",
+                { _id: user._id, password: user.password } // Adjust accordingly
             );
-            console.log("username changed", response.data);
-            // showUsernameChangeMessage();
-        } catch (error: any) {
-            if (
-                error.response &&
-                error.response.data &&
-                error.response.data.error
-            ) {
-                setError(error.response.data.error);
-            } else {
-                setError("An error occurred during signup.");
-            }
-            console.log("API signup failed", error);
+            console.log("User deleted", response.data);
+            logout();
+        } catch (error) {
+            console.error("Delete user failed", error);
+            // Handle the error as needed
         } finally {
             setLoading(false);
-            closeEditArtistModal();
-            window.location.reload();
-
+            closeUsernameModule();
         }
     };
 
@@ -230,7 +221,6 @@ export default function UserProfile({params}: any) {
             closeUsernameModule();
         }
     };
-
 
 
     return (
@@ -339,8 +329,12 @@ export default function UserProfile({params}: any) {
                                 className="w-full text-sm"
                                 key={concerts.concert_name}>
 
+                            <Link href={"/concerts/" + concerts.concert_id} key={concerts.concert_id}>
+
                                 <p >Concerts: <br /><span className="text-base brand_purple">{concerts.concert_name}</span></p>
 
+                            </Link>
+                                
                             </li>
                         ))}     
                     </ul>
@@ -392,6 +386,8 @@ export default function UserProfile({params}: any) {
             )}
 
             {/* LOG OUT LINK */}
+            <div className="w-full flex justify-between">
+            <div className="">
             <button
                 onClick={logout}
                 className="w-full flex gap-2 items-center mt-12 mb-12"
@@ -399,11 +395,23 @@ export default function UserProfile({params}: any) {
                 <span className="text-[#5311BF] dark:text-white">Log out</span>
                 <SlLogout className="fill-[#5311BF] dark:fill-white"/>
             </button>
-                    
+            </div>
+
+            <div className="">
+            <button
+                onClick={openDeleteUserModal}
+                className="w-full flex gap-2 items-center mt-12 mb-12"
+            >
+                <span className="text-red-400 dark:text-white">Delete user</span>
+                
+            </button>
+            </div>
+            </div>
+            
             
 
             {/* CHANGE USERNAME MODAL */}
-            <div id="changeUsernameModal" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+            <div id="changeUsernameModal" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
                 <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
                     <button
                         type="button"
@@ -450,7 +458,7 @@ export default function UserProfile({params}: any) {
             </div>
 
             {/* CHANGE PASSWORD MODAL */}
-            <div id="changePasswordModal" className="absolute top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+            <div id="changePasswordModal" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
                 <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
                     <button
                         type="button"
@@ -519,6 +527,58 @@ export default function UserProfile({params}: any) {
                     </div>
                     <button
                         onClick={changePassword}
+                        className="m-4 brand_gradient px-12 py-4 rounded-full text-white mt-8"
+                    >
+                        Save
+                    </button>
+                </div>
+            </div>
+
+             {/* DELETE USER MODAL */}
+             <div id="deleteUserModal" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+                <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
+                    <button
+                        type="button"
+                        onClick={closeDeleteUserModule}
+                        className="cursor-pointer ml-[100%]"
+                    >
+                        <CgClose/>
+                    </button>
+
+                    <div className="flex flex-col w-full gap-2">
+                        <span className="w-full text-xl font-semibold text-[#5311BF] dark:text-purple-500 mb-6">Change username</span>
+                        <input
+                            readOnly={true}
+                            type="text"
+                            id="email"
+                            value={user._id}
+                            placeholder=""
+                        />
+                        <input
+                            readOnly={true}
+                            type="text"
+                            id="email"
+                            value={user.email}
+                            placeholder=""
+                        />
+                        <label htmlFor="password" className="w-fit text-sm text-gray-600 dark:text-gray-100">Choose a new username</label>
+                        <input
+                            className="input_field"
+                            type="text"
+                            id="password"
+                            placeholder="Start typing..."
+                            value={user.password}
+                            onChange={(e) =>
+                                setUser({...user, password: e.target.value})
+                            }
+                        
+                        />
+                        {error && <div className="text-red-500">{error}</div>}
+
+                    </div>
+
+                    <button
+                        onClick={deleteUser}
                         className="m-4 brand_gradient px-12 py-4 rounded-full text-white mt-8"
                     >
                         Save

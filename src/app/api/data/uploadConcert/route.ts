@@ -94,6 +94,7 @@ export async function POST(request: NextRequest) {
             const newConcert = {
                 concert_id: concertId,
                 concert_name: concertName,
+                concert_image: concertImage,
                 concert_date: concertDescription,
                 concert_venue: concertVenue,
                 concert_start: concertStart,
