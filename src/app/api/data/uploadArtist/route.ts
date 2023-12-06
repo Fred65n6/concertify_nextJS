@@ -13,8 +13,9 @@ AWS.config.update({
 });
 
 const generateUUID = () => {
-    return uuidv4();
-  };
+    const uuid = uuidv4();
+    return uuid.replace(/-/g, '');
+};
 
 const s3 = new AWS.S3();
 
