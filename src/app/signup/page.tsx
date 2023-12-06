@@ -7,7 +7,6 @@ import Link from "next/link";
 import { Progress } from "flowbite-react";
 import { CgClose } from "react-icons/cg";
 
-
 interface Genre {
   _id: string;
   genre_name: string;
@@ -33,10 +32,6 @@ export default function SignupPage() {
   const [venues, setVenues] = useState<Venue[]>([]);
   const [selectedVenues, setSelectedVenues] = useState<string[]>([]);
   const [selectedVenue, setSelectedVenue] = useState<string>("");
-
-  const [email, setEmail] = useState<string>("");
-  const router = useRouter();
-
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string>("");
@@ -98,8 +93,6 @@ export default function SignupPage() {
     }
   }
 
-  
-
   const openSignup = () => {
     const signUpWindow = document.getElementById("userSignup");
     const userPick = document.getElementById("userPick");
@@ -108,7 +101,6 @@ export default function SignupPage() {
       signUpWindow.classList.add("flex");
       userPick?.classList.add("hidden")
       userPick?.classList.remove("grid")
-
     }
   }
 
@@ -185,7 +177,6 @@ export default function SignupPage() {
     }
   };
 
-
   // --- Venue functions
   const handleVenueChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedVenue = event.target.value;
@@ -215,7 +206,6 @@ export default function SignupPage() {
     }
   };
 
-
   // --- Genre functions
   const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedGenre = event.target.value;
@@ -244,8 +234,6 @@ export default function SignupPage() {
       console.error("Error submitting form:", error);
     }
   };
-
-
 
   return (
     <>

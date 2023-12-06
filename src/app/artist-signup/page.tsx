@@ -1,42 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import axios from "axios";
-import { Progress } from "flowbite-react";
-import { CgClose } from "react-icons/cg";
 import LoginPage from "../login/page";
-import SignupPage from "../signup/page";
 
-interface Genre {
-  _id: string;
-  genre_name: string;
-}
-
-interface ShowGenresProps {
-  onSubmit: (selectedGenres: string[], email: string) => void;
-}
-
-interface Venue {
-  _id: string;
-  venue_name: string;
-}
-
-interface ShowVenuesProps {
-  onSubmit: (selectedVenues: string[], email: string) => void;
-}
 
 export default function ArtistSignupPage() {
-  const [genres, setGenres] = useState<Genre[]>([]);
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-  const [selectedGenre, setSelectedGenre] = useState<string>("");
-  const [venues, setVenues] = useState<Venue[]>([]);
-  const [selectedVenues, setSelectedVenues] = useState<string[]>([]);
-  const [selectedVenue, setSelectedVenue] = useState<string>("");
-
-  const [email, setEmail] = useState<string>("");
-  const router = useRouter();
-
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string>("");
@@ -58,31 +27,7 @@ export default function ArtistSignupPage() {
     } else {
       setButtonDisabled(true);
     }
-    fetchData();
-    fetchVenueData();
   }, [user]);
-
-  const fetchVenueData = async () => {
-    try {
-        const response = await axios.get("/api/data/genreData");
-        setGenres(response.data.data);
-        console.log(response);
-    } catch (error) {
-        console.error("Error fetching genres:", error);
-    }
-  };
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get<{ data: Venue[] }>("/api/data/venueData");
-      setVenues(response.data.data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching venues:", error);
-      setLoading(false);
-      setError("Error fetching venues");
-    }
-  };
 
   const switchToLoginModule = () => {
     const loginModule = document.getElementById("login_module");
@@ -92,19 +37,13 @@ export default function ArtistSignupPage() {
     loginModule?.classList.add("grid");
   };
 
-  const closeSignupModule = () => {
-    const signupModule = document.getElementById("signup_module");
-    signupModule?.classList.add("hidden");
-    signupModule?.classList.remove("grid");
-  };
-
   // Send information to API'en signup
   const onSignup = async () => {
     try {
       setLoading(true);
       const response = await axios.post("/api/users/artistSignup", user);
-      console.log("Signup success", response.data);
       signFlowUpCompleteMessage();
+      console.log("Signup success", response.data);
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.error) {
         setError(error.response.data.error);
@@ -128,24 +67,17 @@ export default function ArtistSignupPage() {
   const signFlowUpCompleteMessage = () => {
     const signupFlowCompleteMessage = document.getElementById("signup_flow_complete");
     const signUpForm = document.getElementById("signup_form");
-    // const preferredGenres = document.getElementById("signup_preference_genres");
-    // const preferredVenues = document.getElementById("signup_preference_venues");
     if (signupFlowCompleteMessage) {
       signupFlowCompleteMessage.classList.remove("hidden");
       signupFlowCompleteMessage.classList.add("block");
       signUpForm?.classList.add("hidden");
-      // preferredGenres?.classList.add("hidden");
-      // preferredVenues?.classList.add("hidden");
     }
     console.log("have run signFlowUpCompleteMessage");
   };
 
-  // Disabling the button if not all fields are filled out
-
   return (
     <>
     <LoginPage/>
-    <SignupPage/>
       <div id="signup_module" className="grid h-screen m-auto items-center justify-center backdrop-blur-sm z-50">
         {/* SIGNUP FORM: STEP 1 */}
         <div id="signup_form">

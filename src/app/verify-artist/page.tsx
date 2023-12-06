@@ -15,6 +15,7 @@ const VerifyArtistPage: React.FC = () => {
   const [token, setToken] = useState("");
   const [verified, setVerified] = useState(false);
   const [error, setError] = useState(false);
+  const [linkError, setLinkError] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -51,7 +52,7 @@ const VerifyArtistPage: React.FC = () => {
           await axios.post("/api/users/verifyemail", { token });
           setVerified(true);
         } catch (error: any) {
-          setError(true);
+          setLinkError(true);
           console.log(error.response.data);
         }
       };
@@ -163,7 +164,7 @@ const showUploadMessage = () => {
 
                 {error && (
                     <div className="pt-4">
-                        <h2 className="text-4xl text-red-500">{error}</h2>
+                        <h2 className=" text-red-500">{error}</h2>
                     </div>
                 )}
 
@@ -305,9 +306,10 @@ const showUploadMessage = () => {
         </div>
         </div>
       )}
-      {error && (
-        <div className="pt-4">
-          <h2 className="text-4xl text-red-500">There was an Error</h2>
+      {linkError && (
+        <div className="pt-4 m-auto">
+          <h2 className="text-xl text-red-500 pb-8">Link has expired</h2>
+          <button className="primary_btn"><a href="/">Go to frontpage</a></button>
         </div>
       )}
     </div>

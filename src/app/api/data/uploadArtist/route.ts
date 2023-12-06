@@ -106,6 +106,9 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({success: true});
     } catch (error) {
         console.error("Error uploading file to S3:", error);
-        return NextResponse.json({success: false});
+        return NextResponse.json({
+            success: false,
+            error: "Error uploading artist.",
+        });
     }
 }
