@@ -5,7 +5,7 @@ import React, {useState, useEffect} from "react";
 import {useRouter} from "next/navigation";
 import ThemeSwitcher from "../../components/switchTheme/page";
 import { CgClose } from "react-icons/cg";
-import { SlLogout, SlStar, SlMusicToneAlt, SlGlobeAlt, SlBubble, SlUser, SlNote, SlPencil } from "react-icons/sl";
+import { SlLogout, SlClose, SlStar, SlMusicToneAlt, SlGlobeAlt, SlBubble, SlUser, SlNote, SlPencil } from "react-icons/sl";
 import Image from "next/image";
 import User from "@/models/userModel"
 import {PiBalloon} from "react-icons/pi";
@@ -38,6 +38,11 @@ interface User {
 
   interface Concert {
     concert_name: string;
+    concert_date: string;
+    concert_image: string;
+    concert_venue: {
+        venue_name: string;
+    }
   }
 
 
@@ -178,6 +183,7 @@ export default function UserProfile({params}: any) {
         }
     };
 
+    // -- DELETE USER
     const deleteUser = async () => {
         try {
             setLoading(true);
@@ -276,97 +282,114 @@ export default function UserProfile({params}: any) {
             {/* -- IF ARTIST: */}
             <section>
                 {isArtist ? (
-                // -- CONCERTS
-                <section className="mt-10">
-                        <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">
-                            <div className="w-full flex justify-between">
-                                <h2 className="text-black font-bold text-xl">Concerts</h2>
-                                <button className="brand_purple"><a href="/edit-user-artist"><SlPencil className="fill-black"/></a></button>
-                            </div>
-                            {concerts.map((concerts: any) => (
-                                    <p className="text-black text-sm pt-2">{concerts.concert_name}</p>
-                            ))}
+                <section className="mt-10 flex flex-col gap-12">
+                    {/* -- ARTIST INFO */}
+                    <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">   
+                        <div className="w-full flex justify-between">
+                            <h2 className="text-black font-bold text-xl"> Artist info</h2>
+                            <button className="brand_purple"><a href="/edit-user-artist"><SlPencil className="fill-black"/></a></button>
                         </div>
+                        <div className="flex flex-col w-full md:grid-cols-4 gap-8">
+                            {artist.map((artist: any) => (
+                                    <article className="w-full flex flex-col-reverse md:flex-row dark:text-black gap-8" key={artist.artist_name}>
+                                        <Image
+                                        src={`https://concertify.s3.eu-central-1.amazonaws.com/${artist.artist_image}`}
+                                        width={200}
+                                        height={200}
+                                        alt="artist image"
+                                        className="h-fill w-80 bg-contain rounded-md"
+                                        />
+                                        <ul className="w-full grid gap-2">
+                                            <li className="flex flex-col item-center justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <SlStar className="fill-black w-4 h-4" id="artist_name"/>
+                                                    <p className="text-sm dark:text-black">Artist name:</p>
+                                                </div>
+                                                    <span className="text-base brand_purple pl-6">{artist.artist_name}</span>
+                                            </li>
 
-                        {/* -- ARTIST INFO */}
-                        <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">   
-                            <div className="w-full flex justify-between">
-                                <h2 className="text-black font-bold text-xl"> Artist info</h2>
-                                <button className="brand_purple"><a href="/edit-user-artist"><SlPencil className="fill-black"/></a></button>
-                            </div>
-                            <div className="flex flex-col w-full md:grid-cols-4 gap-8">
-                                {artist.map((artist: any) => (
-                                        <article className="w-full flex flex-col-reverse md:flex-row dark:text-black gap-8" key={artist.artist_name}>
-                                            <Image
-                                            src={`https://concertify.s3.eu-central-1.amazonaws.com/${artist.artist_image}`}
+                                            <li className="flex flex-col item-center justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <SlUser className="fill-black w-4 h-4" id="artist_fullname"/>
+                                                    <p className="text-sm dark:text-black">Full name:</p>
+                                                </div>
+                                                <div className="flex gap-2 items-center">
+                                                    <span className="text-base brand_purple pl-6">{artist.artist_full_name}</span>
+                                                </div>
+                                            </li>
+
+                                            <li className="flex flex-col item-center justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <PiBalloon className="fill-black w-4 h-4" id="artist_dob"/>
+                                                    <p className="text-sm dark:text-black">Date of birth:</p>
+                                                </div>
+                                                <div className="flex gap-2 items-center">
+                                                    <span className="text-base brand_purple pl-6">{artist.artist_dob}</span>
+                                                </div>
+                                            </li>
+                                            
+                                            <li className="flex flex-col item-center justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <SlMusicToneAlt className="fill-black w-4 h-4" id="artist_dob"/>
+                                                    <p className="text-sm dark:text-black">Genre:</p>
+                                                </div>
+                                                <div className="flex gap-2 items-center">
+                                                    <span className="text-base brand_purple pl-6">{artist.artist_genre[0].genre_name}</span>
+                                                </div>
+                                            </li>
+
+                                            <li className="flex flex-col item-center justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <SlGlobeAlt className="fill-black w-4 h-4" id="artist_dob"/>
+                                                    <p className="text-sm dark:text-black">Nationality:</p>
+                                                </div>
+                                                <div className="flex gap-2 items-center">
+                                                    <span className="text-base brand_purple pl-6">{artist.artist_nation}</span>
+                                                </div>
+                                            </li>
+
+                                            <li className="flex flex-col item-center justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <SlBubble className="fill-black w-4 h-4" id="artist_dob"/>
+                                                    <p className="text-sm dark:text-black">Description:</p>
+                                                </div>
+                                                <div className="flex gap-2 items-center">
+                                                    <span className="text-base brand_purple pl-6">{artist.artist_description}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </article>
+                                ))}
+                        </div>
+                    </div>
+
+                    {/* CONCERTS */}
+                    <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">
+                        <div className="w-full flex justify-between">
+                            <h2 className="text-black font-bold text-xl">Concerts</h2>
+                        </div>
+                        <div className="flex-col md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
+                        {concerts.map((concerts: any) => (
+                                <article className="flex-shrink-0 grid md:pt-8 pb-8" key={concerts.concert_id}>
+                                    <Link href={"/concerts/" + concerts.concert_id} key={concerts.concert_id}>
+                                        <Image
+                                            src={`https://concertify.s3.eu-central-1.amazonaws.com/${concerts.concert_image}`}
                                             width={200}
                                             height={200}
-                                            alt="artist image"
-                                            className="h-fill w-80 bg-contain rounded-md"
-                                            />
-                                            <ul className="w-full grid gap-2">
-                                                <li className="flex flex-col item-center justify-between">
-                                                    <div className="flex gap-2 items-center">
-                                                        <SlStar className="fill-black w-4 h-4" id="artist_name"/>
-                                                        <p className="text-sm dark:text-black">Artist name:</p>
-                                                    </div>
-                                                        <span className="text-base brand_purple pl-6">{artist.artist_name}</span>
-                                                </li>
+                                            alt="concert"
+                                            className="rounded-lg object-cover w-full h-[200px]"
+                                        />
+                                    </Link>
 
-                                                <li className="flex flex-col item-center justify-between">
-                                                    <div className="flex gap-2 items-center">
-                                                        <SlUser className="fill-black w-4 h-4" id="artist_fullname"/>
-                                                        <p className="text-sm dark:text-black">Full name:</p>
-                                                    </div>
-                                                    <div className="flex gap-2 items-center">
-                                                        <span className="text-base brand_purple pl-6">{artist.artist_full_name}</span>
-                                                    </div>
-                                                </li>
-
-                                                <li className="flex flex-col item-center justify-between">
-                                                    <div className="flex gap-2 items-center">
-                                                        <PiBalloon className="fill-black w-4 h-4" id="artist_dob"/>
-                                                        <p className="text-sm dark:text-black">Date of birth:</p>
-                                                    </div>
-                                                    <div className="flex gap-2 items-center">
-                                                        <span className="text-base brand_purple pl-6">{artist.artist_dob}</span>
-                                                    </div>
-                                                </li>
-                                                
-                                                <li className="flex flex-col item-center justify-between">
-                                                    <div className="flex gap-2 items-center">
-                                                        <SlMusicToneAlt className="fill-black w-4 h-4" id="artist_dob"/>
-                                                        <p className="text-sm dark:text-black">Genre:</p>
-                                                    </div>
-                                                    <div className="flex gap-2 items-center">
-                                                        <span className="text-base brand_purple pl-6">{artist.artist_genre[0].genre_name}</span>
-                                                    </div>
-                                                </li>
-
-                                                <li className="flex flex-col item-center justify-between">
-                                                    <div className="flex gap-2 items-center">
-                                                        <SlGlobeAlt className="fill-black w-4 h-4" id="artist_dob"/>
-                                                        <p className="text-sm dark:text-black">Nationality:</p>
-                                                    </div>
-                                                    <div className="flex gap-2 items-center">
-                                                        <span className="text-base brand_purple pl-6">{artist.artist_nation}</span>
-                                                    </div>
-                                                </li>
-
-                                                <li className="flex flex-col item-center justify-between">
-                                                    <div className="flex gap-2 items-center">
-                                                        <SlBubble className="fill-black w-4 h-4" id="artist_dob"/>
-                                                        <p className="text-sm dark:text-black">Description:</p>
-                                                    </div>
-                                                    <div className="flex gap-2 items-center">
-                                                        <span className="text-base brand_purple pl-6">{artist.artist_description}</span>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </article>
-                                    ))}
-                            </div>
+                                    <h4 className="text-black text-xl font-bold pt-2">{concerts.concert_name}</h4>
+                                    <p className="text-black text-sm pt-2">{concerts.concert_date}</p>
+                                    <p className="text-black text-sm pt-2">{concerts.concert_venue[0].venue_name}</p>
+                                </article>
+                        ))}
                         </div>
+                    </div>
+
+
                 </section>
                 ) : (
                 <div className=""></div>
@@ -413,28 +436,26 @@ export default function UserProfile({params}: any) {
             <div className=""></div>
             )}
 
-            {/* LOG OUT LINK */}
+            {/* LOG OUT & DELETE USER LINK */}
             <div className="w-full flex justify-between">
-            <div className="">
-            <button
-                onClick={logout}
-                className="w-full flex gap-2 items-center mt-12 mb-12"
-            >
-                <span className="text-[#5311BF] dark:text-white opacity-50">Log out</span>
-                <SlLogout className="fill-[#5311BF] dark:fill-white opacity-50"/>
-            </button>
+                <button
+                    onClick={logout}
+                    className="w-fit flex gap-2 items-center mt-12 mb-12"
+                >
+                    <span className="text-[#5311BF] dark:text-white opacity-50">Log out</span>
+                    <SlLogout className="fill-[#5311BF] dark:fill-white opacity-50"/>
+                    
+                </button>
+
+                <button
+                    onClick={openDeleteUserModal}
+                    className="w-fit flex gap-2 items-center mt-12 mb-12"
+                >
+                    <span className="text-[#5311BF] dark:text-white opacity-50">Delete user</span> 
+                    <SlClose className="fill-[#5311BF] dark:fill-white opacity-50"/>               
+                </button>
             </div>
 
-            <div className="">
-            <button
-                onClick={openDeleteUserModal}
-                className="w-full flex gap-2 items-center mt-12 mb-12"
-            >
-                <span className="text-red-400 dark:text-white">Delete user</span>
-                
-            </button>
-            </div>
-            </div>
             
             
 
@@ -609,9 +630,9 @@ export default function UserProfile({params}: any) {
 
                     <button
                         onClick={deleteUser}
-                        className="m-4 text-red-700 mt-8"
+                        className="mt-8 primary_btn"
                     >
-                        DELETE
+                        Delete my account now
                     </button>
                 </div>
             </div>

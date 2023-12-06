@@ -13,8 +13,10 @@ AWS.config.update({
 });
 
 const generateUUID = () => {
-    return uuidv4();
-  };
+    const uuid = uuidv4();
+    return uuid.replace(/-/g, '');
+};
+
 
 const s3 = new AWS.S3();
 
@@ -94,8 +96,10 @@ export async function POST(request: NextRequest) {
             const newConcert = {
                 concert_id: concertId,
                 concert_name: concertName,
+                concert_artist: concertArtist,
                 concert_image: concertImage,
-                concert_date: concertDescription,
+                concert_description: concertDescription,
+                concert_date: concertDate,
                 concert_venue: concertVenue,
                 concert_start: concertStart,
                 artist_imeage: concertImage,

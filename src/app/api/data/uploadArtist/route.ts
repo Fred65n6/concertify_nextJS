@@ -5,16 +5,22 @@ import Artist from "@/models/artistModel";
 import AWS from "aws-sdk";
 import User from "@/models/userModel"
 
-// Load AWS credentials and configuration from environment variables
+// -- Load AWS credentials and configuration from environment variables
 AWS.config.update({
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
     region: process.env.REGION,
 });
 
+// function validateNation(nation:string) {
+//     const nationRegex = /^[a-zA-Z]{2}$/;
+//     return nationRegex.test(nation);
+// }
+
 const generateUUID = () => {
-    return uuidv4();
-  };
+    const uuid = uuidv4();
+    return uuid.replace(/-/g, '');
+};
 
 const s3 = new AWS.S3();
 
@@ -54,7 +60,7 @@ export async function POST(request: NextRequest) {
     const uuid = uuidv4();
     const fileExtension = file.name.split(".").pop();
     const newFileName = `${uuid}.${fileExtension}`;
-    const s3BucketName = "concertify"; // Replace with your S3 bucket name
+    const s3BucketName = "concertify";
     const s3ObjectKey = `artist_images/${newFileName}`;
 
     const params = {
@@ -64,6 +70,13 @@ export async function POST(request: NextRequest) {
     };
 
     try {
+        // -- Validate nation
+        // if (!validateNation(nation)) {
+        //     return NextResponse.json(
+        //         { error: "Password must include one uppercase letter, one digit, one special character and be at least 9 characters long" },
+        //         { status: 400 }
+        //     );
+        // }
         await s3.upload(params).promise();
         console.log(`File uploaded to S3: ${s3ObjectKey}`);
 
