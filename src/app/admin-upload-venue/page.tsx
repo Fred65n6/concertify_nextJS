@@ -6,7 +6,7 @@ import Link from "../../../node_modules/next/link";
 
 const UploadForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
-
+    const [error, setError] = useState(false);
     const [file, setFile] = useState<File | null>(null);
     const [venueName, setVenueName] = useState("");
     const [venueAddress, setVenueAddress] = useState("");
@@ -34,14 +34,16 @@ const UploadForm: React.FC = () => {
             body: data,
         });
 
-        if (!res.ok) {
-            const errorText = await res.text();
-            console.error(errorText);
-        }
-
-        if (res.ok) {
+        const responseData = await res.json();
+        
+        if (responseData.success) {
+            // Upload successful, show success message or perform other actions
             setLoading(false);
             showUploadMessage();
+        } else {
+            // Upload failed, display error message to the user
+            setError(responseData.error || "Error uploading artist.");
+            setLoading(false);
         }
     };
 
@@ -129,6 +131,12 @@ const UploadForm: React.FC = () => {
                 >
                     {loading ? "Processing" : "Confirm and upload venue"}
                 </button>
+
+                {error && (
+                    <div className="pt-4">
+                        <h2 className=" text-red-500">{error}</h2>
+                    </div>
+                )}
             </form>
 
             <div id="venueUploadedMessage" className="hidden">

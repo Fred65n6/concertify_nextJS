@@ -20,8 +20,8 @@ export async function POST(request: NextRequest) {
         console.log(reqBody);
 
         // -- Check if user already exists
-        const user = await User.findOne({ email });
-
+        const user = await User.findOne({ email: email.toLowerCase() });  
+        
         if (user) {
             return NextResponse.json(
                 { error: "Email already in use" },
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
 
         const newUser = new User({
             username,
-            email,
+            email: email.toLowerCase(),
             password: hashedPassword,
         });
 

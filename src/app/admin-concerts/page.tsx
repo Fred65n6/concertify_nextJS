@@ -38,6 +38,7 @@ interface Concert {
         venue_location: string;
     };
     concert_doors: string;
+    isVisible: boolean;
 }
 
 
@@ -51,6 +52,7 @@ const AdminConcertsOverview: React.FC = () => {
   const [concertDate, setConcertDate] = useState("");
   const [concertDescription, setConcertDescription] = useState("");
   const [concertDoors, setConcertDoors] = useState("");
+  const [isVisible, setIsVisible] = useState(true); // Add state for visibility
 
 
   useEffect(() => {
@@ -137,6 +139,7 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           data.set("concert_doors", concertDoors);
           data.set("concert_id", selectedConcert!.concert_artist_email);
           data.set("concert_artist_email", selectedConcert!.concert_id);
+          data.set("isVisible", isVisible.toString());
 
           console.log(data)
 
@@ -165,6 +168,7 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           data.set("concert_doors", concertDoors);
           data.set("concert_artist_email", selectedConcert!.concert_artist_email);
           data.set("concert_id", selectedConcert!.concert_id);
+          data.set("isVisible", isVisible.toString());
 
           console.log(data)
       
@@ -399,6 +403,18 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                         placeholder={selectedConcert.concert_description}
                     />
                 </div>
+
+                <div className="flex items-center gap-4 mt-8">
+                    <label htmlFor="isVisible" className="text-base text-purple-800">* If this box is checked, the concert will be public</label>
+                    <input
+                        type="checkbox"
+                        id="isVisible"
+                        name="isVisible"
+                        className="bg-purple-800 text-purple-800"
+                        checked={isVisible}
+                        onChange={() => setIsVisible(!isVisible)}
+                    />
+                    </div>
 
 
                 <div className="form-group flex flex-col gap-2">

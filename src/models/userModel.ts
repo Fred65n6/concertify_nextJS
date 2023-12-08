@@ -57,6 +57,8 @@ const userSchema = new mongoose.Schema({
             ],
             concert_date: String,
             concert_start: String,
+            concert_artist_image: String,
+            concert_artist_email: String,
         }
     ],
     artist: [

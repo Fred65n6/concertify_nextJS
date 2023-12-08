@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
         const reqBody = await request.json();
         const { username, email, password, confirmpassword } = reqBody;
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: email.toLowerCase() });  
 
         if (user) {
             return NextResponse.json(
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
 
         const newUser = new User({
             username,
-            email,
+            email: email.toLowerCase(),
             password: hashedPassword,
             isArtist: true,
         });

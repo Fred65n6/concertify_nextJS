@@ -60,15 +60,16 @@ const UploadForm: React.FC = () => {
             body: data,
         });
 
-        if (!res.ok) {
-            const errorText = await res.json();
-            console.error(errorText);
-            setError("Error uploading artist");
-        }
-
-        if (res.ok) {
+        const responseData = await res.json();
+        
+        if (responseData.success) {
+            // Upload successful, show success message or perform other actions
             setLoading(false);
             showUploadMessage();
+        } else {
+            // Upload failed, display error message to the user
+            setError(responseData.error || "Error uploading artist.");
+            setLoading(false);
         }
     };
 
@@ -225,6 +226,12 @@ const UploadForm: React.FC = () => {
                 >
                     {loading ? "Processing" : "Confirm and upload artist"}
                 </button>
+
+                {error && (
+                    <div className="pt-4">
+                        <h2 className=" text-red-500">{error}</h2>
+                    </div>
+                )}
                 </div>
 
                 {error && <div className="text-red-500">{error}</div>}

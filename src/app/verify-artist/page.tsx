@@ -162,12 +162,6 @@ const showUploadMessage = () => {
                     />
                 </div>
 
-                {error && (
-                    <div className="pt-4">
-                        <h2 className=" text-red-500">{error}</h2>
-                    </div>
-                )}
-
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="artist_name">Artist name</label>
                     <input
@@ -290,17 +284,17 @@ const showUploadMessage = () => {
                 >
                     {loading ? "Processing" : "Confirm"}
                 </button>
+
+                {error && (
+                    <div className="pt-4">
+                        <h2 className=" text-red-500">{error}</h2>
+                    </div>
+                )}
             </form>
             <div id="artistUploadedMessage" className="hidden">
                 <h2 className="text-2xl">Artist uploaded successfully 🎉</h2>
                 <div className="flex gap-4 mt-8">
-                <button
-                        type="button"
-                        onClick={openLoginModule}
-                        className="rounded-full w-32 brand_gradient text-white hover:bg-purple-200 h-12"
-                    >
-                        Log in
-                    </button>
+                <button className="primary_btn"><a href="/">Go to frontpage</a></button>
                 </div>
             </div>
         </div>

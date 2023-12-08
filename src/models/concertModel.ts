@@ -47,6 +47,10 @@ const concertSchema = new mongoose.Schema({
     concert_doors: {
         type: String,
     },
+    isVisible: {
+        type: Boolean,
+        default: true,
+    }
 });
 
 const Concert =

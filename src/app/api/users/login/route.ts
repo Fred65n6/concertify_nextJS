@@ -13,7 +13,8 @@ export async function POST(request: NextRequest) {
     console.log(reqBody);
 
     // -- Check if user exists
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.toLowerCase() });  
+
     if (!user) {
       return NextResponse.json(
         { error: "User does not exist" },
@@ -44,7 +45,7 @@ export async function POST(request: NextRequest) {
       const tokenDataAdmin = {
         id: user._id,
         username: user.username,
-        email: user.email,
+        email: user.email.toLowerCase(),
         isAdmin: true, 
       };
 

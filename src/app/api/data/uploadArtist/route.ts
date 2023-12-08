@@ -1,4 +1,3 @@
-import {writeFile} from "fs/promises";
 import {NextRequest, NextResponse} from "next/server";
 import {v4 as uuidv4} from "uuid";
 import Artist from "@/models/artistModel";
@@ -12,11 +11,6 @@ AWS.config.update({
     region: process.env.REGION,
 });
 
-// function validateNation(nation:string) {
-//     const nationRegex = /^[a-zA-Z]{2}$/;
-//     return nationRegex.test(nation);
-// }
-
 const generateUUID = () => {
     const uuid = uuidv4();
     return uuid.replace(/-/g, '');
@@ -28,12 +22,12 @@ export async function POST(request: NextRequest) {
     const data = await request.formData();
     const file = data.get("file") as File;
     const artistId = generateUUID();
-    const artistName = data.get("artist_name");
-    const artistFullName = data.get("artist_full_name");
-    const artistNationality = data.get("artist_nation");
-    const artistDescription = data.get("artist_description");
+    const artistName = (data.get("artist_name")as string);
+    const artistFullName = (data.get("artist_full_name")as string);
+    const artistNationality = (data.get("artist_nation")as string);
+    const artistDescription = (data.get("artist_description")as string);
     const artistDob = data.get("artist_dob");
-    const artistEmail = data.get("artist_email")
+    const artistEmail = (data.get("artist_email") as string).toLowerCase();
 
     const artistGenre = {
         genre_name: data.get("artist_genre_name"),
@@ -43,7 +37,6 @@ export async function POST(request: NextRequest) {
     const existingArtist = await Artist.findOne({ artist_name: artistName });
 
     if (existingArtist) {
-        // Artist name is already taken
         return NextResponse.json({
             success: false,
             error: "Artist name is already taken. Choose a different name.",
@@ -53,6 +46,53 @@ export async function POST(request: NextRequest) {
     if (!file) {
         return NextResponse.json({success: false});
     }
+
+    const allowedFileTypes = ["image/png", "image/jpeg", "image/jpg"];
+    if (!allowedFileTypes.includes(file.type)) {
+        return NextResponse.json({
+        success: false,
+        error: "Invalid file type. Only PNG, JPEG, and JPG files are allowed.",
+        });
+    }
+    
+  const normalCharsRegex = /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\s]+$/;
+
+  if (artistName) {
+    if (artistName.length > 60 || !normalCharsRegex.test(artistName)) {
+      return NextResponse.json({
+        success: false,
+        error: "Artist name must be at most 60 characters long and can only contain normal characters.",
+      });
+    }
+  }
+
+  if (artistFullName) {
+    if (artistFullName.length > 60 || !normalCharsRegex.test(artistFullName)) {
+      return NextResponse.json({
+        success: false,
+        error: "Artist full name name must be at most 60 characters long and can only contain normal characters.",
+      });
+    }
+  }
+
+
+  if (artistDescription) {
+    if (artistDescription.length > 140 || !normalCharsRegex.test(artistDescription)) {
+      return NextResponse.json({
+        success: false,
+        error: "Artist name must be at most 140 characters long and can only contain normal characters.",
+      });
+    }
+  }
+
+  if (artistNationality) {
+    if (artistNationality.length > 2 || !normalCharsRegex.test(artistNationality)) {
+      return NextResponse.json({
+        success: false,
+        error: "Concert name must be at most 2 characters long and can only contain normal characters.",
+      });
+    }
+  }
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
@@ -70,13 +110,6 @@ export async function POST(request: NextRequest) {
     };
 
     try {
-        // -- Validate nation
-        // if (!validateNation(nation)) {
-        //     return NextResponse.json(
-        //         { error: "Password must include one uppercase letter, one digit, one special character and be at least 9 characters long" },
-        //         { status: 400 }
-        //     );
-        // }
         await s3.upload(params).promise();
         console.log(`File uploaded to S3: ${s3ObjectKey}`);
 

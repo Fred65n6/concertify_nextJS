@@ -22,6 +22,8 @@ export async function POST(request: NextRequest) {
   const concertStart = data.get("concert_start");
   const concertDoors = data.get("concert_doors");
   const concertDate = data.get("concert_date");
+  const isVisible = data.get("isVisible"); // Added line to get isVisible
+
 
   try {
     let concertImage = "";
@@ -58,6 +60,7 @@ export async function POST(request: NextRequest) {
       if (concertStart) concert.concert_start = concertStart;
       if (concertDoors) concert.concert_doors = concertDoors;
       if (concertImage) concert.concert_image = concertImage;
+      if (isVisible) concert.isVisible = isVisible;
 
       await concert.save();
     }
@@ -81,6 +84,7 @@ export async function POST(request: NextRequest) {
           if (concertStart) concertToUpdate.concert_start = concertStart;
           if (concertDoors) concertToUpdate.concert_doors = concertDoors;
           if (concertImage) concertToUpdate.concert_image = concertImage;
+          if (isVisible) concert.isVisible = isVisible;
 
           await user.save();
         }

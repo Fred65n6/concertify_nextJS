@@ -20,7 +20,7 @@ interface User {
 
 const UploadForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
-
+    const [error, setError] = useState(false);
     const [file, setFile] = useState<File | null>(null);
     const [concertName, setConcertName] = useState("");
     const [concertDate, setConcertDate] = useState("");
@@ -30,6 +30,7 @@ const UploadForm: React.FC = () => {
     const [concertVenueId, setConcertVenueId] = useState("");
     const [concertVenueName, setConcertVenueName] = useState("");
     const [isArtist, setIsArtist] = useState(false);
+    const [isVisible, setIsVisible] = useState(true); // Add state for visibility
     const [genres, setGenres] = useState<any[]>([]);
     const [artist, setArtist] = useState<any[]>([]);
     const [venues, setVenues] = useState<Venue[]>([]);
@@ -119,20 +120,23 @@ const UploadForm: React.FC = () => {
         data.set("Concert_description", concertDescription);
         data.set("Concert_venue_id", selectedVenue!._id);
         data.set("Concert_venue_name", selectedVenue!.venue_name);
+        data.set("isVisible", isVisible.toString());
 
         const res = await fetch("/api/data/uploadConcert/", {
             method: "POST",
             body: data,
         });
 
-        if (!res.ok) {
-            const errorText = await res.text();
-            console.error(errorText);
-        }
-
-        if (res.ok) {
+        const responseData = await res.json();
+        
+        if (responseData.success) {
+            // Upload successful, show success message or perform other actions
             setLoading(false);
             showUploadMessage();
+        } else {
+            // Upload failed, display error message to the user
+            setError(responseData.error || "Error uploading artist.");
+            setLoading(false);
         }
     };
 
@@ -329,6 +333,20 @@ const UploadForm: React.FC = () => {
                         onChange={(e) => setConcertVenueId(e.target.value)}
                         placeholder="Venue ID"
                     />
+
+                    <div className="flex items-center gap-4 mt-8">
+                    <label htmlFor="isVisible" className="text-base text-purple-800">* Uncheck this box if you don't want the concert to be public yet:</label>
+                    <input
+                        type="checkbox"
+                        id="isVisible"
+                        name="isVisible"
+                        className="bg-purple-800 text-purple-800"
+                        checked={isVisible}
+                        onChange={() => setIsVisible(!isVisible)}
+                    />
+                    </div>
+                 
+                    
                 </div>
 
                
@@ -350,6 +368,12 @@ const UploadForm: React.FC = () => {
                 >
                     {loading ? "Processing" : "Confirm and upload concert"}
                 </button>
+
+                {error && (
+                    <div className="pt-4">
+                        <h2 className=" text-red-500">{error}</h2>
+                    </div>
+                )}
             </form>
             ))}
 
@@ -358,7 +382,7 @@ const UploadForm: React.FC = () => {
                 <div className="flex gap-4 mt-8">
                     <a
                         className="primary_btn"
-                        href="/admin-upload-concert"
+                        href="/user-upload-concert"
                     >
                         Upload another
                     </a>

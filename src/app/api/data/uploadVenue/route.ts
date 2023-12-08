@@ -16,15 +16,71 @@ const s3 = new AWS.S3();
 export async function POST(request: NextRequest) {
     const data = await request.formData();
     const file = data.get("file") as File;
-    const venueName = data.get("Venue_name");
-    const venueAddress = data.get("Venue_address");
-    const venueLocation = data.get("Venue_location");
-    const venueSize = data.get("Venue_size");
-    const venueDescription = data.get("Venue_description");
+    const venueName = (data.get("Venue_name") as string);
+    const venueAddress = (data.get("Venue_address") as string);
+    const venueLocation = (data.get("Venue_location") as string);
+    const venueSize = (data.get("Venue_size") as string);
+    const venueDescription = (data.get("Venue_description") as string);
 
     if (!file) {
         return NextResponse.json({success: false});
     }
+
+    const allowedFileTypes = ["image/png", "image/jpeg", "image/jpg"];
+    if (!allowedFileTypes.includes(file.type)) {
+        return NextResponse.json({
+        success: false,
+        error: "Invalid file type. Only PNG, JPEG, and JPG files are allowed.",
+        });
+    }
+
+    const normalCharsRegex = /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\s]+$/;
+
+    if (venueName) {
+      if (venueName.length > 60 || !normalCharsRegex.test(venueName)) {
+        return NextResponse.json({
+          success: false,
+          error: "Venue name must be at most 60 characters long and can only contain normal characters.",
+        });
+      }
+    }
+
+    if (venueDescription) {
+        if (venueDescription.length > 60 || !normalCharsRegex.test(venueDescription)) {
+          return NextResponse.json({
+            success: false,
+            error: "Venue description must be at most 60 characters long and can only contain normal characters.",
+          });
+        }
+      }
+
+      if (venueLocation) {
+        if (venueLocation.length > 60 || !normalCharsRegex.test(venueLocation)) {
+          return NextResponse.json({
+            success: false,
+            error: "Venue Location must be at most 60 characters long and can only contain normal characters.",
+          });
+        }
+      }
+
+      if (venueAddress) {
+        if (venueAddress.length > 60 || !normalCharsRegex.test(venueAddress)) {
+          return NextResponse.json({
+            success: false,
+            error: "Venue Address must be at most 60 characters long and can only contain normal characters.",
+          });
+        }
+      }
+
+      if (venueSize) {
+        if (venueSize.length > 60 || !normalCharsRegex.test(venueSize)) {
+          return NextResponse.json({
+            success: false,
+            error: "Venue Size must be at most 60 characters long and can only contain normal characters.",
+          });
+        }
+      }
+  
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);

@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Concert from '@/models/concertModel';
+import User from "@/models/userModel"
 
 
 export async function DELETE(request: NextRequest) {
     try {
       const data = await request.json();
       const concertId = data.concertId;
+      const concertArtistEmail = data.concertArtistEmail
+
+      console.log(concertArtistEmail)
   
       if (!concertId) {
         return NextResponse.json(
@@ -13,8 +17,18 @@ export async function DELETE(request: NextRequest) {
           { status: 400 }
         );
       }
-  
-      const deletionResult = await Concert.deleteOne({ _id: concertId });
+
+      const user = await User.findOne({email: concertArtistEmail})
+      console.log("this is user" + user)
+
+      if(user) {
+        await User.updateOne(
+          { email: concertArtistEmail },
+          { $pull: { concerts: { concert_id: concertId } } }
+        );
+      }
+
+      const deletionResult = await Concert.deleteOne({ concert_id: concertId });
   
       if (deletionResult.deletedCount === 0) {
         return NextResponse.json(
