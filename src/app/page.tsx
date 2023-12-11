@@ -104,11 +104,11 @@ export default function Home() {
 
 
             {/* Concerts */}
-            <section className="md:pt-0 pt-12 md:h-[600px]">
+            <section className="md:pt-0 pt-12 pb-24">
                 <h2 className="font-bold text-2xl pb-4 md:pb-2">
                     <span className="text-[#5311BF] dark:text-purple-500">Concerts</span> you need to experience
                 </h2>
-                <div className="flex md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
+                <div className="flex md:grid grid-cols-4 md:gap-4 overflow-x-hidden no-scrollbar">
                     <ConcertCard />
                 </div>
                 <Link

@@ -56,11 +56,11 @@ const ConcertCard: React.FC = () => {
   }, []);
 
   // ----- Calculate the start and end indexes of venues to display on the current page
-  // const startIndex = (currentPage - 1) * concertsPerPage;
-  // const endIndex = startIndex + concertsPerPage;
+  const startIndex = (currentPage - 1) * concertsPerPage;
+  const endIndex = startIndex + concertsPerPage;
 
   // ----- Slice the venues array to display only the venues for the current page
-  const concertsToDisplay = concerts.slice().reverse();
+  const concertsToDisplay = concerts.slice(startIndex, endIndex).reverse();
 
   return (
     <>

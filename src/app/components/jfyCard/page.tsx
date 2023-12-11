@@ -37,6 +37,8 @@ interface ConcertCard {
 
 const JfyCard: React.FC = () => {
     const [concerts, setConcerts] = useState<ConcertCard[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const concertsPerPage = 4;
     const [loading, setLoading] = useState(true);
     const [userGenres, setUserGenres] = useState<string[]>([]);
     const [userVenues, setUserVenues] = useState<string[]>([])
@@ -74,8 +76,11 @@ const JfyCard: React.FC = () => {
       fetchData();
       getUserDetails();
     }, [userGenres, userVenues]);
+
+    const startIndex = (currentPage - 1) * concertsPerPage;
+    const endIndex = startIndex + concertsPerPage;
   
-    const concertsToDisplay = concerts.slice().reverse();
+    const concertsToDisplay = concerts.slice(startIndex, endIndex).reverse();
 
   return (
     <>

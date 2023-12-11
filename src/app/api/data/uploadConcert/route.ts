@@ -20,6 +20,7 @@ const generateUUID = () => {
 const s3 = new AWS.S3();
 
 export async function POST(request: NextRequest) {
+  const cspHeader = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';";
   const data = await request.formData();
   const file = data.get("file") as File;
   const concertId = generateUUID();
@@ -137,10 +138,19 @@ export async function POST(request: NextRequest) {
       user.concerts.push(newConcert);
       await user.save();
     }
-    return NextResponse.json({ success: true });
+    return new NextResponse(JSON.stringify({ success: true }), {
+      headers: {
+          'Content-Type': 'application/json',
+          'Content-Security-Policy': cspHeader,
+      },
+  });
   } catch (error) {
     console.error("Error uploading file to S3:", error);
-    return NextResponse.json({ success: false });
-  }
+    return new NextResponse(JSON.stringify({ success: false }), {
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Security-Policy': cspHeader,
+            },
+        });
 }
-
+}
