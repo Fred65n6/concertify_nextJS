@@ -6,6 +6,7 @@ import axios from "axios";
 import Link from "next/link";
 import { Progress } from "flowbite-react";
 import { CgClose } from "react-icons/cg";
+import Image from "../../../node_modules/next/image";
 
 interface Genre {
   _id: string;
@@ -139,7 +140,7 @@ export default function SignupPage() {
     console.log("signFlowUpCompleteMessage");
   };
 
-  // Disabling the button if not all fields are filled out
+  // -- Disabling the button if not all fields are filled out
   useEffect(() => {
     if (
       user.email.length > 0 &&
@@ -238,12 +239,8 @@ export default function SignupPage() {
   return (
     <>
       <div id="signup_module" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-        {/* SIGNUP FORM: STEP 1 */}
-
-
+        {/* SIGNUP FORM: */}
         <div id="signup_form">
-
-
           <div id="userPick" className="p-10 mx-4 md:m-0 grid gap-6 items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
           <button
                   type="button"
@@ -252,11 +249,19 @@ export default function SignupPage() {
                   >
                   <CgClose/>
               </button>
+              <figure className="w-full flex justify-center">
+                <Image
+                  src="../concertify.svg"
+                  width={25}
+                  height={30}
+                  alt="concertify_logo"
+                />
+              </figure>
             <h2 className="grid m-auto text-2xl font-bold">Sign up</h2>
             <h3 className="text-center">To get your personalised Concertify experience <br />Tell us who you are:</h3>
             <div className="flex m-auto gap-4 mt-8">
-            <button onClick={openSignup} className="bg-slate-100 brand_gradient text-white dark:text-white px-6 py-4 rounded-full ">a concert lover</button>
-            <button className="bg-slate-100 brand_gradient text-white dark:text-white px-6 py-4 rounded-full  "><Link href="/artist-signup">a verified artist/band</Link></button>
+            <button onClick={openSignup} className="primary_btn">I am a concert lover</button>
+            <button className="secondary_btn"><Link href="/artist-signup">I am a verified artist/band</Link></button>
             </div>
           </div>
 
