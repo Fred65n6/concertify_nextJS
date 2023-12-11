@@ -65,7 +65,7 @@ const JfyCard: React.FC = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get<{ data: ConcertCard[] }>("/api/data/concertData");
-                setConcerts(response.data.data.filter(concert => concert.isVisible !== false && userGenres.includes(concert.concert_genre.genre_name) || userVenues.includes(concert.concert_venue.venue_name)).reverse());
+                setConcerts(response.data.data.filter(concert => concert.isVisible !== false && userGenres.includes(concert.concert_genre.genre_name) || userVenues.includes(concert.concert_venue.venue_name)));
             } catch (error) {
                 console.error("Error fetching concerts:", error);
             }

@@ -70,7 +70,7 @@ const JFYLoopview: React.FC = () => {
                 const filteredConcerts = response.data.data.filter(
                     (concert) =>
                       userVenues.includes(concert.concert_venue.venue_name) && concert.isVisible !== false || userGenres.includes(concert.concert_genre.genre_name) && concert.isVisible !== false 
-                  );
+                  ).reverse();
                   setConcerts(filteredConcerts);
             } catch (error) {
                 console.error("Error fetching concerts:", error);
