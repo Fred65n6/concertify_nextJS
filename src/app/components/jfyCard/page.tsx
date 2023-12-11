@@ -35,32 +35,47 @@ interface ConcertCard {
   isVisible: boolean;
 }
 
-const ConcertCard: React.FC = () => {
-  const [concerts, setConcerts] = useState<ConcertCard[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const concertsPerPage = 4;
-
-  // ----- Fetch data with useEffect since it is a client site
-  useEffect(() => {
-    const fetchData = async () => {
+const JfyCard: React.FC = () => {
+    const [concerts, setConcerts] = useState<ConcertCard[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [userGenres, setUserGenres] = useState<string[]>([]);
+    const [userVenues, setUserVenues] = useState<string[]>([])
+  
+    const getUserDetails = async () => {
       try {
-        const response = await axios.get<{ data: ConcertCard[] }>("/api/data/concertData");
-        // Filter out concerts with isVisible = false
-        setConcerts(response.data.data.filter(concert => concert.isVisible !== false));
-      } catch (error) {
-        console.error("Error fetching concerts:", error);
+        const res = await axios.get("/api/users/cookieUser");
+        const userData = res.data.data;
+  
+        // Extract genre_names from the user's genres array
+        const genres = userData.genres.map((genre:any) => genre.genre_name);
+        const venues = userData.genres.map((venue:any) => venue.venue_name);
+
+        setUserGenres(genres);
+        setUserVenues(venues)
+  
+        setLoading(false); // Set loading to false after successful data retrieval
+      } catch (error: any) {
+        console.error(error.message);
+        setLoading(false); // Set loading to false on error
       }
     };
-
-    fetchData();
-  }, []);
-
-  // ----- Calculate the start and end indexes of venues to display on the current page
-  // const startIndex = (currentPage - 1) * concertsPerPage;
-  // const endIndex = startIndex + concertsPerPage;
-
-  // ----- Slice the venues array to display only the venues for the current page
-  const concertsToDisplay = concerts.slice().reverse();
+  
+    // ----- Fetch data with useEffect since it is a client site
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get<{ data: ConcertCard[] }>("/api/data/concertData");
+                setConcerts(response.data.data.filter(concert => concert.isVisible !== false && userGenres.includes(concert.concert_genre.genre_name) || userVenues.includes(concert.concert_venue.venue_name)).reverse());
+            } catch (error) {
+                console.error("Error fetching concerts:", error);
+            }
+        };
+  
+      fetchData();
+      getUserDetails();
+    }, [userGenres, userVenues]);
+  
+    const concertsToDisplay = concerts.slice().reverse();
 
   return (
     <>
@@ -99,4 +114,4 @@ const ConcertCard: React.FC = () => {
   );
 };
 
-export default ConcertCard;
+export default JfyCard;

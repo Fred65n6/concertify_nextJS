@@ -38,22 +38,48 @@ interface ConcertCard {
     isVisible: boolean;
   }
 
-const ConcertLoopview: React.FC = () => {
+const JFYLoopview: React.FC = () => {
     const [concerts, setConcerts] = useState<ConcertCard[]>([]);
     const [filteredConcerts, setFilteredConcerts] = useState<ConcertCard[]>([]);
+    const [userGenres, setUserGenres] = useState<string[]>([]);
+    const [userVenues, setUserVenues] = useState<string[]>([])
+
+    const getUserDetails = async () => {
+        try {
+          const res = await axios.get("/api/users/cookieUser");
+          const userData = res.data.data;
+    
+          // Extract genre_names from the user's genres array
+          const genres = userData.genres.map((genre:any) => genre.genre_name);
+          const venues = userData.venues.map((venue:any) => venue.venue_name);
+  
+          setUserGenres(genres);
+          setUserVenues(venues);
+
+          console.log(venues)
+
+        } catch (error: any) {
+          console.error(error.message);
+        }
+      };
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get<{ data: ConcertCard[] }>("/api/data/concertData");
-                setConcerts(response.data.data.filter(concert => concert.isVisible !== false).reverse());
+                const filteredConcerts = response.data.data.filter(
+                    (concert) =>
+                      userVenues.includes(concert.concert_venue.venue_name) && concert.isVisible !== false 
+                  );
+                  setConcerts(filteredConcerts);
             } catch (error) {
                 console.error("Error fetching concerts:", error);
             }
         };
 
         fetchData();
-    }, []);
+        getUserDetails();
+    }, [userGenres, userVenues]);
 
     const handleDataFiltered = (filteredData: ConcertCard[]) => {
         setFilteredConcerts(filteredData);
@@ -108,4 +134,4 @@ const ConcertLoopview: React.FC = () => {
     );
 };
 
-export default ConcertLoopview;
+export default JFYLoopview;

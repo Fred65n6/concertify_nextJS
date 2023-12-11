@@ -142,7 +142,6 @@ export default function UserProfile({params}: any) {
         }
     };
 
-
     useEffect(() => {
         getUserDetails();
         setUser({...user, email: data.userEmail, _id: data.userId});
@@ -559,8 +558,6 @@ export default function UserProfile({params}: any) {
                         ))}
                         </div>
                     </div>
-
-
                 </section>
                 ) : (
                 <div className=""></div>
@@ -595,7 +592,7 @@ export default function UserProfile({params}: any) {
                             {venues.map((venue: any) => (
                                 <article
                                     className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8 text-[#5311BF]"
-                                    key={venue._id}>
+                                    key={venue.venue_name}>
                                     <p>{venue.venue_name}</p>
                                 </article>
                             ))}

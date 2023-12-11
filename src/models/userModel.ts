@@ -44,6 +44,12 @@ const userSchema = new mongoose.Schema({
             genre_id: String,
         },
     ],
+    venues: [
+        {
+            venue_name: String,
+            venue_id: String,
+        },
+    ],
     concerts: [
         {
             concert_id: String,

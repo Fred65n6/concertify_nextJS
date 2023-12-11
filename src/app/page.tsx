@@ -8,10 +8,14 @@ import ConcertCard from "./components/concertCard/page";
 import VenueCard from "./components/venueCard/page";
 import Link from "next/link";
 import {SlArrowRight, SlArrowLeft} from "react-icons/sl";
+import JfyCard from "./components/jfyCard/page";
+import {hasCookie} from "@/helpers/cookieHelper";
+import { cookies } from "next/headers";
 
 
 export default function Home() {
     const router = useRouter();
+    const [showComponent, setShowComponent] = useState(false);
     const [loading, setLoading] = useState(true); // Initialize as loading
     const [data, setData] = useState({
         username: "",
@@ -32,6 +36,12 @@ export default function Home() {
                 userId: userData._id,
                 userEmail: userData.email,
             });
+            const hasAdminToken = document.cookie.includes('adminToken=');
+        // const hasArtistToken = document.cookie.includes('artistToken=');
+        const hasToken = document.cookie.includes('token=');
+
+        // Set showComponent to true if any of the tokens is present
+        setShowComponent(hasAdminToken || hasToken);
             setLoading(false); // Set loading to false after successful data retrieval
         } catch (error: any) {
             console.error(error.message);
@@ -47,21 +57,6 @@ export default function Home() {
             }
         getUserDetails();
     }, []);
-
-    const changePassword = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.post(
-                "/api/users/reset_password",
-                user
-            );
-            console.log("password changed", response.data);
-        } catch (error: any) {
-            console.log("password change FAILED", error);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     return (
         <>
@@ -82,9 +77,35 @@ export default function Home() {
                 </h1>
             )}
 
+            {showComponent ? ( 
+                    <section className="md:pt-24 pt-12 pb-4 md:h-[600px]">
+                    <h2 className="font-bold text-2xl pb-4 md:pb-2">
+                        Just for
+                        <span className="text-[#5311BF] dark:text-purple-500"> you</span>
+                    </h2>
+                    <div className="flex md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
+                        <JfyCard />
+                    </div>
+                    <Link
+                        className="justify-end flex items-center brand_purple dark:text-purple-500"
+                        href="/just-for-you"
+                    >
+                        View all recommended concerts
+                        <SlArrowRight
+                            className="w-4 h-4"
+                            id="arrow_right"
+                        />
+                    </Link>
+                </section>
+            ): (
+                <section className="py-12">
+                </section>
+            )}
+
+
             {/* Concerts */}
-            <section className="md:pt-24 pt-12 pb-4 md:h-[600px]">
-                <h2 className="font-bold text-2xl pb-4 md:pb-8">
+            <section className="md:pt-0 pt-12 md:h-[600px]">
+                <h2 className="font-bold text-2xl pb-4 md:pb-2">
                     <span className="text-[#5311BF] dark:text-purple-500">Concerts</span> you need to experience
                 </h2>
                 <div className="flex md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
