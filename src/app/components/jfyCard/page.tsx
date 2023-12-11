@@ -113,6 +113,9 @@ const JfyCard: React.FC = () => {
             </span>
             {concert.concert_date}
           </p>
+          <p className="opacity-50 dark:text-slate-400">
+            {concert.concert_genre?.genre_name}
+          </p>
         </article>
       ))}
     </>
