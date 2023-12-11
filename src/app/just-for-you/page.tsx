@@ -69,7 +69,7 @@ const JFYLoopview: React.FC = () => {
                 const response = await axios.get<{ data: ConcertCard[] }>("/api/data/concertData");
                 const filteredConcerts = response.data.data.filter(
                     (concert) =>
-                      userVenues.includes(concert.concert_venue.venue_name) && concert.isVisible !== false 
+                      userVenues.includes(concert.concert_venue.venue_name) && concert.isVisible !== false || userGenres.includes(concert.concert_genre.genre_name) && concert.isVisible !== false 
                   );
                   setConcerts(filteredConcerts);
             } catch (error) {
