@@ -32,27 +32,15 @@
 }
 
 .active-breadcrumb {
-    /* Add your custom styles for the active item here */
-    /* color: #6d34c9;
-    font-weight: 500;
-    pointer-events: none;
-    opacity: 1; */
     text-decoration: underline;
-    /* Add any other styles you want */
 }
 
-/* .active-breadcrumb:hover {
-    text-decoration: none;
-  
-} */
 
 .dark-active-breadcrumb {
-    /* Add your custom styles for the active item here */
     color: rgb(154, 38, 61);
     font-weight: 500;
     pointer-events: none;
     opacity: 1;
-    /* Add any other styles you want */
 }
 
 
@@ -108,11 +96,11 @@
     display: flex; 
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     gap: 0.5rem; 
     width: fit-content; 
-    height: fit-content; 
+    height: 3rem;
     color: #ffffff; 
     border-radius:50px;
     background:
@@ -155,11 +143,11 @@
     display: flex; 
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     gap: 0.5rem; 
     width: fit-content; 
-    height: fit-content; 
+    height: 3rem;
     border-radius:50px;
     background-color: #EDE9FE;
     color: #5311bf;
@@ -178,33 +166,59 @@
     border-width: 0; 
     width: 100%; 
     color: #2c2c2c; 
-    background-color: rgb(241 245 249);
+    background-color: rgb(241, 245, 249);
 }
 
 
-
-
-/* MODALS */
-.modal_overlay {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    z-index: 50; 
-    justify-content: center; 
-    align-items: center; 
-    width: 100%; 
-    height: 100vh; 
-    backdrop-blur: blur(4px); 
-    background-color: rgb(15 23 42 / 0.5);
+/* TABLES */
+.table_styling {
+    display: flex;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    color: #5311BF;
 }
 
+.table_styling_dark {
+    color: rgb(144, 97, 249);
+    display: flex;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
 
-.modal_dark {
+.th_styling {
 
+}
+
+.td_styling {
 
 }
 
 
 .modal {
-
+    padding: 2.5rem;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    border-radius: 0.5rem; 
+    width: 600px;
+    
 }
+
+
+.modal_800 {
+    padding: 2.5rem;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    border-radius: 0.5rem; 
+    width: 800px;
+    
+}
+
+
+
+

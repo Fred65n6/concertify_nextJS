@@ -9,10 +9,9 @@ export const getDataFromToken = (request: NextRequest) => {
       const token = request.cookies.get(tokenName)?.value || "";
       try {
         const decodedToken: any = jwt.verify(token, process.env.TOKEN_SECRET!);
-        const userId = decodedToken.id; // Assuming id is the property you want to extract
+        const userId = decodedToken.id; 
         return userId;
       } catch (error) {
-        // Ignore errors and continue to the next token
       }
     }
 

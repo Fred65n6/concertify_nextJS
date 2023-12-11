@@ -215,7 +215,7 @@ const UploadForm: React.FC = () => {
                 <div className="hidden">
                     <label htmlFor="artist_name">Concert genre <span className="brand_purple dark:text-purple-500">*</span></label>
                     <input
-                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         type="text"
                         id="genre"
                         name="genre"
@@ -229,7 +229,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="Concert_name" className="text-sm">Concert name</label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         type="text"
                         name="Concert_name"
                         value={concertName}
@@ -242,7 +242,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="Concert_date" className="text-sm">Concert date:</label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         type="date"
                         name="Concert_date"
                         value={concertDate}
@@ -255,7 +255,7 @@ const UploadForm: React.FC = () => {
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="Concert_start" className="text-sm">Concert start time:</label>
                     <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                        className="input_field"
                         type="time"
                         name="Concert_start"
                         value={concertStart}
@@ -335,12 +335,12 @@ const UploadForm: React.FC = () => {
                     />
 
                     <div className="flex items-center gap-4 mt-8">
-                    <label htmlFor="isVisible" className="text-base text-purple-800">* Uncheck this box if you don't want the concert to be public yet:</label>
+                    <label htmlFor="isVisible" className="text-base brand_purple dark:text-purple-500">* Uncheck this box if you don't want the concert to be public yet:</label>
                     <input
                         type="checkbox"
                         id="isVisible"
                         name="isVisible"
-                        className="bg-purple-800 text-purple-800"
+                        className="bg-purple-100 brand_purple dark:text-purple-500"
                         checked={isVisible}
                         onChange={() => setIsVisible(!isVisible)}
                     />

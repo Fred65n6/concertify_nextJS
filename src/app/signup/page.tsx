@@ -272,9 +272,9 @@ export default function SignupPage() {
   return (
     <>
       <div id="signup_module" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-        {/* SIGNUP FORM: */}
+        {/* SIGNUP MODAL FORM: */}
         <div id="signup_form">
-          <div id="userPick" className="p-10 mx-4 md:m-0 grid gap-6 items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
+          <div id="userPick" className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
           <button
                   type="button"
                   onClick={closeSignupModule}
@@ -541,7 +541,7 @@ export default function SignupPage() {
 
         {/* WELCOME ON BOARD MODAL */}
         <div id="welcome_modal" className="hidden">
-          <div className="flex flex-col items-center justify-center py-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+          <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
             <img className="my-10" src="../concertify_logo.svg" alt="" />
             <h1 className="my-4 text-3xl font-bold">
               Welcome {user.username}!

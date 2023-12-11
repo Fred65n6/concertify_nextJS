@@ -1,8 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { SlUser, SlArrowRight } from "react-icons/sl";
-import { AiFillDelete } from "react-icons/ai";
+import { SlUser, SlArrowRight, SlTrash } from "react-icons/sl";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
 import Link from "next/link";
@@ -140,51 +139,49 @@ useEffect(() => {
         <section className="flex gap-8 mb-8">
           <div className="flex flex-col gap-4 align-middle">
             <div className="flex gap-2">
-              <SlUser className="stroke-[#5311BF] dark:stroke-[#8e0bf5] w-5 h-5" id="user" />
+              <SlUser className="stroke-[#5311BF] dark:stroke-purple-500 w-5 h-5" id="user" />
               <span>{totalUsers}</span>
             </div>
           </div>
         </section>
 
+
         <form className="flex flex-col items-center gap-8 pb-12">
-          <table className="w-full">
-            <thead>
-            <tr className="lg:flex justify-start w-full mb-4 text-[#5311BF] dark:text-purple-500">
-                <th className="text-left w-1/2">User id</th>
-                <th className="text-left w-1/2">Username</th>
-                <th className="text-left w-1/2">User email</th>
-                <th className="text-right w-1/12"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {users?.map((user) => (
-                <tr key={user._id} className="flex justify-start w-full mb-2">
-                  <td className="text-left w-1/2">{user._id}</td>
-                  <td className="text-left w-1/2">{user.username}</td>
-                  <td className="text-left w-1/2">{user.email}</td>
-                  <td className="text-right w-1/12">
-                  <button
-                      type="button"
-                      className="text-[#5311BF]"
-                      onClick={() => openModule(user)}
-                    >
-                      <AiFillDelete
-                        className="fill-[#5311BF] dark:fill-[#8e0bf5] w-5 h-5"
-                        id="deleteUser"
-                        value="upload"
-                      />
-                    </button>
-                  </td>
+          <div className="overflow-x-auto w-full">
+            <table className="table-auto min-w-full">
+              <thead>
+                <tr className=" text-[#5311BF] dark:text-purple-500">
+                  <th className="px-4 py-2 text-left">Username</th>
+                  <th className="px-4 py-2 text-left">User email</th>
+                  <th className="px-4 py-2 text-right"></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="[&>*:nth-child(odd)]:bg-purple-100 dark:[&>*:nth-child(odd)]:bg-[#23124b]">
+                {users?.map((user) => (
+                  <tr key={user._id} className="">
+                    <td className="px-4 py-2">{user.username}</td>
+                    <td className="px-4 py-2">{user.email}</td>
+                    <td className="px-4 py-2 text-right">
+                      <button
+                        type="button"
+                        onClick={() => openModule(user)}
+                      >
+                        <SlTrash className="fill-[#5311BF] dark:fill-white w-5 h-5" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </form>
+
       </div>
 
+      {/* DELETE USER MODAL */}
       {selectedUser && (
       <div id="delete_user_module" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-        <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
+        <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
         <button
             type="button"
             onClick={closeModule}

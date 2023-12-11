@@ -129,8 +129,20 @@ const UploadForm: React.FC = () => {
                 >
                 <p className="mt-8 text-sm"><span className="brand_purple dark:text-purple-500">*</span> Theese values can not be changed.</p>
 
+                <div className="hidden">
+                    <label htmlFor="artist_id">Artist id <span className="brand_purple text-2xl">*</span></label>
+                    <input
+                        className=""
+                        type="text"
+                        id="artist_name"
+                        name="artist_name"
+                        value={artist.artist_id}
+                        readOnly={true}
+                    />
+                </div>
+
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_name" className="text-sm">Artist name <span className="brand_purple">*</span></label>
+                    <label htmlFor="artist_name" className="text-sm">Artist name <span className="brand_purple dark:text-purple-500">*</span></label>
                     <input
                         className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
                         type="text"
@@ -141,20 +153,9 @@ const UploadForm: React.FC = () => {
                     />
                 </div>
 
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_name">Artist name <span className="brand_purple text-2xl">*</span></label>
-                    <input
-                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
-                        type="text"
-                        id="artist_name"
-                        name="artist_name"
-                        value={artist.artist_id}
-                        readOnly
-                    />
-                </div>
 
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">                    
-                    <label htmlFor="artist_name" className="text-sm">Artist genre <span className="brand_purple">*</span></label>
+                    <label htmlFor="artist_name" className="text-sm">Artist genre <span className="brand_purple dark:text-purple-500">*</span></label>
                     <input
                         className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
                         type="text"
