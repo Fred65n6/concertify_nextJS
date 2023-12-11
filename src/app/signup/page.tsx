@@ -36,6 +36,7 @@ export default function SignupPage() {
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string>("");
+  const [isArtist, setIsArtist] = useState(false);
   const [user, setUser] = React.useState({
     username: "",
     email: "",
@@ -76,6 +77,25 @@ export default function SignupPage() {
     }
   };
 
+  const onArtistSignup = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post("/api/users/artistSignup", user);
+      console.log("Signup success", response.data);
+      showWelcomePopup();
+    } catch (error: any) {
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
+      } else {
+        setError("An error occurred during signup.");
+      }
+      console.log("API signup failed", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   const showWelcomePopup = () => {
     const welcomePopup = document.getElementById("welcome_modal");
     const signUpForm = document.getElementById("signup_form");
@@ -104,6 +124,19 @@ export default function SignupPage() {
       userPick?.classList.remove("grid")
     }
   }
+
+  const openArtistsignup = () => {
+    const signUpWindow = document.getElementById("userSignup");
+    const userPick = document.getElementById("userPick");
+    setIsArtist(true);
+    if (signUpWindow) {
+      signUpWindow.classList.remove("hidden");
+      signUpWindow.classList.add("flex");
+      userPick?.classList.add("hidden")
+      userPick?.classList.remove("grid")
+    }
+  }
+
 
   const selectPrefferedGenres = () => {
     const preferredGenres = document.getElementById("signup_preference_genres");
@@ -261,7 +294,7 @@ export default function SignupPage() {
             <h3 className="text-center">To get your personalised Concertify experience <br />Tell us who you are:</h3>
             <div className="flex m-auto gap-4 mt-8">
             <button onClick={openSignup} className="primary_btn">I am a concert lover</button>
-            <button className="secondary_btn"><Link href="/artist-signup">I am a verified artist/band</Link></button>
+            <button onClick={openArtistsignup} className="secondary_btn">I am a verified artist/band</button>
             </div>
           </div>
 
@@ -343,12 +376,23 @@ export default function SignupPage() {
 
               {error && <div className="text-red-500">{error}</div>}
             
-            <button
-              onClick={onSignup}
-              className="mb-4 mt-8 brand_gradient px-12 py-4 rounded-full text-white"
-            >
-              {buttonDisabled ? "Please fill out all fields to sign up..." : "Sign up"}
-            </button>
+              {
+                !isArtist ? (
+                  <button
+                    onClick={onSignup}
+                    className="mb-4 mt-8 brand_gradient px-12 py-4 rounded-full text-white"
+                  >
+                    {buttonDisabled ? "Please fill out all fields to sign up..." : "Sign up"}
+                  </button>
+                ) : (
+                  <button
+                    onClick={onArtistSignup}
+                    className="mb-4 mt-8 brand_gradient px-12 py-4 rounded-full text-white"
+                  >
+                    {buttonDisabled ? "Please fill out all fields to sign up as an artist..." : "Sign up as Artist"}
+                  </button>
+                )
+              }
 
             <div className="grid gap-4 text-center mt-4">
               <p>

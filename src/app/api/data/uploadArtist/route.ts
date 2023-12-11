@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
     if (artistNationality.length > 2 || !normalCharsRegex.test(artistNationality)) {
       return NextResponse.json({
         success: false,
-        error: "Concert name must be at most 2 characters long and can only contain normal characters.",
+        error: "Artist nationality must be at most 2 characters long and can only contain normal characters.",
       });
     }
   }

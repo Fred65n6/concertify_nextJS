@@ -91,7 +91,7 @@ const JFYLoopview: React.FC = () => {
             <SignupPage />
             <BreadcrumbComp />
             <Filter data={concerts} onDataFiltered={handleDataFiltered} />
-            <h1 className="font-bold text-4xl pb-4 pt-8">All concerts</h1>
+            <h1 className="font-bold text-4xl pb-4 pt-8">Concerts just for you:</h1>
             <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8 pb-20">
                 {filteredConcerts.map((concert) => (
                     <article className="w-auto" key={concert.concert_id}>
@@ -125,6 +125,12 @@ const JFYLoopview: React.FC = () => {
                                 <span className="mr-2 ">
                                     {concert.concert_date} 
                                 </span>
+                            </p>
+                           
+                        </div>
+                        <div className="">
+                        <p className="opacity-50 dark:text-slate-400">
+                            {concert.concert_genre?.genre_name}
                             </p>
                         </div>
                     </article>

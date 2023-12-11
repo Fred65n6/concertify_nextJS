@@ -37,11 +37,11 @@ export default function Home() {
                 userEmail: userData.email,
             });
             const hasAdminToken = document.cookie.includes('adminToken=');
-        // const hasArtistToken = document.cookie.includes('artistToken=');
-        const hasToken = document.cookie.includes('token=');
+            const hasArtistToken = document.cookie.includes('artistToken=');
+            const hasToken = document.cookie.includes('token=');
 
         // Set showComponent to true if any of the tokens is present
-        setShowComponent(hasAdminToken || hasToken);
+        setShowComponent(hasAdminToken || hasToken|| hasArtistToken);
             setLoading(false); // Set loading to false after successful data retrieval
         } catch (error: any) {
             console.error(error.message);
@@ -80,7 +80,8 @@ export default function Home() {
             {showComponent ? ( 
                     <section className="md:pt-24 pt-12 pb-4 md:h-[600px]">
                     <h2 className="font-bold text-2xl pb-4 md:pb-2">
-                        Just for
+                    <span className="text-[#5311BF] dark:text-purple-500">Concerts </span>
+                        just for
                         <span className="text-[#5311BF] dark:text-purple-500"> you</span>
                     </h2>
                     <div className="flex md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
