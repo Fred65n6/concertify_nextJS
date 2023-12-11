@@ -8,7 +8,7 @@ connect();
 
 function validatePassword(password:string) {
     // -- Password must contain at least one uppercase letter, one digit, and one special character
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+.])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z9æøåÆØÅ\d!@#$%^&*()_+]{8,}$/;
     return passwordRegex.test(password);
 }
 

@@ -7,7 +7,8 @@ import {sendEmail} from "@/helpers/mailer";
 connect();
 
 function validatePassword(password:string) {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z9æøåÆØÅ\d!@#$%^&*()_+]{8,}$/;
+
     return passwordRegex.test(password);
 }
 

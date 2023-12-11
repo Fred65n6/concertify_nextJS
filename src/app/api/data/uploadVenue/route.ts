@@ -34,8 +34,8 @@ export async function POST(request: NextRequest) {
         });
     }
 
-    const normalCharsRegex = /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\s]+$/;
-
+    const normalCharsRegex = /^[a-zA-Z0-9æøåÆØÅ!@#$%^&*()_+{}\[\]:;<>,.?~\s]+$/;
+    
     if (venueName) {
       if (venueName.length > 60 || !normalCharsRegex.test(venueName)) {
         return NextResponse.json({

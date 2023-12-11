@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  const normalCharsRegex = /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\s]+$/;
+  const normalCharsRegex = /^[a-zA-Z0-9æøåÆØÅ!@#$%^&*()_+{}\[\]:;<>,.?~\s]+$/;
 
   if (concertName) {
     if (concertName.length > 40 || !normalCharsRegex.test(concertName)) {

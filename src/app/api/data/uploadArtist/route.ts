@@ -34,6 +34,8 @@ export async function POST(request: NextRequest) {
         genre_id: data.get("artist_genre_id"),
     };
 
+    console.log(artistEmail, artistId, artistName, artistNationality)
+
     const existingArtist = await Artist.findOne({ artist_name: artistName });
 
     if (existingArtist) {
@@ -55,7 +57,7 @@ export async function POST(request: NextRequest) {
         });
     }
     
-  const normalCharsRegex = /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\s]+$/;
+    const normalCharsRegex = /^[a-zA-Z0-9æøåÆØÅ!@#$%^&*()_+{}\[\]:;<>,.?~\s]+$/;
 
   if (artistName) {
     if (artistName.length > 60 || !normalCharsRegex.test(artistName)) {
@@ -65,6 +67,7 @@ export async function POST(request: NextRequest) {
       });
     }
   }
+  
 
   if (artistFullName) {
     if (artistFullName.length > 60 || !normalCharsRegex.test(artistFullName)) {
@@ -84,6 +87,7 @@ export async function POST(request: NextRequest) {
       });
     }
   }
+  
 
   if (artistNationality) {
     if (artistNationality.length > 2 || !normalCharsRegex.test(artistNationality)) {
@@ -93,6 +97,7 @@ export async function POST(request: NextRequest) {
       });
     }
   }
+  
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
@@ -128,7 +133,9 @@ export async function POST(request: NextRequest) {
         });
 
         if (artistEmail) {
+          try {
             const user = await User.findOne({email: artistEmail});
+            console.log('this is artist email:' +  artistEmail)
             console.log(user)
     
             const newArtist = {
@@ -144,6 +151,12 @@ export async function POST(request: NextRequest) {
             }
             user.artist.push(newArtist);
             await user.save();
+          } catch (error) {
+            return NextResponse.json(
+              { error: "Artist email doesn't match a user" },
+              { status: 400 }
+          );
+          }
         }
     
         const savedArtist = await newArtist.save();
@@ -151,7 +164,7 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({success: true});
     } catch (error) {
-        console.error("Error uploading file to S3:", error);
+        console.error("Error uploading artist:", error);
         return NextResponse.json({
             success: false,
             error: "Error uploading artist.",

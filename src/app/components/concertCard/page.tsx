@@ -58,7 +58,7 @@ const ConcertCard: React.FC = () => {
   const endIndex = startIndex + concertsPerPage;
 
   // ----- Slice the venues array to display only the venues for the current page
-  const concertsToDisplay = concerts.slice(startIndex, endIndex);
+  const concertsToDisplay = concerts.slice(startIndex, endIndex).reverse();
 
   return (
     <>
