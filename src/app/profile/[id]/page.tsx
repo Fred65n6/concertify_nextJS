@@ -445,7 +445,7 @@ export default function UserProfile({params}: any) {
                                         width={200}
                                         height={200}
                                         alt="artist image"
-                                        className="h-fill w-80 bg-contain rounded-md"
+                                        className="h-fill w-80 rounded-md object-cover"
                                         />
                                         <ul className="w-full grid gap-2">
                                             <li className="flex flex-col item-center justify-between">

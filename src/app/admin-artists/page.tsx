@@ -201,22 +201,28 @@ const closeEditModule = () => {
         </section>
 
         <form className="flex flex-col items-center gap-8 py-8">
-          <table className="w-full">
+          <div className="w-full">
+
+
+          </div>
+          <table className="w-full overflow-x-auto">
             <thead>
             <tr className="lg:flex justify-start w-full mb-4 text-[#5311BF] dark:text-purple-500">
-                <th className="text-left w-1/2">Artist id</th>
                 <th className="text-left w-1/2">Artist name</th>
                 <th className="text-left w-1/2">Full name</th>
+                <th className="text-left w-1/2">Genre</th>
+                <th className="text-left w-1/2">Nationality</th>
                 <th className="text-right w-1/12"></th>
                 <th className="text-right w-1/12"></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="[&>*:nth-child(odd)]:bg-purple-100">
               {artists?.map((artist) => (
-                <tr key={artist.artist_id} className="flex justify-start w-full mb-2">
-                  <td className="text-left w-1/2">{artist.artist_id}</td>
+                <tr key={artist.artist_id} className="flex justify-start w-full py-2">
                   <td className="text-left w-1/2">{artist.artist_name}</td>
                   <td className="text-left w-1/2">{artist.artist_full_name}</td>
+                  <td className="text-left w-1/2">{artist.artist_genre.genre_name}</td>
+                  <td className="text-left w-1/2">{artist.artist_nation}</td>
                   <td className="text-right w-1/12">
                     <button
                       type="button"

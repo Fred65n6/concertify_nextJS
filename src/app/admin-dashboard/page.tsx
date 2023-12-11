@@ -149,16 +149,17 @@ useEffect(() => {
         <form className="flex flex-col items-center gap-8 pb-12">
           <table className="w-full">
             <thead>
-            <tr className="lg:flex justify-start w-full mb-4 text-[#5311BF] dark:text-purple-500">
+            {/* <tr className="lg:flex justify-start w-full mb-4 text-[#5311BF] dark:text-purple-500"> */}
+              <tr className="table_styling dark:table_styling_dark">
                 <th className="text-left w-1/2">User id</th>
                 <th className="text-left w-1/2">Username</th>
                 <th className="text-left w-1/2">User email</th>
                 <th className="text-right w-1/12"></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="[&>*:nth-child(odd)]:bg-purple-100 dark:[&>*:nth-child(odd)]:bg-[#23124b]">
               {users?.map((user) => (
-                <tr key={user._id} className="flex justify-start w-full mb-2">
+                <tr key={user._id} className="flex justify-start w-full py-2">
                   <td className="text-left w-1/2">{user._id}</td>
                   <td className="text-left w-1/2">{user.username}</td>
                   <td className="text-left w-1/2">{user.email}</td>

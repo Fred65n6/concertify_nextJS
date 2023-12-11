@@ -233,9 +233,9 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                   <th className="text-right w-fit md:w-1/12"></th>
                 </tr>
               </thead>
-              <tbody className="mb-8">
+              <tbody className="[&>*:nth-child(odd)]:bg-purple-100">
                 {concerts?.map((concert) => (
-                  <tr key={concert.concert_id} className="flex justify-start w-full mb-2">
+                  <tr key={concert.concert_id} className="flex justify-start w-full py-2">
                     <td className="text-left w-fit md:w-1/2">{concert.concert_name}</td>
                     <td className="text-left w-fit md:w-1/2">{concert.concert_artist.artist_name}</td>
                     <td className="text-left w-fit md:w-1/2">{concert.concert_date}</td>

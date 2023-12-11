@@ -134,9 +134,9 @@ const handleDeleteVenue = async (venueId: string) => {
                 <th className="text-right w-1/12"></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="[&>*:nth-child(odd)]:bg-purple-100">
               {venues?.map((venue) => (
-                <tr key={venue._id} className="flex justify-start w-full mb-2">
+                <tr key={venue._id} className="flex justify-start w-full py-2">
                   <td className="text-left w-1/2">{venue.venue_name}</td>
                   <td className="text-left w-1/2">{venue.venue_address}</td>
                   <td className="text-left w-1/2">{venue.venue_location}</td>

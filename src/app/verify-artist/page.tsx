@@ -140,7 +140,7 @@ const showUploadMessage = () => {
         <div className="text-left grid gap-4">
     
           <div className="flex flex-col w-full md:w-4/6 gap-6 mb-24">
-          <h2 className="text-2xl brand_purple pt-4">
+          <h2 className="text-2xl brand_purple pt-4 dark:text-purple-500">
             Your artist profile has been verified
           </h2>
             <h2 className="font-bold text-4xl pb-4">Upload your artist info</h2>
@@ -150,7 +150,7 @@ const showUploadMessage = () => {
                 onSubmit={onSubmit}
                 >
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_name">insert your email to link the artist to your profile</label>
+                    <label htmlFor="artist_name">Please enter your email, to link the artist to your profile</label>
                     <input
                         className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
                         type="text"
