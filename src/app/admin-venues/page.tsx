@@ -5,8 +5,7 @@ import axios from "axios";
 import { AiFillDelete } from "react-icons/ai";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
-import { RiEdit2Fill } from "react-icons/ri";
-import {SlMusicToneAlt, SlArrowLeft, SlPlus} from "react-icons/sl";
+import {SlMusicToneAlt, SlArrowLeft, SlPlus, SlPencil, SlTrash} from "react-icons/sl";
 import Link from "../../../node_modules/next/link";
 import { CgClose } from "react-icons/cg";
 
@@ -122,60 +121,63 @@ const handleDeleteVenue = async (venueId: string) => {
           </button>
         </section>
 
-        <form className="flex flex-col items-center gap-8 py-8">
-          <table className="w-full">
-            <thead>
-            <tr className="lg:flex justify-start w-full mb-4 text-[#5311BF] dark:text-purple-500">
-                <th className="text-left w-1/2">Venue name</th>
-                <th className="text-left w-1/2">Address</th>
-                <th className="text-left w-1/2">Location</th>
-                <th className="text-left w-1/2">Venue size (people)</th>
-                <th className="text-right w-1/12"></th>
-                <th className="text-right w-1/12"></th>
-              </tr>
-            </thead>
-            <tbody className="[&>*:nth-child(odd)]:bg-purple-100">
+
+        <form className="flex flex-col items-center gap-8 pb-12">
+          <div className="overflow-x-auto w-full">
+            <table className="table-auto min-w-full">
+              <thead>
+                <tr className=" text-[#5311BF] dark:text-purple-500">
+                  <th className="px-4 py-2 text-left font-semibold">Venue name</th>
+                  <th className="px-4 py-2 text-left font-semibold">Address</th>
+                  <th className="px-4 py-2 text-left font-semibold">Location</th>
+                  <th className="px-4 py-2 text-left font-semibold">Venue size (people)</th>
+                  <th className="px-4 py-2 text-right font-semibold"></th>
+                  <th className="px-4 py-2 text-right font-semibold"></th>
+                </tr>
+              </thead>
+              <tbody className=" [&>*:nth-child(odd)]:bg-purple-100 dark:[&>*:nth-child(odd)]:bg-[#23124b]">
               {venues?.map((venue) => (
-                <tr key={venue._id} className="flex justify-start w-full py-2">
-                  <td className="text-left w-1/2">{venue.venue_name}</td>
-                  <td className="text-left w-1/2">{venue.venue_address}</td>
-                  <td className="text-left w-1/2">{venue.venue_location}</td>
-                  <td className="text-left w-1/2">{venue.venue_size}</td>
-                  <td className="text-right w-1/12">
+                  <tr key={venue._id}>
+                    <td className="px-4 py-2">{venue.venue_name}</td>
+                    <td className="px-4 py-2">{venue.venue_address}</td>
+                    <td className="px-4 py-2">{venue.venue_location}</td>
+                    <td className="px-4 py-2">{venue.venue_size}</td>
+                    <td className="px-4 py-2 text-right">
                     <button
                       type="button"
                       className="text-[#5311BF] dark:text-white"
                       onClick={() => openEditModule(venue)}
                     >
-                        <RiEdit2Fill />
+                        <SlPencil />
                     </button>
-                  </td>
-                  <td className="text-right w-1/12">
-                    <button
-                      type="button"
-                      className="text-[#5311BF] dark:text-white"
-                      onClick={() => openDeleteModule(venue)}
-                    >
+                    </td>
+                    <td className="px-4 py-2 text-right">
+                      <button
+                        type="button"
+                        className="text-[#5311BF] dark:text-white"
+                        onClick={() => openDeleteModule(venue)}
+                      >
 
-                      <AiFillDelete
-                        className="fill-[#5311BF] dark:fill-white w-5 h-5"
-                        id="deleteArtist"
-                        value="upload"
-                      />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                        <SlTrash
+                          className="fill-[#5311BF] dark:fill-white w-5 h-5"
+                          id="deleteArtist"
+                          value="upload"
+                        />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </form>
       </div>
 
 
-    {/* DELETE VENUE MODULE */}
+    {/* DELETE VENUE MODAL */}
       {selectedVenue && (
       <div id="delete_venue_id" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-        <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
+        <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
         <button
             type="button"
             onClick={closeDeleteModule}
@@ -201,10 +203,10 @@ const handleDeleteVenue = async (venueId: string) => {
       </div>
       )}
 
-    {/* EDIT VENUE MODULE */}
+    {/* EDIT VENUE MODAL */}
     {selectedVenue && (
       <div id="edit_venue_id" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-        <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
+        <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
         <button
             type="button"
             onClick={closeEditModule}

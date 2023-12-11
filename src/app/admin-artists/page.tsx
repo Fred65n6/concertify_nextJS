@@ -1,11 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { AiFillDelete } from "react-icons/ai";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
-import { RiEdit2Fill } from "react-icons/ri";
-import {SlMusicToneAlt, SlArrowLeft, SlPlus, SlQuestion} from "react-icons/sl";
+import {SlMusicToneAlt, SlArrowLeft, SlPlus, SlPencil, SlTrash} from "react-icons/sl";
 import Link from "../../../node_modules/next/link";
 import { CgClose } from "react-icons/cg";
 
@@ -200,54 +198,49 @@ const closeEditModule = () => {
           </button>
         </section>
 
-        <form className="flex flex-col items-center gap-8 py-8">
-          <div className="w-full">
 
 
-          </div>
-          <table className="w-full overflow-x-auto">
-            <thead>
-            <tr className="lg:flex justify-start w-full mb-4 text-[#5311BF] dark:text-purple-500">
-                <th className="text-left w-1/2">Artist name</th>
-                <th className="text-left w-1/2">Full name</th>
-                <th className="text-left w-1/2">Genre</th>
-                <th className="text-left w-1/2">Nationality</th>
-                <th className="text-right w-1/12"></th>
-                <th className="text-right w-1/12"></th>
-              </tr>
-            </thead>
-            <tbody className="[&>*:nth-child(odd)]:bg-purple-100">
-              {artists?.map((artist) => (
-                <tr key={artist.artist_id} className="flex justify-start w-full py-2">
-                  <td className="text-left w-1/2">{artist.artist_name}</td>
-                  <td className="text-left w-1/2">{artist.artist_full_name}</td>
-                  <td className="text-left w-1/2">{artist.artist_genre.genre_name}</td>
-                  <td className="text-left w-1/2">{artist.artist_nation}</td>
-                  <td className="text-right w-1/12">
-                    <button
-                      type="button"
-                      onClick={() => openEditModule(artist)}
-                    >
-                        <RiEdit2Fill className="fill-[#5311BF] dark:fill-white"/>
-                    </button>
-                  </td>
-                  <td className="text-right w-1/12">
-                    <button
-                      type="button"
-                      onClick={() => openDeleteModule(artist)}
-                    >
-
-                      <AiFillDelete
-                        className="fill-[#5311BF] dark:fill-white w-5 h-5"
-                        id="deleteArtist"
-                        value="upload"
-                      />
-                    </button>
-                  </td>
+        <form className="flex flex-col items-center gap-8 pb-12">
+          <div className="overflow-x-auto w-full">
+            <table className="table-auto min-w-full">
+              <thead>
+                <tr className="text-[#5311BF] dark:text-purple-500">
+                  <th className="px-4 py-2 text-left font-semibold">Artist name</th>
+                  <th className="px-4 py-2 text-left font-semibold">Full name</th>
+                  <th className="px-4 py-2 text-left font-semibold">Genre</th>
+                  <th className="px-4 py-2 text-left font-semibold">Nationality</th>
+                  <th className="px-4 py-2 text-right"></th>
+                  <th className="px-4 py-2 text-right"></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className=" [&>*:nth-child(odd)]:bg-purple-100 dark:[&>*:nth-child(odd)]:bg-[#23124b]">
+              {artists?.map((artist) => (
+                  <tr key={artist.artist_id} className="">
+                    <td className="px-4 py-2">{artist.artist_name}</td>
+                    <td className="px-4 py-2">{artist.artist_full_name}</td>
+                    <td className="px-4 py-2">{artist.artist_genre.genre_name}</td>
+                    <td className="px-4 py-2">{artist.artist_nation}</td>
+                    <td className="px-4 py-2 text-right">
+                      <button
+                        type="button"
+                        onClick={() => openEditModule(artist)}
+                      >
+                          <SlPencil className="fill-[#5311BF] dark:fill-white"/>
+                      </button>
+                    </td>
+                    <td className="px-4 py-2 text-right">
+                      <button
+                        type="button"
+                        onClick={() => openDeleteModule(artist)}
+                      >
+                          <SlTrash className="fill-[#5311BF] dark:fill-white"/>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </form>
       </div>
 
@@ -255,7 +248,7 @@ const closeEditModule = () => {
     {/* DELETE ARTIST MODAL */}
       {selectedArtist && (
       <div id="delete_artist_id" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-        <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
+        <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
         <button
             type="button"
             onClick={closeDeleteModule}
@@ -282,134 +275,137 @@ const closeEditModule = () => {
       )}
 
     {/* EDIT ARTIST MODAL */}
-    {selectedArtist && (
-    <div id="edit_artist_id" className="fixed overflow-scroll top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-      <div className="p-10 grid md_grid-cols-2 items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
-        <button
-          type="button"
-          onClick={closeEditModule}
-          className="cursor-pointer ml-[100%]"
-          >
-          <CgClose/>
-        </button>
+      {selectedArtist && (
+      <div id="edit_artist_id" className="fixed overflow-scroll top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+        <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
+          <button
+            type="button"
+            onClick={closeEditModule}
+            className="cursor-pointer ml-[100%]"
+            >
+            <CgClose/>
+          </button>
+          <span className="w-full text-xl font-semibold text-[#5311BF] dark:text-purple-500 mb-6">Edit artist details</span>
 
-        <form
-                key={selectedArtist.artist_name}
-                id="uploadArtistForm"
-                onSubmit={onSubmit}
-                >
-                <div className="grid md:grid-cols-2 gap-8 w-full">
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_name">Artist name <span className="brand_purple text-2xl">*</span></label>
-                    <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                        type="text"
-                        id="artist_name"
-                        name="artist_name"
-                        value={artistName}
-                        onChange={(e) => setArtistName(e.target.value)}
-                        placeholder={selectedArtist.artist_name}
-                    />
-                </div>
 
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_name">Artist id<span className="brand_purple text-2xl">*</span></label>
-                    <input
-                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
-                        type="text"
-                        id="artist_id"
-                        name="artist_id"
-                        value={selectedArtist.artist_id}
-                        readOnly
-                    />
-                </div>
+          <form
+            key={selectedArtist.artist_name}
+            id="uploadArtistForm"
+            onSubmit={onSubmit}
+            className="flex flex-col gap-4 w-full"
+            >
+            <div className="flex flex-col gap-4 items-center w-full">
+              <div className="form-group flex flex-col w-full gap-2">
+                <label htmlFor="artist_name" className="text-sm">Artist name</label>
+                <input
+                    className="input_field"
+                    type="text"
+                    id="artist_name"
+                    name="artist_name"
+                    value={artistName}
+                    onChange={(e) => setArtistName(e.target.value)}
+                    placeholder={selectedArtist.artist_name}
+                />
+              </div>
 
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_name">Artist email<span className="brand_purple text-2xl">*</span></label>
-                    <input
-                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
-                        type="text"
-                        id="artist_email"
-                        name="artist_email"
-                        value={selectedArtist.artist_email}
-                        readOnly
-                    />
-                </div>
+              <div className="hidden">
+                <label htmlFor="artist_name" className="text-sm">Artist id<span className="brand_purple dark:text-purple-500">*</span></label>
+                <input
+                    className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                    type="text"
+                    id="artist_id"
+                    name="artist_id"
+                    value={selectedArtist.artist_id}
+                    readOnly
+                />
+              </div>
 
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_full_name">Full name</label>
-                    <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                        type="text"
-                        id="artist_full_name"
-                        name="artist_full_name"
-                        value={artistFullName}
-                        onChange={(e) => setArtistFullName(e.target.value)}
-                        placeholder={selectedArtist.artist_full_name}
-                    />
-                </div>
+              <div className="hidden">                  
+              <label htmlFor="artist_name" className="text-sm">Artist email<span className="brand_purple dark:text-purple-500">*</span></label>
+                  <input
+                      className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                      type="text"
+                      id="artist_email"
+                      name="artist_email"
+                      value={selectedArtist.artist_email}
+                      readOnly
+                  />
+              </div>
 
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_description">Description</label>
-                    <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                        type="text"
-                        id="artist_description"
-                        name="artist_description"
-                        value={artistDescription}
-                        placeholder={selectedArtist.artist_description}
-                        onChange={(e) => setArtistDescription(e.target.value)}
-                    />
-                </div>
+              <div className="form-group flex flex-col w-full gap-2">                  
+                <label htmlFor="artist_full_name" className="text-sm">Full name</label>
+                  <input
+                      className="input_field"
+                      type="text"
+                      id="artist_full_name"
+                      name="artist_full_name"
+                      value={artistFullName}
+                      onChange={(e) => setArtistFullName(e.target.value)}
+                      placeholder={selectedArtist.artist_full_name}
+                  />
+              </div>
 
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_full_name">Date of birth</label>
-                    <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                        type="date"
-                        id="artist_dob"
-                        name="artist_dob"
-                        value={artistDob}
-                        onChange={(e) => setArtistDob(e.target.value)}
-                        placeholder={selectedArtist.artist_dob}
-                    />
-                </div>
+              <div className="form-group flex flex-col w-full gap-2">
+                  <label htmlFor="artist_description" className="text-sm">Description</label>
+                  <input
+                      className="input_field"
+                      type="text"
+                      id="artist_description"
+                      name="artist_description"
+                      value={artistDescription}
+                      placeholder={selectedArtist.artist_description}
+                      onChange={(e) => setArtistDescription(e.target.value)}
+                  />
+              </div>
 
-                
+              <div className="form-group flex flex-col w-full gap-2">
+                  <label htmlFor="artist_full_name" className="text-sm">Date of birth</label>
+                  <input
+                      className="input_field"
+                      type="date"
+                      id="artist_dob"
+                      name="artist_dob"
+                      value={artistDob}
+                      onChange={(e) => setArtistDob(e.target.value)}
+                      placeholder={selectedArtist.artist_dob}
+                  />
+              </div>
 
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_nation">Artist nationality</label>
-                    <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                        type="text"
-                        name="artist_nation"
-                        value={artistNation}
-                        onChange={(e) => setArtistNation(e.target.value)}
-                        placeholder={selectedArtist.artist_nation}
-                    />
-                </div>
+              
 
-                <div className="form-group flex flex-col gap-2">
-                    <label htmlFor="file">Upload image</label>
-                    <input
-                        type="file"
-                        name="file"
-                        onChange={(e) => setFile(e.target.files?.[0] || null)}
-                    />
-                </div>
-                </div>
+              <div className="form-group flex flex-col w-full gap-2">
+                  <label htmlFor="artist_nation" className="text-sm">Artist nationality</label>
+                  <input
+                      className="input_field"
+                      type="text"
+                      name="artist_nation"
+                      value={artistNation}
+                      onChange={(e) => setArtistNation(e.target.value)}
+                      placeholder={selectedArtist.artist_nation}
+                  />
+              </div>
 
-                <button
-                    className="brand_gradient px-4 grid m-auto py-2 cursor-pointer mt-8 text-white rounded-full w-72"
-                    type="submit"
-                    value="upload"
-                >
-                    {loading ? "Processing" : "Confirm"}
-                </button>
+              <div className="form-group flex flex-col w-full gap-2">
+                  <label htmlFor="file" className="text-sm text-gray-600 dark:text-gray-400">Upload image</label>
+                  <input
+                      type="file"
+                      name="file"
+                      onChange={(e) => setFile(e.target.files?.[0] || null)}
+                  />
+              </div>
+              </div>
+
+              <button
+                  className="primary_btn"
+                  type="submit"
+                  value="upload"
+              >
+                  {loading ? "Processing" : "Confirm"}
+              </button>
             </form>
           </div>
-    </div>
-    )}
+      </div>
+      )}
 
     </>
   );

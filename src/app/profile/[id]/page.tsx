@@ -11,7 +11,6 @@ import User from "@/models/userModel"
 import {PiBalloon} from "react-icons/pi";
 import ConcertCard from "@/app/components/concertCard/page";
 import Link from "../../../../node_modules/next/link";
-import { RiEdit2Fill } from "react-icons/ri";
 import { AiFillDelete } from "react-icons/ai";
 
 
@@ -537,7 +536,7 @@ export default function UserProfile({params}: any) {
                                     <button
                                             type="button"
                                             onClick={() => openEditModule(concerts)}
-                                        ><RiEdit2Fill className="fill-[#5311BF] dark:fill-white"/>
+                                        ><SlPencil className="fill-[#5311BF] dark:fill-white"/>
                                         </button>
                                     </div>
 
@@ -629,7 +628,7 @@ export default function UserProfile({params}: any) {
 
             {/* CHANGE USERNAME MODAL */}
             <div id="changeUsernameModal" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-                <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
+                <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
                     <button
                         type="button"
                         onClick={closeUsernameModule}
@@ -676,7 +675,7 @@ export default function UserProfile({params}: any) {
 
             {/* CHANGE PASSWORD MODAL */}
             <div id="changePasswordModal" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-                <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
+                <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
                     <button
                         type="button"
                         onClick={closePasswordModule}
@@ -753,7 +752,7 @@ export default function UserProfile({params}: any) {
 
              {/* DELETE USER MODAL */}
              <div id="deleteUserModal" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-                <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
+                <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
                     <button
                         type="button"
                         onClick={closeDeleteUserModule}
@@ -806,175 +805,175 @@ export default function UserProfile({params}: any) {
             </div>
 
             {/* DELETE CONCERT MODULE */}
-      {selectedConcert && (
-      <div id="delete_concert_id" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-        <div className="p-10 flex flex-col items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
-          <button
-              type="button"
-              onClick={closeDeleteModule}
-              className="cursor-pointer ml-[100%]"
-              >
-              <CgClose/>
-            </button>
-
-            <div className="flex flex-col gap-4 justify-center text-center items-center">
-              <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
-              <p className="dark:text-white">
-              You are about to delete{" "}
-              <div className="">{selectedConcert.concert_artist_email}</div>
-              <span className="italic font-bold">{selectedConcert.concert_name}</span>. This action can not be reverted.
-            </p>
-            <button 
-                type="button"
-                onClick={() => handleDeleteConcert(selectedConcert.concert_id, selectedConcert.concert_artist_email)}
-                className="primary_btn">
-                Yes I am sure
-            </button>
-            </div>
-        </div>
-      </div>
-      )}
-
-    {/* EDIT CONCERT MODULE */}
-    {selectedConcert && (
-      <div id="edit_concert_id" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-              <div className="p-10 grid md_grid-cols-2 items-center justify-center w-[600px] bg-white rounded-lg dark:bg-[#12082a]">
-              <button
-              type="button"
-              onClick={closeEditModule}
-              className="cursor-pointer ml-[100%]"
-              >
-              <CgClose/>
-            </button>
-                <form
-                key={selectedConcert.concert_name}
-                id="uploadArtistForm"
-                onSubmit={onSubmit}
-                >
-                <div className="grid md:grid-cols-2 gap-8 w-full">
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="concert_name">Concert name</label>
-                    <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                        type="text"
-                        id="concert_name"
-                        name="concert_name"
-                        value={concertName}
-                        onChange={(e) => setConcertName(e.target.value)}
-                        placeholder={selectedConcert.concert_name}
-                    />
-                </div>
-
-                <div className="hidden">
-                    <label htmlFor="artist_name">Concert id</label>
-                    <input
-                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
-                        type="text"
-                        id="concert_id"
-                        name="concert_id"
-                        value={selectedConcert.concert_id}
-                        readOnly
-                    />
-                </div>
-
-                <div className="hidden">
-                    <label htmlFor="artist_name">Artist email</label>
-                    <input
-                        className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
-                        type="text"
-                        id="concert_artist_email"
-                        name="concert_artist_email"
-                        value={selectedConcert.concert_artist_email}
-                        readOnly
-                    />
-                </div>
-
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_full_name">Concert date</label>
-                    <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                        type="date"
-                        id="concert_date"
-                        name="concert_date"
-                        value={concertDate}
-                        onChange={(e) => setConcertDate(e.target.value)}
-                        placeholder={selectedConcert.concert_date}
-                    />
-                </div>
-
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="concert_name">Concert start time </label>
-                    <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                        type="time"
-                        id="concert_start"
-                        name="concert_start"
-                        value={concertStart}
-                        onChange={(e) => setConcertStart(e.target.value)}
-                        placeholder={selectedConcert.concert_start}
-                    />
-                </div>
-
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_full_name">Concert doors</label>
-                    <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                        type="time"
-                        id="Concert start"
-                        name="Concert start"
-                        value={concertDoors}
-                        onChange={(e) => setConcertDoors(e.target.value)}
-                        placeholder={selectedConcert.concert_doors}
-                    />
-                </div>
-
-                <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-                    <label htmlFor="artist_full_name">Concert start time</label>
-                    <input
-                        className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
-                        type="text"
-                        id="Concert description"
-                        name="Concert description"
-                        value={concertDescription}
-                        onChange={(e) => setConcertDescription(e.target.value)}
-                        placeholder={selectedConcert.concert_description}
-                    />
-                </div>
-
-                <div className="flex items-center gap-4 mt-8">
-                    <label htmlFor="isVisible" className="text-base text-purple-800">* If this box is checked, the concert will be public</label>
-                    <input
-                        type="checkbox"
-                        id="isVisible"
-                        name="isVisible"
-                        className="bg-purple-800 text-purple-800"
-                        checked={isVisible}
-                        onChange={() => setIsVisible(!isVisible)}
-                    />
-                    </div>
-
-
-                <div className="form-group flex flex-col gap-2">
-                    <label htmlFor="file">Change image</label>
-                    <input
-                        type="file"
-                        name="file"
-                        onChange={(e) => setFile(e.target.files?.[0] || null)}
-                    />
-                </div>
-                </div>
-
+            {selectedConcert && (
+            <div id="delete_concert_id" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+                <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
                 <button
-                    className="brand_gradient px-4 grid m-auto py-2 cursor-pointer mt-8 text-white rounded-full w-72"
-                    type="submit"
-                    value="upload"
-                >
-                    {loading ? "Processing" : "Confirm"}
-                </button>
-            </form>
+                    type="button"
+                    onClick={closeDeleteModule}
+                    className="cursor-pointer ml-[100%]"
+                    >
+                    <CgClose/>
+                    </button>
+
+                    <div className="flex flex-col gap-4 justify-center text-center items-center">
+                    <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
+                    <p className="dark:text-white">
+                    You are about to delete{" "}
+                    <div className="">{selectedConcert.concert_artist_email}</div>
+                    <span className="italic font-bold">{selectedConcert.concert_name}</span>. This action can not be reverted.
+                    </p>
+                    <button 
+                        type="button"
+                        onClick={() => handleDeleteConcert(selectedConcert.concert_id, selectedConcert.concert_artist_email)}
+                        className="primary_btn">
+                        Yes I am sure
+                    </button>
+                    </div>
+                </div>
             </div>
-      </div>
-    )}
+            )}
+
+            {/* EDIT CONCERT MODULE */}
+            {selectedConcert && (
+            <div id="edit_concert_id" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
+                <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
+                    <button
+                    type="button"
+                    onClick={closeEditModule}
+                    className="cursor-pointer ml-[100%]"
+                    >
+                    <CgClose/>
+                    </button>
+                        <form
+                        key={selectedConcert.concert_name}
+                        id="uploadArtistForm"
+                        onSubmit={onSubmit}
+                        >
+                        <div className="grid md:grid-cols-2 gap-8 w-full">
+                        <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                            <label htmlFor="concert_name">Concert name</label>
+                            <input
+                                className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                                type="text"
+                                id="concert_name"
+                                name="concert_name"
+                                value={concertName}
+                                onChange={(e) => setConcertName(e.target.value)}
+                                placeholder={selectedConcert.concert_name}
+                            />
+                        </div>
+
+                        <div className="hidden">
+                            <label htmlFor="artist_name">Concert id</label>
+                            <input
+                                className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                                type="text"
+                                id="concert_id"
+                                name="concert_id"
+                                value={selectedConcert.concert_id}
+                                readOnly
+                            />
+                        </div>
+
+                        <div className="hidden">
+                            <label htmlFor="artist_name">Artist email</label>
+                            <input
+                                className="brand_gradient text-white border-0 px-8 py-4 rounded-full w-full"
+                                type="text"
+                                id="concert_artist_email"
+                                name="concert_artist_email"
+                                value={selectedConcert.concert_artist_email}
+                                readOnly
+                            />
+                        </div>
+
+                        <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                            <label htmlFor="artist_full_name">Concert date</label>
+                            <input
+                                className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                                type="date"
+                                id="concert_date"
+                                name="concert_date"
+                                value={concertDate}
+                                onChange={(e) => setConcertDate(e.target.value)}
+                                placeholder={selectedConcert.concert_date}
+                            />
+                        </div>
+
+                        <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                            <label htmlFor="concert_name">Concert start time </label>
+                            <input
+                                className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                                type="time"
+                                id="concert_start"
+                                name="concert_start"
+                                value={concertStart}
+                                onChange={(e) => setConcertStart(e.target.value)}
+                                placeholder={selectedConcert.concert_start}
+                            />
+                        </div>
+
+                        <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                            <label htmlFor="artist_full_name">Concert doors</label>
+                            <input
+                                className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                                type="time"
+                                id="Concert start"
+                                name="Concert start"
+                                value={concertDoors}
+                                onChange={(e) => setConcertDoors(e.target.value)}
+                                placeholder={selectedConcert.concert_doors}
+                            />
+                        </div>
+
+                        <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                            <label htmlFor="artist_full_name">Concert start time</label>
+                            <input
+                                className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full"
+                                type="text"
+                                id="Concert description"
+                                name="Concert description"
+                                value={concertDescription}
+                                onChange={(e) => setConcertDescription(e.target.value)}
+                                placeholder={selectedConcert.concert_description}
+                            />
+                        </div>
+
+                        <div className="flex items-center gap-4 mt-8">
+                            <label htmlFor="isVisible" className="text-base text-purple-800">* If this box is checked, the concert will be public</label>
+                            <input
+                                type="checkbox"
+                                id="isVisible"
+                                name="isVisible"
+                                className="bg-purple-800 text-purple-800"
+                                checked={isVisible}
+                                onChange={() => setIsVisible(!isVisible)}
+                            />
+                            </div>
+
+
+                        <div className="form-group flex flex-col gap-2">
+                            <label htmlFor="file">Change image</label>
+                            <input
+                                type="file"
+                                name="file"
+                                onChange={(e) => setFile(e.target.files?.[0] || null)}
+                            />
+                        </div>
+                        </div>
+
+                        <button
+                            className="brand_gradient px-4 grid m-auto py-2 cursor-pointer mt-8 text-white rounded-full w-72"
+                            type="submit"
+                            value="upload"
+                        >
+                            {loading ? "Processing" : "Confirm"}
+                        </button>
+                    </form>
+                    </div>
+            </div>
+            )}
         </div>
     );
 }

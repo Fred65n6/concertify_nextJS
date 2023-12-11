@@ -79,9 +79,9 @@ export default function ArtistSignupPage() {
     <>
     <LoginPage/>
       <div id="signup_module" className="grid h-screen m-auto items-center justify-center backdrop-blur-sm z-50">
-        {/* SIGNUP FORM: STEP 1 */}
+        {/* SIGNUP MODAL FORM: STEP 1 */}
         <div id="signup_form">
-          <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
+          <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
               <span className="mb-4 text-3xl font-bold dark:text-white">
                 {loading ? "Processing" : "Artist signup"}
               </span>
