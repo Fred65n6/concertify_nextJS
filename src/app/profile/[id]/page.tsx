@@ -5,13 +5,12 @@ import React, {useState, useEffect} from "react";
 import {useRouter} from "next/navigation";
 import ThemeSwitcher from "../../components/switchTheme/page";
 import { CgClose } from "react-icons/cg";
-import { SlLogout, SlClose, SlStar, SlMusicToneAlt, SlGlobeAlt, SlBubble, SlUser, SlNote, SlPencil } from "react-icons/sl";
+import { SlLogout, SlClose, SlStar, SlMusicToneAlt, SlGlobeAlt, SlBubble, SlUser, SlTrash, SlPencil } from "react-icons/sl";
 import Image from "next/image";
 import User from "@/models/userModel"
 import {PiBalloon} from "react-icons/pi";
 import ConcertCard from "@/app/components/concertCard/page";
 import Link from "../../../../node_modules/next/link";
-import { AiFillDelete } from "react-icons/ai";
 
 
 interface Genre {
@@ -245,7 +244,6 @@ export default function UserProfile({params}: any) {
                 user
             );
             console.log("username changed", response.data);
-            // showUsernameChangeMessage();
         } catch (error: any) {
             if (
                 error.response &&
@@ -271,13 +269,12 @@ export default function UserProfile({params}: any) {
             setLoading(true);
             const response = await axios.post(
                 "/api/users/deleteUser",
-                { _id: user._id, password: user.password, email: user.email} // Adjust accordingly
+                { _id: user._id, password: user.password, email: user.email}
             );
             console.log("User deleted", response.data);
             logout();
         } catch (error) {
             console.error("Delete user failed", error);
-            // Handle the error as needed
         } finally {
             setLoading(false);
             closeUsernameModule();
@@ -293,7 +290,6 @@ export default function UserProfile({params}: any) {
                 user
             );
             console.log("password changed", response.data);
-            // showPasswordChangeMessage();
         } catch (error: any) {
             if (
                 error.response &&
@@ -531,27 +527,28 @@ export default function UserProfile({params}: any) {
                                     <h4 className="text-black text-xl font-bold pt-2">{concerts.concert_name}</h4>
                                     <p className="text-black text-sm pt-2">{concerts.concert_date}</p>
                                     <p className="text-black text-sm pt-2">{concerts.concert_venue[0].venue_name}</p>
-                                    <div className="text-right w-fit md:w-1/12">
+                                    <div className="flex gap-2 justify-end">
+                                        <div className="text-right w-fit md:w-1/12">
+                                            <button
+                                                type="button"
+                                                onClick={() => openEditModule(concerts)}
+                                            ><SlPencil className="fill-[#5311BF]"/>
+                                            </button>
+                                        </div>
 
-                                    <button
-                                            type="button"
-                                            onClick={() => openEditModule(concerts)}
-                                        ><SlPencil className="fill-[#5311BF] dark:fill-white"/>
-                                        </button>
-                                    </div>
+                                        <div className="text-right w-fit md:w-1/12">
+                                            <button
+                                                type="button"
+                                                onClick={() => openDeleteModule(concerts)}
+                                            >
 
-                                    <div className="text-right w-fit md:w-1/12">
-                                        <button
-                                            type="button"
-                                            onClick={() => openDeleteModule(concerts)}
-                                        >
-
-                                            <AiFillDelete
-                                            className="fill-[#5311BF] dark:fill-white w-5 h-5"
-                                            id="deleteConcert"
-                                            value="upload"
-                                            />
-                                        </button>
+                                                <SlTrash
+                                                className="fill-[#5311BF] w-5 h-5"
+                                                id="deleteConcert"
+                                                value="upload"
+                                                />
+                                            </button>
+                                        </div>
                                     </div>
                                 </article>
                         ))}
@@ -819,8 +816,8 @@ export default function UserProfile({params}: any) {
                     <div className="flex flex-col gap-4 justify-center text-center items-center">
                     <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
                     <p className="dark:text-white">
-                    You are about to delete{" "}
-                    <div className="">{selectedConcert.concert_artist_email}</div>
+                    You are about to delete the concert{" "}
+                    {/* <div className="">{selectedConcert.concert_artist_email}</div> */}
                     <span className="italic font-bold">{selectedConcert.concert_name}</span>. This action can not be reverted.
                     </p>
                     <button 
