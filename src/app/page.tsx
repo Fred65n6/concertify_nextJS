@@ -22,6 +22,7 @@ export default function Home() {
         userId: null,
         userEmail: "",
     });
+    
     const [user, setUser] = React.useState({
         email: "",
         newpassword: "",
@@ -62,7 +63,7 @@ export default function Home() {
         <>
         <LoginPage />
         <SignupPage />
-        <div className="grid pt-8">
+        <div className="grid pt-12">
             {loading ? (
                 <h1 className="text-4xl font-bold">Loading...</h1>
             ) : data.username ? (
@@ -78,7 +79,7 @@ export default function Home() {
             )}
 
             {showComponent ? ( 
-                    <section className="md:pt-24 pt-12 overflow-hidden">
+                    <section className="md:pt-24 pt-12 mb-20 overflow-hidden">
                     <h2 className="font-bold text-2xl pb-4 md:pb-0">
                     <span className="text-[#5311BF] dark:text-purple-500">Concerts </span>
                         just for
@@ -105,7 +106,7 @@ export default function Home() {
 
 
             {/* Concerts */}
-            <section className="md:pt-0 pt-24 mt-24 pb-24">
+            <section className="md:pt-0 pt-24 mt-4 pb-24">
                 <h2 className="font-bold text-2xl pb-4 md:pb-2">
                     <span className="text-[#5311BF] dark:text-purple-500">Concerts</span> you need to experience
                 </h2>
