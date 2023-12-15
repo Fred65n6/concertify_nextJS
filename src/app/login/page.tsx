@@ -72,7 +72,7 @@ export default function LoginPage() {
     return (
         <>
         <div id="login_module" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-            <div className="p-10 mx-4 md:m-0 flex flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
+            <div className="p-6 md:p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
                 <button
                     type="button"
                     onClick={closeLoginModule}
@@ -126,16 +126,16 @@ export default function LoginPage() {
                 </button>
                 <div className="grid gap-4 text-center">
                     <div className="flex gap-2">
-                        <span className="dard:dark:text-gray-100">Dont have an account yet?</span>
+                        <span className="dard:dark:text-gray-100">Don't have an account yet?</span>
                         <button
-                            className="text-purple-700 hover:underline"
+                            className="brand_purple dark:text-purple-500 hover:underline"
                             onClick={openSignupModule}
                             >
                         Sign up
                         </button>
                     </div>
                     <Link
-                        className="text-purple-700 hover:underline"
+                        className="brand_purple dark:text-purple-500 hover:underline"
                         href="/forgotPassword"
                         >
                     Forgot your password?

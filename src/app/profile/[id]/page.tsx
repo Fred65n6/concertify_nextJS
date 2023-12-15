@@ -747,7 +747,7 @@ export default function UserProfile({params}: any) {
 
              {/* DELETE USER MODAL */}
              <div id="deleteUserModal" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
-                <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
+                <div className="p-6 md:p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
                     <button
                         type="button"
                         onClick={closeDeleteUserModule}

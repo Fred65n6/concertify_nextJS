@@ -275,8 +275,9 @@ export default function SignupPage() {
     <>
       <div id="signup_module" className="fixed top-0 left-0 bg-slate-900/50 w-full h-screen items-center justify-center hidden backdrop-blur-sm z-50">
         {/* SIGNUP MODAL FORM: */}
+        {/* STEP 1 */}
         <div id="signup_form">
-          <div id="userPick" className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
+          <div id="userPick" className="p-6 md:p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
           <button
                   type="button"
                   onClick={closeSignupModule}
@@ -292,91 +293,91 @@ export default function SignupPage() {
                   alt="concertify_logo"
                 />
               </figure>
-            <h2 className="grid m-auto text-2xl font-bold">Sign up</h2>
-            <h3 className="text-center">To get your personalised Concertify experience <br />Tell us who you are:</h3>
-            <div className="flex m-auto gap-4 mt-8">
-            <button onClick={openSignup} className="primary_btn">I am a concert lover</button>
-            <button onClick={openArtistsignup} className="secondary_btn">I am a verified artist/band</button>
+            <h2 className="grid my-4 text-2xl font-bold">Sign up</h2>
+            <span className="text-center">To get your personalised Concertify experience <br />Tell us who you are:</span>
+            <div className="flex flex-col md:flex-row m-auto gap-4 mt-8 justify-center items-center">
+              <button onClick={openSignup} className="primary_btn">I am a concert lover</button>
+              <button onClick={openArtistsignup} className="secondary_btn">I am a verified artist/band</button>
             </div>
           </div>
 
 
           <div id="userSignup" className="p-10 mx-4 md:m-0 hidden flex-col items-center w-fill md:w-[800px] bg-white rounded-lg dark:bg-[#12082a]">
-          <button
-                  type="button"
-                  onClick={closeSignupModule}
-                  className="cursor-pointer ml-[100%]"
-                  >
-                  <CgClose/>
-              </button>
-              <span className="mb-4 text-3xl font-bold dark:text-white">
-                {loading ? "Processing" : "Sign up"}
-              </span>
-              <p className="mb-6">To get a personalised experience</p>
-              
-              {/* FORM FIELDS */}
-              <div className="flex flex-col gap-4 w-full">
+            <button
+              type="button"
+              onClick={closeSignupModule}
+              className="cursor-pointer ml-[100%]"
+              >
+              <CgClose/>
+            </button>
+            <span className="mb-4 text-3xl font-bold dark:text-white">
+              {loading ? "Processing" : "Sign up"}
+            </span>
+            <p className="mb-6">To get a personalised experience</p>
+            
+            {/* FORM FIELDS */}
+            <div className="flex flex-col gap-4 w-full">
 
-                {/* USERNAME */}
-                <div className="flex flex-col w-full gap-2">
-                  <label htmlFor="username" className="w-fit text-sm dark:text-gray-100">Username</label>
-                  <input
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
-                    type="text"
-                    id="username"
-                    value={user.username}
-                    onChange={(e) => setUser({ ...user, username: e.target.value })}
-                    placeholder="Username"
-                  />
-                </div>
-
-                {/* EMAIL */}
-                <div className="flex flex-col w-full gap-2">
-                  <label htmlFor="email" className="w-fit text-sm dark:text-gray-100">Email</label>
-                  <input
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
-                    type="text"
-                    id="email"
-                    value={user.email}
-                    onChange={(e) => setUser({ ...user, email: e.target.value })}
-                    placeholder="Email"
-                  />
-                </div>
-
-                <div className="flex gap-4">
-                  {/* PASSWORD */}
-                  <div className="flex flex-col w-full gap-2">
-                    <label htmlFor="password" className="w-fit text-sm dark:text-gray-100">Password</label>
-                    <input
-                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
-                      type="password"
-                      id="password"
-                      value={user.password}
-                      onChange={(e) => setUser({ ...user, password: e.target.value })}
-                      placeholder="Password"
-                    />
-                  </div>
-
-                  {/* CONFIRM PASSWORD */}
-                  <div className="flex flex-col w-full gap-2">
-                    <label htmlFor="confirmpassword" className="w-fit text-sm dark:text-gray-100">Confirm password</label>
-                    <input
-                      className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
-                      type="password"
-                      id="confirmpassword"
-                      value={user.confirmpassword}
-                      onChange={(e) =>
-                        setUser({ ...user, confirmpassword: e.target.value })
-                      }
-                      placeholder="Confirm your password"
-                    />
-                  </div>
-
-                </div>
+              {/* USERNAME */}
+              <div className="flex flex-col w-full gap-2">
+                <label htmlFor="username" className="w-fit text-sm dark:text-gray-100">Username</label>
+                <input
+                  className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                  type="text"
+                  id="username"
+                  value={user.username}
+                  onChange={(e) => setUser({ ...user, username: e.target.value })}
+                  placeholder="Username"
+                />
               </div>
-               {/* FORM FIELDS END */}
 
-              {error && <div className="text-red-500">{error}</div>}
+              {/* EMAIL */}
+              <div className="flex flex-col w-full gap-2">
+                <label htmlFor="email" className="w-fit text-sm dark:text-gray-100">Email</label>
+                <input
+                  className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                  type="text"
+                  id="email"
+                  value={user.email}
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
+                  placeholder="Email"
+                />
+              </div>
+
+              <div className="flex gap-4">
+                {/* PASSWORD */}
+                <div className="flex flex-col w-full gap-2">
+                  <label htmlFor="password" className="w-fit text-sm dark:text-gray-100">Password</label>
+                  <input
+                  className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                    type="password"
+                    id="password"
+                    value={user.password}
+                    onChange={(e) => setUser({ ...user, password: e.target.value })}
+                    placeholder="Password"
+                  />
+                </div>
+
+                {/* CONFIRM PASSWORD */}
+                <div className="flex flex-col w-full gap-2">
+                  <label htmlFor="confirmpassword" className="w-fit text-sm dark:text-gray-100">Confirm password</label>
+                  <input
+                    className="bg-slate-100 border-0 px-8 py-4 rounded-full w-full dark:text-black"
+                    type="password"
+                    id="confirmpassword"
+                    value={user.confirmpassword}
+                    onChange={(e) =>
+                      setUser({ ...user, confirmpassword: e.target.value })
+                    }
+                    placeholder="Confirm your password"
+                  />
+                </div>
+
+              </div>
+            </div>
+              {/* FORM FIELDS END */}
+
+            {error && <div className="text-red-500">{error}</div>}
             
               {
                 !isArtist ? (
@@ -411,92 +412,91 @@ export default function SignupPage() {
           </div>
         </div>
 
-        {/* GENRE PREFERENCES: STEP 2 */}
+        {/* STEP 2: GENRE PREFERENCES */}
         <div id="signup_preference_genres" className="m-auto hidden">
-          <div className="flex flex-col items-center justify-center p-8 bg-white w-fit m-8 md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
-            <div className="w-[300px] lg:w-[500px] mb-10">
-              <Progress color="purple" progress={33} />
-            </div>
-            <h1 className="mb-4 text-3xl font-bold text-center mx-6">
-              Which music genres do you like?
-            </h1>
-            <p className="mb-6 text-center mx-6">
-              You can select as many as you like, to get your own personalized recommendations.
-            </p>
+            <div className="p-6 md:p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
+              <Progress color="purple" progress={33} className="w-[300px] lg:w-[500px] mb-10" />
+              <h1 className="mb-4 text-3xl font-bold text-center mx-6">
+                Select your favourite genres
+              </h1>
+              <p className="mb-6 text-center mx-6">
+                You can select as many as you like, to get personalized recommendations.
+              </p>
 
-            <form className="grid gap-2 w-full" action="" onSubmit={submitSelectedGenres}>
-              <select
-                  className="bg-slate-100 border-0 px-8 py-4 rounded-full"
-                  id="genreSelect"
-                  onChange={handleGenreChange}
-                  value={selectedGenre}
-                >
-                  <option value="">My favourite geners are...</option>
-                  {genres.map((genre) => (
-                    <option key={genre._id} value={genre.genre_name}>
-                      {genre.genre_name}
-                    </option>
+              <form className="grid gap-2 w-full" action="" onSubmit={submitSelectedGenres}>
+                <select
+                    className="input_field"
+                    id="genreSelect"
+                    onChange={handleGenreChange}
+                    value={selectedGenre}
+                  >
+                    <option value="">Select...</option>
+                    {genres.map((genre) => (
+                      <option key={genre._id} value={genre.genre_name}>
+                        {genre.genre_name}
+                      </option>
+                    ))}
+                </select>
+              
+                {/* SELECTED GENRE TAGS */}
+                <div className="flex flex-wrap gap-4 py-8">
+                  {selectedGenres.map((genre, index) => (
+                    <div key={index} className="relative">
+                      <div className="flex gap-2 border-2 w-max py-2 px-4 align-middle border-purple-700 brand_purple text-center rounded-full">
+                       <span className="text-white">{genre}</span>
+                        <button
+                          type="button"
+                          onClick={() => removeSelectedGenres(index)}
+                          className="cursor-pointer align-middle text-white"
+                        >
+                        &times;
+                        </button>
+
+                      </div>
+                    </div>
                   ))}
-              </select>
-            
-              {/* TAGS AFTER SELECTING GENRES */}
-              <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8 pb-40 pt-10">
-                {selectedGenres.map((genre, index) => (
-                  <div key={index} className="relative">
-                    <input
-                    className="border-2 w-40 border-purple-700 brand_purple py-2 px-2 text-center rounded-full"
-                    type="text"
-                      value={genre}
-                      readOnly 
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeSelectedGenres(index)}
-                      className="absolute -top-1 text-xl brand_purple -right-0 p-2 cursor-pointer"
-                    >
-                    &times;
-                    </button>
-                  </div>
-                ))}
-              </div>
+                </div>
 
-              <input
-                type="email"
-                id="emailInput"
-                value={user.email}
-                readOnly
-                className="hidden"
-              />
+                <input
+                  type="email"
+                  id="emailInput"
+                  value={user.email}
+                  readOnly
+                  className="hidden"
+                />
 
-                <button type="submit" value="upload" className="rounded-full bg-purple-700 m-auto w-fit h-fit py-4 px-12 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
-                  Next
-                </button>
+                  <button 
+                    type="submit" 
+                    value="upload" 
+                    className="rounded-full bg-purple-700 m-auto w-fit h-fit py-3 px-12 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
+                    Next
+                  </button>
               </form>
 
           </div>
         </div>
 
-        {/* VENUE PREFERENCES: STEP 3 */}
+        {/* STEP 3: VENUE PREFERENCES */}
         <div id="signup_preference_venues" className="m-auto hidden">
-          <div className="flex flex-col items-center justify-center p-8 bg-white min-h-fit w-fit m-8 md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+          <div className="p-6 md:p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
             <div className="w-[300px] lg:w-[500px] mb-10">
               <Progress color="purple" progress={66} />
             </div>
             <h1 className="mb-4 text-3xl font-bold text-center mx-6">
-              Which venues are your prefer?
+            Select your favourite venues
             </h1>
             <p className="mb-6 text-center mx-6">
-              You can select as many as you like, to get your own personalized recommendations.
+              You can select as many as you like, to get personalized recommendations.
             </p>
             
             <form className="grid gap-2 w-full" action="" onSubmit={submitSelectedVenues}>
               <select
-                className="bg-slate-100 border-0 px-8 py-4 rounded-full"
+                className="input_field"
                 id="venueSelect"
                 onChange={handleVenueChange}
                 value={selectedVenue}
               >
-                <option value="">My favourite venues are...</option>
+                <option value="">Select...</option>
                 {venues.map((venue) => (
                   <option key={venue._id} value={venue.venue_name}>
                     {venue.venue_name}
@@ -505,27 +505,24 @@ export default function SignupPage() {
               </select>
 
 
-              {/* TAGS AFTER SELECTING VENUES */}
-              <div className="grid m-auto xs:grid-cols-1 md:grid-cols-4 px-6 gap-8 mt-8 pb-20 pt-10">
+              {/* SELECTED VENUE TAGS */}
+              <div className="flex flex-wrap gap-4 py-8">
                 {selectedVenues.map((venue, index) => (
-                  <div key={index} className="relative">
-                    <input
-                      className="border-2 w-40 border-purple-700 brand_purple py-2 px-2 text-center rounded-full"
-                      type="text"
-                      value={venue}
-                      readOnly
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeSelectedVenue(index)}
-                      className="absolute -top-1 text-xl brand_purple -right-0 p-2 cursor-pointer"
-                      >
-                      &times;
-                    </button>
-                  </div>
-                ))}
-              </div>
-      
+                    <div key={index} className="relative">
+                      <div className="flex gap-2 border-2 w-max py-2 px-4 align-middle border-purple-700 brand_purple text-center rounded-full">
+                       <span className="text-white">{venue}</span>
+                        <button
+                          type="button"
+                          onClick={() => removeSelectedVenue(index)}
+                          className="cursor-pointer align-middle text-white"
+                        >
+                        &times;
+                        </button>
+
+                      </div>
+                    </div>
+                  ))}
+                </div>
               <input
                 type="email"
                 id="emailInput"
@@ -534,30 +531,39 @@ export default function SignupPage() {
                 readOnly
               />
       
-              <button type="submit" value="upload" className="rounded-full bg-purple-700 m-auto w-fit h-fit py-4 px-12 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
+              <button 
+                type="submit" 
+                value="upload" 
+                className="rounded-full bg-purple-700 m-auto w-fit h-fit py-3 px-12 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
                 Submit
               </button>
             </form>
           </div>
         </div>
 
-        {/* WELCOME ON BOARD MODAL */}
+        {/* SUCCESS: WELCOME ON BOARD MODAL */}
         <div id="welcome_modal" className="hidden">
-          <div className="p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
-            <img className="my-10" src="../concertify_logo.svg" alt="" />
-            <h1 className="my-4 text-3xl font-bold">
-              Welcome {user.username}!
-            </h1>
-            <p className="mb-6 text-center mx-2 text-lg">
+          <div className="p-6 md:p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
+          <figure className="w-full flex justify-center">
+                <Image
+                  src="../concertify.svg"
+                  width={25}
+                  height={30}
+                  alt="concertify_logo"
+                />
+              </figure>
+            <h2 className="grid my-4 text-2xl font-bold">Welcome {user.username}!</h2>
+
+            <p className="text-center">
               Great to have you on board!
             </p>
-            <p className="mb-6 text-center mx-2 text-lg">
+            <p className="mb-6 text-center">
               Let's personalize your experience in two
               simple steps.
             </p>
             <button
               onClick={selectPrefferedGenres}
-              className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white"
+              className="primary_btn"
             >
               Get Started
             </button>
@@ -566,20 +572,17 @@ export default function SignupPage() {
 
          {/* SIGN UP FLOW COMPLETE MESSAGE */}
         <div id="signup_flow_complete" className="hidden">
-          <div className="flex flex-col items-center justify-center pt-4 p-8 bg-white w-[400px] md:w-[600px] lg:w-[800px] dark:bg-[#202124] dark:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-white/20 rounded-lg">
+          <div className="p-6 md:p-10 flex flex-col items-center justify-center w-fill md:w-[600px] m-4 bg-white rounded-lg dark:bg-[#23124b]">
             <div className="w-[300px] lg:w-[500px] mt-10">
               <Progress color="purple" progress={100} />
             </div>
             <h1 className="text-2xl font-bold text-center mx-6 mt-10">
-              Please check your email to verify your identity
+              You're almost there!
             </h1>
-            <p className="mt-5 text-center">
-              To verify your identity, please check you email and click the verifificaion link.
+            <p className="my-5 text-center">
+              Please check you email and click the verifificaion link to activate your account.
             </p>
-            <p className="mt-5 mb-10 text-center">
-              After that, you are ready to explore the Concertify universe!
-            </p>
-            <button onClick={closeSignup} className="mb-4 mt-2 brand_gradient px-12 py-4 rounded-full text-white">Close</button>
+            <button onClick={closeSignup} className="mb-4 mt-2 brand_gradient px-12 py-3 rounded-full text-white">Close</button>
           </div>
         </div>
       </div>
