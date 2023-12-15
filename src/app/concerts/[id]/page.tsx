@@ -204,7 +204,7 @@ const SingleConcert: React.FC = () => {
                             width={200}
                             height={200}
                             alt="concert"
-                            className="h-auto w-full rounded-lg"
+                            className="h-[400px] object-cover object-top w-full rounded-lg"
                         />
                     </figure>
                     <section>

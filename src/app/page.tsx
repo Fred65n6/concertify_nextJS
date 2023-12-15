@@ -78,7 +78,7 @@ export default function Home() {
             )}
 
             {showComponent ? ( 
-                    <section className="md:pt-24 pt-12 md:h-[600px] overflow-hidden">
+                    <section className="md:pt-24 pt-12 overflow-hidden">
                     <h2 className="font-bold text-2xl pb-4 md:pb-0">
                     <span className="text-[#5311BF] dark:text-purple-500">Concerts </span>
                         just for
@@ -88,7 +88,7 @@ export default function Home() {
                         <JfyCard />
                     </div>
                     <Link
-                        className="justify-end flex items-center brand_purple dark:text-purple-500"
+                        className="justify-end flex items-center brand_purple mt-4 dark:text-purple-500"
                         href="/just-for-you"
                     >
                         View all recommended concerts
