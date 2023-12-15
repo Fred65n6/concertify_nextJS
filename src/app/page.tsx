@@ -78,13 +78,13 @@ export default function Home() {
             )}
 
             {showComponent ? ( 
-                    <section className="md:pt-24 pt-12 pb-4 md:h-[600px]">
-                    <h2 className="font-bold text-2xl pb-4 md:pb-2">
+                    <section className="md:pt-24 pt-12 md:h-[600px] overflow-hidden">
+                    <h2 className="font-bold text-2xl pb-4 md:pb-0">
                     <span className="text-[#5311BF] dark:text-purple-500">Concerts </span>
                         just for
                         <span className="text-[#5311BF] dark:text-purple-500"> you</span>
                     </h2>
-                    <div className="flex md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar">
+                    <div className="flex overflow-scroll  md:gap-4 overflow-x-scroll no-scrollbar">
                         <JfyCard />
                     </div>
                     <Link
@@ -105,7 +105,7 @@ export default function Home() {
 
 
             {/* Concerts */}
-            <section className="md:pt-0 pt-12 pb-24">
+            <section className="md:pt-0 pt-24 mt-24 pb-24">
                 <h2 className="font-bold text-2xl pb-4 md:pb-2">
                     <span className="text-[#5311BF] dark:text-purple-500">Concerts</span> you need to experience
                 </h2>

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SlArrowRight, SlArrowLeft } from "react-icons/sl";
 
-interface ConcertCard {
+interface JfyCard {
   concert_id: string;
   concert_artist: {
     artist_id: string;
@@ -36,10 +36,9 @@ interface ConcertCard {
 }
 
 const JfyCard: React.FC = () => {
-    const [concerts, setConcerts] = useState<ConcertCard[]>([]);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const concertsPerPage = 4;
+    const [concerts, setConcerts] = useState<JfyCard[]>([]);
     const [loading, setLoading] = useState(true);
+    const concertsPerPage = 2;
     const [userGenres, setUserGenres] = useState<string[]>([]);
     const [userVenues, setUserVenues] = useState<string[]>([])
   
@@ -50,11 +49,11 @@ const JfyCard: React.FC = () => {
   
         // Extract genre_names from the user's genres array
         const genres = userData.genres.map((genre:any) => genre.genre_name);
-        const venues = userData.genres.map((venue:any) => venue.venue_name);
+        const venues = userData.venues.map((venue:any) => venue.venue_name);
 
         setUserGenres(genres);
         setUserVenues(venues)
-  
+
         setLoading(false); // Set loading to false after successful data retrieval
       } catch (error: any) {
         console.error(error.message);
@@ -66,26 +65,22 @@ const JfyCard: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<{ data: ConcertCard[] }>("/api/data/concertData");
-                setConcerts(response.data.data.filter(concert => concert.isVisible !== false && userGenres.includes(concert.concert_genre.genre_name) || userVenues.includes(concert.concert_venue.venue_name)));
+                const response = await axios.get<{ data: JfyCard[] }>("/api/data/concertData");
+                setConcerts(response.data.data.filter(concert => userVenues.includes(concert.concert_venue.venue_name) && concert.isVisible !== false || userGenres.includes(concert.concert_genre.genre_name) && concert.isVisible !== false));
             } catch (error) {
                 console.error("Error fetching concerts:", error);
             }
-        };
-  
+      };
       fetchData();
       getUserDetails();
     }, [userGenres, userVenues]);
 
-    const startIndex = (currentPage - 1) * concertsPerPage;
-    const endIndex = startIndex + concertsPerPage;
-  
-    const concertsToDisplay = concerts.slice(startIndex, endIndex).reverse();
+    const concertsToDisplay = concerts.slice(concertsPerPage).reverse();
 
   return (
     <>
       {concertsToDisplay?.map((concert) => (
-        <article className="flex-shrink-0 grid md:pt-8 pb-8" key={concert.concert_id}>
+        <article className="flex-shrink-0 grid md:pt-8 pb-8 w-[400px]" key={concert.concert_id}>
           <Link href={"/concerts/" + concert.concert_id} key={concert.concert_id}>
 
             <Image
@@ -93,7 +88,7 @@ const JfyCard: React.FC = () => {
               width={200}
               height={200}
               alt="concert"
-              className="rounded-lg object-cover w-full h-[200px]"
+              className="rounded-lg object-cover w-full h-[300px]"
             />
           </Link>
 

@@ -23,7 +23,8 @@ export const SearchBar: React.FC<SearchInputProps> = ({setResults}) => {
                         concert &&
                         (concert.concert_name.toLowerCase().includes(value) ||
                             concert.concert_artist.artist_name.toLowerCase().includes(value) ||
-                            concert.concert_venue.venue_name.toLowerCase().includes(value))
+                            concert.concert_venue.venue_name.toLowerCase().includes(value)) && 
+                            concert.isVisible !== false
                     );
                 });
                 setResults(results);

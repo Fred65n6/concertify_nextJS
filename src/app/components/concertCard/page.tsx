@@ -37,7 +37,7 @@ interface ConcertCard {
 
 const ConcertCard: React.FC = () => {
   const [concerts, setConcerts] = useState<ConcertCard[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [currentPage, setCurrentPage] = useState<number>(1);
   const concertsPerPage = 4;
 
   // ----- Fetch data with useEffect since it is a client site
@@ -55,12 +55,8 @@ const ConcertCard: React.FC = () => {
     fetchData();
   }, []);
 
-  // ----- Calculate the start and end indexes of venues to display on the current page
-  const startIndex = (currentPage - 1) * concertsPerPage;
-  const endIndex = startIndex + concertsPerPage;
-
   // ----- Slice the venues array to display only the venues for the current page
-  const concertsToDisplay = concerts.slice(startIndex, endIndex).reverse();
+  const concertsToDisplay = concerts.slice(concertsPerPage).reverse();
 
   return (
     <>
