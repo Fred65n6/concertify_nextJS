@@ -46,6 +46,7 @@ const JfyCard: React.FC = () => {
       try {
         const res = await axios.get("/api/users/cookieUser");
         const userData = res.data.data;
+        const concertsPerPage = 5
   
         // Extract genre_names from the user's genres array
         const genres = userData.genres.map((genre:any) => genre.genre_name);
@@ -75,7 +76,7 @@ const JfyCard: React.FC = () => {
       getUserDetails();
     }, [userGenres, userVenues]);
 
-    const concertsToDisplay = concerts.slice(concertsPerPage).reverse();
+    const concertsToDisplay = concerts.slice(-9).reverse();
 
   return (
     <>
@@ -88,7 +89,7 @@ const JfyCard: React.FC = () => {
               width={200}
               height={200}
               alt="concert"
-              className="rounded-lg object-cover w-full h-[300px]"
+              className="rounded-lg object-cover w-full h-[340px]"
             />
           </Link>
 

@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
       const tokenDataArtist = {
         id: user._id,
         username: user.username,
-        email: user.email,
+        email: user.email.toLowerCase(),
         isArtist: true, 
       };
 
@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
       const tokenData = {
         id: user._id,
         username: user.username,
-        email: user.email,
+        email: user.email.toLowerCase(),
         isAdmin: false,
       };
 

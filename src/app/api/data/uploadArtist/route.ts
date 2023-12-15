@@ -135,9 +135,7 @@ export async function POST(request: NextRequest) {
         if (artistEmail) {
           try {
             const user = await User.findOne({email: artistEmail});
-            console.log('this is artist email:' +  artistEmail)
-            console.log(user)
-    
+  
             const newArtist = {
                 artist_id: artistId,
                 artist_name: artistName,
@@ -163,6 +161,7 @@ export async function POST(request: NextRequest) {
         console.log(savedArtist);
 
         return NextResponse.json({success: true});
+        
     } catch (error) {
         console.error("Error uploading artist:", error);
         return NextResponse.json({

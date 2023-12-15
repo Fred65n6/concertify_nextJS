@@ -37,8 +37,7 @@ interface ConcertCard {
 
 const ConcertCard: React.FC = () => {
   const [concerts, setConcerts] = useState<ConcertCard[]>([]);
-  // const [currentPage, setCurrentPage] = useState<number>(1);
-  const concertsPerPage = 4;
+
 
   // ----- Fetch data with useEffect since it is a client site
   useEffect(() => {
@@ -56,12 +55,12 @@ const ConcertCard: React.FC = () => {
   }, []);
 
   // ----- Slice the venues array to display only the venues for the current page
-  const concertsToDisplay = concerts.slice(concertsPerPage).reverse();
+  const concertsToDisplay = concerts.slice(-9).reverse();
 
   return (
     <>
       {concertsToDisplay?.map((concert) => (
-        <article className="flex-shrink-0 grid md:pt-8 pb-8" key={concert.concert_id}>
+        <article className="flex-shrink-0 grid md:pt-8 pb-8 w-[300px]" key={concert.concert_id}>
           <Link href={"/concerts/" + concert.concert_id} key={concert.concert_id}>
 
             <Image
@@ -69,7 +68,7 @@ const ConcertCard: React.FC = () => {
               width={200}
               height={200}
               alt="concert"
-              className="rounded-lg object-cover w-full h-[200px]"
+              className="rounded-lg object-cover w-full h-[300px]"
             />
           </Link>
 

@@ -212,19 +212,6 @@ const UploadForm: React.FC = () => {
                     />
                 </div>
 
-                <div className="hidden">
-                    <label htmlFor="artist_name">Concert genre <span className="brand_purple dark:text-purple-500">*</span></label>
-                    <input
-                        className="input_field"
-                        type="text"
-                        id="genre"
-                        name="genre"
-                        value={artist.artist_genre[0].genre_id}
-                        readOnly
-                    />
-                </div>
-
-
                 {/* Concert name */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
                     <label htmlFor="Concert_name" className="text-sm">Concert name</label>
@@ -324,6 +311,7 @@ const UploadForm: React.FC = () => {
                         onChange={(e) => setConcertVenueName(e.target.value)}
                         placeholder="venue Name"
                     />
+
                     <input
                         readOnly={true}
                         className="hidden"
@@ -345,11 +333,7 @@ const UploadForm: React.FC = () => {
                         onChange={() => setIsVisible(!isVisible)}
                     />
                     </div>
-                 
-                    
                 </div>
-
-               
 
                 {/* Upload image */}
                 <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">

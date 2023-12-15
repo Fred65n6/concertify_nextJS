@@ -14,10 +14,9 @@ function validatePassword(password:string) {
 
 export async function POST(request: NextRequest) {
     try {
+        
         const reqBody = await request.json();
         const { username, email, password, confirmpassword } = reqBody;
-
-        console.log(reqBody);
 
         // -- Check if user already exists
         const user = await User.findOne({ email: email.toLowerCase() });  
@@ -30,6 +29,7 @@ export async function POST(request: NextRequest) {
         }
 
         const usernameExists = await User.findOne({ username });
+        
         if (usernameExists) {
             return NextResponse.json(
                 { error: "Username is already taken" },
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
         const hashedPassword = await bcryptjs.hash(password, salt);
 
         const newUser = new User({
-            username,
+            username: username.toLowerCase(),
             email: email.toLowerCase(),
             password: hashedPassword,
         });

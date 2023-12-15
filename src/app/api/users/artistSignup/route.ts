@@ -8,11 +8,11 @@ connect();
 
 function validatePassword(password:string) {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z9æøåÆØÅ\d!@#$%^&*()_+]{8,}$/;
-
     return passwordRegex.test(password);
 }
 
 export async function POST(request: NextRequest) {
+
     try {
         const reqBody = await request.json();
         const { username, email, password, confirmpassword } = reqBody;
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
         const hashedPassword = await bcryptjs.hash(password, salt);
 
         const newUser = new User({
-            username,
+            username: username.toLowerCase(),
             email: email.toLowerCase(),
             password: hashedPassword,
             isArtist: true,

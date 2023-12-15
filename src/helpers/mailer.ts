@@ -5,7 +5,9 @@ import bcryptjs from "bcryptjs";
 export const sendEmail = async ({email, emailType, userId}: any) => {
     try {
         // create hashed token
+
         const hashedToken = await bcryptjs.hash(userId.toString(), 10);
+
         const resetToken = await bcryptjs.hash(userId.toString(), 10);
 
         if (emailType === "VERIFY") {
@@ -74,6 +76,7 @@ export const sendEmail = async ({email, emailType, userId}: any) => {
         };
 
         const mailResponse = await transport.sendMail(mailOptions);
+        
         return mailResponse;
     } catch (error: any) {
         throw new Error(error.message);

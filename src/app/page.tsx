@@ -28,6 +28,16 @@ export default function Home() {
         newpassword: "",
     });
 
+    useEffect(() => {
+        const shouldReload = localStorage.getItem('shouldReload');
+            if (shouldReload) {
+              localStorage.removeItem('shouldReload');
+              window.location.reload();
+            }
+        getUserDetails();
+    }, []);
+
+
     const getUserDetails = async () => {
         try {
             const res = await axios.get("/api/users/cookieUser");
@@ -50,14 +60,6 @@ export default function Home() {
         }
     };
 
-    useEffect(() => {
-        const shouldReload = localStorage.getItem('shouldReload');
-            if (shouldReload) {
-              localStorage.removeItem('shouldReload');
-              window.location.reload();
-            }
-        getUserDetails();
-    }, []);
 
     return (
         <>
@@ -85,7 +87,7 @@ export default function Home() {
                         just for
                         <span className="text-[#5311BF] dark:text-purple-500"> you</span>
                     </h2>
-                    <div className="flex overflow-scroll  md:gap-4 overflow-x-scroll no-scrollbar">
+                    <div className="flex overflow-scroll gap-4 md:gap-4 overflow-x-scroll no-scrollbar">
                         <JfyCard />
                     </div>
                     <Link
@@ -106,11 +108,11 @@ export default function Home() {
 
 
             {/* Concerts */}
-            <section className="md:pt-0 pt-24 mt-4 pb-24">
+            <section className="md:pt-0 pt-24 mt-4 pb-24 overflow-hidden">
                 <h2 className="font-bold text-2xl pb-4 md:pb-2">
                     <span className="text-[#5311BF] dark:text-purple-500">Concerts</span> you need to experience
                 </h2>
-                <div className="flex md:grid grid-cols-4 md:gap-4 overflow-x-hidden no-scrollbar">
+                <div className="flex overflow-scroll gap-4 md:gap-4 no-scrollbar">
                     <ConcertCard />
                 </div>
                 <Link
@@ -126,15 +128,15 @@ export default function Home() {
             </section>
 
             {/* Venues */}
-            <section className="pb-36 md:pt-0 pt-12">
+            <section className="pb-36 md:pt-0 pt-12 overflow-hidden">
                 <h2 className="font-bold text-2xl pb-4">
                     <span className="text-[#5311BF] dark:text-purple-500">Venues</span> you need to experience
                 </h2>
-                <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
+                <div className="flex gap-4  md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
                     <VenueCard />
                 </div>
                 <Link
-                    className="justify-end flex items-center brand_purple dark:text-purple-500 md:hidden"
+                    className="justify-end flex items-center brand_purple dark:text-purple-500"
                     href="/venues"
                 >
                     View all venues

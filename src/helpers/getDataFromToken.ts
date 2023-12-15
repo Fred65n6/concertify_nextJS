@@ -14,7 +14,7 @@ export const getDataFromToken = (request: NextRequest) => {
       } catch (error) {
       }
     }
-
+3
     throw new Error("No valid token found");
   } catch (error: any) {
     throw new Error(error.message);

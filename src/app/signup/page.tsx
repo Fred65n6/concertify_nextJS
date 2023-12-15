@@ -36,7 +36,9 @@ export default function SignupPage() {
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string>("");
+
   const [isArtist, setIsArtist] = useState(false);
+  
   const [user, setUser] = React.useState({
     username: "",
     email: "",

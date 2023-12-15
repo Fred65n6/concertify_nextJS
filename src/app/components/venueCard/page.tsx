@@ -4,7 +4,6 @@ import axios from "axios";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 
 interface Venue {
   _id: string;
@@ -37,38 +36,21 @@ const VenueCard: React.FC = () => {
   // Filter venues to exclude the one with the matching ID
   const filteredVenues = venues.filter((venue) => venue._id !== id);
 
-  // Calculate the start and end indexes of venues to display on the current page
-  const startIndex = (currentPage - 1) * venuesPerPage;
-  const endIndex = startIndex + venuesPerPage;
-
   // Slice the filtered venues array to display only the venues for the current page
-  const venuesToDisplay = filteredVenues.slice(startIndex, endIndex);
-
-  // Function to handle next page
-  const nextPage = () => {
-    if (currentPage < Math.ceil(filteredVenues.length / venuesPerPage)) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  // Function to handle previous page
-  const previousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+  const venuesToDisplay = filteredVenues.slice(-9);
+  
 
   return (
     <>
       {venuesToDisplay.map((venue) => (
-        <article className="flex-shrink-0 md:pt-8 pb-8" key={venue._id}>
+        <article className="flex-shrink-0 md:pt-8 pb-8 w-[300px]" key={venue._id}>
           <Link href={"/venues/" + venue._id} key={venue._id}>
             <Image
               src={`https://concertify.s3.eu-central-1.amazonaws.com/${venue.venue_image}`}
               width={200}
               height={200}
               alt="concert"
-              className="rounded-lg  object-cover w-[300px] h-[200px]"
+              className="rounded-lg  object-cover w-full h-[300px]"
             />
           </Link>
 
@@ -81,35 +63,6 @@ const VenueCard: React.FC = () => {
           </p>
         </article>
       ))}
-
-      <div className="hidden pagination md:flex gap-8 md:place-self-end md:col-end-5 brand_purple dark:text-purple-500">
-        {currentPage > 1 && (
-          <button
-            onClick={previousPage}
-            className="pagination-button flex items-center"
-          >
-            <SlArrowLeft
-              className="w-4 h-4"
-              id="arrow_left"
-            />
-            Previous
-          </button>
-        )}
-        <button
-          onClick={nextPage}
-          className={`flex items-center pagination-button brand_purple dark:text-purple-500 ${
-            currentPage === Math.ceil(filteredVenues.length / venuesPerPage)
-              ? "disabled"
-              : ""
-          }`}
-        >
-          Next
-          <SlArrowRight
-              className="w-4 h-4"
-              id="arrow_right"
-          />
-        </button>
-      </div>
     </>
   );
 };

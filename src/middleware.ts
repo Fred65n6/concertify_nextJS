@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
  
-
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
 
@@ -17,14 +16,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.nextUrl))
   }
 
-  if(isArtistPath && !artistToken) {
+  if(isArtistPath && !artistToken || adminToken) {
     return NextResponse.redirect(new URL('/', request.nextUrl))
   }
 
   if (isRestrictedPath && !token && !adminToken && !artistToken) {
     return NextResponse.redirect(new URL('/', request.nextUrl))
   }
-    
 }
 
 export const config = {

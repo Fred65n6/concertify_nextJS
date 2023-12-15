@@ -440,10 +440,10 @@ export default function UserProfile({params}: any) {
                                         width={200}
                                         height={200}
                                         alt="artist image"
-                                        className="h-fill w-80 rounded-md object-cover"
+                                        className="h-[400px] w-[400px] rounded-md object-cover"
                                         />
                                         <ul className="w-full grid gap-2">
-                                            <li className="flex flex-col item-center justify-between">
+                                            <li className="flex flex-col item-center ">
                                                 <div className="flex gap-2 items-center">
                                                     <SlStar className="fill-black w-4 h-4" id="artist_name"/>
                                                     <p className="text-sm dark:text-black">Artist name:</p>
@@ -451,7 +451,7 @@ export default function UserProfile({params}: any) {
                                                     <span className="text-base brand_purple pl-6">{artist.artist_name}</span>
                                             </li>
 
-                                            <li className="flex flex-col item-center justify-between">
+                                            <li className="flex flex-col item-center ">
                                                 <div className="flex gap-2 items-center">
                                                     <SlUser className="fill-black w-4 h-4" id="artist_fullname"/>
                                                     <p className="text-sm dark:text-black">Full name:</p>
@@ -461,7 +461,7 @@ export default function UserProfile({params}: any) {
                                                 </div>
                                             </li>
 
-                                            <li className="flex flex-col item-center justify-between">
+                                            <li className="flex flex-col item-center ">
                                                 <div className="flex gap-2 items-center">
                                                     <PiBalloon className="fill-black w-4 h-4" id="artist_dob"/>
                                                     <p className="text-sm dark:text-black">Date of birth:</p>
@@ -471,7 +471,7 @@ export default function UserProfile({params}: any) {
                                                 </div>
                                             </li>
                                             
-                                            <li className="flex flex-col item-center justify-between">
+                                            <li className="flex flex-col item-center ">
                                                 <div className="flex gap-2 items-center">
                                                     <SlMusicToneAlt className="fill-black w-4 h-4" id="artist_dob"/>
                                                     <p className="text-sm dark:text-black">Genre:</p>
@@ -481,7 +481,7 @@ export default function UserProfile({params}: any) {
                                                 </div>
                                             </li>
 
-                                            <li className="flex flex-col item-center justify-between">
+                                            <li className="flex flex-col item-center ">
                                                 <div className="flex gap-2 items-center">
                                                     <SlGlobeAlt className="fill-black w-4 h-4" id="artist_dob"/>
                                                     <p className="text-sm dark:text-black">Nationality:</p>
@@ -491,7 +491,7 @@ export default function UserProfile({params}: any) {
                                                 </div>
                                             </li>
 
-                                            <li className="flex flex-col item-center justify-between">
+                                            <li className="flex flex-col item-center ">
                                                 <div className="flex gap-2 items-center">
                                                     <SlBubble className="fill-black w-4 h-4" id="artist_dob"/>
                                                     <p className="text-sm dark:text-black">Description:</p>
@@ -562,7 +562,7 @@ export default function UserProfile({params}: any) {
 
             
             {/* PREFERENCES */}  
-            {!isArtist ? (       
+       
             <section className="flex flex-col md:flex-row gap-4 mt-10">
                 {/* GENRES */}
                 <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
@@ -596,9 +596,7 @@ export default function UserProfile({params}: any) {
                     </div>
                 </div>
             </section>
-            ) : (
-            <div className=""></div>
-            )}
+
 
             {/* LOG OUT & DELETE USER LINK */}
             <div className="w-full flex justify-between">
