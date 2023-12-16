@@ -443,11 +443,11 @@ export default function SignupPage() {
                   {selectedGenres.map((genre, index) => (
                     <div key={index} className="relative">
                       <div className="flex gap-2 border-2 w-max py-2 px-4 align-middle border-purple-700 brand_purple text-center rounded-full">
-                       <span className="text-white">{genre}</span>
+                       <span className="text-black dark:text-white">{genre}</span>
                         <button
                           type="button"
                           onClick={() => removeSelectedGenres(index)}
-                          className="cursor-pointer align-middle text-white"
+                          className="cursor-pointer align-middle text-black dark:text-white"
                         >
                         &times;
                         </button>
@@ -510,11 +510,11 @@ export default function SignupPage() {
                 {selectedVenues.map((venue, index) => (
                     <div key={index} className="relative">
                       <div className="flex gap-2 border-2 w-max py-2 px-4 align-middle border-purple-700 brand_purple text-center rounded-full">
-                       <span className="text-white">{venue}</span>
+                       <span className="text-black dark:text-white">{venue}</span>
                         <button
                           type="button"
                           onClick={() => removeSelectedVenue(index)}
-                          className="cursor-pointer align-middle text-white"
+                          className="cursor-pointer align-middle text-black dark:text-white"
                         >
                         &times;
                         </button>
