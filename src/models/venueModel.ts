@@ -1,11 +1,6 @@
 import mongoose from "mongoose";
 
 const venueSchema = new mongoose.Schema({
-    venue_id: {
-        type: String,
-        unique: true,
-        required: true,
-    },
     venue_name: {
         type: String,
         required: [true, "please provide the venue_name"],

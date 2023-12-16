@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
   const concertDate = data.get("Concert_date");
   const concertStart = data.get("Concert_start");
   const concertDoors = data.get("Concert_doors");
-  const concertArtistEmail = (data.get("Concert_artist_email")as string).toLowerCase();;
+  const concertArtistEmail = (data.get("Concert_artist_email")as string);
   const concertDescription = (data.get("Concert_description")as string);
   const isVisible = data.get("isVisible"); // Added line to get isVisible
 
@@ -103,21 +103,40 @@ export async function POST(request: NextRequest) {
 
     const concertImage = `concert_images/${newFileName}`;
 
-    const newConcert = new Concert({
-      concert_id: concertId,
-      concert_name: concertName,
-      concer_date: concertDate,
-      concert_start: concertStart,
-      concert_doors: concertDoors,
-      concert_image: concertImage,
-      concert_date: concertDate,
-      concert_description: concertDescription,
-      concert_genre: concertGenre,
-      concert_artist: concertArtist,
-      concert_venue: concertVenue,
-      concert_artist_email: concertArtistEmail,
-      isVisible: isVisible === "true", // Convert string to boolean
-    });
+    let newConcert;
+
+if (concertArtistEmail) {
+  newConcert = new Concert({
+    concert_id: concertId,
+    concert_name: concertName,
+    concer_date: concertDate,
+    concert_start: concertStart,
+    concert_doors: concertDoors,
+    concert_image: concertImage,
+    concert_date: concertDate,
+    concert_description: concertDescription,
+    concert_genre: concertGenre,
+    concert_artist: concertArtist,
+    concert_venue: concertVenue,
+    concert_artist_email: concertArtistEmail.toLowerCase(),
+    isVisible: isVisible === "true", // Convert string to boolean
+  });
+} else {
+  newConcert = new Concert({
+    concert_id: concertId,
+    concert_name: concertName,
+    concer_date: concertDate,
+    concert_start: concertStart,
+    concert_doors: concertDoors,
+    concert_image: concertImage,
+    concert_date: concertDate,
+    concert_description: concertDescription,
+    concert_genre: concertGenre,
+    concert_artist: concertArtist,
+    concert_venue: concertVenue,
+    isVisible: isVisible === "true", // Convert string to boolean
+  });
+}
 
     const savedConcert = await newConcert.save();
     console.log(savedConcert);

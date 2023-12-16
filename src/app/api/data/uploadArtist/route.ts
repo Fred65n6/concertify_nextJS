@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     const artistNationality = (data.get("artist_nation")as string);
     const artistDescription = (data.get("artist_description")as string);
     const artistDob = data.get("artist_dob");
-    const artistEmail = (data.get("artist_email") as string).toLowerCase();
+    const artistEmail = (data.get("artist_email") as string);
 
     const artistGenre = {
         genre_name: data.get("artist_genre_name"),
@@ -97,7 +97,6 @@ export async function POST(request: NextRequest) {
       });
     }
   }
-  
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
@@ -120,7 +119,10 @@ export async function POST(request: NextRequest) {
 
         const artistImage = `artist_images/${newFileName}`;
 
-        const newArtist = new Artist({
+        let newArtist;
+
+        if (artistEmail) {
+          newArtist = new Artist({
             artist_id: artistId,
             artist_name: artistName,
             artist_full_name: artistFullName,
@@ -129,8 +131,20 @@ export async function POST(request: NextRequest) {
             artist_image: artistImage,
             artist_genre: artistGenre,
             artist_dob: artistDob,
-            artist_email: artistEmail,
+            artist_email: artistEmail.toLowerCase(),
+          });
+        } else {
+          newArtist = new Artist({
+            artist_id: artistId,
+            artist_name: artistName,
+            artist_full_name: artistFullName,
+            artist_description: artistDescription,
+            artist_nation: artistNationality,
+            artist_image: artistImage,
+            artist_genre: artistGenre,
+            artist_dob: artistDob,
         });
+      }
 
         if (artistEmail) {
           try {
@@ -145,7 +159,7 @@ export async function POST(request: NextRequest) {
                 artist_image: artistImage,
                 artist_genre: artistGenre,
                 artist_dob: artistDob,
-                artist_email: artistEmail
+                artist_email: artistEmail.toLowerCase()
             }
             user.artist.push(newArtist);
             await user.save();
