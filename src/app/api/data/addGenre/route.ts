@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     if (!user) {
       return NextResponse.json({
         success: false,
-        error: "User not found",
+        error: "genre can't be added",
       });
     }
 

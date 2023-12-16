@@ -65,7 +65,8 @@ export default function Home() {
         <>
         <LoginPage />
         <SignupPage />
-        <div className="grid pt-12">
+        <div className="grid">
+            <div className="mt-12 mb-20">
             {loading ? (
                 <h1 className="text-4xl font-bold">Loading...</h1>
             ) : data.username ? (
@@ -74,14 +75,15 @@ export default function Home() {
                     <span className="brand_purple dark:text-purple-500">{data.username}</span>
                 </h1>
             ) : (
-                <h1 className="text-3xl md:text-4xl font-bold">
+                <h1 className="text-4xl md:text-4xl font-bold">
                     Experience <span className="brand_purple dark:text-purple-500">Copenhagen</span>{" "} <span className="md:hidden"><br /></span>
                     through <span className="brand_purple dark:text-purple-500">live music</span>
                 </h1>
             )}
+            </div>
 
             {showComponent ? ( 
-                    <section className="md:pt-24 pt-12 mb-20 overflow-hidden">
+                    <section className="mb-20 overflow-hidden">
                     <h2 className="font-bold text-2xl pb-4 md:pb-0">
                     <span className="text-[#5311BF] dark:text-purple-500">Concerts </span>
                         just for
@@ -102,13 +104,13 @@ export default function Home() {
                     </Link>
                 </section>
             ): (
-                <section className="py-12">
+                <section className="">
                 </section>
             )}
 
 
             {/* Concerts */}
-            <section className="md:pt-0 pt-24 mt-4 pb-24 overflow-hidden">
+            <section className="pb-24 overflow-hidden">
                 <h2 className="font-bold text-2xl pb-4 md:pb-2">
                     <span className="text-[#5311BF] dark:text-purple-500">Concerts</span> you need to experience
                 </h2>
