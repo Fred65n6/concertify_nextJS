@@ -5,7 +5,7 @@ import Concert from "@/models/concertModel";
 import AWS from "aws-sdk";
 import User from "@/models/userModel";
 
-// Load AWS credentials and configuration from environment variables
+// -- Load AWS credentials and configuration from environment variables
 AWS.config.update({
   accessKeyId: process.env.ACCESS_KEY_ID,
   secretAccessKey: process.env.SECRET_ACCESS_KEY,

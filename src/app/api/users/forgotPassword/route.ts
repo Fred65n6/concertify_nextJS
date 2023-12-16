@@ -21,7 +21,7 @@ export async function POST(request: NextRequest): Promise<void | Response> {
             await sendEmail({email, emailType: "RESET", userId: user._id});
             console.log(user.user_id);
             return NextResponse.json({
-                message: "Email sent",
+                message: "Forgot password-email sent successfully",
                 success: true,
                 userId: user.id,
             });

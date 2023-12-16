@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
 
         // Sign up success
         return NextResponse.json({
-            message: "User created successfully",
+            message: "Artist created successfully",
             success: true,
             savedUser,
         });

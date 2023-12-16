@@ -115,7 +115,10 @@ export async function POST(request: NextRequest) {
         const savedVenue = await newVenue.save();
         console.log(savedVenue);
 
-        return NextResponse.json({success: true});
+        return NextResponse.json({
+          success: true,
+          message: "Venue uploaded successfully"
+        });
     } catch (error) {
         console.error("Error uploading file to S3:", error);
         return NextResponse.json({success: false});

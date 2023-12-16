@@ -709,7 +709,7 @@ export default function UserProfile({params}: any) {
                                     <input
                                         className="input_field"
                                         type="password"
-                                        id="password"
+                                        id="new_password"
                                         value={user.newpassword}
                                         onChange={(e) =>
                                             setUser({...user, newpassword: e.target.value})

@@ -9,7 +9,8 @@ export async function GET(request: NextRequest, response: NextResponse) {
         const genre = await Genre.find();
 
         return NextResponse.json({
-            message: "Genres Found:",
+            message: "Array of all genres found:",
+            success: true,
             data: genre,
         });
     } catch (error: any) {

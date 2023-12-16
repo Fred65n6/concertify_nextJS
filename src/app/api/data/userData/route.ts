@@ -9,7 +9,8 @@ export async function GET(request: NextRequest, response: NextResponse) {
         const user = await User.find();
 
         return NextResponse.json({
-            message: "User Found:",
+            message: "Array of all users found:",
+            success: true,
             data: user,
         });
     } catch (error: any) {

@@ -19,7 +19,7 @@ const ForgotPassword = () => {
     const [buttonDisabled, setButtonDisabled] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
 
-    // Send information til API'en signup
+    // -- Send information to API'en 
     const sendLink = async () => {
         try {
             setLoading(true);
@@ -27,11 +27,10 @@ const ForgotPassword = () => {
                 "/api/users/forgotPassword",
                 user
             );
-            console.log("Signup success", response.data);
-            // showMessage();
+            console.log("Mail sent with forgotPassword link", response.data);
         } catch (error: any) {
             toast.error(error.message);
-            console.log("API signup failed", error);
+            console.log("API forgotPassword failed", error);
         } finally {
             setLoading(false);
         }

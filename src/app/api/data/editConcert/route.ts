@@ -92,7 +92,6 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json({ success: true });
     } else {
-      // Handle the case where the user is not found
       console.error(`User with email ${concertArtistEmail} not found`);
       return NextResponse.json({ success: false });
     }

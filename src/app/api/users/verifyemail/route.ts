@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
         await user.save();
 
         return NextResponse.json({
-            message: "Email verified successfully",
+            message: "User verified successfully through verification-email",
             success: true,
         });
     } catch (error: any) {

@@ -131,7 +131,7 @@ const handleDeleteVenue = async (venueId: string) => {
                   <th className="px-4 py-2 text-left font-semibold">Address</th>
                   <th className="px-4 py-2 text-left font-semibold">Location</th>
                   <th className="px-4 py-2 text-left font-semibold">Venue size (people)</th>
-                  <th className="px-4 py-2 text-right font-semibold"></th>
+                  {/* <th className="px-4 py-2 text-right font-semibold"></th> */}
                   <th className="px-4 py-2 text-right font-semibold"></th>
                 </tr>
               </thead>
@@ -142,7 +142,7 @@ const handleDeleteVenue = async (venueId: string) => {
                     <td className="px-4 py-2">{venue.venue_address}</td>
                     <td className="px-4 py-2">{venue.venue_location}</td>
                     <td className="px-4 py-2">{venue.venue_size}</td>
-                    <td className="px-4 py-2 text-right">
+                    {/* <td className="px-4 py-2 text-right">
                     <button
                       type="button"
                       className="text-[#5311BF] dark:text-white"
@@ -150,7 +150,7 @@ const handleDeleteVenue = async (venueId: string) => {
                     >
                         <SlPencil />
                     </button>
-                    </td>
+                    </td> */}
                     <td className="px-4 py-2 text-right">
                       <button
                         type="button"

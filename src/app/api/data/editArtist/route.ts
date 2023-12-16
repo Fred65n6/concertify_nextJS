@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       const uuid = uuidv4();
       const fileExtension = file.name.split(".").pop();
       const newFileName = `${uuid}.${fileExtension}`;
-      const s3BucketName = "concertify"; // Replace with your S3 bucket name
+      const s3BucketName = "concertify"; // Amazon S3 bucket name
       const s3ObjectKey = `artist_images/${newFileName}`;
 
       const params = {

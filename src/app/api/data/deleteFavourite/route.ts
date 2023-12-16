@@ -8,7 +8,9 @@ export async function DELETE(request: NextRequest) {
 
     if (!favouriteUserId || !favouriteConcertId) {
         return NextResponse.json(
-            {success: false, error: "Missing required parameters"},
+            {
+            success: false, 
+            error: "Missing required parameters"},
             {status: 400}
         );
     }

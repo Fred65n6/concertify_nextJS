@@ -9,7 +9,8 @@ export async function GET(request: NextRequest, response: NextResponse) {
         const concert = await Concert.find();
         
         return NextResponse.json({
-            message: "Concert Found:",
+            message: "Array of all concerts found:",
+            success: true,
             data: concert,
             
         });

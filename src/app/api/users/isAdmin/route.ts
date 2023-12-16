@@ -10,7 +10,8 @@ export async function GET(request: NextRequest) {
         const userId = await getDataFromToken(request);
         const user = await User.findOne({_id: userId}).select("isAdmin");
         return NextResponse.json({
-            message: "User Found",
+            message: "User found, see the data object to see if the user is admin",
+            success: true,
             data: user,
         });
     } catch (error: any) {

@@ -10,7 +10,8 @@ export async function GET(request: NextRequest) {
         const userId = await getDataFromToken(request);
         const user = await User.findOne({_id: userId}).select("-password ");
         return NextResponse.json({
-            message: "User Found",
+            message: "Cookie user found",
+            success: true,
             data: user,
         });
     } catch (error: any) {

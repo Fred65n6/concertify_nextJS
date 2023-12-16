@@ -9,7 +9,8 @@ export async function GET(request: NextRequest, response: NextResponse) {
     const artist = await Artist.find();
 
     return NextResponse.json({
-      message: "Artist Found:",
+      message: "Array of all artists found:",
+      success: true,
       data: artist,
     });
   } catch (error: any) {

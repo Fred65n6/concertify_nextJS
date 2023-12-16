@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     const favouriteUserId = data.get("Favourite_user_id");
 
     try {
-        // Find the user based on their ID
+        // -- Find the user based on their ID
         const user = await User.findOne({_id: favouriteUserId});
 
         if (!user) {
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
             });
         }
 
-        // Create a new favorite object
+        // -- Create a new favorite object
         const newFavorite = {
             favourite_concert_id: favouriteConcertId,
             favourite_concert_image: favouriteConcertImage,
