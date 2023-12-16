@@ -323,7 +323,7 @@ const UploadForm: React.FC = () => {
                     />
 
                     <div className="flex items-center gap-4 mt-8">
-                    <label htmlFor="isVisible" className="text-base brand_purple dark:text-purple-500">* Uncheck this box if you don't want the concert to be public yet:</label>
+                    <label htmlFor="isVisible" className="text-base brand_purple dark:text-purple-500">A visible concert that can be seen by everyone</label>
                     <input
                         type="checkbox"
                         id="isVisible"

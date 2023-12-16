@@ -245,7 +245,7 @@ const UploadForm: React.FC = () => {
                     type="submit"
                     value="upload"
                 >
-                    {loading ? "Processing" : "Confirm"}
+                    {loading ? "Processing" : "Save changes"}
                 </button>
             </form>
             ))}

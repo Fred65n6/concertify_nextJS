@@ -935,16 +935,19 @@ export default function UserProfile({params}: any) {
                             />
                         </div>
 
-                        <div className="flex items-center gap-4 mt-8">
-                            <label htmlFor="isVisible" className="text-base text-purple-800">* If this box is checked, the concert will be public</label>
-                            <input
-                                type="checkbox"
-                                id="isVisible"
-                                name="isVisible"
-                                className="bg-purple-800 text-purple-800"
-                                checked={isVisible}
-                                onChange={() => setIsVisible(!isVisible)}
-                            />
+                        <div className="form-group flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+                            <label htmlFor="isVisible" className="">Visibility</label>
+                            <div className="flex gap-8">
+                                <span className="brand_purple dark:text-purple-500">A visible concert that can be seen by everyone</span>
+                                <input
+                                    type="checkbox"
+                                    id="isVisible"
+                                    name="isVisible"
+                                    className="bg-purple-800 text-purple-800"
+                                    checked={isVisible}
+                                    onChange={() => setIsVisible(!isVisible)}
+                                />
+                            </div>
                             </div>
 
 
@@ -963,7 +966,7 @@ export default function UserProfile({params}: any) {
                             type="submit"
                             value="upload"
                         >
-                            {loading ? "Processing" : "Confirm"}
+                            {loading ? "Processing" : "Save changes"}
                         </button>
                     </form>
                     </div>
