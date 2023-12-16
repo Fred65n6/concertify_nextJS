@@ -26,6 +26,7 @@ const NavLogged = () => {
       } 
       if (userData.isAdmin) {
         setIsAdmin(true);
+        setIsArtist(false)
       } 
     } catch (error) {
       console.error("Error fetching user details: ", error);
