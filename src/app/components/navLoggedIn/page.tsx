@@ -4,6 +4,8 @@ import NavAdmin from "../navAdmin/page";
 import NavUser from "../navUser/page";
 import NavArtist from "../navArtist/page";
 import axios from "axios";
+import Image from "../../../../node_modules/next/image";
+import Link from "../../../../node_modules/next/link";
 
 interface User {
   _id: string;
@@ -40,6 +42,20 @@ const NavLogged = () => {
 
   return (
     <>
+      {/* <div className="w-full pt-8 px-4 md:hidden">
+        <Link
+              href={
+                  "/"
+              }
+          >
+            <Image
+                src="../concertify_logo.svg"
+                width={150}
+                height={30}
+                alt="logo"
+            />
+          </Link>
+      </div> */}
       {isAdmin ? (
         <NavAdmin />
       ) : (

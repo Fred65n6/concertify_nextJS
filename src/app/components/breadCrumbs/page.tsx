@@ -20,7 +20,7 @@ const BreadcrumbComp = () => {
 
     return (
         <>
-        <div className="w-full pb-8 md:hidden">
+        {/* <div className="w-full pb-8 md:hidden">
             <figure className="">
                 <Image
                     src="../concertify_logo.svg"
@@ -29,7 +29,7 @@ const BreadcrumbComp = () => {
                     alt="logo"
                 />
             </figure>
-        </div>
+        </div> */}
 
         <div className="hidden md:flex mt-4 mb-12">
             <ul className="flex items-center gap-2 brand_purple dark:text-purple-500">

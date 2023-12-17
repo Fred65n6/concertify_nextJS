@@ -33,17 +33,17 @@ const VenueCard: React.FC = () => {
     fetchData();
   }, []);
 
-  // Filter venues to exclude the one with the matching ID
+  // -- Filter venues to exclude the one with the matching ID
   const filteredVenues = venues.filter((venue) => venue._id !== id);
 
-  // Slice the filtered venues array to display only the venues for the current page
+  // -- Slice the filtered venues array to display only the venues for the current page
   const venuesToDisplay = filteredVenues.slice(-9);
   
 
   return (
     <>
       {venuesToDisplay.map((venue) => (
-        <article className="flex-shrink-0 md:pt-8 pb-8 w-[300px]" key={venue._id}>
+        <article className="flex-shrink-0 md:pt-4 pb-8 w-[300px]" key={venue._id}>
           <Link href={"/venues/" + venue._id} key={venue._id}>
             <Image
               src={`https://concertify.s3.eu-central-1.amazonaws.com/${venue.venue_image}`}

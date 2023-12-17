@@ -4,12 +4,12 @@ import { useParams } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
-// import {StringSchemaDefinition} from "mongoose";
+import Link from "../../../../node_modules/next/link";
 import VenueCard from "@/app/components/venueCard/page";
 import LoginPage from "@/app/login/page";
 import SignupPage from "@/app/signup/page";
 import BreadcrumbComp from "@/app/components/breadCrumbs/page";
-import {SlLocationPin, SlCalender, SlUserFollowing} from "react-icons/sl";
+import {SlLocationPin, SlCalender, SlUserFollowing, SlArrowRight} from "react-icons/sl";
 
 interface VenueSingle {
   _id: string;
@@ -87,11 +87,11 @@ export default function SingleVenue() {
                   id="venue_size"
                 />
                 <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
-                  {selectedVenue.venue_size}
+                  {selectedVenue.venue_size} people
                 </p>
               </li>
               {/* Todays program */}
-              <li className="flex gap-2">
+              {/* <li className="flex gap-2">
                 <SlCalender
                   className="stroke-gray-600 dark:stroke-slate-400 w-5 h-5"
                   id="date"
@@ -100,10 +100,9 @@ export default function SingleVenue() {
                   What is on today?
                 </p>
                 <hr />
-                {/* her skal der fetches data om hvilke koncerter, der spiller */}
-              </li>
+              </li> */}
             </ul>
-            <div className="border-t-[1px] border-[#979C9E] dark:border-[#23124b] pt-4 mt-4">
+            <div className="pt-4 mt-4">
               <p className="text-gray-600 text-sm dark:text-gray-300 align-middle">
                 {selectedVenue.venue_description}
               </p>
@@ -115,7 +114,7 @@ export default function SingleVenue() {
       )}
 
       {/* Event schedule section */}
-      {selectedVenue ? (
+      {/* {selectedVenue ? (
         <section className="pb-12">
           <h2 className="text-2xl font-bold">
             Event Schedule at <span className="brand_purple dark:text-purple-500">{selectedVenue.venue_name}</span>
@@ -124,21 +123,28 @@ export default function SingleVenue() {
         </section>
       ) : (
         <p>Loading...</p>
-      )}
+      )} */}
       
       {/* Other venues section */}
-      {selectedVenue ? (
-        <section className="">
-          <h2 className="text-2xl font-bold">
-            <span className="brand_purple dark:text-purple-500">Other venues</span> you need to experience
-          </h2>
-          <div className="flex gap-4 md:grid grid-cols-4 md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
+      <section className="pb-36 md:pt-8 pt-12 overflow-hidden">
+        <h2 className="font-bold text-2xl">
+            <span className="text-[#5311BF] dark:text-purple-500">Venues</span> you need to experience
+        </h2>
+        <div className="flex gap-4  md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
             <VenueCard />
-          </div>
-        </section>
-      ) : (
-        <p>Loading...</p>
-      )}
+        </div>
+        <Link
+            className="justify-end flex items-center brand_purple dark:text-purple-500"
+            href="/venues"
+        >
+            View all venues
+            <SlArrowRight
+            className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
+            id="arrow_right"
+            />
+
+        </Link>
+    </section>
     </div>
   );
 }

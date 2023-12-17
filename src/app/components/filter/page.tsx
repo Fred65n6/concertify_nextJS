@@ -83,8 +83,7 @@ const Filter: React.FC<any> = ({data, onDataFiltered}) => {
     ]);
 
     return (
-        // <div className="border-[1px] lg:rounded-full rounded-2xl lg:my-8 border-solid border-purple-800 grid grid-cols-2 lg:flex lg:py-6 p-4 lg:px-12 justify-between">
-        <div className="grid grid-cols-1 lg:flex lg:py-6 p-4 lg:px-0 justify-between gap-4">
+        <div className="grid grid-cols-1 md:flex lg:py-6 p-4 lg:px-0 justify-between gap-4">
             <div className="pb-4 md:pb-0 w-full md:w-1/4">
                 <label
                     className=" flex gap-2 mb-4 mt-0 items-center w-fit text-sm md:text-lg text-[#5311BF] dark:text-white"

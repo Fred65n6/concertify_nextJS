@@ -5,12 +5,13 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import {SlStar, SlMusicToneAlt, SlLocationPin, SlGlobeAlt} from "react-icons/sl";
+import {SlStar, SlMusicToneAlt, SlLocationPin, SlGlobeAlt, SlArrowRight} from "react-icons/sl";
 import {HiOutlineArrowRight} from "react-icons/hi";
 import {PiBalloon} from "react-icons/pi";
 import LoginPage from "@/app/login/page";
 import SignupPage from "@/app/signup/page";
 import BreadcrumbComp from "@/app/components/breadCrumbs/page";
+import ArtistCard from "@/app/components/artistCard/page";
 
 interface ArtistSingle {
     artist_id: string;
@@ -124,7 +125,7 @@ export default function SingleArtist() {
                                 </p>
                             </li>
 
-                            {/* See all concerts*/}
+                            {/* TO DO: See all concerts from this artist*/}
                             {/* <li className="flex gap-2">
                                 <Link className="flex gap-2" href="/concerts/">
                                     <HiOutlineArrowRight
@@ -132,13 +133,13 @@ export default function SingleArtist() {
                                         id="se_all"
                                     />
                                     <p className="text-[#5311BF] dark:text-purple-500 text-sm align-middle">
-                                        See all concerts
+                                        See all concerts by {selectedArtist.artist_name}
                                     </p>
                                 </Link>
                             </li> */}
                         </ul>
 
-                        <div className="border-t-[1px] border-[#979C9E] dark:border-[#23124b] pt-4 mt-4">
+                        <div className="pt-4 mt-4">
                             <p className="text-gray-600 text-sm dark:text-gray-400 align-middle">
                                 {selectedArtist.artist_description}
                             </p>
@@ -148,6 +149,8 @@ export default function SingleArtist() {
             ) : (
                 <p>Loading...</p>
             )}
+
+            {/* TO DO: Display other similar artists (based on genre)*/}
         </div>
     );
 }

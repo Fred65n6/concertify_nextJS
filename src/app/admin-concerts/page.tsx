@@ -208,7 +208,7 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         </Link>
         <h1 className="font-bold text-4xl pb-4 pt-8">Admin / <span className="text-[#5311BF] dark:text-purple-500">concerts</span></h1>
 
-        <section className="flex w-full justify-between py-8 items-center border-b-[1px] border-gray-100 dark:border-[#23124b]">
+        <section className="flex flex-col w-full justify-between items-start gap-4 py-8 border-b-[1px] border-gray-100 dark:border-[#23124b] md:flex-row md:items-center md:gap-0">
             <div className="flex gap-2">
               <SlMusicToneAlt className="stroke-[#5311BF] dark:stroke-purple-500 w-5 h-5" id="user" />
               <span>There are <span className="text-[#5311BF] dark:text-purple-500 font-bold">{totalConcerts}</span> concerts in total</span>

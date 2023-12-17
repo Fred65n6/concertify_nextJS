@@ -59,11 +59,12 @@ export async function POST(request: NextRequest) {
     
     const normalCharsRegex = /^[a-zA-Z0-9æøåÆØÅ!@#$%^&*()_+{}\[\]:;<>,.?~\s]+$/;
 
+
   if (artistName) {
     if (artistName.length > 60 || !normalCharsRegex.test(artistName)) {
       return NextResponse.json({
         success: false,
-        error: "Artist name must be at most 60 characters long and can only contain normal characters.",
+        error: "Max length for artist name is 60 characters long, and can only contain normal characters.",
       });
     }
   }
@@ -73,17 +74,17 @@ export async function POST(request: NextRequest) {
     if (artistFullName.length > 60 || !normalCharsRegex.test(artistFullName)) {
       return NextResponse.json({
         success: false,
-        error: "Artist full name name must be at most 60 characters long and can only contain normal characters.",
+        error: "Max length for artist full name is 60 characters long, and can only contain normal characters.",
       });
     }
   }
 
 
   if (artistDescription) {
-    if (artistDescription.length > 140 || !normalCharsRegex.test(artistDescription)) {
+    if (artistDescription.length > 800 || !normalCharsRegex.test(artistDescription)) {
       return NextResponse.json({
         success: false,
-        error: "Artist name must be at most 140 characters long and can only contain normal characters.",
+        error: "Max length for artist description is 800 characters long, and can only contain normal characters.",
       });
     }
   }
@@ -93,7 +94,7 @@ export async function POST(request: NextRequest) {
     if (artistNationality.length > 2 || !normalCharsRegex.test(artistNationality)) {
       return NextResponse.json({
         success: false,
-        error: "Artist nationality must be at most 2 characters long and can only contain normal characters.",
+        error: "Max length for artist full name is 2 characters long, and can only contain normal characters.",
       });
     }
   }

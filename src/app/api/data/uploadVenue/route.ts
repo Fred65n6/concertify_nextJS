@@ -48,10 +48,10 @@ export async function POST(request: NextRequest) {
     }
 
     if (venueDescription) {
-        if (venueDescription.length > 600 || !normalCharsRegex.test(venueDescription)) {
+        if (venueDescription.length > 800 || !normalCharsRegex.test(venueDescription)) {
           return NextResponse.json({
             success: false,
-            error: "Max length for venue description is 600 characters long, and can only contain normal characters.",
+            error: "Max length for venue description is 800 characters long, and can only contain normal characters.",
           });
         }
       }
