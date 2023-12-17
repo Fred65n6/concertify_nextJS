@@ -4,7 +4,7 @@ import { SlArrowLeft } from "react-icons/sl";
 import Link from "../../../node_modules/next/link";
 
 interface Artist {
-    _id: string;
+    artist_id: string;
     artist_name: string;
     // Add more artist properties as needed
 }
@@ -107,7 +107,7 @@ const UploadForm: React.FC = () => {
         data.set("Concert_description", concertDescription);
         data.set("Concert_genre_id", selectedGenre!._id);
         data.set("Concert_genre_name", selectedGenre!.genre_name);
-        data.set("Concert_artist_id", selectedArtist!._id);
+        data.set("Concert_artist_id", selectedArtist!.artist_id);
         data.set("Concert_artist_name", selectedArtist!.artist_name);
         data.set("Concert_venue_id", selectedVenue!._id);
         data.set("Concert_venue_name", selectedVenue!.venue_name);
@@ -232,18 +232,18 @@ const UploadForm: React.FC = () => {
                     <label htmlFor="Concert_artist">Artist</label>
                     <select
                         className="input_field"
-                        value={selectedArtist ? selectedArtist._id : ""}
+                        value={selectedArtist ? selectedArtist.artist_id : ""}
                         onChange={(e) =>
                             setSelectedArtist(
                                 artists.find(
-                                    (artist) => artist._id === e.target.value
+                                    (artist) => artist.artist_id === e.target.value
                                 ) || null
                             )
                         }
                     >
                         <option value="">Select an artist</option>
                         {artists.map((artist) => (
-                            <option key={artist._id} value={artist._id}>
+                            <option key={artist.artist_id} value={artist.artist_id}>
                                 {artist.artist_name}
                             </option>
                         ))}
@@ -263,7 +263,7 @@ const UploadForm: React.FC = () => {
                         className="hidden"
                         type="text"
                         name="Concert_artist_id"
-                        value={selectedArtist ? selectedArtist._id : ""}
+                        value={selectedArtist ? selectedArtist.artist_id : ""}
                         onChange={(e) => setConcertArtistId(e.target.value)}
                         placeholder="Artist ID"
                     />
