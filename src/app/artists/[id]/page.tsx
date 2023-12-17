@@ -85,7 +85,7 @@ export default function SingleArtist() {
                                     id="artist_fullname"
                                 />
                                 <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
-                                    Full name: {selectedArtist.artist_name}
+                                    Full name: {selectedArtist.artist_full_name}
                                 </p>
                             </li>
 
