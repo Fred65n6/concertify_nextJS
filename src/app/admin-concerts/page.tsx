@@ -4,7 +4,7 @@ import axios from "axios";
 import { SlPlus } from "react-icons/sl";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
-import {SlMusicToneAlt, SlArrowLeft, SlPencil, SlTrash} from "react-icons/sl";
+import {SlMusicToneAlt, SlArrowLeft, SlPencil, SlTrash, SlLockOpen, SlLock} from "react-icons/sl";
 import Link from "../../../node_modules/next/link";
 import { CgClose } from "react-icons/cg";
 
@@ -224,6 +224,7 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             <table className="table-auto min-w-full">
               <thead>
                 <tr className=" text-[#5311BF] dark:text-purple-500">
+                  <th className="px-4 py-2 text-left">Visibility</th>
                   <th className="px-4 py-2 text-left">Concert name</th>
                   <th className="px-4 py-2 text-left">Artist</th>
                   <th className="px-4 py-2 text-left">Date</th>
@@ -235,6 +236,11 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
               <tbody className=" [&>*:nth-child(odd)]:bg-purple-100 dark:[&>*:nth-child(odd)]:bg-[#23124b]">
               {concerts?.map((concert) => (
                   <tr key={concert.concert_id} className="">
+                    {!concert.isVisible ? (
+                      <td className="px-4 py-2 text-red-500 dark:text-red-400">Private</td>
+                      ) : (
+                    <td className="px-4 py-2 brand_purple dark:text-purple-500">Public</td>
+                    )}
                     <td className="px-4 py-2">{concert.concert_name}</td>
                     <td className="px-4 py-2">{concert.concert_artist.artist_name}</td>
                     <td className="px-4 py-2">{concert.concert_date}</td>
