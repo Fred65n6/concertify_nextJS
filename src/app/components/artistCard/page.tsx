@@ -64,7 +64,7 @@ const ArtistCard: React.FC = () => {
     return (
         <>
             {artists?.map((artist) => (
-                <article className="flex-shrink-0 grid pb-8" key={artist.artist_id}>
+                <article className="flex-shrink-0 md:pt-4 pb-8 w-[300px]" key={artist.artist_id}>
                     <Link href={"/artists/" + artist.artist_id} key={artist.artist_id}>
                         <Image
                             src={"/" + artist.artist_image}

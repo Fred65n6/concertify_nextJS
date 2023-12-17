@@ -94,7 +94,7 @@ useEffect(() => {
       <SignupPage />
       <div>
         <h1 className="font-bold text-4xl pb-4 pt-8">Admin dashboard</h1>
-        <section className="flex gap-4 mt-10">
+        <section className="flex flex-col md:flex-row gap-4 mt-10">
           <Link href={"/admin-concerts/"} className="w-full">
           <article className="bg-purple-100 w-full gap-2 py-8 rounded-lg align-middle justify-start px-8 flex flex-col hover:bg-purple-200">
             <div className="flex justify-between">

@@ -4,7 +4,7 @@ import axios from "axios";
 import { SlPlus } from "react-icons/sl";
 import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
-import {SlMusicToneAlt, SlArrowLeft, SlPencil, SlTrash} from "react-icons/sl";
+import {SlMusicToneAlt, SlArrowLeft, SlPencil, SlTrash, SlLockOpen, SlLock} from "react-icons/sl";
 import Link from "../../../node_modules/next/link";
 import { CgClose } from "react-icons/cg";
 
@@ -208,7 +208,7 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         </Link>
         <h1 className="font-bold text-4xl pb-4 pt-8">Admin / <span className="text-[#5311BF] dark:text-purple-500">concerts</span></h1>
 
-        <section className="flex w-full justify-between py-8 items-center border-b-[1px] border-gray-100 dark:border-[#23124b]">
+        <section className="flex flex-col w-full justify-between items-start gap-4 py-8 border-b-[1px] border-gray-100 dark:border-[#23124b] md:flex-row md:items-center md:gap-0">
             <div className="flex gap-2">
               <SlMusicToneAlt className="stroke-[#5311BF] dark:stroke-purple-500 w-5 h-5" id="user" />
               <span>There are <span className="text-[#5311BF] dark:text-purple-500 font-bold">{totalConcerts}</span> concerts in total</span>
@@ -224,6 +224,7 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             <table className="table-auto min-w-full">
               <thead>
                 <tr className=" text-[#5311BF] dark:text-purple-500">
+                  <th className="px-4 py-2 text-left">Visibility</th>
                   <th className="px-4 py-2 text-left">Concert name</th>
                   <th className="px-4 py-2 text-left">Artist</th>
                   <th className="px-4 py-2 text-left">Date</th>
@@ -235,6 +236,11 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
               <tbody className=" [&>*:nth-child(odd)]:bg-purple-100 dark:[&>*:nth-child(odd)]:bg-[#23124b]">
               {concerts?.map((concert) => (
                   <tr key={concert.concert_id} className="">
+                    {!concert.isVisible ? (
+                      <td className="px-4 py-2 text-red-500 dark:text-red-400">Private</td>
+                      ) : (
+                    <td className="px-4 py-2 brand_purple dark:text-purple-500">Public</td>
+                    )}
                     <td className="px-4 py-2">{concert.concert_name}</td>
                     <td className="px-4 py-2">{concert.concert_artist.artist_name}</td>
                     <td className="px-4 py-2">{concert.concert_date}</td>

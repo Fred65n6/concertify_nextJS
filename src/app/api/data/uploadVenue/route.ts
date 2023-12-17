@@ -34,22 +34,24 @@ export async function POST(request: NextRequest) {
         });
     }
 
-    const normalCharsRegex = /^[a-zA-Z0-9æøåÆØÅ!@#$%^&*()_+{}\[\]:;<>,.?~\s]+$/;
+    const normalCharsRegex = /^[a-zA-Z0-9æøåÆØÅ!@#$%^&*()_+-{}\[\]:;<>,.?~\s]+$/;
+    const onlyIntegersRegex = /^[0-9]+$/;
+
     
     if (venueName) {
       if (venueName.length > 60 || !normalCharsRegex.test(venueName)) {
         return NextResponse.json({
           success: false,
-          error: "Venue name must be at most 60 characters long and can only contain normal characters.",
+          error: "Max length for venue name is 60 characters long, and can only contain normal characters.",
         });
       }
     }
 
     if (venueDescription) {
-        if (venueDescription.length > 60 || !normalCharsRegex.test(venueDescription)) {
+        if (venueDescription.length > 800 || !normalCharsRegex.test(venueDescription)) {
           return NextResponse.json({
             success: false,
-            error: "Venue description must be at most 60 characters long and can only contain normal characters.",
+            error: "Max length for venue description is 800 characters long, and can only contain normal characters.",
           });
         }
       }
@@ -58,7 +60,7 @@ export async function POST(request: NextRequest) {
         if (venueLocation.length > 60 || !normalCharsRegex.test(venueLocation)) {
           return NextResponse.json({
             success: false,
-            error: "Venue Location must be at most 60 characters long and can only contain normal characters.",
+            error: "Max length for venue location is 60 characters long, and can only contain normal characters.",
           });
         }
       }
@@ -67,16 +69,16 @@ export async function POST(request: NextRequest) {
         if (venueAddress.length > 60 || !normalCharsRegex.test(venueAddress)) {
           return NextResponse.json({
             success: false,
-            error: "Venue Address must be at most 60 characters long and can only contain normal characters.",
+            error: "Max length for venue address is 60 characters long, and can only contain normal characters.",
           });
         }
       }
 
       if (venueSize) {
-        if (venueSize.length > 60 || !normalCharsRegex.test(venueSize)) {
+        if (venueSize.length > 20 || !onlyIntegersRegex.test(venueSize)) {
           return NextResponse.json({
             success: false,
-            error: "Venue Size must be at most 60 characters long and can only contain normal characters.",
+            error: "Max length for venue size is 20 characters long, and can only contain numbers from 0-9.",
           });
         }
       }

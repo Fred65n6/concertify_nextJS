@@ -96,7 +96,7 @@ export default function Home() {
                         className="justify-end flex items-center brand_purple mt-4 dark:text-purple-500"
                         href="/just-for-you"
                     >
-                        View all recommended concerts
+                        See all recommended concerts
                         <SlArrowRight
                             className="w-4 h-4"
                             id="arrow_right"
@@ -111,7 +111,7 @@ export default function Home() {
 
             {/* Concerts */}
             <section className="pb-24 overflow-hidden">
-                <h2 className="font-bold text-2xl pb-4 md:pb-2">
+                <h2 className="font-bold text-2xl pb-4 md:pb-0">
                     <span className="text-[#5311BF] dark:text-purple-500">Concerts</span> you need to experience
                 </h2>
                 <div className="flex overflow-scroll gap-4 md:gap-4 no-scrollbar">
@@ -121,7 +121,7 @@ export default function Home() {
                     className="justify-end flex items-center brand_purple dark:text-purple-500"
                     href="/concerts"
                 >
-                    View all concerts
+                    See all concerts
                     <SlArrowRight
                         className="w-4 h-4"
                         id="arrow_right"
@@ -131,7 +131,7 @@ export default function Home() {
 
             {/* Venues */}
             <section className="pb-36 md:pt-0 pt-12 overflow-hidden">
-                <h2 className="font-bold text-2xl pb-4">
+                <h2 className="font-bold text-2xl pb-4 md:pb-0">
                     <span className="text-[#5311BF] dark:text-purple-500">Venues</span> you need to experience
                 </h2>
                 <div className="flex gap-4  md:gap-4 overflow-x-scroll no-scrollbar md:height-[300px]">
@@ -141,7 +141,7 @@ export default function Home() {
                     className="justify-end flex items-center brand_purple dark:text-purple-500"
                     href="/venues"
                 >
-                    View all venues
+                    See all venues
                     <SlArrowRight
                     className="fill-gray-600 dark:gray-600 w-4 h-4 pt-1"
                     id="arrow_right"

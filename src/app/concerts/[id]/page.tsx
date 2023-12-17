@@ -385,16 +385,26 @@ const SingleConcert: React.FC = () => {
                                 </p>
                             </li>
 
-                            {/* Location*/}
+                            {/* Venue*/}
+                            <Link
+                                href={
+                                    "/venues/" +
+                                    selectedConcert.concert_venue.venue_id
+                                }
+                                key={selectedConcert.concert_venue.venue_id}
+                            >
                             <li className="flex gap-2">
                                 <SlLocationPin
-                                    className="stroke-gray-600 dark:stroke-gray-200 w-5 h-5"
-                                    id="location"
+                                        className="fill-[#5311BF] dark:fill-purple-500 w-5 h-5"
+                                        id="location"
                                 />
-                                <p className="text-gray-600 text-sm dark:text-gray-200 align-middle">
+                                    <p className="text-[#5311BF] dark:text-purple-500 text-sm align-middle">
                                     {selectedConcert.concert_venue.venue_name}
                                 </p>
                             </li>
+                            </Link>
+
+
 
                             {/* See all concerts*/}
                             {/* <li className="flex gap-2">
