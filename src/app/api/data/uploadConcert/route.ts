@@ -54,6 +54,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: false });
   }
 
+
+
+
   const allowedFileTypes = ["image/png", "image/jpeg", "image/jpg"];
   if (!allowedFileTypes.includes(file.type)) {
     return NextResponse.json({
@@ -62,22 +65,23 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  const normalCharsRegex = /^[a-zA-Z0-9æøåÆØÅ!@#$%^&*()_+{}\[\]:;<>,.?~\s]+$/;
+  const normalCharsRegex = /^[a-zA-Z0-9æøåÆØÅ!@#$%^&*()_+-{}\[\]:;<>,.?~\s]+$/;
+
 
   if (concertName) {
     if (concertName.length > 40 || !normalCharsRegex.test(concertName)) {
       return NextResponse.json({
         success: false,
-        error: "Concert name must be at most 40 characters long and can only contain normal characters.",
+        error: "Concert name must be at most 140 characters long and can only contain normal characters.",
       });
     }
   }
 
   if (concertDescription) {
-    if (concertDescription.length > 140 || !normalCharsRegex.test(concertDescription)) {
+    if (concertDescription.length > 300 || !normalCharsRegex.test(concertDescription)) {
       return NextResponse.json({
         success: false,
-        error: "Concert name must be at most 140 characters long and can only contain normal characters.",
+        error: "Concert description must be at most 300 characters long and can only contain normal characters.",
       });
     }
   }

@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
         });
     }
 
-    const normalCharsRegex = /^[a-zA-Z0-9æøåÆØÅ!@#$%^&*()_+{}\[\]:;<>,.?~\s]+$/;
+    const normalCharsRegex = /^[a-zA-Z0-9æøåÆØÅ!@#$%^&*()_+-{}\[\]:;<>,.?~\s]+$/;
     const onlyIntegersRegex = /^[0-9]+$/;
 
     
