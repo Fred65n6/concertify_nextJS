@@ -60,12 +60,14 @@ const UploadForm: React.FC = () => {
             if (response.ok) {
                 const data = await response.json();
                 setVenues(data.data as Venue[]);
+                console.log(data)
             }
         } catch (error) {
-            console.error("Error fetching artists: ", error);
+            console.error("Error fetching venues: ", error);
         }
     };
     
+
     const fetchGenres = async () => {
         try {
             const response = await fetch("/api/data/genreData");

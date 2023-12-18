@@ -9,7 +9,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
         const venue = await Venue.find();
 
         return NextResponse.json({
-            message: "Array of all artists found:",
+            message: "Array of all venues found:",
             success: true,
             data: venue,
         });
