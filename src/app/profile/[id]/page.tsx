@@ -319,7 +319,7 @@ export default function UserProfile({params}: any) {
         } catch (error) {
           console.error("Error submitting form:", error);
         }
-      };
+    };
 
 
     const handleDeleteConcert = async (concertId: string, concertArtistEmail: string) => {
