@@ -90,7 +90,6 @@ const UploadForm: React.FC = () => {
                 setIsArtist(true)
             } 
             setGenres(res.data.data.genres);
-            setVenues(res.data.data.venues);
             setArtist(res.data.data.artist);
             
             setData({
