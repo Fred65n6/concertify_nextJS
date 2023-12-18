@@ -6,6 +6,7 @@ import LoginPage from "../login/page";
 import SignupPage from "../signup/page";
 import Link from "next/link";
 import { CgClose } from "react-icons/cg";
+import { String } from "aws-sdk/clients/apigateway";
 
 
 interface User {
@@ -62,11 +63,11 @@ useEffect(() => {
     deleteUserModule?.classList.remove("grid");
   };
 
-  const handleDeleteUser = async (userId: string) => {
+  const handleDeleteUser = async (userId: string, email: string) => {
     try {
       const res = await fetch('/api/admin/deleteUser', {
         method: 'DELETE',
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ userId, email }),
       });
   
       if (!res.ok) {
@@ -201,7 +202,7 @@ useEffect(() => {
           </p>
           <button 
             type="button"
-            onClick={() => handleDeleteUser(selectedUser._id)}
+            onClick={() => handleDeleteUser(selectedUser._id, selectedUser.email)}
             className="primary_btn">
             Yes I am sure
           </button>

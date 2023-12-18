@@ -209,6 +209,26 @@ export default function UserProfile({params}: any) {
       deleteConcertModule?.classList.remove("grid");
     };
 
+    const selectPrefferedGenres = () => {
+        const preferredGenres = document.getElementById("signup_preference_genres");
+        const welcomePopup = document.getElementById("welcome_modal");
+        if (preferredGenres) {
+          preferredGenres.classList.remove("hidden");
+          preferredGenres.classList.add("grid");
+          welcomePopup?.classList.add("hidden");
+        }
+      };
+    
+      const selectPreferredVenues = () => {
+        const preferredVenues = document.getElementById("signup_preference_venues");
+        const preferredGenres = document.getElementById("signup_preference_genres");
+        if (preferredVenues) {
+          preferredVenues.classList.remove("hidden");
+          preferredVenues.classList.add("block");
+          preferredGenres?.classList.add("hidden");
+        }
+      };
+
     const handleDeleteConcert = async (concertId: string, concertArtistEmail: string) => {
         try {
           const res = await fetch('/api/admin/deleteConcert', {
@@ -273,8 +293,17 @@ export default function UserProfile({params}: any) {
             );
             console.log("User deleted", response.data);
             logout();
-        } catch (error) {
-            console.error("Delete user failed", error);
+        } catch (error: any) {
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.error
+            ) {
+                setError(error.response.data.error);
+            } else {
+                setError("An error occurred during signup.");
+            }
+            console.log("API signup failed", error);
         } finally {
             setLoading(false);
             closeUsernameModule();
@@ -770,7 +799,7 @@ export default function UserProfile({params}: any) {
                             readOnly={true}
                             type="text"
                             id="email"
-                            className="hidden"
+                            
                             value={user.email}
                             placeholder=""
                         />

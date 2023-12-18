@@ -21,7 +21,7 @@ const s3 = new AWS.S3();
 
 export async function POST(request: NextRequest) {
 
-  const cspHeader = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';";
+  const cspHeader = "default-src 'self'; script-src 'self'; style-src 'self';";
 
   const data = await request.formData();
   
@@ -169,6 +169,7 @@ if (concertArtistEmail) {
       headers: {
           'Content-Type': 'application/json',
           'Content-Security-Policy': cspHeader,
+          'Cache-Control': 'max-age=3600, public',
       },
   });
   } catch (error) {

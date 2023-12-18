@@ -80,11 +80,11 @@ const closeEditModule = () => {
 
 
 
-  const handleDeleteArtist = async (artistId: string) => {
+  const handleDeleteArtist = async (artistId: string, artistEmail: string) => {
     try {
       const res = await fetch('/api/admin/deleteArtist', {
         method: 'DELETE',
-        body: JSON.stringify({ artistId }),
+        body: JSON.stringify({ artistId, artistEmail }),
       });
   
       if (!res.ok) {
@@ -261,11 +261,12 @@ const closeEditModule = () => {
               <h1 className="dark:text-white font-bold text-3xl">Are you sure?</h1>
               <p className="dark:text-white">
               You are about to delete{" "}
+              {selectedArtist.artist_email}
               <span className="italic font-bold">{selectedArtist.artist_name}</span>. This action can not be reverted.
             </p>
             <button 
                 type="button"
-                onClick={() => handleDeleteArtist(selectedArtist.artist_id)}
+                onClick={() => handleDeleteArtist(selectedArtist.artist_id, selectedArtist.artist_email)}
                 className="primary_btn">
                 Yes I am sure
             </button>

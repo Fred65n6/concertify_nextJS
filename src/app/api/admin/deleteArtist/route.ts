@@ -6,6 +6,7 @@ export async function DELETE(request: NextRequest) {
   try {
     const data = await request.json();
     const artistId = data.artistId;
+    const email = data.artistEmail
 
     if (!artistId) {
       return NextResponse.json(
@@ -24,10 +25,13 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    // Find concerts by concert_artist.artist_id and delete them
-    const concertsDeletionResult = await Concert.deleteMany({ 'concert_artist.artist_id': artistId });
+    if (email) {
+      const concerts = await Concert.find({concert_artist_email: email})
 
-    console.log(concertsDeletionResult);
+      await Concert.deleteMany({ concert_artist_email: email });
+      
+      console.log(concerts)
+    }
 
     return NextResponse.json({
       success: true,

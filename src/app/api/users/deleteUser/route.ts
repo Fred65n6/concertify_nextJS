@@ -30,8 +30,6 @@ export async function POST(request: NextRequest) {
         }
 
         if (artist) {
-            // Get the artist name
-            const artistName = artist.artist_name;
 
             const concerts = await Concert.find({concert_artist_email: email})
         
