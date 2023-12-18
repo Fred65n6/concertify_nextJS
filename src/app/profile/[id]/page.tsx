@@ -74,8 +74,10 @@ export default function UserProfile({params}: any) {
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState<string>("");
     const [isArtist, setIsArtist] = useState(false);
-    const [genres, setGenres] = useState<any[]>([]);
-    const [venues, setVenues] = useState<any[]>([]);
+    const [userGenres, setUserGenres] = useState<any[]>([]);
+    const [userVenues, setUserVenues] = useState<any[]>([]);
+    const [allGenres, setAllGenres] = useState<any[]>([]);
+    const [allVenues, setAllVenues] = useState<any[]>([]);
     const [artist, setArtist] = useState<any[]>([]);
     const [concerts, setConcerts] = useState<any[]>([]);
     const [selectedConcert, setSelectedConcert] = useState<Concert | null>(null);
@@ -86,6 +88,10 @@ export default function UserProfile({params}: any) {
     const [concertDescription, setConcertDescription] = useState("");
     const [concertDoors, setConcertDoors] = useState("");
     const [isVisible, setIsVisible] = useState(true); // Add state for visibility
+    const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+    const [selectedGenre, setSelectedGenre] = useState<string>("");
+    const [selectedVenues, setSelectedVenues] = useState<string[]>([]);
+    const [selectedVenue, setSelectedVenue] = useState<string>("");
 
     const [data, setData] = useState({
         username: "unknown",
@@ -125,11 +131,10 @@ export default function UserProfile({params}: any) {
             if (adminData.isArtist) {
                 setIsArtist(true)
             } 
-            setGenres(res.data.data.genres);
-            setVenues(res.data.data.venues);
+            setUserGenres(res.data.data.genres);
+            setUserVenues(res.data.data.venues);
             setArtist(res.data.data.artist);
             setConcerts(res.data.data.concerts);
-            
             setData({
                 username: userData.username,
                 userId: userData._id,
@@ -142,9 +147,32 @@ export default function UserProfile({params}: any) {
 
     useEffect(() => {
         getUserDetails();
+        fetchGenreData();
+        fetchVenueData();
         setUser({...user, email: data.userEmail, _id: data.userId});
     }, [data.userEmail, data.userId]);
 
+    
+    
+    const fetchGenreData = async () => {
+        try {
+            const response = await axios.get("/api/data/genreData");
+            setAllGenres(response.data.data);
+            console.log(response);
+        } catch (error) {
+            console.error("Error fetching genres:", error);
+        }
+      };
+    
+      const fetchVenueData = async () => {
+        try {
+          const response = await axios.get<{ data: Venue[] }>("/api/data/venueData");
+          setAllVenues(response.data.data);
+        } catch (error) {
+          console.error("Error fetching venues:", error);
+          setError("Error fetching venues");
+        }
+      };
 
     // -- MODAL FUNCTIONS
     const openChangePasswordModal = () => {
@@ -209,25 +237,88 @@ export default function UserProfile({params}: any) {
       deleteConcertModule?.classList.remove("grid");
     };
 
-    const selectPrefferedGenres = () => {
-        const preferredGenres = document.getElementById("signup_preference_genres");
-        const welcomePopup = document.getElementById("welcome_modal");
-        if (preferredGenres) {
-          preferredGenres.classList.remove("hidden");
-          preferredGenres.classList.add("grid");
-          welcomePopup?.classList.add("hidden");
+    const openVenuePreferenceModule = () => {
+        const venuePreferenceModule = document.getElementById("venue_preference")
+        venuePreferenceModule?.classList.remove("hidden")
+        venuePreferenceModule?.classList.add("grid")
+    }
+
+    const closeVenuePreferenceModule = () => {
+        const venuePreferenceModule = document.getElementById("venue_preference")
+        venuePreferenceModule?.classList.add("hidden")
+        venuePreferenceModule?.classList.remove("grid")
+    }
+
+    const openGenrePreferenceModule = () => {
+        const venuePreferenceModule = document.getElementById("genre_preference")
+        venuePreferenceModule?.classList.remove("hidden")
+        venuePreferenceModule?.classList.add("grid")
+    }
+
+    const closeGenrePreferenceModule = () => {
+        const venuePreferenceModule = document.getElementById("genre_preference")
+        venuePreferenceModule?.classList.add("hidden")
+        venuePreferenceModule?.classList.remove("grid")
+    }
+
+
+ 
+
+    const handleVenueChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedVenue = event.target.value;
+        setSelectedVenues([...selectedVenues, selectedVenue]);
+        setSelectedVenue(""); 
+      };
+      const removeSelectedVenue = (index: number) => {
+        const updatedVenues = [...selectedVenues];
+        updatedVenues.splice(index, 1);
+        setSelectedVenues(updatedVenues);
+      };
+      const submitSelectedVenues = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+          const venuesWithIds = allVenues
+            .filter((venue) => selectedVenues.includes(venue.venue_name))
+            console.log(venuesWithIds)
+            console.log(user.email)
+          await axios.post("/api/data/addVenue", {
+            selectedVenues: venuesWithIds,
+            email: user.email
+          });
+          console.log('preferred venue added')
+        } catch (error) {
+          console.error("Error submitting form:", error);
         }
       };
     
-      const selectPreferredVenues = () => {
-        const preferredVenues = document.getElementById("signup_preference_venues");
-        const preferredGenres = document.getElementById("signup_preference_genres");
-        if (preferredVenues) {
-          preferredVenues.classList.remove("hidden");
-          preferredVenues.classList.add("block");
-          preferredGenres?.classList.add("hidden");
+      // --- Genre functions
+      const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedGenre = event.target.value;
+        setSelectedGenres([...selectedGenres, selectedGenre]);
+        setSelectedGenre(""); 
+      };
+      const removeSelectedGenres = (index: number) => {
+        const updatedGenres = [...selectedGenres];
+        updatedGenres.splice(index, 1);
+        setSelectedGenres(updatedGenres);
+      };
+      const submitSelectedGenres = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+          const genresWithIds = allGenres
+            .filter((genre) => selectedGenres.includes(genre.genre_name))
+            console.log(genresWithIds)
+            console.log(user.email)
+          await axios.post("/api/data/addGenre", {
+            selectedGenres: genresWithIds,
+            email: user.email
+          });
+          console.log('user genre added')
+        } catch (error) {
+          console.error("Error submitting form:", error);
         }
       };
+
 
     const handleDeleteConcert = async (concertId: string, concertArtistEmail: string) => {
         try {
@@ -370,6 +461,7 @@ export default function UserProfile({params}: any) {
                 console.error("Error uploading artist with file: ", error);
             }
         } else {
+            
             try {
       
                 const data = new FormData();
@@ -596,9 +688,16 @@ export default function UserProfile({params}: any) {
                 {/* GENRES */}
                 <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
                     <div className="flex flex-col gap-4">
+                        <div className="flex justify-between">
                         <h2 className="text-black font-bold text-xl">Preferred genres</h2>
+                        <button
+                            type="button"
+                            onClick={() => openGenrePreferenceModule()}
+                        ><SlPencil className="fill-[#5311BF]"/>
+                        </button>
+                        </div>
                             <ul className="flex flex-wrap gap-2">
-                                {genres.map((genre: any) => (
+                                {userGenres.map((genre: any) => (
                                     <article
                                         className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8 text-[#5311BF]"
                                         key={genre._id}>
@@ -612,9 +711,16 @@ export default function UserProfile({params}: any) {
                 {/* VENUES */}
                 <div className="bg-purple-100 w-full gap-4 py-8 rounded-lg align-middle justify-start px-8 flex flex-col">                    
                     <div className="flex flex-col gap-4">
+                        <div className="flex justify-between">
                         <h2 className="text-black font-bold text-xl">Preferred venues</h2>
+                        <button
+                            type="button"
+                            onClick={() => openVenuePreferenceModule()}
+                        ><SlPencil className="fill-[#5311BF]"/>
+                        </button>
+                        </div>
                         <ul className="flex flex-wrap gap-2">
-                            {venues.map((venue: any) => (
+                            {userVenues.map((venue: any) => (
                                 <article
                                     className="w-fit rounded-full border-[1px] border-solid border-[#5311BF] py-2 px-8 text-[#5311BF]"
                                     key={venue.venue_name}>
@@ -1001,6 +1107,148 @@ export default function UserProfile({params}: any) {
                     </div>
             </div>
             )}
+
+            {/* EDIT GENRES */}
+
+            <div id="genre_preference" className="m-auto fixed bg-black bg-opacity-50 w-screen h-screen left-0 top-0 hidden">
+                <div className="m-auto p-6 md:p-10 flex flex-col items-center justify-center w-fill md:w-[600px] bg-white rounded-lg dark:bg-[#23124b]">
+            <button
+                type="button"
+                onClick={closeGenrePreferenceModule}
+                className="cursor-pointer ml-[100%]"
+            >
+                <CgClose/>
+            </button>
+              <h1 className="mb-4 text-3xl font-bold text-center mx-6">
+                Set new favourite genres
+              </h1>
+              <p className="mb-6 text-center mx-6">
+                You can select as many as you like, to get personalized recommendations.
+              </p>
+
+              <form className="grid gap-2 w-full" action="" onSubmit={submitSelectedGenres}>
+                <select
+                    className="input_field"
+                    id="genreSelect"
+                    onChange={handleGenreChange}
+                    value={selectedGenre}
+                  >
+                    <option value="">Select...</option>
+                    {allGenres.map((genre) => (
+                      <option key={genre._id} value={genre.genre_name}>
+                        {genre.genre_name}
+                      </option>
+                    ))}
+                </select>
+              
+                {/* SELECTED GENRE TAGS */}
+                <div className="flex flex-wrap gap-4 py-8">
+                  {selectedGenres.map((genre, index) => (
+                    <div key={index} className="relative">
+                      <div className="flex gap-2 border-2 w-max py-2 px-4 align-middle border-purple-700 brand_purple text-center rounded-full">
+                       <span className="text-black dark:text-white">{genre}</span>
+                        <button
+                          type="button"
+                          onClick={() => removeSelectedGenres(index)}
+                          className="cursor-pointer align-middle text-black dark:text-white"
+                        >
+                        &times;
+                        </button>
+
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <input
+                  type="email"
+                  id="emailInput"
+                  value={user.email}
+                  readOnly
+                  className="hidden"
+                />
+
+                  <button 
+                    type="submit" 
+                    value="upload" 
+                    className="rounded-full bg-purple-700 m-auto w-fit h-fit py-3 px-12 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
+                    Next
+                  </button>
+              </form>
+
+          </div>
+        </div>
+
+        {/* EDIT VENUES */}
+        <div id="venue_preference" className="m-auto fixed bg-black bg-opacity-50 w-screen h-screen left-0 top-0 hidden">
+          <div className="m-auto p-6 md:p-10 flex flex-col items-center justify-center w-fill md:w-[600px] bg-white rounded-lg dark:bg-[#23124b]">
+          <button
+                type="button"
+                onClick={closeVenuePreferenceModule}
+                className="cursor-pointer ml-[100%]"
+            >
+                <CgClose/>
+            </button>
+            <div className="w-[300px] lg:w-[500px] mb-10">
+            </div>
+            <h1 className="mb-4 text-3xl font-bold text-center mx-6">
+            Set new favourite venues
+            </h1>
+            <p className="mb-6 text-center mx-6">
+              You can select as many as you like, to get personalized recommendations.
+            </p>
+            
+            <form className="grid gap-2 w-full" action="" onSubmit={submitSelectedVenues}>
+              <select
+                className="input_field"
+                id="venueSelect"
+                onChange={handleVenueChange}
+                value={selectedVenue}
+              >
+                <option value="">Select...</option>
+                {allVenues.map((venue) => (
+                  <option key={venue._id} value={venue.venue_name}>
+                    {venue.venue_name}
+                  </option>
+                ))}
+              </select>
+
+
+              {/* SELECTED VENUE TAGS */}
+              <div className="flex flex-wrap gap-4 py-8">
+                {selectedVenues.map((venue, index) => (
+                    <div key={index} className="relative">
+                      <div className="flex gap-2 border-2 w-max py-2 px-4 align-middle border-purple-700 brand_purple text-center rounded-full">
+                       <span className="text-black dark:text-white">{venue}</span>
+                        <button
+                          type="button"
+                          onClick={() => removeSelectedVenue(index)}
+                          className="cursor-pointer align-middle text-black dark:text-white"
+                        >
+                        &times;
+                        </button>
+
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              <input
+                type="email"
+                id="emailInput"
+                value={user.email}
+                className="hidden"
+                readOnly
+              />
+      
+              <button 
+                type="submit" 
+                value="upload" 
+                className="rounded-full bg-purple-700 m-auto w-fit h-fit py-3 px-12 brand_gradient text-white hover:bg-purple-200 flex gap-2 align-middle">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
         </div>
     );
 }

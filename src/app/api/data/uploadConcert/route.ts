@@ -169,7 +169,7 @@ if (concertArtistEmail) {
       headers: {
           'Content-Type': 'application/json',
           'Content-Security-Policy': cspHeader,
-          'Cache-Control': 'max-age=3600, public',
+          'Cache-Control': 'no-cache, max-age=0',
       },
   });
   } catch (error) {

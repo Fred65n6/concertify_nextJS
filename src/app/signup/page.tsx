@@ -187,11 +187,11 @@ export default function SignupPage() {
     } else {
       setButtonDisabled(true);
     }
-    fetchData();
     fetchVenueData();
+    fetchGenreData();
   }, [user]);
 
-  const fetchVenueData = async () => {
+  const fetchGenreData = async () => {
     try {
         const response = await axios.get("/api/data/genreData");
         setGenres(response.data.data);
@@ -201,7 +201,7 @@ export default function SignupPage() {
     }
   };
 
-  const fetchData = async () => {
+  const fetchVenueData = async () => {
     try {
       const response = await axios.get<{ data: Venue[] }>("/api/data/venueData");
       setVenues(response.data.data);

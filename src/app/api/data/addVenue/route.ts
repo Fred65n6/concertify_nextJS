@@ -25,6 +25,8 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    user.venues = [];
+
     const venueObjects: SelectedVenue[] = selectedVenues.map(
       ({ venue_name, venue_id }: SelectedVenue) => ({
         venue_name,

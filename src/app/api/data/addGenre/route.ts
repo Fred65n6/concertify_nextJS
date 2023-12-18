@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   try {
     // Parse the incoming JSON payload
     const data = await request.json();
-    const { selectedGenres,email } = data;
+    const { selectedGenres, email } = data;
 
     // Find the user based on their email
     const user = await User.findOne({ email });
@@ -21,10 +21,14 @@ export async function POST(request: NextRequest) {
     if (!user) {
       return NextResponse.json({
         success: false,
-        error: "genre can't be added",
+        error: "User not found",
       });
     }
 
+    // Clear existing genres
+    user.genres = [];
+
+    // Add the new genres
     const genreObjects: SelectedGenre[] = selectedGenres.map(
       ({ genre_name, genre_id }: SelectedGenre) => ({
         genre_name,
@@ -34,14 +38,16 @@ export async function POST(request: NextRequest) {
 
     user.genres.push(...genreObjects);
 
+    // Save the updated user
     await user.save();
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error adding genres:", error);
+    console.error("Error updating genres:", error);
     return NextResponse.json({
       success: false,
-      error: "Error adding genres",
+      error: "Error updating genres",
     });
   }
 }
+
