@@ -11,8 +11,6 @@ import User from "@/models/userModel"
 import {PiBalloon} from "react-icons/pi";
 import ConcertCard from "@/app/components/concertCard/page";
 import Link from "../../../../node_modules/next/link";
-
-
 interface Genre {
     _id: string;
     genre_name: string;

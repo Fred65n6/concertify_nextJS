@@ -39,7 +39,7 @@ const ArtistLoopview: React.FC = () => {
             <SignupPage />
             <BreadcrumbComp />
             <h1 className="font-bold text-4xl pb-4">All artists</h1>
-            <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8">
+            <div className="grid xs:grid-cols1 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-8 mb-20">
                 {artists?.map((artist) => (
                     <article className="w-auto" key={artist.artist_id}>
                         <Link href={"/artists/" + artist.artist_id} key={artist.artist_id}>
