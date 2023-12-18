@@ -260,8 +260,6 @@ export default function UserProfile({params}: any) {
         venuePreferenceModule?.classList.add("hidden")
         venuePreferenceModule?.classList.remove("grid")
     }
-
-
  
 
     const handleVenueChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -286,6 +284,8 @@ export default function UserProfile({params}: any) {
             email: user.email
           });
           console.log('preferred venue added')
+          getUserDetails();
+          closeVenuePreferenceModule();
         } catch (error) {
           console.error("Error submitting form:", error);
         }
@@ -314,6 +314,8 @@ export default function UserProfile({params}: any) {
             email: user.email
           });
           console.log('user genre added')
+          getUserDetails();
+          closeGenrePreferenceModule();
         } catch (error) {
           console.error("Error submitting form:", error);
         }
