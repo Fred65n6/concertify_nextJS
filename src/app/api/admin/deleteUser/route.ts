@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import User from '@/models/userModel';
 import Concert from '@/models/concertModel';
-import Artist from '@/models/artistModel'
-
+import Artist from '@/models/artistModel';
 
 export async function DELETE(request: NextRequest) {
     try {

@@ -65,7 +65,7 @@ export default function SingleArtist() {
                 <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
                     <figure>
                         <Image
-                            src={`https://concertify.s3.eu-central-1.amazonaws.com/${selectedArtist.artist_image}`}
+                            src={`https://storage.googleapis.com/concertify/${selectedArtist.artist_image}`}
                             width={200}
                             height={200}
                             alt="artist image"

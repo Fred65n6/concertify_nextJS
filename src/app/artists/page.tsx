@@ -44,7 +44,7 @@ const ArtistLoopview: React.FC = () => {
                     <article className="w-auto" key={artist.artist_id}>
                         <Link href={"/artists/" + artist.artist_id} key={artist.artist_id}>
                             <Image
-                                src={`https://concertify.s3.eu-central-1.amazonaws.com/${artist.artist_image}`}
+                                src={`https://storage.googleapis.com/concertify/${artist.artist_image}`}
                                 width={200}
                                 height={200}
                                 alt="artist_image"

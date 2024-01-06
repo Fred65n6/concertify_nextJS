@@ -200,7 +200,7 @@ const SingleConcert: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6 pb-20">
                     <figure>
                         <Image
-                            src={`https://concertify.s3.eu-central-1.amazonaws.com/${selectedConcert.concert_image}`}
+                            src={`https://storage.googleapis.com/concertify/${selectedConcert.concert_image}`}
                             width={200}
                             height={200}
                             alt="concert"

@@ -59,7 +59,7 @@ export default function SingleVenue() {
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8 pb-12 w-full">
           <figure>
             <Image
-              src={`https://concertify.s3.eu-central-1.amazonaws.com/${selectedVenue.venue_image}`}
+              src={`https://storage.googleapis.com/concertify/${selectedVenue.venue_image}`}
               width={200}
               height={200}
               alt="concert"

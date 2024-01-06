@@ -46,7 +46,7 @@ const VenueCard: React.FC = () => {
         <article className="flex-shrink-0 md:pt-4 pb-8 w-[300px]" key={venue._id}>
           <Link href={"/venues/" + venue._id} key={venue._id}>
             <Image
-              src={`https://concertify.s3.eu-central-1.amazonaws.com/${venue.venue_image}`}
+              src={`https://storage.googleapis.com/concertify/${venue.venue_image}`}
               width={200}
               height={200}
               alt="concert"

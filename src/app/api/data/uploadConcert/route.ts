@@ -2,14 +2,16 @@ import { writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import Concert from "@/models/concertModel";
-import AWS from "aws-sdk";
+import { Storage } from "@google-cloud/storage";
 import User from "@/models/userModel";
 
 // -- Load AWS credentials and configuration from environment variables
-AWS.config.update({
-  accessKeyId: process.env.ACCESS_KEY_ID,
-  secretAccessKey: process.env.SECRET_ACCESS_KEY,
-  region: process.env.REGION,
+const storage = new Storage({
+  projectId: process.env.GCP_PROJECT_ID,
+  credentials: {
+    client_email: process.env.GCP_CLIENT_EMAIL,
+    private_key: process.env.GCP_PRIVATE_KEY!.replace(/\\n/g, '\n'),
+  },
 });
 
 const generateUUID = () => {
@@ -17,14 +19,10 @@ const generateUUID = () => {
   return uuid.replace(/-/g, "");
 };
 
-const s3 = new AWS.S3();
 
 export async function POST(request: NextRequest) {
-
   const cspHeader = "default-src 'self'; script-src 'self'; style-src 'self';";
-
   const data = await request.formData();
-  
   const file = data.get("file") as File;
   const concertId = generateUUID();
   const concertName = (data.get("Concert_name")as string);
@@ -87,25 +85,32 @@ export async function POST(request: NextRequest) {
   }
 
   const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
+    const buffer = Buffer.from(bytes);
 
-  const uuid = uuidv4();
-  const fileExtension = file.name.split(".").pop();
-  const newFileName = `${uuid}.${fileExtension}`;
-  const s3BucketName = "concertify"; // Replace with your S3 bucket name
-  const s3ObjectKey = `concert_images/${newFileName}`;
-
-  const params = {
-    Bucket: s3BucketName,
-    Key: s3ObjectKey,
-    Body: buffer,
-  };
+    const bucketName = "concertify";
+    const uuid = generateUUID();
+    const fileExtension = file.name.split(".").pop();
+    const newFileName = `${uuid}.${fileExtension}`;
+    const gcsFileName = `concert_images/${newFileName}`;
+    const bucket = storage.bucket(bucketName);
+    const fileOptions = {
+      gzip: true,
+      metadata: {
+        cacheControl: "public, max-age=31536000",
+      },
+    };
 
   try {
-    await s3.upload(params).promise();
-    console.log(`File uploaded to S3: ${s3ObjectKey}`);
+    const fileBuffer = await file.arrayBuffer();
+      const fileData = Buffer.from(fileBuffer);
 
-    const concertImage = `concert_images/${newFileName}`;
+      await bucket.file(gcsFileName).save(fileData, {
+        metadata: fileOptions.metadata,
+      });
+
+      console.log(`File uploaded to GCS: ${gcsFileName}`);
+
+      const concertImage = `${gcsFileName}`
 
     let newConcert;
 

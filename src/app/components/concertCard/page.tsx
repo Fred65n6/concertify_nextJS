@@ -64,7 +64,7 @@ const ConcertCard: React.FC = () => {
           <Link href={"/concerts/" + concert.concert_id} key={concert.concert_id}>
 
             <Image
-              src={`https://concertify.s3.eu-central-1.amazonaws.com/${concert.concert_image}`}
+              src={`https://storage.googleapis.com/concertify/${concert.concert_image}`}
               width={200}
               height={200}
               alt="concert"

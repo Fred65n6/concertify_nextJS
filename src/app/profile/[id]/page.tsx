@@ -557,7 +557,7 @@ export default function UserProfile({params}: any) {
                             {artist.map((artist: any) => (
                                     <article className="w-full flex flex-col-reverse md:flex-row dark:text-black gap-8" key={artist.artist_name}>
                                         <Image
-                                        src={`https://concertify.s3.eu-central-1.amazonaws.com/${artist.artist_image}`}
+                                        src={`https://storage.googleapis.com/concertify/${artist.artist_image}`}
                                         width={200}
                                         height={200}
                                         alt="artist image"
@@ -637,7 +637,7 @@ export default function UserProfile({params}: any) {
                                 <article className="flex-shrink-0 grid md:pt-8 pb-8" key={concerts.concert_id}>
                                     <Link href={"/concerts/" + concerts.concert_id} key={concerts.concert_id}>
                                         <Image
-                                            src={`https://concertify.s3.eu-central-1.amazonaws.com/${concerts.concert_image}`}
+                                            src={`https://storage.googleapis.com/concertify/${concerts.concert_image}`}
                                             width={200}
                                             height={200}
                                             alt="concert"
