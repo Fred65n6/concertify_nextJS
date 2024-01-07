@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server'
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
 
-const isAdminPath = path === '/admin-dashboard' || path === '/admin-artist' || path === '/admin-concerts' || path === '/admin-upload-artist' || path === '/admin-uploadconcert' || path === '/admin-upload-venue' || path === '/admin-venues'  ;
+const isAdminPath = path === '/admin-dashboard' || path === '/admin-artist' || path === '/admin-concerts' || path === '/admin-upload-artist' || path === '/admin-uploadconcert' || path === '/admin-upload-venue' || path === '/admin-venues'  || path === '/api/admin/deleteArtist' ;
   const isRestrictedPath = path === '/favourites' || path === '/profile' || path === '/profile/${data}';
   const isArtistPath = path === '/user-upload-concert';
 
@@ -42,7 +42,7 @@ export const config = {
     '/admin-upload-concert',
     '/profile/${data}',
     '/user-upload-concert',
-    '/api/admin/deleteConcert'
+    '/api/admin/deleteArtist'
   ]
 }
 

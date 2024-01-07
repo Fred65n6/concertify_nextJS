@@ -22,12 +22,11 @@ export async function DELETE(request: NextRequest) {
       const user = await User.findOne({email: concertArtistEmail})
       console.log("this is user" + user)
 
-      if(user) {
         await User.updateOne(
           { email: concertArtistEmail },
           { $pull: { concerts: { concert_id: concertId } } }
         );
-      }
+    
       }
 
       const deletionResult = await Concert.deleteOne({ concert_id: concertId });
