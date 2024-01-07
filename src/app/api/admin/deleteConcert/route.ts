@@ -18,6 +18,7 @@ export async function DELETE(request: NextRequest) {
         );
       }
 
+      if (concertArtistEmail) {
       const user = await User.findOne({email: concertArtistEmail})
       console.log("this is user" + user)
 
@@ -26,6 +27,7 @@ export async function DELETE(request: NextRequest) {
           { email: concertArtistEmail },
           { $pull: { concerts: { concert_id: concertId } } }
         );
+      }
       }
 
       const deletionResult = await Concert.deleteOne({ concert_id: concertId });
