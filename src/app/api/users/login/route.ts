@@ -3,6 +3,7 @@ import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { FaAssistiveListeningSystems } from "react-icons/fa";
 
 connect();
 
@@ -13,7 +14,7 @@ export async function POST(request: NextRequest) {
     console.log(reqBody);
 
     // -- Check if user exists
-    const user = await User.findOne({ email: email.toLowerCase() });  
+    const user = await User.findOne({ email: email.toLowerCase() });
 
     if (!user) {
       return NextResponse.json(
@@ -39,87 +40,45 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if the user is an admin
+    // Create a base token data object
+    const tokenData: {
+      id: string;
+      username: string;
+      email: string;
+      isAdmin?: boolean;
+      isArtist?: boolean;
+      isVerified: boolean;
+    } = {
+      id: user._id,
+      username: user.username,
+      email: user.email.toLowerCase(),
+      isVerified: true,
+    };
+
+    // Check user roles and update token data accordingly
     if (user.isAdmin) {
-      // Create token data for admin users
-      const tokenDataAdmin = {
-        id: user._id,
-        username: user.username,
-        email: user.email.toLowerCase(),
-        isAdmin: true, 
-      };
-
-      // Create and set the adminToken
-      const adminToken = await jwt.sign(tokenDataAdmin, process.env.TOKEN_SECRET!, {
-        expiresIn: "1d",
-      });
-
-      const response = NextResponse.json({
-        message: "Admin login successful",
-        success: true,
-        isAdmin: true,
-      });
-
-      response.cookies.set("adminToken", adminToken, {
-        httpOnly: false,
-      });
-
-      return response;
+      tokenData.isAdmin = true;
+    } else if (user.isArtist) {
+      tokenData.isArtist = true;
     }
 
-    else if (user.isArtist) {
-      // Create token data for admin users
-      const tokenDataArtist = {
-        id: user._id,
-        username: user.username,
-        email: user.email.toLowerCase(),
-        isArtist: true, 
-      };
+    const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
+      expiresIn: "1d",
+    });
 
-      // Create and set the adminToken
-      const artistToken = await jwt.sign(tokenDataArtist, process.env.TOKEN_SECRET!, {
-        expiresIn: "1d",
-      });
+    const response = NextResponse.json({
+      message: "Login successful",
+      success: true,
+    });
 
-      const response = NextResponse.json({
-        message: "Artist login successful",
-        success: true,
-        isArtist: true,
-      });
+    // Set the token in an HTTP-only cookie
+    response.cookies.set("token", token, {
+      httpOnly: true,
+    });
 
-      response.cookies.set("artistToken", artistToken, {
-        httpOnly: false,
-      });
-
-      return response;
-    }
-
-    // If the user is not admin:
-    else {
-      // Create token data for normal users
-      const tokenData = {
-        id: user._id,
-        username: user.username,
-        email: user.email.toLowerCase(),
-        isAdmin: false,
-      };
-
-      // Create and set the token for normal users
-      const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
-        expiresIn: "1d",
-      });
-
-      const response = NextResponse.json({
-        message: "Login successful",
-        success: true,
-      });
-
-      response.cookies.set("token", token, {
-        httpOnly: false,
-      });
-      return response;
-    }
+    return response;
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
