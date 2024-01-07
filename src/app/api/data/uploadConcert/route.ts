@@ -52,9 +52,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: false });
   }
 
-
-
-
   const allowedFileTypes = ["image/png", "image/jpeg", "image/jpg"];
   if (!allowedFileTypes.includes(file.type)) {
     return NextResponse.json({
