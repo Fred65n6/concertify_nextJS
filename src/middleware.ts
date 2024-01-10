@@ -31,6 +31,7 @@ export async function verify(token: string): Promise<Token | null> {
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
+  const cspHeader = "default-src 'self'; script-src 'self'; style-src 'self';";
 
   const isAdminPath =
     path === '/admin-dashboard' ||
@@ -68,6 +69,7 @@ export async function middleware(request: NextRequest) {
   if (isRestrictedPath && (!decodedToken || !decodedToken.isVerified)) {
     return NextResponse.redirect(new URL('/', request.nextUrl));
   }
+  
 }
 
 export const config = {

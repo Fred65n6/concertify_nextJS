@@ -3,7 +3,6 @@ import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { FaAssistiveListeningSystems } from "react-icons/fa";
 
 connect();
 
@@ -74,6 +73,8 @@ export async function POST(request: NextRequest) {
     // Set the token in an HTTP-only cookie
     response.cookies.set("token", token, {
       httpOnly: true,
+      sameSite: 'lax',
+      secure: true
     });
 
     return response;

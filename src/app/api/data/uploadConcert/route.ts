@@ -19,7 +19,6 @@ const generateUUID = () => {
   return uuid.replace(/-/g, "");
 };
 
-
 export async function POST(request: NextRequest) {
   const cspHeader = "default-src 'self'; script-src 'self'; style-src 'self';";
   const data = await request.formData();
@@ -162,6 +161,7 @@ if (concertArtistEmail) {
         concert_start: concertStart,
         concert_artist_image: concertImage,
         concert_artist_email: concertArtistEmail,
+        isVisible: isVisible === "true",
       };
       
       user.concerts.push(newConcert);
@@ -175,7 +175,7 @@ if (concertArtistEmail) {
       },
   });
   } catch (error) {
-    console.error("Error uploading file to S3:", error);
+    console.error("CSP-header error:", error);
     return new NextResponse(JSON.stringify({ success: false }), {
             headers: {
                 'Content-Type': 'application/json',

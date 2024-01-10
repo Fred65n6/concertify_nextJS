@@ -20,6 +20,7 @@ const generateUUID = () => {
 };
 
 export async function POST(request: NextRequest) {
+    const cspHeader = "default-src 'self'; script-src 'self'; style-src 'self';";
     const data = await request.formData();
     const file = data.get("file") as File;
     const artistId = generateUUID();
