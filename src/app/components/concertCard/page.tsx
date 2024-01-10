@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import { SlArrowRight, SlArrowLeft } from "react-icons/sl";
-
 interface ConcertCard {
   concert_id: string;
   concert_artist: {
