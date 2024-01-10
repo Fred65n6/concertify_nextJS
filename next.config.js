@@ -34,6 +34,15 @@ const nextConfig = {
 };
 
 module.exports = {
+    async redirects() {
+        return [
+          {
+            source: '/_headers',
+            destination: '/_headers',
+            permanent: true,
+          },
+        ];
+      },
     ...nextConfig,
     eslint: {
         ignoreDuringBuilds: true,
