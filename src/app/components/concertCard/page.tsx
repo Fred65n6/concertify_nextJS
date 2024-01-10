@@ -68,7 +68,7 @@ const ConcertCard: React.FC = () => {
               width={200}
               height={200}
               alt="concert"
-              className="rounded-lg object-cover w-auto h-[300px]"
+              className="rounded-lg object-cover w-full h-[300px]"
             />
           </Link>
 
