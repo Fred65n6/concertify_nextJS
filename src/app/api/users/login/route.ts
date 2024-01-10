@@ -73,8 +73,8 @@ export async function POST(request: NextRequest) {
     // Set the token in an HTTP-only cookie
     response.cookies.set("token", token, {
       httpOnly: true,
-      sameSite: 'lax',
-      secure: true
+      sameSite: "lax",
+      secure: true,
     });
 
     return response;
@@ -82,4 +82,3 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-
