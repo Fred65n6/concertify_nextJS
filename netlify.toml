@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build"
+  functions = "out_functions"
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.example.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https://storage.googleapis.com;
+    """
