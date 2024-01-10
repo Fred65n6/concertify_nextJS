@@ -26,7 +26,10 @@ export async function POST(request: NextRequest) {
     // -- Check if password is correct
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
-      return NextResponse.json({ error: "Invalid password" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid email or password" },
+        { status: 400 }
+      );
     }
     console.log(user);
 
@@ -73,8 +76,8 @@ export async function POST(request: NextRequest) {
     // Set the token in an HTTP-only cookie
     response.cookies.set("token", token, {
       httpOnly: true,
-      sameSite: 'lax',
-      secure: true
+      sameSite: "lax",
+      secure: true,
     });
 
     return response;
@@ -82,4 +85,3 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-
