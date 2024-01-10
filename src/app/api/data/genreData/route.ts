@@ -1,19 +1,32 @@
-import {NextRequest, NextResponse} from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Genre from "@/models/genreModel";
-import {connect} from "@/dbConfig/dbConfig";
+import { connect } from "@/dbConfig/dbConfig";
 
 connect();
 
-export async function GET(request: NextRequest, response: NextResponse) {
-    try {
-        const genre = await Genre.find();
+export async function getServerSideProps() {
+  return {
+    props: {},
+    headers: {
+      // Add your headers for API routes here
+      "X-Frame-Options": "DENY",
+      "Content-Security-Policy":
+        "default-src 'self' https://concertify.netlify.app;",
+      // Add other headers as needed
+    },
+  };
+}
 
-        return NextResponse.json({
-            message: "Array of all genres found:",
-            success: true,
-            data: genre,
-        });
-    } catch (error: any) {
-        return NextResponse.json({error: error.message}, {status: 400});
-    }
+export async function GET(request: NextRequest, response: NextResponse) {
+  try {
+    const genre = await Genre.find();
+
+    return NextResponse.json({
+      message: "Array of all genres found:",
+      success: true,
+      data: genre,
+    });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  }
 }
