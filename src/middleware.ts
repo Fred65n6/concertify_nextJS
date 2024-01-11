@@ -44,7 +44,10 @@ export async function middleware(request: NextRequest) {
     path === "/admin-uploadconcert" ||
     path === "/admin-upload-venue" ||
     path === "/admin-venues" ||
-    path === "/api/admin/deleteArtist";
+    path === "/api/admin/deleteArtist" ||
+    path === "/api/admin/deleteUser" ||
+    path === "/api/admin/deleteConcert" ||
+    path === "/api/admin/deleteVenue";
 
   const isRestrictedPath =
     path === "/favourites" ||
@@ -97,5 +100,8 @@ export const config = {
     "/profile/${data}",
     "/user-upload-concert",
     "/api/admin/deleteArtist",
+    "/api/admin/deleteUser",
+    "/api/admin/deleteConcert",
+    "/api/admin/deleteVenue",
   ],
 };

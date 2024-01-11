@@ -13,7 +13,7 @@ const nextConfig = {
                     },
                     {
                         key: 'Content-Security-Policy',
-                        value: "default-src 'self' https://concertify.netlify.app; img-src 'self' data: https://storage.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; font-src 'self' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline'",
+                        value: "default-src 'self' https://concertify.netlify.app; img-src 'self' https://storage.googleapis.com; form-action 'self'; script-src 'self'; font-src 'self' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline'",
                     },
                     {
                         key: 'X-Content-Type-Options',
@@ -21,7 +21,7 @@ const nextConfig = {
                     },
                     {
                         key: 'Permissions-Policy',
-                        value: "camera=(); battery=(self); geolocation=(); microphone=('https://a-domain.com')",
+                        value: "geolocation=();",
                     },
                     {
                         key: 'Referrer-Policy',
