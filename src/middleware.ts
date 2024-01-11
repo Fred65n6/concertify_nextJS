@@ -43,11 +43,11 @@ export async function middleware(request: NextRequest) {
     path === "/admin-upload-artist" ||
     path === "/admin-uploadconcert" ||
     path === "/admin-upload-venue" ||
-    path === "/admin-venues" ||
-    path === "/api/admin/deleteArtist" ||
-    path === "/api/admin/deleteUser" ||
-    path === "/api/admin/deleteConcert" ||
-    path === "/api/admin/deleteVenue";
+    path === "/admin-venues";
+    // path === "/api/admin/deleteArtist" ||
+    // path === "/api/admin/deleteUser" ||
+    // path === "/api/admin/deleteConcert" ||
+    // path === "/api/admin/deleteVenue";
 
   const isRestrictedPath =
     path === "/favourites" ||
