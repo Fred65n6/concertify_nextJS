@@ -31,23 +31,23 @@ const nextConfig = {
             },
         ];
     },   
-};
+}
 
 module.exports = {
-    async redirects() {
-        return [
-          {
-            source: '/_headers',
-            destination: '/_headers',
-            permanent: true,
-          },
-        ];
+  async redirects() {
+    return [
+      {
+        source: "/_headers",
+        destination: "/_headers",
+        permanent: true,
       },
-    ...nextConfig,
-    eslint: {
-        ignoreDuringBuilds: true,
-    },
-    images: {
-        domains: ["storage.googleapis.com"],
-    },
+    ];
+  },
+  ...nextConfig,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  images: {
+    domains: ["storage.googleapis.com"],
+  },
 };
