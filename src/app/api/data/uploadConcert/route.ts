@@ -10,7 +10,7 @@ const storage = new Storage({
   projectId: process.env.GCP_PROJECT_ID,
   credentials: {
     client_email: process.env.GCP_CLIENT_EMAIL,
-    private_key: process.env.GCP_PRIVATE_KEY!.replace(/\\n/g, '\n'),
+    private_key: process.env.GCP_PRIVATE_KEY!.replace(/\\n/g, "\n"),
   },
 });
 
@@ -24,12 +24,12 @@ export async function POST(request: NextRequest) {
   const data = await request.formData();
   const file = data.get("file") as File;
   const concertId = generateUUID();
-  const concertName = (data.get("Concert_name")as string);
+  const concertName = data.get("Concert_name") as string;
   const concertDate = data.get("Concert_date");
   const concertStart = data.get("Concert_start");
   const concertDoors = data.get("Concert_doors");
-  const concertArtistEmail = (data.get("Concert_artist_email")as string);
-  const concertDescription = (data.get("Concert_description")as string);
+  const concertArtistEmail = data.get("Concert_artist_email") as string;
+  const concertDescription = data.get("Concert_description") as string;
   const isVisible = data.get("isVisible"); // Added line to get isVisible
 
   const concertGenre = {
@@ -59,89 +59,93 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  const normalCharsRegex = /^[a-zA-Z0-9æøåÆØÅ!@#$%^&*()_+-{}\[\]:;<>,.?~\s]+$/;
-
+  const normalCharsRegex = /^[a-zA-Z0-9æøåÆØÅ!@#$%^&*()_+-{}\[\]:;,.?~\s]+$/;
 
   if (concertName) {
     if (concertName.length > 40 || !normalCharsRegex.test(concertName)) {
       return NextResponse.json({
         success: false,
-        error: "Concert name must be at most 140 characters long and can only contain normal characters.",
+        error:
+          "Concert name must be at most 140 characters long and can only contain normal characters.",
       });
     }
   }
 
   if (concertDescription) {
-    if (concertDescription.length > 300 || !normalCharsRegex.test(concertDescription)) {
+    if (
+      concertDescription.length > 300 ||
+      !normalCharsRegex.test(concertDescription)
+    ) {
       return NextResponse.json({
         success: false,
-        error: "Concert description must be at most 300 characters long and can only contain normal characters.",
+        error:
+          "Concert description must be at most 300 characters long and can only contain normal characters.",
       });
     }
   }
 
   const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+  const buffer = Buffer.from(bytes);
 
-    const bucketName = "concertify";
-    const uuid = generateUUID();
-    const fileExtension = file.name.split(".").pop();
-    const newFileName = `${uuid}.${fileExtension}`;
-    const gcsFileName = `concert_images/${newFileName}`;
-    const bucket = storage.bucket(bucketName);
-    const fileOptions = {
-      gzip: true,
-      metadata: {
-        cacheControl: "public, max-age=31536000",
-      },
-    };
+  const bucketName = "concertify";
+  const uuid = generateUUID();
+  const fileExtension = file.name.split(".").pop();
+  const newFileName = `${uuid}.${fileExtension}`;
+  const gcsFileName = `concert_images/${newFileName}`;
+  const bucket = storage.bucket(bucketName);
+  const fileOptions = {
+    gzip: true,
+    metadata: {
+      cacheControl: "public, max-age=31536000",
+    },
+  };
 
   try {
     const fileBuffer = await file.arrayBuffer();
-      const fileData = Buffer.from(fileBuffer);
+    const fileData = Buffer.from(fileBuffer);
 
-      await bucket.file(gcsFileName).save(fileData, {
-        metadata: fileOptions.metadata,
-      });
+    await bucket.file(gcsFileName).save(fileData, {
+      metadata: fileOptions.metadata,
+    });
 
-      console.log(`File uploaded to GCS: ${gcsFileName}`);
+    console.log(`File uploaded to GCS: ${gcsFileName}`);
 
-      const concertImage = `${gcsFileName}`
+    const concertImage = `${gcsFileName}`;
 
     let newConcert;
 
-if (concertArtistEmail) {
-  newConcert = new Concert({
-    concert_id: concertId,
-    concert_name: concertName,
-    concer_date: concertDate,
-    concert_start: concertStart,
-    concert_doors: concertDoors,
-    concert_image: concertImage,
-    concert_date: concertDate,
-    concert_description: concertDescription,
-    concert_genre: concertGenre,
-    concert_artist: concertArtist,
-    concert_venue: concertVenue,
-    concert_artist_email: concertArtistEmail.toLowerCase(),
-    isVisible: isVisible === "true", // Convert string to boolean
-  });
-} else {
-  newConcert = new Concert({
-    concert_id: concertId,
-    concert_name: concertName,
-    concer_date: concertDate,
-    concert_start: concertStart,
-    concert_doors: concertDoors,
-    concert_image: concertImage,
-    concert_date: concertDate,
-    concert_description: concertDescription,
-    concert_genre: concertGenre,
-    concert_artist: concertArtist,
-    concert_venue: concertVenue,
-    isVisible: isVisible === "true", // Convert string to boolean
-  });
-}
+    if (concertArtistEmail) {
+      newConcert = new Concert({
+        concert_id: concertId,
+        concert_name: concertName,
+        concer_date: concertDate,
+        concert_start: concertStart,
+        concert_doors: concertDoors,
+        concert_image: concertImage,
+        concert_date: concertDate,
+        concert_description: concertDescription,
+        concert_genre: concertGenre,
+        concert_artist: concertArtist,
+        concert_venue: concertVenue,
+        concert_artist_email: concertArtistEmail.toLowerCase(),
+        isVisible: isVisible === "true", // Convert string to boolean
+      });
+    } else {
+      newConcert = new Concert({
+        concert_id: concertId,
+        concert_name: concertName,
+        concer_date: concertDate,
+        concert_start: concertStart,
+        concert_doors: concertDoors,
+        concert_image: concertImage,
+        concert_date: concertDate,
+        concert_description: concertDescription,
+        concert_genre: concertGenre,
+        concert_artist: concertArtist,
+        concert_venue: concertVenue,
+        isVisible: isVisible === "true", // Convert string to boolean
+      });
+    }
 
     const savedConcert = await newConcert.save();
     console.log(savedConcert);
@@ -163,24 +167,24 @@ if (concertArtistEmail) {
         concert_artist_email: concertArtistEmail,
         isVisible: isVisible === "true",
       };
-      
+
       user.concerts.push(newConcert);
       await user.save();
     }
     return new NextResponse(JSON.stringify({ success: true }), {
       headers: {
-          'Content-Type': 'application/json',
-          'Content-Security-Policy': cspHeader,
-          'Cache-Control': 'no-cache, max-age=0',
+        "Content-Type": "application/json",
+        "Content-Security-Policy": cspHeader,
+        "Cache-Control": "no-cache, max-age=0",
       },
-  });
+    });
   } catch (error) {
     console.error("CSP-header error:", error);
     return new NextResponse(JSON.stringify({ success: false }), {
-            headers: {
-                'Content-Type': 'application/json',
-                'Content-Security-Policy': cspHeader,
-            },
-        });
-}
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Security-Policy": cspHeader,
+      },
+    });
+  }
 }
